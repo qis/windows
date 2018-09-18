@@ -5,7 +5,6 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools useful for Windows development.
 
-* [Git](https://git-scm.com/)
 * [Perl 5](http://strawberryperl.com/)
 * [Python 3](https://www.python.org/)
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
