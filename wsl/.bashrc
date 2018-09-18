@@ -92,8 +92,6 @@ if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
     cd "${HOME}/documents/$(pwd | cut -d/ -f7-)"
   elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Downloads" ]; then
     cd "${HOME}/downloads/$(pwd | cut -d/ -f7-)"
-  elif [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Libraries" ]; then
-    cd "${HOME}/libraries/$(pwd | cut -d/ -f5-)"
   elif [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
     cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
   fi

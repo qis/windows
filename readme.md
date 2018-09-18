@@ -38,7 +38,7 @@ Choose 131700 MB when creating the first partition and 102400 MB when creating
 the second partition on a 256 GiB drive.
 -->
 
-Create a single word username to keep the `%UserProfile%` path free from spaces.
+Create a single word username starting with a capital letter to keep the `%UserProfile%` path free from spaces.
 
 ## System
 Configure display scaling and resolution.
@@ -70,8 +70,10 @@ shutdown -r -t 0
 Set the full user name.
 
 ```cmd
-lusrmgr.msc > Users > {user}
-+ Full Name: {User Name}
+lusrmgr.msc > Users
+{User} context menu "Rename": {user}
+{user} context menu "Properties":
++ Full Name: {Full Name}
 ```
 
 Reboot the system.
@@ -273,14 +275,16 @@ Task Manager > Startup
 
 
 ## Services
-Disable unwanted services.
+Disable unwanted services (ignore if missing).
 
 ```
 services.msc
 + Certificate Propagation: Manual -> Disabled
 + Microsoft (R) Diagnostics Hub Standard Collector Service: Manual -> Disabled
++ Microsoft Office Click-to-Run Service: Automatic -> Disabled
 + Superfetch: Automatic -> Disabled
 + Windows Biometric Service: Manual -> Disabled
++ Windows Mobile-2003-based device connectivity: Log on as "Local System account"
 + Xbox Accessory Management Service: Manual -> Disabled
 + Xbox Live …: Manual -> Disabled
 ```
@@ -415,7 +419,7 @@ with a new inbound rule for port 22.
 
 
 ## Keymap
-Use this [keymap](keymap.zip) to input German characters on a U.S. keyboard.
+Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
 
 
 ## Microsoft Software
@@ -483,19 +487,19 @@ Install third party software.
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
+* [Blender](https://www.blender.org/)
 * [Sublime Text 3](https://www.sublimetext.com/)
 * [gVim](http://www.vim.org)
-* [Python 3](https://www.python.org/)
-* [CMake](https://cmake.org)
-* [NASM](http://www.nasm.us)
-* [HxD](https://mh-nexus.de/en/hxd)
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [Resource Hacker](http://www.angusj.com/resourcehacker)
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 
-Configure Sublime Text 3 after installing the [Visual Studio Dark](https://packagecontrol.io/packages/Visual%20Studio%20Dark) theme.
+
+## Sublime Text 3
+Install [Visual Studio Dark](https://packagecontrol.io/packages/Visual%20Studio%20Dark).<br/>
+Install [MarkdownEditing](https://packagecontrol.io/packages/MarkdownEditing) (optional).
+
+Configure Sublime Text 3.
 
 ```json
+// Preferences > Settings
 {
   "color_scheme": "Packages/Visual Studio Dark/Visual Studio Dark.tmTheme",
   "close_windows_when_empty": true,
@@ -516,9 +520,10 @@ Configure Sublime Text 3 after installing the [Visual Studio Dark](https://packa
 }
 ```
 
-Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.io/packages/MarkdownEditing) (optional).
+Configure GFM (optional).
 
 ```json
+// Preferences > Package Settings > Markdown Editing > Markdown GFM Settings - User
 {
   "color_scheme": "Packages/Visual Studio Dark/Visual Studio Dark.tmTheme",
   "trim_trailing_white_space_on_save": true,
@@ -530,13 +535,11 @@ Configure [Sublime Text 3 MarkdownEditing GFM Settings](https://packagecontrol.i
 }
 ```
 
+
+<!--
 ## Server
 Install software for Windows Server administration.
 
-<!--
-Possible future replacement for the SSMS link:
-https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
--->
 
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
@@ -549,9 +552,6 @@ Set-NetConnectionProfile -InterfaceIndex {InterfaceIndex} -NetworkCategory Priva
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 
-*See comments in this readme file for Windows Server configuration.*
-
-<!--
 Configure the WinRM server.
 
 ```ps
@@ -583,11 +583,16 @@ Enter-PSSession -ComputerName host.domain -Port 5986 -Credential administrator@d
 ```
 -->
 
+
+<!--
 ## Control Panel
 Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Windows\System32\shell32.dll`).
 
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
+-->
 
+
+<!--
 ## Anti-Virus
 Suggested third party anti-virus exclusion lists.
 
@@ -607,6 +612,7 @@ Excluded Directories
 %UserProfile%\AppData\Local\lxss\
 C:\Workspace\
 ```
+-->
 
 
 ## Windows Features
@@ -633,13 +639,12 @@ Install a WSL distro from <https://aka.ms/wslstore> and launch it.
 Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.<br/>
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 -->
-Create Windows symlinks.
+Download config files.
 
 ```sh
-ln -s /mnt/c/Users/Qis/Documents ~/documents
-ln -s /mnt/c/Users/Qis/Downloads ~/downloads
-ln -s /mnt/c/Libraries ~/libraries
-ln -s /mnt/c/Workspace ~/workspace
+wget https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc
+wget https://raw.githubusercontent.com/qis/windows/master/wsl/.profile
+wget https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
@@ -657,6 +662,14 @@ root  ALL=(ALL) ALL
 
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
+```
+
+Create `/etc/wsl.conf`.
+
+```sh
+[automount]
+enabled=true
+options=metadata,uid=1000,gid=1000,umask=022
 ```
 
 Fix timezone information.
@@ -681,12 +694,19 @@ Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 #session    optional    pam_motd.so noupdate
 ```
 
-Create `/etc/wsl.conf`.
+Restart `bash.exe`.
+
+Create Windows symlinks.
 
 ```sh
-[automount]
-enabled=true
-options=metadata,uid=1000,gid=1000,umask=022
+ln -s /mnt/c/Users/Qis/Documents ~/documents
+ln -s /mnt/c/Users/Qis/Downloads ~/downloads
+ln -s /mnt/c/Workspace ~/workspace
+mkdir -p ~/.ssh
+for i in config id_rsa id_rsa.pub known_hosts; do
+  ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
+done
+chmod 0600 ~/.ssh/*
 ```
 
 Install packages.
@@ -696,68 +716,12 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop pngcrush sysstat
+sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop
+sudo apt install imagemagick pngcrush
+sudo apt install siege
 sudo apt-file update
 ```
 
-Take ownership of `/opt`.
-
-```sh
-USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
-```
-
-Install development packages.
-
-```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
-```
-
-Install CMake.
-
-```sh
-rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.12/cmake-3.12.1-Linux-x86_64.tar.gz
-tar xvf cmake-3.12.1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
-find /opt/cmake -type d -exec chmod 0755 '{}' ';'
-```
-
-Install Ninja.
-```sh
-git clone -b release https://github.com/ninja-build/ninja
-cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
-```
-
-Install NodeJS.
-
-```sh
-rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.9.0/node-v10.9.0-linux-x64.tar.xz
-tar xvf node-v10.9.0-linux-x64.tar.xz -C /opt/node --strip-components 1
-find /opt/node -type d -exec chmod 0755 '{}' ';'
-```
-
-Consider using the [llvm](llvm.md) and [vcpkg](vcpkg.md) guides.
 
 ## Start Menu
-![Start Menu](layout.png)
-
-
-
-
-
-
-
-
-
-Uninstall Mixed Reality Portal.
-
-```
-Start > Mixed Reality Portal
-```
-
-Configure services for installed applications (ignore if missing).
-
-```
-+ Microsoft Office Click-to-Run Service: Automatic -> Disabled
-+ Windows Mobile-2003-based device connectivity: Log on as "Local System account"
-```
+![Start Menu](res/start.png)
