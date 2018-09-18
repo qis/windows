@@ -490,7 +490,16 @@ Install third party software.
 * [Blender](https://www.blender.org/)
 * [Sublime Text 3](https://www.sublimetext.com/)
 * [gVim](http://www.vim.org)
+* [Git](https://git-scm.com/)
 
+
+## gVim
+Configure gVim.
+
+```cmd
+cd %UserProfile%
+git clone https://github.com/qis/vim vimfiles
+```
 
 ## Sublime Text 3
 Install [Visual Studio Dark](https://packagecontrol.io/packages/Visual%20Studio%20Dark).<br/>
@@ -699,6 +708,8 @@ Restart `bash.exe`.
 Create Windows symlinks.
 
 ```sh
+ln -s /mnt/c/Users/Qis/vimfiles .config/nvim
+ln -s /mnt/c/Users/Qis/vimfiles .vim
 ln -s /mnt/c/Users/Qis/Documents ~/documents
 ln -s /mnt/c/Users/Qis/Downloads ~/downloads
 ln -s /mnt/c/Workspace ~/workspace

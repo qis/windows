@@ -34,10 +34,8 @@ C:\Program Files (x86)\Sysinternals Suite
 ## Visual Studio 2017
 Install and configure [Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/).<br/>
 
-### Workloads
 ![Workloads](res/vs2017-1.png)
 
-### Individual Components
 ![Individual Components](res/vs2017-2.png)
 
 ### Configuration
