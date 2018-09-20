@@ -128,9 +128,9 @@ Text Editor
 
 
 ### Plugins
-Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).<br/>
+Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
 
-Install and configure [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).<br/>
+Install and configure [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
 
 ```
 Tools > Options
@@ -142,6 +142,18 @@ Line Endings Unifier
   Save Files After Unifying: True
   Supported File Formats: .c; .cc; .cpp; .h; .hh; .hpp; .in; .js; .json; .html; .md; .sh; .conf; .txt
   Supported File Names: makefile
+```
+
+Install [NPL_LuaLanguageService](https://marketplace.visualstudio.com/items?itemName=Xizhi.NPLLuaLanguageService).
+
+```
+Tools > Options > Environment > Fonts and Colors
++ Display items: NPL.NPLFunction
+  Item foreground: R:0 G:215 B:0
+  [ ] bold
++ Display items: NPL.NPLSelf
+  Item foreground: R:0 G:204 B:204
+  [ ] bold
 ```
 
 
