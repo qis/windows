@@ -173,6 +173,7 @@ Configure the `Path` environment variable.
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\Java\jdk1.8.{version}\bin
+%ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
 C:\Android\platform-tools
