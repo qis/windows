@@ -239,6 +239,33 @@ Apply
 ```
 
 
+## Vcpkg
+Configure the `VCPKG_DEFAULT_TRIPLET` environment variable.
+
+```
+x64-windows-static
+```
+
+Install Vcpkg.
+
+```cmd
+git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
+cd C:\Workspace\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
+cd %UserProfile% && rd /q /s ^
+  "C:\Workspace\vcpkg\toolsrc\Release" ^
+  "C:\Workspace\vcpkg\toolsrc\vcpkg\Release" ^
+  "C:\Workspace\vcpkg\toolsrc\vcpkglib\Release" ^
+  "C:\Workspace\vcpkg\toolsrc\vcpkgmetricsuploader\Release"
+```
+
+Install Vcpkg packages.
+
+```cmd
+vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 nlohmann-json openssl wtl zlib
+vcpkg install benchmark gtest
+```
+
+
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
 

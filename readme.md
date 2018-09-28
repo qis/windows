@@ -733,6 +733,11 @@ sudo apt install siege
 sudo apt-file update
 ```
 
+## Settings
+Follow the [Settings](settings.md) guide to finish the configuration.
+
+## Development
+Follow the [Development](development.md) guide to set up a developer workstation.
 
 ## Start Menu
 ![Start Menu](res/start.png)
