@@ -140,7 +140,7 @@ Line Endings Unifier
   Default Line Ending: Linux
   Force Default Line Ending On Document Save: True
   Save Files After Unifying: True
-  Supported File Formats: .c; .cc; .cpp; .h; .hh; .hpp; .in; .js; .json; .html; .md; .sh; .conf; .txt
+  Supported File Formats: .c; .cc; .cpp; .h; .hh; .hpp; .in; .lua; .js; .json; .html; .md; .sh; .conf; .txt
   Supported File Names: makefile
 ```
 
