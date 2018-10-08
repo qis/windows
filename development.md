@@ -262,7 +262,7 @@ cd %UserProfile% && rd /q /s ^
 Install Vcpkg packages.
 
 ```cmd
-vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 nlohmann-json openssl wtl zlib
+vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 libzip nlohmann-json openssl pugixml wtl zlib
 vcpkg install benchmark gtest
 ```
 
