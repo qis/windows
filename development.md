@@ -266,6 +266,19 @@ vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 libzip nlohman
 vcpkg install benchmark gtest
 ```
 
+Always link to OpenSSL release builds.
+
+```cmd
+move C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib ^
+     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib.bak
+move C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib ^
+     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib.bak
+copy C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\lib\libeay32.lib ^
+     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib
+copy C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\lib\ssleay32.lib ^
+     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib
+```
+
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
