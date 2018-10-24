@@ -262,23 +262,11 @@ cd %UserProfile% && rd /q /s ^
 Install Vcpkg packages.
 
 ```cmd
-vcpkg install bzip2 date fmt libjpeg-turbo liblzma libpng libssh2 libzip nlohmann-json openssl pugixml wtl zlib
 vcpkg install benchmark gtest
+vcpkg install date fmt nlohmann-json pugixml wtl
+vcpkg install bzip2 freetype harfbuzz libjpeg-turbo liblzma libpng libssh2 libzip openssl zlib
+vcpkg install qt5-tools qt5-declarative qt5-modularscripts qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg
 ```
-
-Always link to OpenSSL release builds.
-
-```cmd
-move C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib ^
-     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib.bak
-move C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib ^
-     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib.bak
-copy C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\lib\libeay32.lib ^
-     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\libeay32.lib
-copy C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\lib\ssleay32.lib ^
-     C:\Workspace\vcpkg\installed\%VCPKG_DEFAULT_TRIPLET%\debug\lib\ssleay32.lib
-```
-
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
