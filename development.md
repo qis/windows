@@ -133,8 +133,7 @@ Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/it
 Install and configure [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
 
 ```
-Tools > Options
-Line Endings Unifier
+Tools > Options > Line Endings Unifier
 + General Settings
   Add Newline On The Last Line: True
   Default Line Ending: Linux
@@ -156,6 +155,12 @@ Tools > Options > Environment > Fonts and Colors
   [ ] bold
 ```
 
+Install [Qt Visual Studio Tools](https://download.qt.io/official_releases/vsaddin/).
+
+```
+Qt VS Tools > Qt Options
+[TODO]
+```
 
 ## Windows Driver Kit
 Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
@@ -291,6 +296,19 @@ git clone -b release https://github.com/ninja-build/ninja
 cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
 ```
 
+Install LLVM.
+
+```sh
+rm -rf /opt/llvm; mkdir /opt/llvm
+wget http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+tar xvf clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /opt/llvm --strip-components 1
+cat > /etc/ld.so.conf.d/llvm.conf <<EOF
+/opt/llvm/lib
+/opt/llvm/lib/clang/7.0.0/lib/linux
+EOF
+ldconfig
+```
+
 Install NodeJS.
 
 ```sh
@@ -300,3 +318,28 @@ tar xvf node-v10.10.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
+Install Vcpkg.
+
+```sh
+rm -rf ${VCPKG_ROOT}/toolsrc/build.rel; mkdir ${VCPKG_ROOT}/toolsrc/build.rel && cd ${VCPKG_ROOT}/toolsrc/build.rel
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . && cp vcpkg ${VCPKG_ROOT}/
+cat > ${VCPKG_ROOT}/triplets/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
+set(VCPKG_TARGET_ARCHITECTURE x64)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE static)
+set(VCPKG_CMAKE_SYSTEM_NAME Linux)
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "\${CMAKE_CURRENT_LIST_DIR}/toolchains/${VCPKG_DEFAULT_TRIPLET}.cmake")
+EOF
+mkdir -p ${VCPKG_ROOT}/triplets/toolchains
+cat > ${VCPKG_ROOT}/triplets/toolchains/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
+set(CMAKE_CROSSCOMPILING OFF CACHE STRING "")
+set(CMAKE_SYSTEM_NAME Linux CACHE STRING "")
+set(CMAKE_C_COMPILER "`which clang`" CACHE STRING "")
+set(CMAKE_CXX_COMPILER "`which clang++`" CACHE STRING "")
+set(CMAKE_CXX_FLAGS "-std=c++2a -stdlib=libc++ ${CMAKE_CXX_FLAGS} ${VCPKG_CXX_FLAGS}" CACHE STRING "")
+set(HAVE_STEADY_CLOCK ON CACHE STRING "")
+set(HAVE_STD_REGEX ON CACHE STRING "")
+EOF
+cd && rm -rf ${VCPKG_ROOT}/toolsrc/build.rel
+```
