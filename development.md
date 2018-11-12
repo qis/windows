@@ -215,7 +215,7 @@ Install Vcpkg.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
-cd C:\Workspace\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
+C:\Workspace\vcpkg\bootstrap-vcpkg.bat && vcpkg integrate install
 ```
 
 <!--
@@ -245,14 +245,16 @@ vcpkg install angle freetype giflib harfbuzz libjpeg-turbo libpng
 vcpkg install qt5-tools qt5-declarative qt5-modularscripts qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg
 ```
 
+<!--
 Install Vcpkg ports on Android.
 
 ```cmd
 set VCPKG_DEFAULT_TRIPLET=arm64-android
 vcpkg install date fmt mio nlohmann-json pugixml
-vcpkg install bzip2 liblzma libzip openssl zlib
-vcpkg install freetype giflib harfbuzz libjpeg-turbo libpng
+vcpkg install bzip2 liblzma libzip zlib
+vcpkg install freetype giflib libjpeg-turbo libpng
 ```
+-->
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
