@@ -187,9 +187,6 @@ C:\Workspace\android\tools
 C:\Workspace\vcpkg
 ```
 
-<!--
-clang++ -std=c++2a -stdlib=libc++ -fcoroutines-ts main.cpp -pthread -static -lc++fs -lc++ -lc++abi
--->
 
 ## Android
 Extract the [Android SDK Tools](https://developer.android.com/studio/#downloads) to `C:\Workspace\android\tools`.
