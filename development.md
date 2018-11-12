@@ -218,6 +218,15 @@ git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
 cd C:\Workspace\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
 ```
 
+<!--
+Replace OpenSSL port.
+
+```cmd
+rd /q /s C:\Workspace\vcpkg\ports\openssl
+git clone https://github.com/qis/openssl C:\Workspace\vcpkg\ports\openssl
+```
+-->
+
 Replace Vcpkg toolchain files.
 
 ```cmd
@@ -226,7 +235,7 @@ git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchain
 copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\triplets\
 ```
 
-Install Vcpkg packages.
+Install Vcpkg ports.
 
 ```cmd
 vcpkg install benchmark gtest
@@ -234,6 +243,15 @@ vcpkg install date fmt mio nlohmann-json pugixml wtl
 vcpkg install bzip2 liblzma libzip openssl opus zlib
 vcpkg install angle freetype giflib harfbuzz libjpeg-turbo libpng
 vcpkg install qt5-tools qt5-declarative qt5-modularscripts qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg
+```
+
+Install Vcpkg ports on Android.
+
+```cmd
+set VCPKG_DEFAULT_TRIPLET=arm64-android
+vcpkg install date fmt mio nlohmann-json pugixml
+vcpkg install bzip2 liblzma libzip openssl zlib
+vcpkg install freetype giflib harfbuzz libjpeg-turbo libpng
 ```
 
 ## Windows Subsystem for Linux
