@@ -5,8 +5,6 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools useful for Windows development.
 
-* [Perl 5](http://strawberryperl.com/)
-* [Python 3](https://www.python.org/)
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [CMake](https://cmake.org)
 * [NASM](http://www.nasm.us)
@@ -127,6 +125,10 @@ Text Editor
 ```
 
 
+## Windows Driver Kit
+Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
+
+
 ### Plugins
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
 
@@ -143,7 +145,7 @@ Tools > Options > Line Endings Unifier
   Supported File Names: makefile
 ```
 
-Install [NPL_LuaLanguageService](https://marketplace.visualstudio.com/items?itemName=Xizhi.NPLLuaLanguageService).
+Install [NPL LuaLanguageService](https://marketplace.visualstudio.com/items?itemName=Xizhi.NPLLuaLanguageService).
 
 ```
 Tools > Options > Environment > Fonts and Colors
@@ -157,20 +159,18 @@ Tools > Options > Environment > Fonts and Colors
 
 Install [Qt Visual Studio Tools](https://download.qt.io/official_releases/vsaddin/).
 
-```
-Qt VS Tools > Qt Options
-[TODO]
-```
-
-## Windows Driver Kit
-Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
-
 
 ## Environment Variables
-Configure the `Path` environment variable.
+Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 
 ```
-%SystemRoot%\system32
+x64-windows
+```
+
+Configure the System `Path` environment variable.
+
+```
+%SystemRoot%\System32
 %SystemRoot%
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
@@ -181,20 +181,18 @@ Configure the `Path` environment variable.
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
-C:\Android\platform-tools
-C:\Android\tools\bin
-C:\Android\tools
-C:\Perl\c\bin
-C:\Perl\perl\site\bin
-C:\Perl\perl\bin
-C:\Python\Scripts
-C:\Python
+C:\Workspace\android\platform-tools
+C:\Workspace\android\tools\bin
+C:\Workspace\android\tools
 C:\Workspace\vcpkg
 ```
 
+<!--
+clang++ -std=c++2a -stdlib=libc++ -fcoroutines-ts main.cpp -pthread -static -lc++fs -lc++ -lc++abi
+-->
 
 ## Android
-Extract the [Android SDK Tools](https://developer.android.com/studio/#downloads) to `C:\Android\tools`.
+Extract the [Android SDK Tools](https://developer.android.com/studio/#downloads) to `C:\Workspace\android\tools`.
 
 Install Android SDK, NDK, USB driver and `adb`.
 
@@ -215,53 +213,19 @@ adb shell pm list users
 ```
 
 
-Install [Qt](https://www.qt.io/download).
-
-```
-Qt
-[■] Qt 5.11.1
-  [✓] MSVC 2017 64-bit
-  [✓] Android ARMv7
-  [✓] Qt Charts
-  [✓] Qt Data Visualization
-  [✓] Qt Virtual Keyboard
-  [✓] Qt WebEngine
-[■] Tools
-  Qt Creator 4.7.0
-  [✓] Qt Creator 4.7.0 CDB Debugger Support
-  [✓] Qt 3D Studio 2.0.0
-  [✓] Qt 3D Studio Runtime 2.0.0
-  [✓] Qt Installer Framework 3.0
-```
-
-Configure Qt Creator.
-
-```
-Tools > Options > Devices
-Android SDK location: C:\Android
-Android NDK location: C:\Android\ndk-bundle
-Apply
-[ ] Automatically create kits for Android tool chains
-```
-
-
 ## Vcpkg
-Configure the `VCPKG_DEFAULT_TRIPLET` environment variable.
-
-```
-x64-windows-static
-```
-
 Install Vcpkg.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
 cd C:\Workspace\vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
-cd %UserProfile% && rd /q /s ^
-  "C:\Workspace\vcpkg\toolsrc\Release" ^
-  "C:\Workspace\vcpkg\toolsrc\vcpkg\Release" ^
-  "C:\Workspace\vcpkg\toolsrc\vcpkglib\Release" ^
-  "C:\Workspace\vcpkg\toolsrc\vcpkgmetricsuploader\Release"
+```
+
+Replace Vcpkg toolchain files.
+
+```cmd
+rd /q /s C:\Workspace\vcpkg\scripts\toolchains
+git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
 ```
 
 Install Vcpkg packages.
@@ -269,7 +233,7 @@ Install Vcpkg packages.
 ```cmd
 vcpkg install benchmark gtest
 vcpkg install date fmt nlohmann-json pugixml wtl
-vcpkg install bzip2 freetype harfbuzz libjpeg-turbo liblzma libpng libssh2 libzip openssl zlib
+vcpkg install bzip2 freetype harfbuzz libjpeg-turbo liblzma libpng libzip openssl zlib
 vcpkg install qt5-tools qt5-declarative qt5-modularscripts qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg
 ```
 
@@ -280,20 +244,23 @@ Take ownership of `/opt`.
 USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 ```
 
+Create a symlink to the host Vcpkg installation.
+
+```sh
+ln -s /mnt/c/Workspace/vcpkg /opt/vcpkg
+```
+
+Configure the `PATH` environment variable in `~/.bashrc`.
+
+```sh
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+export PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+```
+
 Install development packages.
 
 ```sh
 sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
-```
-
-Install CMake and Ninja.
-
-```sh
-rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.12/cmake-3.12.2-Linux-x86_64.tar.gz
-tar xvf cmake-3.12.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
-git clone -b release https://github.com/ninja-build/ninja
-cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
 ```
 
 Install LLVM.
@@ -302,44 +269,44 @@ Install LLVM.
 rm -rf /opt/llvm; mkdir /opt/llvm
 wget http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
 tar xvf clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /opt/llvm --strip-components 1
-cat > /etc/ld.so.conf.d/llvm.conf <<EOF
+sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
 /opt/llvm/lib
 /opt/llvm/lib/clang/7.0.0/lib/linux
 EOF
-ldconfig
+sudo ldconfig
+```
+
+Install CMake and Ninja.
+
+```sh
+rm -rf /opt/cmake; mkdir /opt/cmake
+wget https://cmake.org/files/v3.12/cmake-3.12.4-Linux-x86_64.tar.gz
+tar xvf cmake-3.12.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+git clone -b release https://github.com/ninja-build/ninja
+cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
 ```
 
 Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.10.0/node-v10.10.0-linux-x64.tar.xz
-tar xvf node-v10.10.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xz
+tar xvf node-v10.13.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
 Install Vcpkg.
 
 ```sh
-rm -rf ${VCPKG_ROOT}/toolsrc/build.rel; mkdir ${VCPKG_ROOT}/toolsrc/build.rel && cd ${VCPKG_ROOT}/toolsrc/build.rel
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
-cmake --build . && cp vcpkg ${VCPKG_ROOT}/
-cat > ${VCPKG_ROOT}/triplets/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_CRT_LINKAGE dynamic)
-set(VCPKG_LIBRARY_LINKAGE static)
-set(VCPKG_CMAKE_SYSTEM_NAME Linux)
-set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "\${CMAKE_CURRENT_LIST_DIR}/toolchains/${VCPKG_DEFAULT_TRIPLET}.cmake")
-EOF
-mkdir -p ${VCPKG_ROOT}/triplets/toolchains
-cat > ${VCPKG_ROOT}/triplets/toolchains/${VCPKG_DEFAULT_TRIPLET}.cmake <<EOF
-set(CMAKE_CROSSCOMPILING OFF CACHE STRING "")
-set(CMAKE_SYSTEM_NAME Linux CACHE STRING "")
-set(CMAKE_C_COMPILER "`which clang`" CACHE STRING "")
-set(CMAKE_CXX_COMPILER "`which clang++`" CACHE STRING "")
-set(CMAKE_CXX_FLAGS "-std=c++2a -stdlib=libc++ ${CMAKE_CXX_FLAGS} ${VCPKG_CXX_FLAGS}" CACHE STRING "")
-set(HAVE_STEADY_CLOCK ON CACHE STRING "")
-set(HAVE_STD_REGEX ON CACHE STRING "")
-EOF
-cd && rm -rf ${VCPKG_ROOT}/toolsrc/build.rel
+bootstrap-vcpkg.sh
+sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
 ```
+
+Install Vcpkg packages.
+
+```sh
+vcpkg install benchmark gtest
+vcpkg install date fmt nlohmann-json pugixml
+vcpkg install bzip2 liblzma libzip openssl zlib
+```
+
