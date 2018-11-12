@@ -223,6 +223,7 @@ Replace Vcpkg toolchain files.
 ```cmd
 rd /q /s C:\Workspace\vcpkg\scripts\toolchains
 git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
+copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\triplets\
 ```
 
 Install Vcpkg packages.
@@ -307,6 +308,6 @@ Install Vcpkg packages.
 ```sh
 vcpkg install benchmark gtest
 vcpkg install date fmt mio nlohmann-json pugixml
-vcpkg install bzip2 liblzma libzip openssl opus zlib
+vcpkg install bzip2 liblzma libzip openssl zlib
 ```
 
