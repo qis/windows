@@ -247,11 +247,12 @@ Create a symlink to the host Vcpkg installation.
 ln -s /mnt/c/Workspace/vcpkg /opt/vcpkg
 ```
 
-Configure the `PATH` environment variable in `~/.bashrc`.
+Configure environment variables in `~/.bashrc`.
 
 ```sh
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 export PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+export NODE_PATH="/opt/node/lib/node_modules"
 ```
 
 Install development packages.
