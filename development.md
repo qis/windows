@@ -297,6 +297,7 @@ Install Vcpkg.
 
 ```sh
 bootstrap-vcpkg.sh
+rm -rf /opt/vcpkg/toolsrc/build.rel
 sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
 ```
 
