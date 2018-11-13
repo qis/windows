@@ -47,6 +47,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
+C:\Workspace\android\build-tools\27.0.3
 C:\Workspace\android\platform-tools
 C:\Workspace\android\tools\bin
 C:\Workspace\android\tools
