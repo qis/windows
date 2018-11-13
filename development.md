@@ -238,11 +238,12 @@ copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\tr
 Install Vcpkg ports.
 
 ```cmd
-vcpkg install benchmark gtest
-vcpkg install date fmt mio nlohmann-json pugixml wtl
-vcpkg install bzip2 liblzma libzip openssl opus zlib
-vcpkg install angle freetype giflib harfbuzz libjpeg-turbo libpng
-vcpkg install qt5-tools qt5-declarative qt5-modularscripts qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg
+vcpkg install benchmark gtest ^
+ date fmt mio nlohmann-json pugixml wtl ^
+ bzip2 liblzma libzip openssl opus zlib ^
+ angle freetype giflib harfbuzz libjpeg-turbo libpng ^
+ qt5-tools qt5-declarative qt5-graphicaleffects qt5-modularscripts ^
+ qt5-multimedia qt5-quickcontrols2 qt5-script qt5-svg qt5-winextras
 ```
 
 <!--
@@ -326,8 +327,6 @@ sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets
 Install Vcpkg packages.
 
 ```sh
-vcpkg install benchmark gtest
-vcpkg install date fmt mio nlohmann-json pugixml
-vcpkg install bzip2 liblzma libzip openssl zlib
+vcpkg install benchmark gtest date fmt mio nlohmann-json pugixml bzip2 liblzma libzip openssl zlib
 ```
 
