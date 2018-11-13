@@ -201,9 +201,9 @@ Install Android SDK, NDK, USB driver and `adb`.
 ```cmd
 android update sdk
 sdkmanager "platform-tools"
-sdkmanager "platforms;android-28"
+sdkmanager "platforms;android-27"
 sdkmanager "extras;google;usb_driver"
-sdkmanager "build-tools;28.0.2"
+sdkmanager "build-tools;27.0.3"
 sdkmanager "ndk-bundle"
 ```
 
