@@ -3,29 +3,62 @@ Installation and configuration of a Windows 10 development workstation.
 
 
 ## Tools
-Install various tools useful for Windows development.
+Install various tools for development.
 
-* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-* [CMake](https://cmake.org)
 * [NASM](http://www.nasm.us)
+* [CMake](https://cmake.org)
+* [Python 2](https://www.python.org/downloads/)
+* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Node](https://nodejs.org)
+
+Install various tools for debugging.
+
 * [HxD](https://mh-nexus.de/en/hxd)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+
+Install a standalone version of `clang-format`.
+
 * [Clang Format](https://llvm.org/builds/)
 
-<!--
-Backup locations.
+
+## Environment Variables
+Configure the User `Path` environment variable.
 
 ```
-C:\Program Files\ConEmu
-C:\Program Files\HxD
-C:\Program Files\NASM
-C:\Program Files\WSL
-C:\Program Files (x86)\Resource Hacker
-C:\Program Files (x86)\Sysinternals Suite
+%UserProfile%\AppData\Local\Microsoft\WindowsApps
+%UserProfile%\AppData\Roaming\npm
 ```
--->
+
+Configure the System `Path` environment variable.
+
+```
+%SystemRoot%\System32
+%SystemRoot%
+%SystemRoot%\System32\Wbem
+%SystemRoot%\System32\WindowsPowerShell\v1.0
+%SystemRoot%\System32\OpenSSH
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
+%ProgramFiles(x86)%\Sysinternals Suite
+%ProgramFiles%\Java\jdk1.8.{version}\bin
+%ProgramFiles%\CMake\bin
+%ProgramFiles%\Git\cmd
+%ProgramFiles%\NASM
+C:\Workspace\android\platform-tools
+C:\Workspace\android\tools\bin
+C:\Workspace\android\tools
+C:\Workspace\vcpkg
+C:\Python\Scripts
+C:\Python
+C:\Node
+```
+
+Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
+
+```
+x64-windows
+```
 
 
 ## Visual Studio 2017
@@ -158,34 +191,6 @@ Tools > Options > Environment > Fonts and Colors
 ```
 
 Install [Qt Visual Studio Tools](https://download.qt.io/official_releases/vsaddin/).
-
-
-## Environment Variables
-Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
-
-```
-x64-windows
-```
-
-Configure the System `Path` environment variable.
-
-```
-%SystemRoot%\System32
-%SystemRoot%
-%SystemRoot%\System32\Wbem
-%SystemRoot%\System32\WindowsPowerShell\v1.0
-%SystemRoot%\System32\OpenSSH
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
-%ProgramFiles(x86)%\Sysinternals Suite
-%ProgramFiles%\Java\jdk1.8.{version}\bin
-%ProgramFiles%\CMake\bin
-%ProgramFiles%\Git\cmd
-%ProgramFiles%\NASM
-C:\Workspace\android\platform-tools
-C:\Workspace\android\tools\bin
-C:\Workspace\android\tools
-C:\Workspace\vcpkg
-```
 
 
 ## Android
