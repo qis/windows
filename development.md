@@ -9,6 +9,7 @@ Install various tools for development.
 * [CMake](https://cmake.org)
 * [Python 2](https://www.python.org/downloads/)
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Gradle](https://gradle.org)
 * [Node](https://nodejs.org)
 
 Install various tools for debugging.
@@ -42,6 +43,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\Java\jdk1.8.{version}\bin
+%ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
@@ -49,6 +51,7 @@ C:\Workspace\android\platform-tools
 C:\Workspace\android\tools\bin
 C:\Workspace\android\tools
 C:\Workspace\vcpkg
+C:\Gradle\bin
 C:\Python\Scripts
 C:\Python
 C:\Node
