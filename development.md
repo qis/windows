@@ -58,6 +58,18 @@ C:\Python
 C:\Node
 ```
 
+Configure the System `ANDROID_HOME` environment variable.
+
+```
+C:\Workspace\android
+```
+
+Configure the System `ANDROID_NDK_HOME` environment variable.
+
+```
+C:\Workspace\android\ndk-bundle
+```
+
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 
 ```
@@ -216,6 +228,12 @@ Verify that `adb` works.
 ```cmd
 adb devices
 adb shell pm list users
+```
+
+Fix cordova builds.
+
+```cmd
+mkdir C:\Workspace\android\ndk-bundle\toolchains\mips64el-linux-android\prebuilt\linux-x86_64
 ```
 
 
