@@ -7,11 +7,11 @@ Install various tools for development.
 
 * [LZMA](https://www.7-zip.org/sdk.html)
 * [NASM](http://www.nasm.us)
+* [Node](https://nodejs.org)
 * [CMake](https://cmake.org)
 * [Python 2](https://www.python.org/downloads/)
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Gradle](https://gradle.org)
-* [Node](https://nodejs.org)
 
 Install various tools for debugging.
 
