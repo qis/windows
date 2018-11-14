@@ -42,6 +42,7 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
+%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles(x86)%\LZMA\bin
 %ProgramFiles%\Java\jdk1.8.{version}\bin
@@ -54,7 +55,6 @@ C:\Workspace\android\platform-tools
 C:\Workspace\android\tools\bin
 C:\Workspace\android\tools
 C:\Workspace\vcpkg
-C:\Gradle\bin
 C:\Python\Scripts
 C:\Python
 C:\Node
