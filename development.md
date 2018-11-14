@@ -5,6 +5,7 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development.
 
+* [LZMA](https://www.7-zip.org/sdk.html)
 * [NASM](http://www.nasm.us)
 * [CMake](https://cmake.org)
 * [Python 2](https://www.python.org/downloads/)
@@ -42,6 +43,7 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
 %ProgramFiles(x86)%\Sysinternals Suite
+%ProgramFiles(x86)%\LZMA\bin
 %ProgramFiles%\Java\jdk1.8.{version}\bin
 %ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
@@ -276,8 +278,8 @@ Install Vcpkg ports on Android.
 ```cmd
 set VCPKG_DEFAULT_TRIPLET=arm64-android
 vcpkg install benchmark gtest ^
- bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib ^
- freetype giflib harfbuzz libjpeg-turbo libpng opus
+  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib ^
+  freetype giflib harfbuzz libjpeg-turbo libpng opus
 ```
 -->
 
@@ -352,6 +354,6 @@ Install Vcpkg packages.
 
 ```sh
 vcpkg install benchmark gtest \
- bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib
+  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib
 ```
 
