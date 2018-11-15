@@ -248,6 +248,7 @@ sdkmanager "platforms;android-28"
 sdkmanager "extras;google;usb_driver"
 sdkmanager "build-tools;28.0.3"
 sdkmanager "ndk-bundle"
+sdkmanager --licenses
 ```
 
 Verify that `adb` works.
@@ -260,7 +261,6 @@ adb shell pm list users
 Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
 
 ```cmd
-flutter doctor --android-licenses
 flutter doctor
 ```
 
