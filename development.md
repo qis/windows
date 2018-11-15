@@ -9,6 +9,7 @@ Install various tools for development. Do not add anything to `Path` during the 
 * [CMake](https://cmake.org) into `C:\Program Files\CMake`
 * [Node LTS](https://nodejs.org) into `C:\Node`
 * [Python 2](https://www.python.org/downloads/) into `C:\Python`
+* [VS Code](https://code.visualstudio.com/download) using the System Installer.
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 
@@ -43,11 +44,13 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
 %ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
+%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\Java\jdk1.8.{version}\bin
 %ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
+C:\Workspace\android\flutter\bin
 C:\Workspace\android\build-tools\28.0.3
 C:\Workspace\android\platform-tools
 C:\Workspace\android\tools\bin
@@ -207,6 +210,10 @@ Tools > Options > Environment > Fonts and Colors
 ```
 
 
+## VS Code
+Install VS Code plugins: `Flutter`
+
+
 ## Android
 Extract the [Android SDK Tools](https://developer.android.com/studio/#downloads) to `C:\Workspace\android\tools`.
 
@@ -226,6 +233,13 @@ Verify that `adb` works.
 ```cmd
 adb devices
 adb shell pm list users
+```
+
+Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
+
+```cmd
+flutter doctor --android-licenses
+flutter doctor
 ```
 
 
