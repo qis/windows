@@ -211,7 +211,29 @@ Tools > Options > Environment > Fonts and Colors
 
 
 ## VS Code
-Install VS Code plugins: `Flutter`
+Install VS Code plugins:
+
+* Flutter
+* XML Tools
+
+Configure VS Code.
+
+```json
+{
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 120,
+  "editor.fontSize": 12,
+  "editor.fontFamily": "'DejaVu Sans Mono', Consolas, 'Courier New', monospace",
+  "editor.renderLineHighlight": "none",
+  "editor.detectIndentation": false,
+  "editor.dragAndDrop": false,
+  "editor.folding": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "explorer.confirmDelete": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+}
+```
 
 
 ## Android
