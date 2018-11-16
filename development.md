@@ -216,7 +216,7 @@ Tools > Options > Environment > Fonts and Colors
 
 
 ## VS Code
-Install VS Code plugins:
+Install [VS Code](https://code.visualstudio.com/docs/?dv=win64) plugins:
 
 * Dart
 * Flutter
