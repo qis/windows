@@ -216,12 +216,11 @@ Tools > Options > Environment > Fonts and Colors
 
 
 ## VS Code
-Install [VS Code](https://code.visualstudio.com/docs/?dv=win64) plugins:
+Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins:
 
 * Dart
 * Flutter
 * Git History
-* Language Support for Java(TM) by Red Hat
 * XML Tools
 
 Configure VS Code.
