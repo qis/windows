@@ -5,9 +5,12 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development. Do not add anything to `Path` during the installation.
 
-* [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
+* [Git](https://git-scm.com/downloads) into `C:\Program Files\Git`
 * [CMake](https://cmake.org) into `C:\Program Files\CMake`
+* [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
+* [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
 * [Node LTS](https://nodejs.org) into `C:\Node`
+* [Perl 5 (Portable)](http://strawberryperl.com/releases.html) into `C:\Perl`
 * [Python 2](https://www.python.org/downloads/) into `C:\Python`
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
@@ -48,11 +51,13 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
+%ProgramFiles%\Ninja
 C:\Workspace\android\build-tools\28.0.3
 C:\Workspace\android\platform-tools
 C:\Workspace\android\tools\bin
 C:\Workspace\android\tools
 C:\Workspace\vcpkg
+C:\Perl\perl\bin
 C:\Python\Scripts
 C:\Python
 C:\Node
@@ -252,6 +257,16 @@ Replace Vcpkg toolchain files.
 rd /q /s C:\Workspace\vcpkg\scripts\toolchains
 git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
 copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\triplets\
+```
+
+Add system programs to the triplet file.
+
+```cmake
+set(7Z "C:/Program Files/7-Zip/7z.exe" CACHE STRING "")
+set(PERL "C:/Perl/perl/bin/perl.exe" CACHE STRING "")
+set(PYTHON2 "C:/Python/python.exe" CACHE STRING "")
+set(NASM "C:/Program Files/NASM/nasm.exe" CACHE STRING "")
+set(NINJA "C:/Program Files/Ninja/ninja.exe" CACHE STRING "")
 ```
 
 Install Vcpkg ports.
