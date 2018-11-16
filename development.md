@@ -239,7 +239,8 @@ Configure VS Code.
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDelete": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "telemetry.enableTelemetry": false
 }
 ```
 
