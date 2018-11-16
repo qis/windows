@@ -238,7 +238,8 @@ Configure VS Code.
   "explorer.confirmDelete": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "telemetry.enableTelemetry": false
+  "telemetry.enableTelemetry": false,
+  "git.enableSmartCommit": true
 }
 ```
 
