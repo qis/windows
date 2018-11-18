@@ -220,6 +220,7 @@ Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins:
 * C/C++
 * CMake
 * CMake Tools
+* Clang-Format
 * Flutter
 * Git History
 * XML Tools
