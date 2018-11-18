@@ -24,7 +24,7 @@ Install various tools for debugging.
 
 Install a standalone version of `clang-format`.
 
-* [Clang Format](https://llvm.org/builds/)
+* [Clang Format](https://llvm.org/builds/) as `C:\Program Files (x86)\clang-format.exe`
 
 
 ## Environment Variables
@@ -254,7 +254,8 @@ Configure VS Code.
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe"
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe"
 }
 ```
 
