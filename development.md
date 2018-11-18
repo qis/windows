@@ -220,7 +220,6 @@ Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins:
 * C/C++
 * CMake
 * CMake Tools
-* Dart
 * Flutter
 * Git History
 * XML Tools
@@ -251,7 +250,9 @@ Configure VS Code.
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
-  }
+  },
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe"
 }
 ```
 
