@@ -236,6 +236,7 @@ Configure VS Code.
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.folding": false,
+  "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "workbench.startupEditor": "newUntitledFile",
@@ -331,6 +332,12 @@ vcpkg install benchmark gtest ^
 -->
 
 ## Windows Subsystem for Linux
+Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable in `~/.bashrc`.
+
+```
+x64-linux
+```
+
 Take ownership of `/opt`.
 
 ```sh
