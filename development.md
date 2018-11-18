@@ -332,7 +332,7 @@ vcpkg install benchmark gtest ^
 -->
 
 ## Windows Subsystem for Linux
-Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable in `~/.bashrc`.
+Configure the `VCPKG_DEFAULT_TRIPLET` environment variable in `~/.bashrc`.
 
 ```
 x64-linux
