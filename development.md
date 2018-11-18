@@ -83,7 +83,7 @@ Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 x64-windows
 ```
 
-
+<!--
 ## Visual Studio 2017
 Install and configure [Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/).<br/>
 
@@ -212,12 +212,14 @@ Tools > Options > Environment > Fonts and Colors
   Item foreground: R:0 G:204 B:204
   [ ] bold
 ```
-
+-->
 
 ## VS Code
 Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins:
 
 * C/C++
+* CMake
+* CMake Tools
 * Dart
 * Flutter
 * Git History
@@ -235,12 +237,21 @@ Configure VS Code.
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.folding": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDelete": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "telemetry.enableTelemetry": false,
-  "git.enableSmartCommit": true
+  "git.enableSmartCommit": true,
+  "cmake.configureOnOpen": true,
+  "cmake.generator": "Ninja",
+  "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
+  "cmake.installPrefix": "${workspaceRoot}",
+  "cmake.configureSettings": {
+    "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
+    "VCPKG_TARGET_TRIPLET": "x64-windows"
+  }
 }
 ```
 
