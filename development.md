@@ -244,6 +244,7 @@ Configure VS Code.
   "explorer.confirmDelete": false,
   "telemetry.enableTelemetry": false,
   "git.enableSmartCommit": true,
+  "git.confirmSync": false,
   "cmake.configureOnOpen": true,
   "cmake.generator": "Ninja",
   "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
