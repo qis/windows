@@ -230,6 +230,7 @@ Configure VS Code.
 ```json
 {
   "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 120,
   "editor.fontSize": 12,
   "editor.fontFamily": "'DejaVu Sans Mono', Consolas, 'Courier New', monospace",
@@ -257,6 +258,7 @@ Configure VS Code.
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
+  "dart.lineLength": 120,
   "files.associations": {
     "*.arb": "json"
   }
