@@ -255,7 +255,10 @@ Configure VS Code.
   },
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
-  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe"
+  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
+  "files.associations": {
+    "*.arb": "json"
+  }
 }
 ```
 
