@@ -288,7 +288,7 @@ Enable Windows Hypervisor Platform support and register the SDK.
 
 ```cmd
 mkdir %UserProfile%\.android
-@echo WindowsHypervisorPlatform = on>> %UserProfile%\.android\advancedFeatures.ini
+echo WindowsHypervisorPlatform = on>> %UserProfile%\.android\advancedFeatures.ini
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Workspace\android" /f
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
 ```
@@ -297,6 +297,10 @@ Create and start virtual device.
 
 ```cmd
 avdmanager create avd -n Phone -k "system-images;android-28;google_apis;x86_64"
+set script=import msvcrt, os, sys; ^
+msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY); ^
+print('hw.keyboard=yes')
+python -c "%script%" >> %UserProfile%\.android\avd\Phone.avd\config.ini
 emulator -avd Phone -skin 480x854 -no-audio -partition-size 512
 ```
 
