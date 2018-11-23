@@ -630,11 +630,13 @@ Enable or disable Windows features.
 ```
 Control Panel > Programs > Turn Windows features on or off
 [■] .NET Framework 3.5 (includes .NET 2.0 and 3.0)
+[✓] Hyper-V
 [ ] Microsoft XPS Document Writer
 [■] SMB 1.0/CIFS File Sharing Support
     [✓] SMB 1.0/CIFS Client
 [✓] Telnet Client
 [✓] TFTP Client
+[✓] Windows Hypervisor Platform
 [✓] Windows Subsystem for Linux
 ```
 

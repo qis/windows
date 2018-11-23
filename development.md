@@ -54,6 +54,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
 %ProgramFiles%\7-Zip
+C:\Workspace\android\emulator
 C:\Workspace\android\flutter\bin
 C:\Workspace\android\build-tools\28.0.3
 C:\Workspace\android\platform-tools
@@ -83,7 +84,6 @@ Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 x64-windows
 ```
 
-<!--
 ## Visual Studio 2017
 Install and configure [Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/).<br/>
 
@@ -91,6 +91,7 @@ Install and configure [Visual Studio 2017 Community](https://visualstudio.micros
 
 ![Individual Components](res/vs2017-2.png)
 
+<!--
 ### Configuration
 ```
 Tools > Options
@@ -278,7 +279,25 @@ sdkmanager "platforms;android-28"
 sdkmanager "extras;google;usb_driver"
 sdkmanager "build-tools;28.0.3"
 sdkmanager "ndk-bundle"
+sdkmanager "emulator"
+sdkmanager "system-images;android-28;google_apis;x86_64"
 sdkmanager --licenses
+```
+
+Enable Windows Hypervisor Platform support and register the SDK.
+
+```cmd
+mkdir %UserProfile%\.android
+@echo WindowsHypervisorPlatform = on>> %UserProfile%\.android\advancedFeatures.ini
+reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Workspace\android" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
+```
+
+Create and start virtual device.
+
+```cmd
+avdmanager create avd -n Phone -k "system-images;android-28;google_apis;x86_64"
+emulator -avd Phone -skin 480x854 -no-audio -partition-size 512
 ```
 
 Verify that `adb` works.
@@ -292,6 +311,12 @@ Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\
 
 ```cmd
 flutter doctor
+```
+
+Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding).
+
+```cmd
+git clone https://github.com/google/flutter-desktop-embedding C:\Workspace\android\flutter-desktop-embedding
 ```
 
 
