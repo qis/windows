@@ -735,11 +735,21 @@ sudo apt install siege
 sudo apt-file update
 ```
 
+Install youtube-dl.
+
+```sh
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+```
+
+
 ## Settings
 Follow the [Settings](settings.md) guide to finish the configuration.
 
+
 ## Development
 Follow the [Development](development.md) guide to set up a developer workstation.
+
 
 ## Start Menu
 ![Start Menu](res/start.png)
