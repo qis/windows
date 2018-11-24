@@ -274,41 +274,28 @@ Install Android SDK, NDK, USB driver and `adb`.
 
 ```cmd
 sdkmanager --update
-sdkmanager "platform-tools"
-sdkmanager "platforms;android-28"
-sdkmanager "extras;google;usb_driver"
-sdkmanager "build-tools;28.0.3"
-sdkmanager "ndk-bundle"
-sdkmanager "emulator"
-sdkmanager "system-images;android-28;google_apis;x86_64"
 sdkmanager --licenses
+sdkmanager "platforms;android-28" "build-tools;28.0.3" "system-images;android-28;google_apis;x86_64"
+sdkmanager "extras;google;usb_driver" "platform-tools" "ndk-bundle" "emulator"
+echo WindowsHypervisorPlatform=on>> %UserProfile%\.android\advancedFeatures.ini
 ```
 
-Enable Windows Hypervisor Platform support and register the SDK.
+Register the SDK as Administrator.
 
 ```cmd
-mkdir %UserProfile%\.android
-echo WindowsHypervisorPlatform = on>> %UserProfile%\.android\advancedFeatures.ini
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Workspace\android" /f
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
 ```
 
-Create and start virtual device.
+Create, configure and start virtual device.
 
 ```cmd
-avdmanager create avd -n Phone -k "system-images;android-28;google_apis;x86_64"
-set script=import msvcrt, os, sys; ^
-msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY); ^
-print('hw.keyboard=yes')
-python -c "%script%" >> %UserProfile%\.android\avd\Phone.avd\config.ini
-emulator -avd Phone -skin 480x854 -no-audio -partition-size 512
-```
-
-Verify that `adb` works.
-
-```cmd
-adb devices
-adb shell pm list users
+avdmanager create avd -n Phone -d "Nexus 4" -k "system-images;android-28;google_apis;x86_64"
+echo hw.lcd.density=160>> %UserProfile%\.android\avd\Phone.avd\config.ini
+echo hw.lcd.height=800>>  %UserProfile%\.android\avd\Phone.avd\config.ini
+echo hw.lcd.width=480>>   %UserProfile%\.android\avd\Phone.avd\config.ini
+echo hw.keyboard=yes>>    %UserProfile%\.android\avd\Phone.avd\config.ini
+emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 480x800
 ```
 
 Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
@@ -317,11 +304,13 @@ Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\
 flutter doctor
 ```
 
+<!--
 Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding).
 
 ```cmd
 git clone https://github.com/google/flutter-desktop-embedding C:\Workspace\android\flutter-desktop-embedding
 ```
+-->
 
 
 ## Vcpkg
