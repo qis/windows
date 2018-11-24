@@ -292,10 +292,10 @@ Create, configure and start virtual device.
 ```cmd
 avdmanager create avd -n Phone -d "Nexus 4" -k "system-images;android-28;google_apis;x86_64"
 echo hw.lcd.density=160>> %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.height=800>>  %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.width=480>>   %UserProfile%\.android\avd\Phone.avd\config.ini
+echo hw.lcd.height=640>>  %UserProfile%\.android\avd\Phone.avd\config.ini
+echo hw.lcd.width=360>>   %UserProfile%\.android\avd\Phone.avd\config.ini
 echo hw.keyboard=yes>>    %UserProfile%\.android\avd\Phone.avd\config.ini
-emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 480x800
+emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 360x640
 ```
 
 Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
