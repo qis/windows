@@ -497,8 +497,7 @@ Install third party software.
 Configure gVim.
 
 ```cmd
-cd %UserProfile%
-git clone https://github.com/qis/vim vimfiles
+git clone https://github.com/qis/vim %UserProfile%\vimfiles
 ```
 
 ## Sublime Text 3
@@ -680,7 +679,7 @@ Create `/etc/wsl.conf`.
 ```sh
 [automount]
 enabled=true
-options=metadata,uid=1000,gid=1000,umask=022
+options=case=off,metadata,uid=1000,gid=1000,umask=022
 ```
 
 Fix timezone information.
