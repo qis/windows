@@ -641,15 +641,8 @@ Control Panel > Programs > Turn Windows features on or off
 
 Reboot the system.
 
-Install a WSL distro from <https://aka.ms/wslstore> and launch it.
-
-
 ## Windows Subsystem for Linux
-<!--
-Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.<br/>
-Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
--->
-Download config files.
+Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
 
 ```sh
 wget https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc
@@ -740,6 +733,9 @@ Install youtube-dl.
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 ```
+
+Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.<br/>
+Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 
 
 ## Settings
