@@ -311,7 +311,7 @@ Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-em
 git clone https://github.com/google/flutter-desktop-embedding C:\Workspace\android\flutter-desktop-embedding
 ```
 
-Build `C:\Workspace\android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln` in `Release Static Library` mode.
+Build `C:\Workspace\android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln` in `Release Dynamic Library` mode.
 -->
 
 
