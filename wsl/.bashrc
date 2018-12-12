@@ -9,10 +9,6 @@ export PATH
 # Limits
 ulimit -S -c 0
 
-# VCPKG
-export VCPKG_DEFAULT_TRIPLET="x64-linux-clang"
-export VCPKG="/opt/vcpkg"
-
 # Unicode
 export UTF8=$(locale -m | grep -i utf | head -1)
 export NCURSES_NO_UTF8_ACS="1"
@@ -26,7 +22,7 @@ export LC_COLLATE="C"
 export LC_ALL=
 
 # Applications
-export NODE_PATH="/usr/local/lib/node_modules"
+export NODE_PATH="/opt/node/lib/node_modules"
 export P7ZIP="$(which 7z 7zr 7za 2>/dev/null | head -1)"
 export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
 export PAGER="less"
@@ -53,6 +49,7 @@ alias lla="ll -a"
 alias 7z="${P7ZIP}"
 alias vim="${EDITOR} -p"
 alias vimdiff="${EDITOR} -d"
+alias crush="pngcrush -brute -reduce -rem allb -ow"
 alias grep="grep --color=auto"
 alias sudo="sudo "
 alias gdb="gdb -q"
@@ -88,12 +85,12 @@ set -o emacs
 
 # WSL
 if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
-  if [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then
+  if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
+    cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
+  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then
     cd "${HOME}/documents/$(pwd | cut -d/ -f7-)"
   elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Downloads" ]; then
     cd "${HOME}/downloads/$(pwd | cut -d/ -f7-)"
-  elif [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
-    cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
   fi
 fi
 
