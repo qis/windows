@@ -235,6 +235,7 @@ Configure VS Code.
   "editor.wordWrapColumn": 120,
   "editor.fontSize": 12,
   "editor.fontFamily": "'DejaVu Sans Mono', Consolas, 'Courier New', monospace",
+  "editor.cursorSmoothCaretAnimation": true,
   "editor.renderLineHighlight": "none",
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
@@ -246,12 +247,15 @@ Configure VS Code.
   "explorer.confirmDelete": false,
   "telemetry.enableTelemetry": false,
   "git.enableSmartCommit": true,
+  "git.postCommitCommand": "push",
   "git.confirmSync": false,
   "cmake.configureOnOpen": true,
   "cmake.generator": "Ninja",
   "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
   "cmake.installPrefix": "${workspaceRoot}",
   "cmake.configureSettings": {
+    "CMAKE_VERBOSE_MAKEFILE": "ON",
+    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
@@ -262,7 +266,8 @@ Configure VS Code.
   "dart.lineLength": 120,
   "files.associations": {
     "*.arb": "json"
-  }
+  },
+  "java.errors.incompleteClasspath.severity": "ignore"
 }
 ```
 
