@@ -66,13 +66,13 @@ C:\Python
 C:\Node
 ```
 
-Configure the System `ANDROID_HOME` environment variable.
+Configure the System `ANDROID_SDK_ROOT` environment variable.
 
 ```
 C:\Workspace\android
 ```
 
-Configure the System `ANDROID_NDK_HOME` environment variable.
+Configure the System `ANDROID_NDK_ROOT` environment variable.
 
 ```
 C:\Workspace\android\ndk-bundle
@@ -216,7 +216,7 @@ Tools > Options > Environment > Fonts and Colors
 -->
 
 ## VS Code
-Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins:
+Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins.
 
 * C/C++
 * CMake
@@ -273,16 +273,14 @@ Configure VS Code.
 
 
 ## Android
-Extract the [Android SDK Tools](https://developer.android.com/studio/#downloads) to `C:\Workspace\android\tools`.
+Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Workspace\android\tools`.
 
-Install Android SDK, NDK, USB driver and `adb`.
+Install Android SDK, Build Tools, NDK, USB driver and `adb`.
 
 ```cmd
 sdkmanager --update
 sdkmanager --licenses
-sdkmanager "platforms;android-28" "build-tools;28.0.3" "system-images;android-28;google_apis;x86_64"
-sdkmanager "extras;google;usb_driver" "platform-tools" "ndk-bundle" "emulator"
-echo WindowsHypervisorPlatform=on>> %UserProfile%\.android\advancedFeatures.ini
+sdkmanager "platforms;android-28" "build-tools;28.0.3" "ndk-bundle" "extras;google;usb_driver" "platform-tools"
 ```
 
 Register the SDK as Administrator.
@@ -292,7 +290,15 @@ reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
 ```
 
-Create, configure and start virtual device.
+<!--
+Install and configure emulator.
+
+```cmd
+sdkmanager "emulator" "system-images;android-28;google_apis;x86_64"
+echo WindowsHypervisorPlatform=on>> %UserProfile%\.android\advancedFeatures.ini
+```
+
+Create and configure virtual device.
 
 ```cmd
 avdmanager create avd -n Phone -d "Nexus 4" -k "system-images;android-28;google_apis;x86_64"
@@ -300,13 +306,19 @@ echo hw.lcd.density=160>> %UserProfile%\.android\avd\Phone.avd\config.ini
 echo hw.lcd.height=640>>  %UserProfile%\.android\avd\Phone.avd\config.ini
 echo hw.lcd.width=360>>   %UserProfile%\.android\avd\Phone.avd\config.ini
 echo hw.keyboard=yes>>    %UserProfile%\.android\avd\Phone.avd\config.ini
+```
+
+Start virtual device.
+
+```cmd
 emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 360x640
 ```
+-->
 
 Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
 
 ```cmd
-flutter doctor
+flutter doctor -v
 ```
 
 <!--
@@ -329,7 +341,7 @@ Install Vcpkg.
 
 ```cmd
 git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
-C:\Workspace\vcpkg\bootstrap-vcpkg.bat && vcpkg integrate install
+bootstrap-vcpkg -disableMetrics && vcpkg integrate install
 ```
 
 <!--
@@ -353,7 +365,7 @@ Install Vcpkg ports.
 
 ```cmd
 vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib ^
+  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
   angle freetype giflib harfbuzz libjpeg-turbo libpng opus
 ```
 
@@ -363,18 +375,12 @@ Install Vcpkg ports on Android.
 ```cmd
 set VCPKG_DEFAULT_TRIPLET=arm64-android
 vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib ^
+  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
   freetype giflib harfbuzz libjpeg-turbo libpng opus
 ```
 -->
 
 ## Windows Subsystem for Linux
-Configure the `VCPKG_DEFAULT_TRIPLET` environment variable in `~/.bashrc`.
-
-```
-x64-linux
-```
-
 Take ownership of `/opt`.
 
 ```sh
@@ -405,38 +411,40 @@ Install LLVM.
 
 ```sh
 rm -rf /opt/llvm; mkdir /opt/llvm
-wget http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+wget https://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
 tar xvf clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /opt/llvm --strip-components 1
 sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
 /opt/llvm/lib
 /opt/llvm/lib/clang/7.0.0/lib/linux
 EOF
 sudo ldconfig
+sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
+sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
 ```
 
 Install CMake and Ninja.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.12/cmake-3.12.4-Linux-x86_64.tar.gz
-tar xvf cmake-3.12.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.13/cmake-3.13.2-Linux-x86_64.tar.gz
+tar xvf cmake-3.13.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 git clone -b release https://github.com/ninja-build/ninja
-cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/
+sh -c "cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
 ```
 
 Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xz
-tar xvf node-v10.13.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v10.14.2/node-v10.14.2-linux-x64.tar.xz
+tar xvf node-v10.14.2-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
 Install Vcpkg.
 
 ```sh
-bootstrap-vcpkg.sh
+bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries
 rm -rf /opt/vcpkg/toolsrc/build.rel
 sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
 ```
@@ -445,6 +453,5 @@ Install Vcpkg packages.
 
 ```sh
 vcpkg install benchmark gtest \
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml range-v3 zlib
+  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib
 ```
-
