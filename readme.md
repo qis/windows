@@ -503,6 +503,7 @@ Install useful fonts.
 Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
+* [Chrome](https://www.google.com/chrome/)
 * [ConEmu](https://conemu.github.io)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)

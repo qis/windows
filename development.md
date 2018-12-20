@@ -3,21 +3,106 @@ Installation and configuration of a Windows 10 development workstation.
 
 
 ## Tools
-Install various tools for development. Do not add anything to `Path` during the installation.
+Install various tools for development.
 
-* [Git](https://git-scm.com/downloads) into `C:\Program Files\Git`
-* [CMake](https://cmake.org) into `C:\Program Files\CMake`
+* [Git](https://git-scm.com/downloads)
+
+```
+Select Destination Location
+  C:\Program Files\Git
+Select Components
+  [✓] Git LFS (Large File Support)
+Select Start Menu Folder
+  [✓] Don't create a Start Menu folder
+Choosing the default editor used by Git
+  [Select other editor as Git's default editor]
+  Location of editor: C:\Program Files (x86)\Vim\vim81\gvim.exe
+  [Test Custom Editor]
+Adjusting your PATH environment
+  (•) Use Git from Git Bash only
+Choosing the SSH executable
+  (•) Use OpenSSH
+Choosing HTTPS transport backend
+  (•) Use the OpenSSL library
+Configuring the line ending conversions
+  (•) Checkout as-is, commit as-is
+Configuring the terminal emulator to use with Git Bash
+  (•) Use Windows' default console window
+Configuring file system caching
+  [✓] Enable file system caching
+  [✓] Enable Git Credential Manager
+  [✓] Enable symbolic links
+```
+
+* [CMake](https://cmake.org)
+
+```
+Install Options
+  (•) Do not add CMake to the system PATH
+  [ ] Create CMake Desktop Icon
+Destination Folder
+  C:\Program Files\CMake
+```
+
+* [Node LTS](https://nodejs.org)
+
+```
+Destination Folder
+  C:\Node
+Custom Setup
+  [✓] Node.js runtime
+  [✓] npm package manager
+  [✗] Online documentation shortcuts
+  [✗] Add to PATH
+```
+
+* [Python 2](https://www.python.org/downloads/)
+
+```
+Select where to install Python
+  (•) Install for all users
+Select Destination Directory
+  C:\Python
+Customize Python
+  [■] Python
+    [✓] Register Extensions
+    [✓] Tcl/Tk
+    [✗] Documentation
+    [✓] Utility Scripts
+    [✓] pip
+    [✓] Test suite
+    [✗] Add python.exe to Path
+  [Advanced]
+    [✓] Compile .py files to byte code after installation
+```
+
+* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+```
+Select optional features
+  [✓] Development Tools
+  [✗] Source Code
+  [✗] Public JRE
+  Install to: C:\Program Files\Java
+```
+
+* [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
+
+```
+Select Additional Tasks
+  [ ] Create a desktop icon
+  [✓] Add "Open with Code" action to Windows Explorer file context menu
+  [✓] Add "Open with Code" action to Windows Explorer directory context menu
+  [✓] Register Code as an editor for supported file types
+  [ ] Add to PATH (available after restart)
+```
+
+* [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 * [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
 * [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
-* [Node LTS](https://nodejs.org) into `C:\Node`
-* [Python 2](https://www.python.org/downloads/) into `C:\Python`
-* [VS Code](https://code.visualstudio.com/download) using the System Installer.
-* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-* [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 
 Install various tools for debugging.
 
-* [HxD](https://mh-nexus.de/en/hxd)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
@@ -47,7 +132,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\Microsoft VS Code\bin
-%ProgramFiles%\Java\jdk1.8.{version}\bin
+%ProgramFiles%\Java\bin
 %ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
@@ -215,18 +300,10 @@ Tools > Options > Environment > Fonts and Colors
 ```
 -->
 
-## VS Code
-Install [VS Code](https://code.visualstudio.com/docs/?dv=wfluttin64) plugins.
+## Visual Studio Code
+**NOTE**: Press `CTRL+P` and type `>` followed by a command.
 
-* C/C++
-* CMake
-* CMake Tools
-* Clang-Format
-* Flutter
-* Git History
-* XML Tools
-
-Configure VS Code.
+Configure editor with the command `Preferences: Open Settings (JSON)`
 
 ```json
 {
@@ -246,6 +323,8 @@ Configure VS Code.
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDelete": false,
   "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "push",
   "git.confirmSync": false,
@@ -261,15 +340,21 @@ Configure VS Code.
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
-  "dart.lineLength": 120,
-  "files.associations": {
-    "*.arb": "json"
-  },
-  "java.errors.incompleteClasspath.severity": "ignore"
+  "dart.lineLength": 120
 }
 ```
+
+Install extensions witht he command `Extensions: Install Extensions`.
+
+* C/C++ (Microsoft)
+* CMake (twxs)
+* CMake Tools (vector-of-bool)
+* Clang-Format (xaver)
+* Flutter (Dart Code)
+* Git History (Don Jayamanne)
+* hexdump for VSCode (slevesque)
+* XML Tools (Josh Johnson)
 
 
 ## Android
