@@ -132,6 +132,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\Microsoft VS Code\bin
+%ProgramFiles%\7-Zip
 %ProgramFiles%\Java\bin
 %ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
@@ -464,6 +465,37 @@ vcpkg install benchmark gtest ^
   freetype giflib harfbuzz libjpeg-turbo libpng opus
 ```
 -->
+
+<!--
+Install LLVM.
+
+```cmd
+git clone -b release_70 --depth 1 https://llvm.org/git/llvm src
+git clone -b release_70 --depth 1 https://llvm.org/git/clang src\tools\clang
+git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src\tools\clang\tools\extra
+git clone -b release_70 --depth 1 https://llvm.org/git/lld src\tools\lld
+md build\host
+pushd build\host
+cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release ^
+  -DCMAKE_INSTALL_PREFIX=C:/LLVM ^
+  -DLLVM_TARGETS_TO_BUILD="X86;WebAssembly" ^
+  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" ^
+  -DLLVM_ENABLE_ASSERTIONS=OFF ^
+  -DLLVM_ENABLE_WARNINGS=OFF ^
+  -DLLVM_ENABLE_PEDANTIC=OFF ^
+  -DLLVM_INCLUDE_EXAMPLES=OFF ^
+  -DLLVM_INCLUDE_TESTS=OFF ^
+  -DLLVM_INCLUDE_DOCS=OFF ^
+  ..\..\src
+cmake --build . --target install
+popd
+git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src\musl
+git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src\projects\compiler-rt
+git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src\projects\libcxxabi
+git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src\projects\libcxx
+```
+-->
+
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
