@@ -83,6 +83,8 @@ export PS1
 
 set -o emacs
 
+stty werase '^_'
+
 # WSL
 if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
   if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then

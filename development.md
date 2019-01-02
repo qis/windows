@@ -355,6 +355,7 @@ Install extensions witht he command `Extensions: Install Extensions`.
 * Flutter (Dart Code)
 * Git History (Don Jayamanne)
 * hexdump for VSCode (slevesque)
+* Markdown All in One (Yu Zhang)
 * XML Tools (Josh Johnson)
 
 
@@ -476,7 +477,7 @@ git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src\too
 git clone -b release_70 --depth 1 https://llvm.org/git/lld src\tools\lld
 md build\host
 pushd build\host
-cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release ^
+cmake -G "Visual Studio 15 2017 Win64" -Thost=x64 -DCMAKE_BUILD_TYPE=Release ^
   -DCMAKE_INSTALL_PREFIX=C:/LLVM ^
   -DLLVM_TARGETS_TO_BUILD="X86;WebAssembly" ^
   -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" ^
@@ -493,9 +494,78 @@ git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src\mu
 git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src\projects\compiler-rt
 git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src\projects\libcxxabi
 git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src\projects\libcxx
+md build\musl
+pushd build\musl
+
+```
+
+```sh
+rm -rf /opt/llvm; mkdir /opt/llvm; cd /opt/llvm
+git clone -b release_70 --depth 1 https://llvm.org/git/llvm src && \
+git clone -b release_70 --depth 1 https://llvm.org/git/lld src/tools/lld && \
+git clone -b release_70 --depth 1 https://llvm.org/git/clang src/tools/clang && \
+git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src/tools/clang/tools/extra && \
+git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src/projects/compiler-rt && \
+git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src/projects/libcxxabi && \
+git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src/projects/libcxx && \
+git clone -b release_70 --depth 1 https://llvm.org/git/libunwind src/runtimes/libunwind && \
+git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src/musl
+sed -i "s/\s\smain()//" src/projects/libcxx/utils/merge_archives.py
+mkdir -p build/host; pushd build/host
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
+  -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86;WebAssembly" \
+  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
+  -DLLVM_ENABLE_ASSERTIONS=OFF \
+  -DLLVM_ENABLE_WARNINGS=OFF \
+  -DLLVM_ENABLE_PEDANTIC=OFF \
+  -DLLVM_INCLUDE_EXAMPLES=OFF \
+  -DLLVM_INCLUDE_TESTS=OFF \
+  -DLLVM_INCLUDE_DOCS=OFF \
+  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
+  -DLIBCXXABI_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
+  -DLIBCXXABI_ENABLE_SHARED=OFF \
+  -DLIBCXXABI_ENABLE_STATIC=ON \
+  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
+  -DLIBCXX_ENABLE_SHARED=OFF \
+  -DLIBCXX_ENABLE_STATIC=ON \
+  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXX_ENABLE_FILESYSTEM=ON \
+  -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=ON \
+  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+  -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
+  ../../src
+cmake --build . --target install -- -j4
+popd
+
+wget -O /opt/llvm/bin/wasm https://raw.githubusercontent.com/qis/llvm/master/wasm.sh
+chmod 0755 /opt/llvm/bin/wasm
+
+pushd /opt/llvm/bin
+for i in cc c++ clang clang++; do \
+  echo "/opt/llvm/bin/wasm-$i -> wasm"; \
+  rm -f wasm-$i; ln -s wasm wasm-$i; \
+done
+popd
+
+pushd /opt/llvm/bin
+for i in ar as nm objcopy objdump ranlib readelf readobj size strings; do \
+  echo "/opt/llvm/bin/wasm-$i -> llvm-$i"; \
+  rm -f wasm-$i; ln -s llvm-$i wasm-$i; \
+done
+popd
+
+mkdir -p build/musl; pushd build/musl
+CC=/opt/llvm/bin/clang CROSS_COMPILE=/opt/llvm/bin/wasm- CFLAGS=-Wno-everything \
+../../src/musl/configure --prefix=/opt/llvm/wasm --disable-shared --enable-optimize=size
+make all install -j4
+popd
 ```
 -->
-
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
