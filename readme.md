@@ -493,6 +493,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365
 ## Fonts
 Install useful fonts.
 
+* [Fira Code](https://github.com/tonsky/FiraCode/)
 * [DejaVu & DejaVu LGC](https://sourceforge.net/projects/dejavu/files/dejavu)
 * [DejaVu Sans Mono from Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 * [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
