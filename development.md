@@ -139,7 +139,6 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
-%ProgramFiles%\7-Zip
 C:\Workspace\android\emulator
 C:\Workspace\android\flutter\bin
 C:\Workspace\android\build-tools\28.0.3
