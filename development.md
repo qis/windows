@@ -361,8 +361,7 @@ Install extensions witht he command `Extensions: Install Extensions`.
 * Flutter (Dart Code)
 * Git History (Don Jayamanne)
 * hexdump for VSCode (slevesque)
-* Java Extension Pack (Microsoft)
-* Markdown All in One (Yu Zhang)
+* Python (Microsoft)
 * XML Tools (Josh Johnson)
 
 
