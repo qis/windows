@@ -5,10 +5,10 @@ Windows 10 Settings template.
 ```
 Notifications & actions
 + Add or remove quick actions
-  [✓] Network
-  [✓] Bluetooth
-  [✓] Night light
   [✓] All settings
+  [✓] Network
+  [✓] Night light
+  [✓] Screen snip
 + Notifications
   [ ] Show notifications on the lock screen
   [ ] Show reminders and incoming VoIP calls on the lock screen
@@ -33,8 +33,6 @@ Multitasking
 + Timeline
   [ ] Show suggestions occasionally in Timeline
 Shared experiences
-+ Nearby sharing
-  [ ] Nearby sharing lets you send and receive content …
 + Share across devices
   [ ] Let apps on other devices open and message apps on this device …
 Remote Desktop
@@ -65,9 +63,6 @@ AutoPlay
 
 ## Network & Internet
 ```
-Mobile hotspot
-+ Turn on remotely
-  [ ] Allow another device to turn on mobile hotspot.
 Proxy
 + Automatic proxy setup
   [ ] Automatically detect settings
@@ -122,7 +117,7 @@ Taskbar
 ```
 Apps & features
 + Installing apps
-  Choose where you can get apps from. …: Allow apps from everywhere
+  Choose where you can get apps from. …: Turn off app recommendations
 Video playback
 + Video playback
   [ ] Automatically process video to enhance it
@@ -182,9 +177,12 @@ General
   [ ] Let websites provide locally relevant content by accessing my language list
   [ ] Let Windows track app launches to improve Start and search results
   [ ] Show me suggested content in the Settings app
+Inking & typing personalization
+  [ ] Getting to know you
 Activity history
 + Activity history
   [ ] Let Windows collect my activities from this PC
+  [Clear]
 App permissions
 + Camera
   [ ] Allow apps to access your camera
@@ -218,6 +216,8 @@ App permissions
   [✓] People
 + App diagnostics
   [ ] Allow apps to access diagnostic information
++ Documents
+  [ ] Allow apps to access your documents library
 + Pictures
   [ ] Allow apps to access your pictures library
 + Videos
@@ -235,12 +235,15 @@ For developers
   [ ] Change settings to show full path in title bar
   [ ] Change policy to show Run as different user in Start
   [✓] Change settings to show empty drives
-  Apply
+  [Apply]
 + Remote Desktop
   [ ] Change settings to allow remote connections to this computer
+  [✓] Change settings to allow connections only from computers running …
+  [✓] Change settings so that the PC never goes to sleep when plugged in
+  [Apply]
 + PowerShell
   [✓] Change execution policy to allow local PowerShell scripts to run without signing.
-  Apply
+  [Apply]
 ```
 
 ## Control Panel

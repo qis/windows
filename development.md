@@ -5,35 +5,6 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development.
 
-* [Git](https://git-scm.com/downloads)
-
-```
-Select Destination Location
-  C:\Program Files\Git
-Select Components
-  [✓] Git LFS (Large File Support)
-Select Start Menu Folder
-  [✓] Don't create a Start Menu folder
-Choosing the default editor used by Git
-  [Select other editor as Git's default editor]
-  Location of editor: C:\Program Files (x86)\Vim\vim81\gvim.exe
-  [Test Custom Editor]
-Adjusting your PATH environment
-  (•) Use Git from Git Bash only
-Choosing the SSH executable
-  (•) Use OpenSSH
-Choosing HTTPS transport backend
-  (•) Use the OpenSSL library
-Configuring the line ending conversions
-  (•) Checkout as-is, commit as-is
-Configuring the terminal emulator to use with Git Bash
-  (•) Use Windows' default console window
-Configuring file system caching
-  [✓] Enable file system caching
-  [✓] Enable Git Credential Manager
-  [✓] Enable symbolic links
-```
-
 * [CMake](https://cmake.org)
 
 ```
