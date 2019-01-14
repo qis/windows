@@ -122,6 +122,13 @@ C:\Python
 C:\Node
 ```
 
+Configure the System `JAVA_HOME` environment variable.
+
+
+```
+%ProgramFiles%\Java
+```
+
 Configure the System `ANDROID_SDK_ROOT` environment variable.
 
 ```
