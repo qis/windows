@@ -309,39 +309,40 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.postCommitCommand": "push",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
   "window.restoreWindows": "none",
   "workbench.startupEditor": "newUntitledFile",
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.openExplorerOnEnd": true,
+  "debug.openDebug": "openOnDebugBreak",
+  "cmake.generator": "Ninja",
+  "cmake.installPrefix": "${workspaceRoot}",
   "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
   "cmake.configureOnOpen": true,
   "cmake.configureSettings": {
-    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
-  "cmake.generator": "Ninja",
-  "cmake.installPrefix": "${workspaceRoot}",
   "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
   "dart.lineLength": 120
 }
 ```
 
-Install extensions witht he command `Extensions: Install Extensions`.
+Install extensions witht the following commands with `CTRL+P`.
 
-* C/C++ (Microsoft)
-* CMake (twxs)
-* CMake Tools (vector-of-bool)
-* Clang-Format (xaver)
-* Flutter (Dart Code)
-* Git History (Don Jayamanne)
-* hexdump for VSCode (slevesque)
-* Language Support for Java(TM) by Red Hat (Red Hat)
-* Python (Microsoft)
-* XML Tools (Josh Johnson)
+```
+ext install eamodio.gitlens
+ext install donjayamanne.githistory
+ext install dotjoshjohnson.xml
+ext install maddouri.cmake-tools-helper
+ext install xaver.clang-format
+ext install vscjava.vscode-java-debug
+ext install dart-code.flutter
+> Reload Window
+```
 
 
 ## Android
