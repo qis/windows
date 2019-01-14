@@ -339,6 +339,7 @@ Install extensions witht he command `Extensions: Install Extensions`.
 * Flutter (Dart Code)
 * Git History (Don Jayamanne)
 * hexdump for VSCode (slevesque)
+* Language Support for Java(TM) by Red Hat (Red Hat)
 * Python (Microsoft)
 * XML Tools (Josh Johnson)
 
