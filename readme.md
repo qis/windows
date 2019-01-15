@@ -1,6 +1,8 @@
 ﻿# Windows
 Installation and configuration instructions for Windows 10 (Version 1809).
 
+☑
+
 
 ## Preparations
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image and create the installation media.
@@ -231,7 +233,7 @@ Windows Error Reporting
 Windows Update
 + Configure Automatic Updates: Enabled
   Configure automatic updating: 2 - Notify for download and auto install
-  [✓] Install updates for other Microsoft products
+  ☑ Install updates for other Microsoft products
 ```
 
 
@@ -266,7 +268,7 @@ Disable automatic driver application installation.
 
 ```
 Control Panel > "System" > Advanced system settings > Hardware > Device Installation Settings
-(·) No (your device might not work as expected)
+◉ No (your device might not work as expected)
 ```
 
 Reboot the system.
@@ -505,30 +507,30 @@ Install [Git](https://git-scm.com/downloads) with specific settings.
 Select Destination Location
   C:\Program Files\Git
 Select Components
-  [ ] Windows Explorer integration
-  [✓] Git LFS (Large File Support)
-  [ ] Associate .git* configuration files with the default text editor
-  [ ] Associate .sh files to be run with Bash
+  ☐ Windows Explorer integration
+  ☑ Git LFS (Large File Support)
+  ☐ Associate .git* configuration files with the default text editor
+  ☐ Associate .sh files to be run with Bash
 Select Start Menu Folder
-  [✓] Don't create a Start Menu folder
+  ☑ Don't create a Start Menu folder
 Choosing the default editor used by Git
   [Select other editor as Git's default editor]
   Location of editor: C:\Program Files (x86)\Vim\vim81\gvim.exe
   [Test Custom Editor]
 Adjusting your PATH environment
-  (•) Use Git from Git Bash only
+  ◉ Use Git from Git Bash only
 Choosing the SSH executable
-  (•) Use OpenSSH
+  ◉ Use OpenSSH
 Choosing HTTPS transport backend
-  (•) Use the OpenSSL library
+  ◉ Use the OpenSSL library
 Configuring the line ending conversions
-  (•) Checkout as-is, commit as-is
+  ◉ Checkout as-is, commit as-is
 Configuring the terminal emulator to use with Git Bash
-  (•) Use Windows' default console window
+  ◉ Use Windows' default console window
 Configuring file system caching
-  [✓] Enable file system caching
-  [✓] Enable Git Credential Manager
-  [✓] Enable symbolic links
+  ☑ Enable file system caching
+  ☑ Enable Git Credential Manager
+  ☑ Enable symbolic links
 ```
 
 Add `%ProgramFiles%\Git\cmd` to `Path`.
@@ -625,15 +627,15 @@ Enable or disable Windows features.
 
 ```
 Control Panel > Programs > Turn Windows features on or off
-[■] .NET Framework 3.5 (includes .NET 2.0 and 3.0)
-[ ] Microsoft XPS Document Writer
-[ ] Print and Document Services
-[■] SMB 1.0/CIFS File Sharing Support
-    [✓] SMB 1.0/CIFS Client
-[✓] Telnet Client
-[✓] TFTP Client
-[✓] Windows Subsystem for Linux
-[ ] Work Folders Client
+▣ .NET Framework 3.5 (includes .NET 2.0 and 3.0)
+☐ Microsoft XPS Document Writer
+☐ Print and Document Services
+▣ SMB 1.0/CIFS File Sharing Support
+  ☑ SMB 1.0/CIFS Client
+☑ Telnet Client
+☑ TFTP Client
+☑ Windows Subsystem for Linux
+☐ Work Folders Client
 ```
 
 Reboot the system.

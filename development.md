@@ -9,8 +9,8 @@ Install various tools for development.
 
 ```
 Install Options
-  (•) Do not add CMake to the system PATH
-  [ ] Create CMake Desktop Icon
+  ◉ Do not add CMake to the system PATH
+  ☐ Create CMake Desktop Icon
 Destination Folder
   C:\Program Files\CMake
 ```
@@ -21,39 +21,39 @@ Destination Folder
 Destination Folder
   C:\Node
 Custom Setup
-  [✓] Node.js runtime
-  [✓] npm package manager
-  [✗] Online documentation shortcuts
-  [✗] Add to PATH
+  ☑ Node.js runtime
+  ☑ npm package manager
+  ☒ Online documentation shortcuts
+  ☒ Add to PATH
 ```
 
 * [Python 2](https://www.python.org/downloads/)
 
 ```
 Select where to install Python
-  (•) Install for all users
+  ◉ Install for all users
 Select Destination Directory
   C:\Python
 Customize Python
-  [■] Python
-    [✓] Register Extensions
-    [✓] Tcl/Tk
-    [✗] Documentation
-    [✓] Utility Scripts
-    [✓] pip
-    [✓] Test suite
-    [✗] Add python.exe to Path
+  ▣ Python
+    ☑ Register Extensions
+    ☑ Tcl/Tk
+    ☒ Documentation
+    ☑ Utility Scripts
+    ☑ pip
+    ☑ Test suite
+    ☒ Add python.exe to Path
   [Advanced]
-    [✓] Compile .py files to byte code after installation
+    ☑ Compile .py files to byte code after installation
 ```
 
 * [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 ```
 Select optional features
-  [✓] Development Tools
-  [✗] Source Code
-  [✗] Public JRE
+  ☑ Development Tools
+  ☒ Source Code
+  ☒ Public JRE
   Install to: C:\Program Files\Java
 ```
 
@@ -61,11 +61,11 @@ Select optional features
 
 ```
 Select Additional Tasks
-  [ ] Create a desktop icon
-  [✓] Add "Open with Code" action to Windows Explorer file context menu
-  [✓] Add "Open with Code" action to Windows Explorer directory context menu
-  [✓] Register Code as an editor for supported file types
-  [ ] Add to PATH (available after restart)
+  ☐ Create a desktop icon
+  ☑ Add "Open with Code" action to Windows Explorer file context menu
+  ☑ Add "Open with Code" action to Windows Explorer directory context menu
+  ☑ Register Code as an editor for supported file types
+  ☐ Add to PATH (available after restart)
 ```
 
 * [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
@@ -162,22 +162,22 @@ Environment
 + General
   Color theme: Dark
 + Documents
-  [✓] Detect when file is changed outside the environment
-      [✓] Reload modified files unless there are unsaved changes
-  [✓] Save documents as Unicode when data cannot be saved in codepage
+  ☑ Detect when file is changed outside the environment
+    ☑ Reload modified files unless there are unsaved changes
+  ☑ Save documents as Unicode when data cannot be saved in codepage
 + Fonts and Colors
   Text Editor: DejaVu LGC Sans Mono 9
   Printer and Cut/Copy: Iconsolata 10
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
 + Quick Launch
-  [ ] Enable Quick Launch
+  ☐ Enable Quick Launch
 + Startup
   At startup: Show empty environment
-  [ ] Download content every: 60 minutes
+  ☐ Download content every: 60 minutes
 Projects and Solutions
 + General
-  [ ] Always show Error list if build finishes with errors
-  [ ] Warn user when the project location is not trusted
+  ☐ Always show Error list if build finishes with errors
+  ☐ Warn user when the project location is not trusted
 + Build and Run
   On Run, when projects are out of date: Always build
   On Run, when build or deployment error occur: Do not launch
@@ -186,43 +186,43 @@ Source Control
   Current source control plug-in: Git
 Text Editor
 + General
-  [ ] Enable mouse click to perform Go to Definition
-  [ ] Highlight current line
-  [ ] Show structure guide lines
+  ☐ Enable mouse click to perform Go to Definition
+  ☐ Highlight current line
+  ☐ Show structure guide lines
 + All Languages
   + General
-    [✓] Line numbers
-    [ ] Apply Cut or Copy to blank lines when there is no selection
+    ☑ Line numbers
+    ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
-    (•) Use map mode for vertical scroll bar
-        [ ] Show Preview Tooltip
-        Source overview: Wide
+    ◉ Use map mode for vertical scroll bar
+      ☐ Show Preview Tooltip
+      Source overview: Wide
   + Tabs
     Indenting: Smart
     Tab size: 2
     Indent size: 2
-    (•) Indent spaces
+    ◉ Indent spaces
 + C/C++
   + Formatting
     + General
-      (•) Run ClangFormat only for manually invoked formatting commands
-      [✓] Use custom clang-format.exe file: (Latest version from <https://llvm.org/builds/>.)
+      ◉ Run ClangFormat only for manually invoked formatting commands
+      ☑ Use custom clang-format.exe file: (Latest version from <https://llvm.org/builds/>.)
     + Indentation
-      [ ] Indent namespace contents
+      ☐ Indent namespace contents
     + New Lines
       Position of open braces for namespaces: Keep on the same line, but add a space before
       Position of open braces for types: Keep on the same line, but add a space before
       Position of open braces for functions: Move to a new line
       Position of open braces for control blocks: Keep on the same line, but add a space before
       Position of open braces for lambdas: Keep on the same line, but add a space before
-      [✓] Place braces on separate lines
-      [✓] For empty types, move closing braces to the same line as opening braces
-      [✓] For empty function bodies, move closing braces to the same line as opening braces
-      [ ] Place 'else' on a new line
-      [✓] Place 'catch' and similar keywords on a new line
-      [ ] Place 'while' in a do-while loop on a new line
+      ☑ Place braces on separate lines
+      ☑ For empty types, move closing braces to the same line as opening braces
+      ☑ For empty function bodies, move closing braces to the same line as opening braces
+      ☐ Place 'else' on a new line
+      ☑ Place 'catch' and similar keywords on a new line
+      ☐ Place 'while' in a do-while loop on a new line
     + Wrapping
-      (•) Always apply New Lines settings for blocks
+      ◉ Always apply New Lines settings for blocks
   + View
     + Outlining
       Enable Outlining: False
@@ -233,12 +233,12 @@ Text Editor
 + JavaScript/TrueScript
   + Formatting
     + General
-      [ ] Format completed line on Enter
-      [ ] Format completed statement on ;
-      [ ] Format opened block on {
-      [ ] Format completed block on }
+      ☐ Format completed line on Enter
+      ☐ Format completed statement on ;
+      ☐ Format opened block on {
+      ☐ Format completed block on }
     + Spacing
-      [ ] Insert space after function keyword for anonymous functions
+      ☐ Insert space after function keyword for anonymous functions
 + JSON
   + Advanced
     Automatic formatting: Off
@@ -271,10 +271,10 @@ Install [NPL LuaLanguageService](https://marketplace.visualstudio.com/items?item
 Tools > Options > Environment > Fonts and Colors
 + Display items: NPL.NPLFunction
   Item foreground: R:0 G:215 B:0
-  [ ] bold
+  ☐ bold
 + Display items: NPL.NPLSelf
   Item foreground: R:0 G:204 B:204
-  [ ] bold
+  ☐ bold
 ```
 -->
 
