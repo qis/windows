@@ -584,11 +584,11 @@ Install LLVM.
 
 ```sh
 rm -rf /opt/llvm; mkdir /opt/llvm
-wget https://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
-tar xvf clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz -C /opt/llvm --strip-components 1
+wget https://releases.llvm.org/7.0.1/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+tar xvf clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
 sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
 /opt/llvm/lib
-/opt/llvm/lib/clang/7.0.0/lib/linux
+/opt/llvm/lib/clang/7.0.1/lib/linux
 EOF
 sudo ldconfig
 sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
