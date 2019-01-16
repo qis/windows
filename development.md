@@ -309,6 +309,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.postCommitCommand": "push",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
