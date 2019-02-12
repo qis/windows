@@ -299,6 +299,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "push",
   "gitlens.codeLens.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
@@ -306,6 +307,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
   "window.restoreWindows": "none",
+  "window.zoomLevel": 0,
   "workbench.startupEditor": "newUntitledFile",
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
@@ -320,6 +322,8 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
   "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "java.configuration.updateBuildConfiguration": "automatic",
   "dart.lineLength": 120
 }
 ```
