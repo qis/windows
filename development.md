@@ -339,7 +339,7 @@ ext install dart-code.flutter
 
 
 ## Android
-Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\android\tools`.
+Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Android\tools`.
 
 Install Android SDK, Build Tools, NDK, USB driver and `adb`.
 
