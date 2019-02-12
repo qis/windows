@@ -428,6 +428,11 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 ## Keymap
 Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
 
+<!--
+Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
+create new keyboard layouts.
+-->
+
 
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).

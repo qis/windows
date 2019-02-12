@@ -47,16 +47,6 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
-* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-
-```
-Select optional features
-  ☑ Development Tools
-  ☒ Source Code
-  ☒ Public JRE
-  Install to: C:\Program Files\Java
-```
-
 * [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
 
 ```
@@ -68,6 +58,7 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
+* [OpenJDK 8](https://jdk.java.net/java-se-ri/8) into `C:\Java`
 * [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 * [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
 * [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
@@ -100,45 +91,44 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
 %ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
-%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\7-Zip
-%ProgramFiles%\Java\bin
-%ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
+%ProgramFiles%\Gradle\bin
+%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
-C:\Workspace\android\emulator
-C:\Workspace\android\flutter\bin
-C:\Workspace\android\build-tools\28.0.3
-C:\Workspace\android\platform-tools
-C:\Workspace\android\tools\bin
-C:\Workspace\android\tools
-C:\Workspace\vcpkg
-C:\Python\Scripts
-C:\Python
+C:\Android\build-tools\28.0.3
+C:\Android\flutter\bin
+C:\Android\platform-tools
+C:\Android\tools
+C:\Android\tools\bin
+C:\Java\bin
 C:\Node
-```
-
-Configure the System `JAVA_HOME` environment variable.
-
-
-```
-%ProgramFiles%\Java
-```
-
-Configure the System `ANDROID_SDK_ROOT` environment variable.
-
-```
-C:\Workspace\android
+C:\Python
+C:\Python\Scripts
+C:\Workspace\vcpkg
 ```
 
 Configure the System `ANDROID_NDK_ROOT` environment variable.
 
 ```
-C:\Workspace\android\ndk-bundle
+C:\Android\ndk-bundle
+```
+
+Configure the System `ANDROID_SDK_ROOT` environment variable.
+
+```
+C:\Android
+```
+
+Configure the System `JAVA_HOME` environment variable.
+
+```
+C:\Java
 ```
 
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
@@ -349,7 +339,7 @@ ext install dart-code.flutter
 
 
 ## Android
-Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Workspace\android\tools`.
+Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\android\tools`.
 
 Install Android SDK, Build Tools, NDK, USB driver and `adb`.
 
@@ -362,36 +352,11 @@ sdkmanager "platforms;android-28" "build-tools;28.0.3" "ndk-bundle" "extras;goog
 Register the SDK as Administrator.
 
 ```cmd
-reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Workspace\android" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Android" /f
 reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
 ```
 
-<!--
-Install and configure emulator.
-
-```cmd
-sdkmanager "emulator" "system-images;android-28;google_apis;x86_64"
-echo WindowsHypervisorPlatform=on>> %UserProfile%\.android\advancedFeatures.ini
-```
-
-Create and configure virtual device.
-
-```cmd
-avdmanager create avd -n Phone -d "Nexus 4" -k "system-images;android-28;google_apis;x86_64"
-echo hw.lcd.density=160>> %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.height=640>>  %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.width=360>>   %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.keyboard=yes>>    %UserProfile%\.android\avd\Phone.avd\config.ini
-```
-
-Start virtual device.
-
-```cmd
-emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 360x640
-```
--->
-
-Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
+Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
 
 ```cmd
 flutter doctor -v
@@ -401,10 +366,10 @@ flutter doctor -v
 Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding).
 
 ```cmd
-git clone https://github.com/google/flutter-desktop-embedding C:\Workspace\android\flutter-desktop-embedding
+git clone https://github.com/google/flutter-desktop-embedding C:\Android\flutter-desktop-embedding
 ```
 
-Build `C:\Workspace\android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln`:
+Build `C:\Android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln`:
 
 - with the `Debug Dynamic Library` config
 - with the `Release Dynamic Library` config
