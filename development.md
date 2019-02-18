@@ -47,6 +47,16 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
+* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+```
+Select optional features
+  [✓] Development Tools
+  [✗] Source Code
+  [✗] Public JRE
+  Install to: C:\Program Files\Java
+```
+
 * [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
 
 ```
@@ -58,7 +68,6 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
-* [OpenJDK 8](https://jdk.java.net/java-se-ri/8) into `C:\Java`
 * [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 * [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
 * [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
@@ -98,6 +107,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Gradle\bin
+%ProgramFiles%\Java\bin
 %ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
@@ -106,7 +116,6 @@ C:\Android\flutter\bin
 C:\Android\platform-tools
 C:\Android\tools
 C:\Android\tools\bin
-C:\Java\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
@@ -128,7 +137,7 @@ C:\Android
 Configure the System `JAVA_HOME` environment variable.
 
 ```
-C:\Java
+%ProgramFiles%\Java
 ```
 
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
