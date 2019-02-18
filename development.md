@@ -285,6 +285,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "editor.largeFileOptimizations": false,
   "editor.renderLineHighlight": "none",
   "editor.rulers": [ 120 ],
+  "editor.smoothScrolling": true,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 120,
