@@ -324,7 +324,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "debug.openDebug": "openOnDebugBreak",
   "cmake.generator": "Ninja",
   "cmake.installPrefix": "${workspaceRoot}",
-  "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
+  "cmake.buildDirectory": "${workspaceRoot}/build/code/${buildType}",
   "cmake.configureOnOpen": true,
   "cmake.configureSettings": {
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
