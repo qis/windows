@@ -100,6 +100,23 @@ cmake --build . --target install -- -j7
 cp -R ../pstl/include/pstl /opt/llvm/include/c++/v1/
 cd
 
+# Check out TBB.
+git clone -b tbb_2019 --depth 1 https://github.com/01org/tbb tbb && cd tbb
+
+# Build and install TBB.
+make compiler=clang arch=intel64 tbb tbbmalloc
+chmod 0644 build/*_release/lib{tbb,tbbmalloc}.so*
+cp -R build/*_release/lib{tbb,tbbmalloc}.so* /opt/llvm/lib/
+cp -R include/tbb /opt/llvm/include/c++/v1/
+tee /opt/llvm/include/c++/v1/execution <<EOF
+#pragma once
+#include "pstl/algorithm"
+#include "pstl/execution"
+#include "pstl/memory"
+#include "pstl/numeric"
+EOF
+cd
+
 # Configure system-wide symbolic links.
 sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
 sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
@@ -111,21 +128,9 @@ sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
 EOF
 sudo ldconfig
 
-# Check out TBB.
-git clone -b tbb_2019 --depth 1 https://github.com/01org/tbb tbb && cd tbb
-
-# Build and install TBB.
-make compiler=clang arch=intel64 tbb tbbmalloc
-cp -R include/tbb /opt/llvm/include/c++/v1/
-cp -R build/*_release/lib{tbb,tbbmalloc}.so /opt/llvm/lib/
-tee /opt/llvm/include/c++/v1/execution <<EOF
-#pragma once
-#include "pstl/algorithm"
-#include "pstl/execution"
-#include "pstl/memory"
-#include "pstl/numeric"
-EOF
-cd
+# Create distribution.
+cd /opt/llvm/lib
+tar cvzf /opt/llvm-9.0.0-lib.tar.gz lib{c++,c++abi,unwind,omp,tbb,tbbmalloc}.so*
 ```
 
 Check out Vcpkg.
