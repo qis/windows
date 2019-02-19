@@ -312,7 +312,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "gitlens.hovers.currentLine.over": "line",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
