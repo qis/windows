@@ -329,7 +329,8 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "cmake.configureSettings": {
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
-    "VCPKG_TARGET_TRIPLET": "x64-windows"
+    "VCPKG_TARGET_TRIPLET": "x64-windows",
+    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}"
   },
   "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
   "java.configuration.checkProjectSettingsExclusions": false,
@@ -376,176 +377,11 @@ Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\
 flutter doctor -v
 ```
 
-<!--
-Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding).
-
-```cmd
-git clone https://github.com/google/flutter-desktop-embedding C:\Android\flutter-desktop-embedding
-```
-
-Build `C:\Android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln`:
-
-- with the `Debug Dynamic Library` config
-- with the `Release Dynamic Library` config
-
--->
-
-
-## Vcpkg
-Install Vcpkg.
-
-```cmd
-git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
-bootstrap-vcpkg -disableMetrics && vcpkg integrate install
-```
-
-<!--
-Replace OpenSSL port.
-
-```cmd
-rd /q /s C:\Workspace\vcpkg\ports\openssl
-git clone https://github.com/qis/openssl C:\Workspace\vcpkg\ports\openssl
-```
--->
-
-Replace Vcpkg toolchain files.
-
-```cmd
-rd /q /s C:\Workspace\vcpkg\scripts\toolchains
-git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
-copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\triplets\
-```
-
-Install Vcpkg ports.
-
-```cmd
-vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
-  angle freetype giflib harfbuzz libjpeg-turbo libpng opus
-```
-
-<!--
-Install Vcpkg ports on Android.
-
-```cmd
-set VCPKG_DEFAULT_TRIPLET=arm64-android
-vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
-  freetype giflib harfbuzz libjpeg-turbo libpng opus
-```
--->
-
-<!--
-Install LLVM.
-
-```cmd
-git clone -b release_70 --depth 1 https://llvm.org/git/llvm src
-git clone -b release_70 --depth 1 https://llvm.org/git/clang src\tools\clang
-git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src\tools\clang\tools\extra
-git clone -b release_70 --depth 1 https://llvm.org/git/lld src\tools\lld
-md build\host
-pushd build\host
-cmake -G "Visual Studio 15 2017 Win64" -Thost=x64 -DCMAKE_BUILD_TYPE=Release ^
-  -DCMAKE_INSTALL_PREFIX=C:/LLVM ^
-  -DLLVM_TARGETS_TO_BUILD="X86;WebAssembly" ^
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" ^
-  -DLLVM_ENABLE_ASSERTIONS=OFF ^
-  -DLLVM_ENABLE_WARNINGS=OFF ^
-  -DLLVM_ENABLE_PEDANTIC=OFF ^
-  -DLLVM_INCLUDE_EXAMPLES=OFF ^
-  -DLLVM_INCLUDE_TESTS=OFF ^
-  -DLLVM_INCLUDE_DOCS=OFF ^
-  ..\..\src
-cmake --build . --target install
-popd
-git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src\musl
-git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src\projects\compiler-rt
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src\projects\libcxxabi
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src\projects\libcxx
-md build\musl
-pushd build\musl
-
-```
-
-```sh
-rm -rf /opt/llvm; mkdir /opt/llvm; cd /opt/llvm
-git clone -b release_70 --depth 1 https://llvm.org/git/llvm src && \
-git clone -b release_70 --depth 1 https://llvm.org/git/lld src/tools/lld && \
-git clone -b release_70 --depth 1 https://llvm.org/git/clang src/tools/clang && \
-git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src/tools/clang/tools/extra && \
-git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src/projects/compiler-rt && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src/projects/libcxxabi && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src/projects/libcxx && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libunwind src/runtimes/libunwind && \
-git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src/musl
-sed -i "s/\s\smain()//" src/projects/libcxx/utils/merge_archives.py
-mkdir -p build/host; pushd build/host
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
-  -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86;WebAssembly" \
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
-  -DLLVM_ENABLE_ASSERTIONS=OFF \
-  -DLLVM_ENABLE_WARNINGS=OFF \
-  -DLLVM_ENABLE_PEDANTIC=OFF \
-  -DLLVM_INCLUDE_EXAMPLES=OFF \
-  -DLLVM_INCLUDE_TESTS=OFF \
-  -DLLVM_INCLUDE_DOCS=OFF \
-  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
-  -DLIBCXXABI_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
-  -DLIBCXXABI_ENABLE_SHARED=OFF \
-  -DLIBCXXABI_ENABLE_STATIC=ON \
-  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
-  -DLIBCXX_ENABLE_SHARED=OFF \
-  -DLIBCXX_ENABLE_STATIC=ON \
-  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXX_ENABLE_FILESYSTEM=ON \
-  -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=ON \
-  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-  -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
-  ../../src
-cmake --build . --target install -- -j4
-popd
-
-wget -O /opt/llvm/bin/wasm https://raw.githubusercontent.com/qis/llvm/master/wasm.sh
-chmod 0755 /opt/llvm/bin/wasm
-
-pushd /opt/llvm/bin
-for i in cc c++ clang clang++; do \
-  echo "/opt/llvm/bin/wasm-$i -> wasm"; \
-  rm -f wasm-$i; ln -s wasm wasm-$i; \
-done
-popd
-
-pushd /opt/llvm/bin
-for i in ar as nm objcopy objdump ranlib readelf readobj size strings; do \
-  echo "/opt/llvm/bin/wasm-$i -> llvm-$i"; \
-  rm -f wasm-$i; ln -s llvm-$i wasm-$i; \
-done
-popd
-
-mkdir -p build/musl; pushd build/musl
-CC=/opt/llvm/bin/clang CROSS_COMPILE=/opt/llvm/bin/wasm- CFLAGS=-Wno-everything \
-../../src/musl/configure --prefix=/opt/llvm/wasm --disable-shared --enable-optimize=size
-make all install -j4
-popd
-```
--->
-
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
 
 ```sh
 USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
-```
-
-Create a symlink to the host Vcpkg installation.
-
-```sh
-ln -s /mnt/c/Workspace/vcpkg /opt/vcpkg
 ```
 
 Configure environment variables in `~/.bashrc`.
@@ -560,21 +396,6 @@ Install development packages.
 
 ```sh
 sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
-```
-
-Install LLVM.
-
-```sh
-rm -rf /opt/llvm; mkdir /opt/llvm
-wget https://releases.llvm.org/7.0.1/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-tar xvf clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
-sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
-/opt/llvm/lib
-/opt/llvm/lib/clang/7.0.1/lib/linux
-EOF
-sudo ldconfig
-sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
 ```
 
 Install CMake and Ninja.
@@ -596,17 +417,5 @@ tar xvf node-v10.14.2-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
-Install Vcpkg.
-
-```sh
-bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries
-rm -rf /opt/vcpkg/toolsrc/build.rel
-sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
-```
-
-Install Vcpkg packages.
-
-```sh
-vcpkg install benchmark gtest \
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib
-```
+## Vcpkg
+Install Vcpkg using [this](vcpkg.md) guide.
