@@ -107,15 +107,13 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Gradle\bin
-%ProgramFiles%\Java\bin
 %ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
-C:\Android\build-tools\28.0.3
 C:\Android\flutter\bin
-C:\Android\platform-tools
-C:\Android\tools
-C:\Android\tools\bin
+C:\Android\sdk\build-tools\28.0.3
+C:\Android\sdk\platform-tools
+C:\Android\studio\jre\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
@@ -125,25 +123,25 @@ C:\Workspace\vcpkg
 Configure the System `ANDROID_HOME` environment variable.
 
 ```
-C:\Android
+C:\Android\sdk
 ```
 
 Configure the System `ANDROID_NDK_ROOT` environment variable.
 
 ```
-%ANDROID_HOME%\ndk-bundle
+C:\Android\sdk\ndk-bundle
 ```
 
 Configure the System `ANDROID_SDK_ROOT` environment variable.
 
 ```
-%ANDROID_HOME%
+C:\Android\sdk
 ```
 
 Configure the System `JAVA_HOME` environment variable.
 
 ```
-%ProgramFiles%\Java
+C:\Android\studio\jre
 ```
 
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
@@ -360,6 +358,8 @@ ext install dart-code.flutter
 
 
 ## Android
+TODO
+<!--
 Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Android\tools`.
 
 Install Android SDK, Build Tools, NDK, USB driver and `adb`.
@@ -382,6 +382,7 @@ Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\
 ```cmd
 flutter doctor -v
 ```
+-->
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
