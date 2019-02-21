@@ -122,16 +122,22 @@ C:\Python\Scripts
 C:\Workspace\vcpkg
 ```
 
+Configure the System `ANDROID_HOME` environment variable.
+
+```
+C:\Android
+```
+
 Configure the System `ANDROID_NDK_ROOT` environment variable.
 
 ```
-C:\Android\ndk-bundle
+%ANDROID_HOME%\ndk-bundle
 ```
 
 Configure the System `ANDROID_SDK_ROOT` environment variable.
 
 ```
-C:\Android
+%ANDROID_HOME%
 ```
 
 Configure the System `JAVA_HOME` environment variable.
