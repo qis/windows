@@ -68,7 +68,6 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
-* [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 * [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
 * [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
 
@@ -113,6 +112,7 @@ Configure the System `Path` environment variable.
 C:\Android\flutter\bin
 C:\Android\sdk\build-tools\28.0.3
 C:\Android\sdk\platform-tools
+C:\Android\studio\gradle\gradle-4.10.1\bin
 C:\Android\studio\jre\bin
 C:\Node
 C:\Python
