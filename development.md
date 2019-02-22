@@ -47,16 +47,6 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
-* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-
-```
-Select optional features
-  [✓] Development Tools
-  [✗] Source Code
-  [✗] Public JRE
-  Install to: C:\Program Files\Java
-```
-
 * [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
 
 ```
@@ -157,8 +147,8 @@ Install and configure [Visual Studio 2017 Community](https://visualstudio.micros
 
 ![Individual Components](res/vs2017-2.png)
 
-<!--
-### Configuration
+Configure the IDE.
+
 ```
 Tools > Options
 Environment
@@ -248,7 +238,7 @@ Text Editor
 ```
 
 
-## Windows Driver Kit
+### Windows Driver Kit
 Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
 
 
@@ -279,7 +269,7 @@ Tools > Options > Environment > Fonts and Colors
   Item foreground: R:0 G:204 B:204
   ☐ bold
 ```
--->
+
 
 ## Visual Studio Code
 **NOTE**: Press `CTRL+P` and type `>` followed by a command.
@@ -312,8 +302,6 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "push",
-  "gitlens.codeLens.enabled": false,
-  "gitlens.hovers.currentLine.over": "line",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
@@ -336,53 +324,104 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
     "VCPKG_TARGET_TRIPLET": "x64-windows",
     "CMAKE_INSTALL_PREFIX": "${workspaceRoot}"
   },
-  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
-  "java.configuration.checkProjectSettingsExclusions": false,
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "dart.lineLength": 120
+  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe"
 }
 ```
 
-Install extensions witht the following commands with `CTRL+P`.
+Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install eamodio.gitlens
 ext install donjayamanne.githistory
 ext install dotjoshjohnson.xml
+ext install ms-vscode.cpptools
 ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
-ext install vscjava.vscode-java-debug
-ext install dart-code.flutter
 > Reload Window
 ```
 
 
-## Android
-TODO
-<!--
-Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Android\tools`.
+## Android Development
+Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) into `C:\Android\sdk`.<br/>
+Extract [Flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
 
-Install Android SDK, Build Tools, NDK, USB driver and `adb`.
+Start and configure Android Studio.
 
-```cmd
-sdkmanager --update
-sdkmanager --licenses
-sdkmanager "platforms;android-28" "build-tools;28.0.3" "ndk-bundle" "extras;google;usb_driver" "platform-tools"
+```
+Install Type
+  ◉ Custom
+SDK Components Setup
+  ☐ Performance (Intel® HAXM)
+  ☐ Android Virtual Device
+  Android SDK Location: C:\Android\sdk
 ```
 
-Register the SDK as Administrator.
+Install missing plugins and SDKs for flutter development.
 
-```cmd
-reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Android" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
+```
+File > Settings...
++ Appearance & Behavior
+  + System Settings
+    + Android SDK
+      SDK Platforms
+        ☑ Android 9.0 (Pie)
+        ☑ Android 8.1 (Oreo)
+      SDK Tools
+        ☐ Android Emulator
+        ☑ Google USB Driver
+        ☑ NDK
++ Editor
+  + Font
+    Font: Fira Code
+    ☑ Enable font ligatures
+  + Code Style
+    + Java, C/C++, CMake, HTML, JSON, Kotlin, XML, Other File Types
+      Tabs and Indents
+        Tab size: 2
+        Indent: 2
+        Continuation indent: 4
+    + C/C++
+      Tabs and Indents
+        Indent in lambdas: 2
+        Indent members of plain structures: 2
+        Indent members of classes: 2
+        Indent visibility keywords in class/structure: 0
+        Indent members of namespace: 0
+        Preprocessor directive indent: 0
+        ☑ Follow code indent
+      Spaces
+        Other
+          ☐ Prevent > > concatenation in template
+        In Template Declaration
+          ☑ Before '<'
+        In Template Instantiation
+          ☑ Before '<'
+      New File Extensions
+        C++
+          Source Extension: cpp
+          Header Extension: hpp
+          File Naming Convention: snake_case
+  + File Encodings
+    Global Encoding: UTF-8
+    Project Encoding: UTF-8
+    Default encoding for properties files: UTF-8
+    Create UTF-8 files: with NO BOM
+  + Layout Editor
+    ☑ Prefer XML editor
++ Plugins
+  [Browse repositories...]
+    Install: Flutter, Flutteri18n
++ Version Control
+  + Git
+    SSH executable: Native
 ```
 
-Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
+Verify that flutter is working properly and accept android licenses.
 
 ```cmd
 flutter doctor -v
+flutter doctor --android-licenses
 ```
--->
+
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
