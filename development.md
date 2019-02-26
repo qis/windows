@@ -415,6 +415,8 @@ File > Settings...
     SSH executable: Native
 ```
 
+Search for `redo` in the settings and assign `CTRL+Y` as a shortcut.
+
 Verify that flutter is working properly and accept android licenses.
 
 ```cmd
