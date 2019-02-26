@@ -336,6 +336,7 @@ ext install dotjoshjohnson.xml
 ext install ms-vscode.cpptools
 ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
+ext install dart-code.flutter
 > Reload Window
 ```
 
