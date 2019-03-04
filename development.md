@@ -95,7 +95,6 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\7-Zip
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
-%ProgramFiles%\Gradle\bin
 %ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
