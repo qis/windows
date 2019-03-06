@@ -694,11 +694,20 @@ Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 ARRAY <ignore> devices=/dev/sda
 ```
 
-Modify the following lines in `/etc/pam.d/login` (disables message of the day).
+Modify the following lines in `/etc/pam.d/login` and `/etc/pam.d/sshd` (disables message of the day).
 
 ```sh
 #session    optional    pam_motd.so motd=/run/motd.dynamic
 #session    optional    pam_motd.so noupdate
+```
+
+Execute `chmod -x /etc/update-motd.d/{10-help-text,50-motd-news}` to reduce spam.<br/>
+Modify `/etc/update-motd.d/50-landscape-sysinfo` to your liking.<br/>
+Create the file `/etc/landscape/client.conf`.
+
+```ini
+[sysinfo]
+sysinfo_plugins = Load, Processes, Memory
 ```
 
 Restart `bash.exe`.
