@@ -285,6 +285,7 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "editor.fontLigatures": true,
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
+  "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "none",
   "editor.rulers": [ 120 ],
   "editor.smoothScrolling": true,
@@ -313,17 +314,17 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
   "debug.openDebug": "openOnDebugBreak",
+  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
   "cmake.generator": "Ninja",
+  "cmake.configureOnOpen": true,
   "cmake.installPrefix": "${workspaceRoot}",
   "cmake.buildDirectory": "${workspaceRoot}/build/code/${buildType}",
-  "cmake.configureOnOpen": true,
   "cmake.configureSettings": {
+    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
-    "VCPKG_TARGET_TRIPLET": "x64-windows",
-    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}"
-  },
-  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe"
+    "VCPKG_TARGET_TRIPLET": "x64-windows"
+  }
 }
 ```
 
