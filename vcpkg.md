@@ -1,5 +1,5 @@
 # Vcpkg
-Installation instructions for Vcpkg on Windows and Linux.
+Installation instructions for Vcpkg with custom toolchains for Windows and Linux.
 
 ## Windows
 Set environment variables.
@@ -15,18 +15,18 @@ Check out Vcpkg.
 git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
 ```
 
-Build and install Vcpkg.
+Build Vcpkg.
 
 ```cmd
-bootstrap-vcpkg -disableMetrics && vcpkg integrate install
+bootstrap-vcpkg -disableMetrics -win64
 ```
 
 Replace Vcpkg toolchain files.
 
 ```cmd
 rd /q /s C:\Workspace\vcpkg\scripts\toolchains
+git clone git@github.com:qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
 git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
-copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.cmake C:\Workspace\vcpkg\triplets\
 ```
 
 Install Vcpkg ports.
@@ -47,90 +47,156 @@ export PATH="${PATH}:/opt/vcpkg"
 Install compatible compiler.
 
 ```sh
-# Remove previous LLVM version.
-rm -rf /opt/llvm
+# Download LLVM source code.
+git clone --depth 1 https://github.com/llvm-project/llvm-project-submodule llvm
+for i in clang clang-tools-extra compiler-rt libcxx libcxxabi libunwind lld llvm openmp pstl; do
+  sh -c "cd llvm && git submodule update --init --depth 1 -- $i"
+done
+ls llvm/{clang,clang-tools-extra,compiler-rt,libcxx,libcxxabi,libunwind,lld,llvm,openmp,pstl}
 
-# Remove dynamic linker run-time bindings.
+# Download TBB source code.
+git clone -b tbb_2019 --depth 1 https://github.com/01org/tbb tbb
+
+# Unregister toolchain.
+sudo update-alternatives --remove-all cc
+sudo update-alternatives --remove-all c++
 sudo rm -f /etc/ld.so.conf.d/llvm.conf
 sudo ldconfig
 
-# Remove system-wide symbolic links.
-sudo update-alternatives --remove-all cc
-sudo update-alternatives --remove-all c++
-
-# Check out LLVM.
-rm -rf llvm
-git clone --depth 1 https://github.com/llvm-project/llvm-project-submodule llvm && cd llvm
-for i in clang clang-tools-extra compiler-rt libcxx libcxxabi libunwind lld lldb llvm openmp pstl; do
-  git submodule update --init --depth 1 -- $i
-done
-
-# Configure LLVM.
-rm -rf build; mkdir -p build; cd build
+# Stage LLVM.
+rm -rf llvm/stage; mkdir -p llvm/stage; pushd llvm/stage
 cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
-  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;libunwind;lld;lldb;openmp" \
-  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
-  -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86;WebAssembly" \
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
+  -DCMAKE_INSTALL_PREFIX="/opt/stage" \
+  -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;libcxx;libcxxabi;libunwind;lld" \
+  -DLLVM_TARGETS_TO_BUILD="X86" \
   -DLLVM_ENABLE_ASSERTIONS=OFF \
   -DLLVM_ENABLE_WARNINGS=OFF \
   -DLLVM_ENABLE_PEDANTIC=OFF \
   -DLLVM_INCLUDE_EXAMPLES=OFF \
   -DLLVM_INCLUDE_TESTS=OFF \
   -DLLVM_INCLUDE_DOCS=OFF \
+  -DCLANG_DEFAULT_STD_C="c99" \
+  -DCLANG_DEFAULT_STD_CXX="cxx17" \
   -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
+  -DCLANG_DEFAULT_RTLIB="compiler-rt" \
+  -DCLANG_DEFAULT_LINKER="lld" \
+  -DLIBUNWIND_ENABLE_SHARED=OFF \
+  -DLIBUNWIND_ENABLE_STATIC=ON \
+  -DLIBCXXABI_ENABLE_SHARED=OFF \
+  -DLIBCXXABI_ENABLE_STATIC=ON \
+  -DLIBCXXABI_USE_COMPILER_RT=ON \
+  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+  -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
   -DLIBCXXABI_ENABLE_ASSERTIONS=OFF \
   -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
-  -DLIBCXXABI_ENABLE_SHARED=ON \
-  -DLIBCXXABI_ENABLE_STATIC=OFF \
-  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
   -DLIBCXX_ENABLE_SHARED=ON \
   -DLIBCXX_ENABLE_STATIC=OFF \
+  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
   -DLIBCXX_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
   -DLIBCXX_ENABLE_FILESYSTEM=ON \
   -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=ON \
   -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
   -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
   ../llvm
+/usr/bin/time cmake --build . --target install -- -j7
+# 30 min
+popd
 
-# Build and install LLVM.
+# Install LLVM.
+rm -rf llvm/build; mkdir -p llvm/build; pushd llvm/build
+PATH="/opt/stage/bin:$PATH" CC="clang" CXX="clang++" \
+CFLAGS="-march=broadwell -mavx2" CXXFLAGS="$CFLAGS" LDFLAGS="-Wl,-S" \
+LD_LIBRARY_PATH="/opt/stage/lib:/opt/stage/lib/clang/9.0.0/lib/linux:$LD_LIBRARY_PATH" \
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
+  -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;libcxx;libcxxabi;libunwind;lld" \
+  -DLLVM_TARGETS_TO_BUILD="X86;WebAssembly" \
+  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
+  -DLLVM_ENABLE_ASSERTIONS=OFF \
+  -DLLVM_ENABLE_WARNINGS=OFF \
+  -DLLVM_ENABLE_PEDANTIC=OFF \
+  -DLLVM_ENABLE_LTO=Thin \
+  -DLLVM_ENABLE_LLD=ON \
+  -DLLVM_INCLUDE_EXAMPLES=OFF \
+  -DLLVM_INCLUDE_TESTS=OFF \
+  -DLLVM_INCLUDE_DOCS=OFF \
+  -DCLANG_DEFAULT_STD_C="c99" \
+  -DCLANG_DEFAULT_STD_CXX="cxx17" \
+  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
+  -DCLANG_DEFAULT_RTLIB="compiler-rt" \
+  -DCLANG_DEFAULT_LINKER="lld" \
+  -DLIBUNWIND_ENABLE_SHARED=OFF \
+  -DLIBUNWIND_ENABLE_STATIC=ON \
+  -DLIBCXXABI_ENABLE_SHARED=OFF \
+  -DLIBCXXABI_ENABLE_STATIC=ON \
+  -DLIBCXXABI_USE_COMPILER_RT=ON \
+  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+  -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+  -DLIBCXXABI_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
+  -DLIBCXX_ENABLE_SHARED=ON \
+  -DLIBCXX_ENABLE_STATIC=OFF \
+  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
+  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
+  -DLIBCXX_ENABLE_FILESYSTEM=ON \
+  -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=ON \
+  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+  -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
+  ../llvm
+LD_LIBRARY_PATH="/opt/stage/lib:/opt/stage/lib/clang/9.0.0/lib/linux:$LD_LIBRARY_PATH" \
+/usr/bin/time cmake --build . --target install -- -j7
+# 80 min
+popd
+
+# Install OpenMP
+rm -rf llvm/build-openmp; mkdir -p llvm/build-openmp; pushd llvm/build-openmp
+PATH="/opt/llvm/bin:$PATH" CC="clang" CXX="clang++" \
+CFLAGS="-march=broadwell -mavx2 -flto=thin" CXXFLAGS="$CFLAGS" LDFLAGS="-Wl,-S -flto=thin" \
+LD_LIBRARY_PATH="/opt/llvm/lib:/opt/llvm/lib/clang/9.0.0/lib/linux:$LD_LIBRARY_PATH" \
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
+  ../openmp
+LD_LIBRARY_PATH="/opt/llvm/lib:/opt/llvm/lib/clang/9.0.0/lib/linux:$LD_LIBRARY_PATH" \
 cmake --build . --target install -- -j7
-cp -R ../pstl/include/pstl /opt/llvm/include/c++/v1/
-cd
+popd
 
-# Check out TBB.
-git clone -b tbb_2019 --depth 1 https://github.com/01org/tbb tbb && cd tbb
+# Install PSTL headers.
+cp -R llvm/pstl/include/pstl /opt/llvm/include/c++/v1/
 
-# Build and install TBB.
-make compiler=clang arch=intel64 tbb tbbmalloc
-chmod 0644 build/*_release/lib{tbb,tbbmalloc}.so*
-cp -R build/*_release/lib{tbb,tbbmalloc}.so* /opt/llvm/lib/
+# Install TBB.
+pushd tbb
+rm -rf build/*_release
+PATH="/opt/llvm/bin:$PATH" CC="clang" CXX="clang++" \
+CFLAGS="-march=broadwell -mavx2" CXXFLAGS="$CFLAGS" LDFLAGS="-fuse-ld=ld -Wl,-S" \
+LD_LIBRARY_PATH="/opt/llvm/lib:/opt/llvm/lib/clang/9.0.0/lib/linux:$LD_LIBRARY_PATH" \
+make compiler=clang arch=intel64 stdver=c++17 cfg=release
+chmod 0644 build/*_release/lib*.so*
+cp -R build/*_release/lib*.so* /opt/llvm/lib/
 cp -R include/tbb /opt/llvm/include/c++/v1/
-tee /opt/llvm/include/c++/v1/execution <<EOF
+tee /opt/llvm/include/c++/v1/execution <<'EOF'
 #pragma once
 #include "pstl/algorithm"
 #include "pstl/execution"
 #include "pstl/memory"
 #include "pstl/numeric"
 EOF
-cd
+popd
 
-# Configure system-wide symbolic links.
+# Create distribution.
+pushd llvm
+tar czf /opt/llvm-9.0.0-$(git rev-parse --short HEAD).tar.gz -C /opt llvm
+popd
+
+# Register toolchain.
 sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
 sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
-
-# Configure dynamic linker run-time bindings.
-sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
+sudo tee /etc/ld.so.conf.d/llvm.conf <<'EOF'
 /opt/llvm/lib
 /opt/llvm/lib/clang/9.0.0/lib/linux
 EOF
 sudo ldconfig
-
-# Create distribution.
-cd /opt/llvm/lib
-tar cvzf /opt/llvm-9.0.0-lib.tar.gz lib{c++,c++abi,unwind,omp,tbb,tbbmalloc}.so*
 ```
 
 Check out Vcpkg.
