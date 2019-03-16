@@ -47,16 +47,6 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
-* [Java SE Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-
-```
-Select optional features
-  ☑ Development Tools
-  ☒ Source Code
-  ☒ Public JRE
-  Install to: C:\Program Files\Java
-```
-
 * [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
 
 ```
@@ -68,7 +58,6 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
-* [Gradle](https://gradle.org/releases/) into `C:\Program Files\Gradle`
 * [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
 * [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
 
@@ -100,45 +89,48 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
+%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
 %ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
-%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\7-Zip
-%ProgramFiles%\Java\bin
-%ProgramFiles%\Gradle\bin
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
+%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
-C:\Workspace\android\emulator
-C:\Workspace\android\flutter\bin
-C:\Workspace\android\build-tools\28.0.3
-C:\Workspace\android\platform-tools
-C:\Workspace\android\tools\bin
-C:\Workspace\android\tools
-C:\Workspace\vcpkg
-C:\Python\Scripts
-C:\Python
+C:\Android\flutter\bin
+C:\Android\sdk\build-tools\28.0.3
+C:\Android\sdk\platform-tools
+C:\Android\studio\gradle\gradle-4.10.1\bin
+C:\Android\studio\jre\bin
 C:\Node
+C:\Python
+C:\Python\Scripts
+C:\Workspace\vcpkg
 ```
 
-Configure the System `JAVA_HOME` environment variable.
-
-
-```
-%ProgramFiles%\Java
-```
-
-Configure the System `ANDROID_SDK_ROOT` environment variable.
+Configure the System `ANDROID_HOME` environment variable.
 
 ```
-C:\Workspace\android
+C:\Android\sdk
 ```
 
 Configure the System `ANDROID_NDK_ROOT` environment variable.
 
 ```
-C:\Workspace\android\ndk-bundle
+C:\Android\sdk\ndk-bundle
+```
+
+Configure the System `ANDROID_SDK_ROOT` environment variable.
+
+```
+C:\Android\sdk
+```
+
+Configure the System `JAVA_HOME` environment variable.
+
+```
+C:\Android\studio\jre
 ```
 
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
@@ -154,8 +146,8 @@ Install and configure [Visual Studio 2017 Community](https://visualstudio.micros
 
 ![Individual Components](res/vs2017-2.png)
 
-<!--
-### Configuration
+Configure the IDE.
+
 ```
 Tools > Options
 Environment
@@ -245,7 +237,7 @@ Text Editor
 ```
 
 
-## Windows Driver Kit
+### Windows Driver Kit
 Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
 
 
@@ -276,7 +268,7 @@ Tools > Options > Environment > Fonts and Colors
   Item foreground: R:0 G:204 B:204
   ☐ bold
 ```
--->
+
 
 ## Visual Studio Code
 **NOTE**: Press `CTRL+P` and type `>` followed by a command.
@@ -293,8 +285,10 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "editor.fontLigatures": true,
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
+  "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "none",
   "editor.rulers": [ 120 ],
+  "editor.smoothScrolling": true,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 120,
@@ -308,265 +302,135 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "push",
-  "gitlens.codeLens.enabled": false,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
   "window.restoreWindows": "none",
+  "window.zoomLevel": 0,
   "workbench.startupEditor": "newUntitledFile",
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
   "debug.openDebug": "openOnDebugBreak",
+  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
   "cmake.generator": "Ninja",
-  "cmake.installPrefix": "${workspaceRoot}",
-  "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
   "cmake.configureOnOpen": true,
+  "cmake.installPrefix": "${workspaceRoot}",
+  "cmake.buildDirectory": "${workspaceRoot}/build/code/${buildType}",
   "cmake.configureSettings": {
+    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
-  },
-  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
-  "dart.lineLength": 120
+  }
 }
 ```
 
-Install extensions witht the following commands with `CTRL+P`.
+Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install eamodio.gitlens
 ext install donjayamanne.githistory
 ext install dotjoshjohnson.xml
+ext install ms-vscode.cpptools
 ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
-ext install vscjava.vscode-java-debug
 ext install dart-code.flutter
 > Reload Window
 ```
 
 
-## Android
-Extract the [Android SDK Tools](https://developer.android.com/studio/#command-tools) to `C:\Workspace\android\tools`.
+## Android Development
+Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) into `C:\Android\sdk`.<br/>
+Extract [Flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
 
-Install Android SDK, Build Tools, NDK, USB driver and `adb`.
+Start and configure Android Studio.
 
-```cmd
-sdkmanager --update
-sdkmanager --licenses
-sdkmanager "platforms;android-28" "build-tools;28.0.3" "ndk-bundle" "extras;google;usb_driver" "platform-tools"
+```
+Install Type
+  ◉ Custom
+SDK Components Setup
+  ☐ Performance (Intel® HAXM)
+  ☐ Android Virtual Device
+  Android SDK Location: C:\Android\sdk
 ```
 
-Register the SDK as Administrator.
+Install missing plugins and SDKs for flutter development.
 
-```cmd
-reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "Path" /t REG_SZ /d "C:\Workspace\android" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Android SDK Tools" /v "StartMenuGroup" /t REG_SZ /d "Android SDK Tools" /f
+```
+File > Settings...
++ Appearance & Behavior
+  + System Settings
+    + Android SDK
+      SDK Platforms
+        ☑ Android 9.0 (Pie)
+        ☑ Android 8.1 (Oreo)
+      SDK Tools
+        ☐ Android Emulator
+        ☑ Google USB Driver
+        ☑ NDK
++ Editor
+  + Font
+    Font: Fira Code
+    ☑ Enable font ligatures
+  + Code Style
+    + Java, C/C++, CMake, HTML, JSON, Kotlin, XML, Other File Types
+      Tabs and Indents
+        Tab size: 2
+        Indent: 2
+        Continuation indent: 4
+    + C/C++
+      Tabs and Indents
+        Indent in lambdas: 2
+        Indent members of plain structures: 2
+        Indent members of classes: 2
+        Indent visibility keywords in class/structure: 0
+        Indent members of namespace: 0
+        Preprocessor directive indent: 0
+        ☑ Follow code indent
+      Spaces
+        Other
+          ☐ Prevent > > concatenation in template
+        In Template Declaration
+          ☑ Before '<'
+        In Template Instantiation
+          ☑ Before '<'
+      New File Extensions
+        C++
+          Source Extension: cpp
+          Header Extension: hpp
+          File Naming Convention: snake_case
+  + File Encodings
+    Global Encoding: UTF-8
+    Project Encoding: UTF-8
+    Default encoding for properties files: UTF-8
+    Create UTF-8 files: with NO BOM
+  + Layout Editor
+    ☑ Prefer XML editor
++ Plugins
+  [Browse repositories...]
+    Install: Flutter, Flutteri18n
++ Version Control
+  + Git
+    SSH executable: Native
 ```
 
-<!--
-Install and configure emulator.
+Search for `redo` in the settings and assign `CTRL+Y` as a shortcut.
 
-```cmd
-sdkmanager "emulator" "system-images;android-28;google_apis;x86_64"
-echo WindowsHypervisorPlatform=on>> %UserProfile%\.android\advancedFeatures.ini
-```
-
-Create and configure virtual device.
-
-```cmd
-avdmanager create avd -n Phone -d "Nexus 4" -k "system-images;android-28;google_apis;x86_64"
-echo hw.lcd.density=160>> %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.height=640>>  %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.lcd.width=360>>   %UserProfile%\.android\avd\Phone.avd\config.ini
-echo hw.keyboard=yes>>    %UserProfile%\.android\avd\Phone.avd\config.ini
-```
-
-Start virtual device.
-
-```cmd
-emulator -avd Phone -no-audio -no-boot-anim -no-jni -skin 360x640
-```
--->
-
-Install [flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Workspace\android\flutter`.
+Verify that flutter is working properly and accept android licenses.
 
 ```cmd
 flutter doctor -v
+flutter doctor --android-licenses
 ```
 
-<!--
-Install [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding).
-
-```cmd
-git clone https://github.com/google/flutter-desktop-embedding C:\Workspace\android\flutter-desktop-embedding
-```
-
-Build `C:\Workspace\android\flutter-desktop-embedding\library\windows\Flutter Windows Embedder.sln`:
-
-- with the `Debug Dynamic Library` config
-- with the `Release Dynamic Library` config
-
--->
-
-
-## Vcpkg
-Install Vcpkg.
-
-```cmd
-git clone https://github.com/Microsoft/vcpkg C:\Workspace\vcpkg
-bootstrap-vcpkg -disableMetrics && vcpkg integrate install
-```
-
-<!--
-Replace OpenSSL port.
-
-```cmd
-rd /q /s C:\Workspace\vcpkg\ports\openssl
-git clone https://github.com/qis/openssl C:\Workspace\vcpkg\ports\openssl
-```
--->
-
-Replace Vcpkg toolchain files.
-
-```cmd
-rd /q /s C:\Workspace\vcpkg\scripts\toolchains
-git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
-copy /Y C:\Workspace\vcpkg\scripts\toolchains\triplets\*.* C:\Workspace\vcpkg\triplets\
-```
-
-Install Vcpkg ports.
-
-```cmd
-vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
-  angle freetype giflib harfbuzz libjpeg-turbo libpng opus
-```
-
-<!--
-Install Vcpkg ports on Android.
-
-```cmd
-set VCPKG_DEFAULT_TRIPLET=arm64-android
-vcpkg install benchmark gtest ^
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib ^
-  freetype giflib harfbuzz libjpeg-turbo libpng opus
-```
--->
-
-<!--
-Install LLVM.
-
-```cmd
-git clone -b release_70 --depth 1 https://llvm.org/git/llvm src
-git clone -b release_70 --depth 1 https://llvm.org/git/clang src\tools\clang
-git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src\tools\clang\tools\extra
-git clone -b release_70 --depth 1 https://llvm.org/git/lld src\tools\lld
-md build\host
-pushd build\host
-cmake -G "Visual Studio 15 2017 Win64" -Thost=x64 -DCMAKE_BUILD_TYPE=Release ^
-  -DCMAKE_INSTALL_PREFIX=C:/LLVM ^
-  -DLLVM_TARGETS_TO_BUILD="X86;WebAssembly" ^
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" ^
-  -DLLVM_ENABLE_ASSERTIONS=OFF ^
-  -DLLVM_ENABLE_WARNINGS=OFF ^
-  -DLLVM_ENABLE_PEDANTIC=OFF ^
-  -DLLVM_INCLUDE_EXAMPLES=OFF ^
-  -DLLVM_INCLUDE_TESTS=OFF ^
-  -DLLVM_INCLUDE_DOCS=OFF ^
-  ..\..\src
-cmake --build . --target install
-popd
-git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src\musl
-git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src\projects\compiler-rt
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src\projects\libcxxabi
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src\projects\libcxx
-md build\musl
-pushd build\musl
-
-```
-
-```sh
-rm -rf /opt/llvm; mkdir /opt/llvm; cd /opt/llvm
-git clone -b release_70 --depth 1 https://llvm.org/git/llvm src && \
-git clone -b release_70 --depth 1 https://llvm.org/git/lld src/tools/lld && \
-git clone -b release_70 --depth 1 https://llvm.org/git/clang src/tools/clang && \
-git clone -b release_70 --depth 1 https://llvm.org/git/clang-tools-extra src/tools/clang/tools/extra && \
-git clone -b release_70 --depth 1 https://llvm.org/git/compiler-rt src/projects/compiler-rt && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxxabi src/projects/libcxxabi && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libcxx src/projects/libcxx && \
-git clone -b release_70 --depth 1 https://llvm.org/git/libunwind src/runtimes/libunwind && \
-git clone -b wasm-prototype-1 --depth 1 https://github.com/jfbastien/musl src/musl
-sed -i "s/\s\smain()//" src/projects/libcxx/utils/merge_archives.py
-mkdir -p build/host; pushd build/host
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="/opt/llvm" \
-  -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86;WebAssembly" \
-  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly" \
-  -DLLVM_ENABLE_ASSERTIONS=OFF \
-  -DLLVM_ENABLE_WARNINGS=OFF \
-  -DLLVM_ENABLE_PEDANTIC=OFF \
-  -DLLVM_INCLUDE_EXAMPLES=OFF \
-  -DLLVM_INCLUDE_TESTS=OFF \
-  -DLLVM_INCLUDE_DOCS=OFF \
-  -DCLANG_DEFAULT_CXX_STDLIB="libc++" \
-  -DLIBCXXABI_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXXABI_ENABLE_EXCEPTIONS=ON \
-  -DLIBCXXABI_ENABLE_SHARED=OFF \
-  -DLIBCXXABI_ENABLE_STATIC=ON \
-  -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXX_ENABLE_EXCEPTIONS=ON \
-  -DLIBCXX_ENABLE_SHARED=OFF \
-  -DLIBCXX_ENABLE_STATIC=ON \
-  -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-  -DLIBCXX_ENABLE_ASSERTIONS=OFF \
-  -DLIBCXX_ENABLE_FILESYSTEM=ON \
-  -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=ON \
-  -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-  -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
-  ../../src
-cmake --build . --target install -- -j4
-popd
-
-wget -O /opt/llvm/bin/wasm https://raw.githubusercontent.com/qis/llvm/master/wasm.sh
-chmod 0755 /opt/llvm/bin/wasm
-
-pushd /opt/llvm/bin
-for i in cc c++ clang clang++; do \
-  echo "/opt/llvm/bin/wasm-$i -> wasm"; \
-  rm -f wasm-$i; ln -s wasm wasm-$i; \
-done
-popd
-
-pushd /opt/llvm/bin
-for i in ar as nm objcopy objdump ranlib readelf readobj size strings; do \
-  echo "/opt/llvm/bin/wasm-$i -> llvm-$i"; \
-  rm -f wasm-$i; ln -s llvm-$i wasm-$i; \
-done
-popd
-
-mkdir -p build/musl; pushd build/musl
-CC=/opt/llvm/bin/clang CROSS_COMPILE=/opt/llvm/bin/wasm- CFLAGS=-Wno-everything \
-../../src/musl/configure --prefix=/opt/llvm/wasm --disable-shared --enable-optimize=size
-make all install -j4
-popd
-```
--->
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
 
 ```sh
 USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
-```
-
-Create a symlink to the host Vcpkg installation.
-
-```sh
-ln -s /mnt/c/Workspace/vcpkg /opt/vcpkg
 ```
 
 Configure environment variables in `~/.bashrc`.
@@ -581,21 +445,6 @@ Install development packages.
 
 ```sh
 sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
-```
-
-Install LLVM.
-
-```sh
-rm -rf /opt/llvm; mkdir /opt/llvm
-wget https://releases.llvm.org/7.0.1/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-tar xvf clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
-sudo tee /etc/ld.so.conf.d/llvm.conf <<EOF
-/opt/llvm/lib
-/opt/llvm/lib/clang/7.0.1/lib/linux
-EOF
-sudo ldconfig
-sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
 ```
 
 Install CMake and Ninja.
@@ -617,17 +466,5 @@ tar xvf node-v10.14.2-linux-x64.tar.xz -C /opt/node --strip-components 1
 find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
-Install Vcpkg.
-
-```sh
-bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries
-rm -rf /opt/vcpkg/toolsrc/build.rel
-sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
-```
-
-Install Vcpkg packages.
-
-```sh
-vcpkg install benchmark gtest \
-  bzip2 date fmt liblzma libzip mio nlohmann-json openssl pugixml zlib
-```
+## Vcpkg
+Install Vcpkg using [this](vcpkg.md) guide.

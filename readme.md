@@ -428,6 +428,11 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 ## Keymap
 Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
 
+<!--
+Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
+create new keyboard layouts.
+-->
+
 
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).
@@ -689,11 +694,20 @@ Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 ARRAY <ignore> devices=/dev/sda
 ```
 
-Modify the following lines in `/etc/pam.d/login` (disables message of the day).
+Modify the following lines in `/etc/pam.d/login` and `/etc/pam.d/sshd` (disables message of the day).
 
 ```sh
 #session    optional    pam_motd.so motd=/run/motd.dynamic
 #session    optional    pam_motd.so noupdate
+```
+
+Execute `chmod -x /etc/update-motd.d/{10-help-text,50-motd-news}` to reduce spam.<br/>
+Modify `/etc/update-motd.d/50-landscape-sysinfo` to your liking.<br/>
+Create the file `/etc/landscape/client.conf`.
+
+```ini
+[sysinfo]
+sysinfo_plugins = Load, Processes, Memory
 ```
 
 Restart `bash.exe`.
@@ -726,7 +740,7 @@ sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
 sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop python-minimal
-sudo apt install imagemagick pngcrush
+sudo apt install imagemagick pngcrush webp
 sudo apt install siege
 sudo apt-file update
 ```
