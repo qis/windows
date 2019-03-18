@@ -83,7 +83,7 @@ export PS1
 
 set -o emacs
 
-stty werase '^_'
+[[ $- == *i* ]] && stty werase '^_'
 
 # WSL
 if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
