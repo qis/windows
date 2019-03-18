@@ -25,7 +25,7 @@ Replace Vcpkg toolchain files.
 
 ```cmd
 rd /q /s C:\Workspace\vcpkg\scripts\toolchains
-git clone git@github.com:qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
+rem git clone git@github.com:qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
 git clone https://github.com/qis/toolchains C:\Workspace\vcpkg\scripts\toolchains
 ```
 
@@ -216,9 +216,8 @@ Replace Vcpkg toolchain files.
 
 ```sh
 rm -rf /opt/vcpkg/scripts/toolchains
+#   git clone git@github.com:qis/toolchains /opt/vcpkg/scripts/toolchains
 git clone https://github.com/qis/toolchains /opt/vcpkg/scripts/toolchains
-cp /opt/vcpkg/scripts/toolchains/triplets/*.cmake /opt/vcpkg/triplets/
-sed s/dynamic/static/g /opt/vcpkg/triplets/x64-linux.cmake > /opt/vcpkg/triplets/x64-linux-static.cmake
 ```
 
 Install Vcpkg ports.
