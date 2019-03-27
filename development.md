@@ -467,4 +467,4 @@ find /opt/node -type d -exec chmod 0755 '{}' ';'
 ```
 
 ## Vcpkg
-Install Vcpkg using [this](vcpkg.md) guide.
+Install Vcpkg using [this](https://github.com/qis/toolchains) guide.
