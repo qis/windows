@@ -451,10 +451,10 @@ Install CMake and Ninja.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.13/cmake-3.13.2-Linux-x86_64.tar.gz
-tar xvf cmake-3.13.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
+tar xvf cmake-3.14.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 git clone -b release https://github.com/ninja-build/ninja
-sh -c "cd ninja && ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
+sh -c "cd ninja && CC=gcc CXX=g++ ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
 ```
 
 Install NodeJS.
