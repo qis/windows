@@ -320,24 +320,25 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "cmake.installPrefix": "${workspaceRoot}",
   "cmake.buildDirectory": "${workspaceRoot}/build/code/${buildType}",
   "cmake.configureSettings": {
+    "CMAKE_VERBOSE_MAKEFILE": "OFF",
     "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
     "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
-  }
+  },
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools"
 }
 ```
 
 Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install donjayamanne.githistory
-ext install dotjoshjohnson.xml
-ext install ms-vscode.cpptools
-ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
-ext install dart-code.flutter
-> Reload Window
+ext install maddouri.cmake-tools-helper
+ext install donjayamanne.githistory
+ext install rreverser.ragel
+ext install dotjoshjohnson.xml
+> Developer: Reload Window
 ```
 
 
@@ -451,8 +452,8 @@ Install CMake and Ninja.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
-tar xvf cmake-3.14.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.13/cmake-3.13.4-Linux-x86_64.tar.gz
+tar xvf cmake-3.13.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 git clone -b release https://github.com/ninja-build/ninja
 sh -c "cd ninja && CC=gcc CXX=g++ ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
 ```
