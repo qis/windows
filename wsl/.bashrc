@@ -6,6 +6,9 @@ PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
 export PATH
 
+# Files
+umask 0022
+
 # Limits
 ulimit -S -c 0
 
