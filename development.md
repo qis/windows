@@ -80,6 +80,12 @@ Configure the User `Path` environment variable.
 %UserProfile%\AppData\Roaming\npm
 ```
 
+Configure the user `NODE_PATH` environment variable.
+
+```
+%AppData%\npm\node_modules
+```
+
 Configure the System `Path` environment variable.
 
 ```
