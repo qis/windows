@@ -90,7 +90,7 @@ If ((Get-NetbiosName) -cne "$hostname") {
 # Change user name.
 If ($env:UserName -cne $username) {
   Write-Output "Setting User name..."
-  Rename-LocalUser -Name (Get-UserName) -NewName "$username"
+  Rename-LocalUser -Name "$env:UserName" -NewName "$username"
   Set-LocalUser -Name "$username" -FullName "$userfull"
   Reboot
 }

@@ -49,8 +49,8 @@ Select Additional Tasks
 ```
 
 * [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `C:\CMake`
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\CMake\bin`
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\NASM`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\Nasm`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 
 Install various tools for debugging.
 
@@ -89,7 +89,8 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\7-Zip
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Microsoft VS Code\bin
-%ProgramFiles%\NASM
+%ProgramFiles%\Nasm
+%ProgramFiles%\Ninja
 C:\CMake\bin
 C:\Node
 C:\Python
