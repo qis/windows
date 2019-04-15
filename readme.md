@@ -257,7 +257,7 @@ Disable automatically started applications.
 
 ```
 Task Manager > Startup
-+ Windows Defender notification icon: Disabled
++ Windows Security notification icon: Disabled
 ```
 
 

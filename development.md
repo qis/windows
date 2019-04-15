@@ -5,17 +5,7 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development.
 
-* [CMake](https://cmake.org)
-
-```
-Install Options
-  ◉ Do not add CMake to the system PATH
-  ☐ Create CMake Desktop Icon
-Destination Folder
-  C:\Program Files\CMake
-```
-
-* [Node LTS](https://nodejs.org)
+* [Node LTS](https://nodejs.org/dist/v10.15.0/node-v10.15.0-x64.msi)
 
 ```
 Destination Folder
@@ -27,7 +17,7 @@ Custom Setup
   ☒ Add to PATH
 ```
 
-* [Python 2](https://www.python.org/downloads/)
+* [Python 2](https://www.python.org/ftp/python/2.7.16/python-2.7.16.amd64.msi)
 
 ```
 Select where to install Python
@@ -58,8 +48,9 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
-* [Ninja](https://github.com/ninja-build/ninja/releases) into `C:\Program Files\Ninja`
-* [NASM](http://www.nasm.us) into `C:\Program Files\NASM`
+* [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `C:\CMake`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\CMake\bin`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\NASM`
 
 Install various tools for debugging.
 
@@ -94,49 +85,16 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\Common7\IDE
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
-%ProgramFiles(x86)%\Windows Kits\8.1\bin\x86
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\7-Zip
-%ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\NASM
-%ProgramFiles%\Ninja
-C:\Android\flutter\bin
-C:\Android\sdk\build-tools\28.0.3
-C:\Android\sdk\platform-tools
-C:\Android\studio\gradle\gradle-4.10.1\bin
-C:\Android\studio\jre\bin
+C:\CMake\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
 C:\Workspace\vcpkg
-```
-
-Configure the System `ANDROID_HOME` environment variable.
-
-```
-C:\Android\sdk
-```
-
-Configure the System `ANDROID_NDK_ROOT` environment variable.
-
-```
-C:\Android\sdk\ndk-bundle
-```
-
-Configure the System `ANDROID_SDK_ROOT` environment variable.
-
-```
-C:\Android\sdk
-```
-
-Configure the System `JAVA_HOME` environment variable.
-
-```
-C:\Android\studio\jre
 ```
 
 Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
@@ -145,9 +103,10 @@ Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 x64-windows
 ```
 
-## Visual Studio 2017
-Install and configure [Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/).<br/>
+## Visual Studio 2019
+Install and configure [Visual Studio 2019 Community](https://visualstudio.microsoft.com/downloads/).<br/>
 
+<!--
 ![Workloads](res/vs2017-1.png)
 
 ![Individual Components](res/vs2017-2.png)
@@ -244,12 +203,14 @@ Text Editor
 
 
 ### Windows Driver Kit
-Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/).
+Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+-->
 
 
 ### Plugins
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
 
+<!--
 Install and configure [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
 
 ```
@@ -274,7 +235,7 @@ Tools > Options > Environment > Fonts and Colors
   Item foreground: R:0 G:204 B:204
   ☐ bold
 ```
-
+-->
 
 ## Visual Studio Code
 **NOTE**: Press `CTRL+P` and type `>` followed by a command.
@@ -347,7 +308,7 @@ ext install dotjoshjohnson.xml
 > Developer: Reload Window
 ```
 
-
+<!--
 ## Android Development
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) into `C:\Android\sdk`.<br/>
 Extract [Flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
@@ -429,9 +390,9 @@ Verify that flutter is working properly and accept android licenses.
 
 ```cmd
 flutter doctor -v
-flutter doctor --android-licenses
+flutter doctor -\-android-licenses
 ```
-
+-->
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
@@ -454,12 +415,17 @@ Install development packages.
 sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
 ```
 
-Install CMake and Ninja.
+Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.13/cmake-3.13.4-Linux-x86_64.tar.gz
-tar xvf cmake-3.13.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
+tar xf cmake-3.14.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+```
+
+Install Ninja.
+
+```sh
 git clone -b release https://github.com/ninja-build/ninja
 sh -c "cd ninja && CC=gcc CXX=g++ ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
 ```
@@ -468,9 +434,8 @@ Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.14.2/node-v10.14.2-linux-x64.tar.xz
-tar xvf node-v10.14.2-linux-x64.tar.xz -C /opt/node --strip-components 1
-find /opt/node -type d -exec chmod 0755 '{}' ';'
+wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.xz
+tar xf node-v10.15.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
 ## Vcpkg
