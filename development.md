@@ -104,7 +104,7 @@ x64-windows
 ```
 
 ## Visual Studio 2019
-Install and configure [Visual Studio 2019 Community](https://visualstudio.microsoft.com/downloads/).<br/>
+Install and configure [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).<br/>
 
 <!--
 ![Workloads](res/vs2017-1.png)
