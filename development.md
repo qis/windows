@@ -57,6 +57,7 @@ Install various tools for debugging.
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Resource Hacker](http://www.angusj.com/resourcehacker)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [x64dbg](https://x64dbg.com)
 
 Install a standalone version of `clang-format`.
 
