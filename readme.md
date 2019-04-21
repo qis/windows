@@ -543,7 +543,10 @@ Configure gVim.
 
 ```cmd
 git clone https://github.com/qis/vim %UserProfile%\vimfiles
+```
 
+<!--
+```cmd
 reg add HKCU\SOFTWARE\Classes\.clang-format /v "" /t REG_SZ /d "Source" /f
 reg add HKCU\SOFTWARE\Classes\.gitattributes /v "" /t REG_SZ /d "Source" /f
 reg add HKCU\SOFTWARE\Classes\.gitignore /v "" /t REG_SZ /d "Source" /f
@@ -564,6 +567,7 @@ reg add HKCU\SOFTWARE\Classes\.pl /v "" /t REG_SZ /d "Source" /f
 reg add HKCU\SOFTWARE\Classes\.py /v "" /t REG_SZ /d "Source" /f
 reg add HKCU\SOFTWARE\Classes\Source\shell\open\command /v "" /t REG_SZ /d "\"%ProgramFiles(x86)%\Vim\vim81\gvim.exe\" \"%1\"" /f
 ```
+-->
 
 <!--
 ## Server
