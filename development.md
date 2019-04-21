@@ -128,11 +128,8 @@ Environment
   Text Editor: DejaVu LGC Sans Mono 9
   Printer and Cut/Copy: Iconsolata 10
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
-+ Quick Launch
-  ☐ Enable Quick Launch
 + Startup
-  At startup: Show empty environment
-  ☐ Download content every: 60 minutes
+  On startup, open: Show empty environment
 Projects and Solutions
 + General
   ☐ Always show Error list if build finishes with errors
