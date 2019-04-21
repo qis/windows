@@ -543,8 +543,27 @@ Configure gVim.
 
 ```cmd
 git clone https://github.com/qis/vim %UserProfile%\vimfiles
-```
 
+reg add HKCU\SOFTWARE\Classes\.clang-format /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.gitattributes /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.gitignore /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.cfg /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.json /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.md /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.c /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.cc /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.cpp /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.cxx /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.h /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.hh /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.hpp /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.hxx /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.ipp /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.ixx /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.pl /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\.py /v "" /t REG_SZ /d "Source" /f
+reg add HKCU\SOFTWARE\Classes\Source\shell\open\command /v "" /t REG_SZ /d "\"%ProgramFiles(x86)%\Vim\vim81\gvim.exe\" \"%1\"" /f
+```
 
 <!--
 ## Server
