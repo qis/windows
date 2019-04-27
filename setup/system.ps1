@@ -1,7 +1,7 @@
 # Settings.
-$hostname = "core"
-$username = "qis"
-$userfull = "Alexej Harm"
+$hostname = ""
+$username = "name"
+$userfull = "Name Surname"
 
 If ($hostname -eq "") {
   Error 'Read this script and assign meaningful strings to the variables $hostname, $username, and $userfull.'

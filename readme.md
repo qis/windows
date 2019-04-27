@@ -25,25 +25,24 @@ Value={windows key}
 
 Copy this repo and the latest graphics drivers installer to the installation media.
 
-## Installation
 Set the BIOS date and time to the current local time.
 
-Keep the system disconnected from the network.
+**Keep the system disconnected from the network.**
 
+## Installation
 Boot the installation media.
 
-Language to install: English (United States)<br/>
-Time and currency format: {Current Time Zone Country}<br/>
-Keyboard or input method: {Current Hardware Keyboard}<br/>
+```
+Language to install: English (United States)
+Time and currency format: {Current Time Zone Country}
+Keyboard or input method: {Current Hardware Keyboard}
+```
 
-Choose a single word username starting with a capital letter to keep the `%UserProfile%` path consistent
-and free from spaces.
+Choose a single word username starting with a capital letter to keep the `%UserProfile%` path
+consistent and free from spaces.
 
 ## Setup
-The [setup/system.ps1](setup/system.ps1) script uses the
-[Windows 10 Initial Setup Script](https://github.com/Disassembler0/Win10-Initial-Setup-Script)
-to configure the system. It must be edited, then executed by right-clicking it and selecting `Run with PowerShell`.
-
+Modify the [setup/system.ps1](setup/system.ps1) script and execute it using the "Run with PowerShell" context menu.
 
 ## Universal Apps
 List remaining apps.
