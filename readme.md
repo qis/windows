@@ -200,7 +200,7 @@ General
 ```
 
 ## Indexing Options
-Configure Indexing Options to only index the "Start Menu" and rebuild the index.
+Configure Indexing Options to only track the "Start Menu" and rebuild the index.
 
 <!--
 ## Windows Mobile Device Center (WMDC)
@@ -228,9 +228,9 @@ sc start WcesComm
 Move unwanted Windows libraries.
 
 1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.<br/>
-   Select the `Location` tab and set it to `%AppData%\Camera Roll`.
+   Select the `Location` tab and change the path to `%AppData%\Camera Roll`.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
-   Select the `Location` tab and set it to `%AppData%\Saved Pictures`.
+   Select the `Location` tab and change the path to `%AppData%\Saved Pictures`.
 
 ## Firewall
 Disable all rules in Windows Firewall except the following entries.
@@ -250,11 +250,9 @@ wf.msc
   Network Discovery (…)
 ```
 
-Enable inbound rules for "Remomte Desktop - …" if necessary.
-
-Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "Private,Public"
+Enable inbound rules for `File and Printer Sharing (Echo Request …)`. Modify `Private,Public`
 rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
-"Remote IP address" in the "Scope" tab.
+`Remote IP address` in the `Scope` tab.
 
 ## Keymap
 Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
