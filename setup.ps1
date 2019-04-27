@@ -16,7 +16,7 @@ $userfull = "First Last"
 function Confirm {
   If ($Host.Name -eq "ConsoleHost") {
     Write-Output $args
-    $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp") > $null
+    $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyUp") | Out-Null
   }
 }
 

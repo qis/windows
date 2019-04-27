@@ -1,7 +1,6 @@
 ﻿# Windows
 Installation and configuration instructions for Windows 10 (Version 1809).
 
-
 ## Preparations
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image and create the installation media.
 
@@ -90,7 +89,6 @@ Install the latest graphics card drivers from the installation media.
 
 Reboot the system.
 
-
 ## Cortana
 Disable Cortana as **User**.
 
@@ -105,7 +103,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCorta
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 ```
-
 
 ## Apps
 Disable consumer apps as **Administrator**.
@@ -162,7 +159,6 @@ Settings > Apps > Manage optional features
 ```
 
 Clean up the Start Menu.
-
 
 ## Group Policies
 Configure group policies (skip unwanted steps).
@@ -234,7 +230,6 @@ Windows Update
   ☑ Install updates for other Microsoft products
 ```
 
-
 ## Tracking
 Delete diagnostics services.
 
@@ -251,7 +246,6 @@ Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Expe
 + ProgramDataUpdater: Disabled
 ```
 
-
 ## Startup
 Disable automatically started applications.
 
@@ -259,7 +253,6 @@ Disable automatically started applications.
 Task Manager > Startup
 + Windows Security notification icon: Disabled
 ```
-
 
 ## Drivers & Updates
 Disable automatic driver application installation.
@@ -274,7 +267,6 @@ Reboot the system.
 Connect to the Internet.
 
 Install Windows updates.
-
 
 <!--
 ## Services
@@ -315,7 +307,6 @@ sc start WcesComm
 ```
 -->
 
-
 <!--
 ## Notifications
 Disable unwanted notifications.
@@ -326,7 +317,6 @@ Control Panel > System and Security > Security and Maintenance
 ```
 -->
 
-
 ## Windows Libraries
 Move unwanted Windows libraries.
 
@@ -334,7 +324,6 @@ Move unwanted Windows libraries.
    Select the `Location` tab and set it to `%AppData%\Camera Roll`.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Saved Pictures`.
-
 
 ## Explorer
 <!--
@@ -399,7 +388,6 @@ reg add "HKCR\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" /v "Programm
 ```
 -->
 
-
 ## Firewall
 Disable all rules in Windows Firewall except the following entries.
 
@@ -424,7 +412,6 @@ Enable inbound rules for "File and Printer Sharing (Echo Request …)". Modify "
 rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
 "Remote IP address" in the "Scope" tab.
 
-
 ## Keymap
 Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
 
@@ -432,7 +419,6 @@ Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
 Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
 create new keyboard layouts.
 -->
-
 
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).
@@ -482,14 +468,12 @@ reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365
 ```
 -->
 
-
 ## Fonts
 Install useful fonts.
 
 * [DejaVu](https://sourceforge.net/projects/dejavu/files/dejavu)
 * [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
 * [IPA](http://ipafont.ipa.go.jp)
-
 
 ## Third Party
 Install third party software.
@@ -573,7 +557,6 @@ reg add HKCU\SOFTWARE\Classes\Source\shell\open\command /v "" /t REG_SZ /d "\"%P
 ## Server
 Install software for Windows Server administration.
 
-
 * [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
 * [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
 
@@ -616,14 +599,12 @@ Enter-PSSession -ComputerName host.domain -Port 5986 -Credential administrator@d
 ```
 -->
 
-
 <!--
 ## Control Panel
 Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Windows\System32\shell32.dll`).
 
 [Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
 -->
-
 
 <!--
 ## Anti-Virus
@@ -646,7 +627,6 @@ Excluded Directories
 C:\Workspace\
 ```
 -->
-
 
 ## Windows Features
 Enable or disable Windows features.
@@ -781,14 +761,11 @@ Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 -->
 
-
 ## Settings
 Follow the [Settings](settings.md) guide to finish the configuration.
 
-
 ## Development
 Follow the [Development](development.md) guide to set up a developer workstation.
-
 
 ## Start Menu
 ![Start Menu](res/start.png)

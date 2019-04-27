@@ -1,7 +1,6 @@
 # Development
 Installation and configuration of a Windows 10 development workstation.
 
-
 ## Tools
 Install various tools for development.
 
@@ -62,7 +61,6 @@ Install various tools for debugging.
 Install a standalone version of `clang-format`.
 
 * [Clang Format](https://llvm.org/builds/) as `C:\Program Files (x86)\clang-format.exe`
-
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -199,12 +197,10 @@ Text Editor
   + Advanced
     Automatic formatting: Off
 ```
-
-
-### Windows Driver Kit
-Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 -->
 
+### Windows 10 WDK
+Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 ### Plugins
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
