@@ -122,9 +122,11 @@ Typing
   ☐ Autocorrect misspelled words
 + Typing
   ☐ Add a period after I double-tap the Spacebar
+
 Pen & Windows Ink
 + Windows Ink Workspace
   ☐ Show recommended app suggestions
+
 AutoPlay
 + Choose AutoPlay defaults
   Removable drive: Open folder to view files (File Explorer)
@@ -337,27 +339,36 @@ Install [Git](https://git-scm.com/downloads) with specific settings.
 ```
 Select Destination Location
   C:\Program Files\Git
+
 Select Components
   ☐ Windows Explorer integration
   ☑ Git LFS (Large File Support)
   ☐ Associate .git* configuration files with the default text editor
   ☐ Associate .sh files to be run with Bash
+
 Select Start Menu Folder
   ☑ Don't create a Start Menu folder
+
 Choosing the default editor used by Git
   [Select other editor as Git's default editor]
   Location of editor: C:\Program Files (x86)\Vim\vim81\gvim.exe
   [Test Custom Editor]
+
 Adjusting your PATH environment
   ◉ Use Git from Git Bash only
+
 Choosing the SSH executable
   ◉ Use OpenSSH
+
 Choosing HTTPS transport backend
   ◉ Use the OpenSSL library
+
 Configuring the line ending conversions
   ◉ Checkout as-is, commit as-is
+
 Configuring the terminal emulator to use with Git Bash
   ◉ Use Windows' default console window
+
 Configuring file system caching
   ☑ Enable file system caching
   ☑ Enable Git Credential Manager

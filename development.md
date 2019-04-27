@@ -36,6 +36,7 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
+<!--
 * [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
 
 ```
@@ -46,21 +47,17 @@ Select Additional Tasks
   ☑ Register Code as an editor for supported file types
   ☐ Add to PATH (available after restart)
 ```
+-->
 
-* [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `C:\CMake`
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
-
-Install various tools for debugging.
-
-* [x64dbg](https://x64dbg.com)
-* [ScyllaHide](https://github.com/x64dbg/ScyllaHide)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `%ProgramFiles%\CMake`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) as `%ProgramFiles%\CMake\bin\ninja.exe`
+* [Make](http://www.equation.com/servlet/equation.cmd?fa=make) as `%ProgramFiles%\GNU\make.exe`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
+* [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
 
-Install a standalone version of `clang-format`.
-
-* [Clang Format](https://llvm.org/builds/) as `C:\Program Files (x86)\clang-format.exe`
+Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\clang-format.exe`.
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -86,10 +83,9 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\7-Zip
+%ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
-%ProgramFiles%\Ninja
-C:\CMake\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
@@ -103,40 +99,56 @@ x64-windows
 ```
 
 ## Visual Studio 2019
-Install and configure [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).<br/>
-
-<!--
-![Workloads](res/vs2017-1.png)
-
-![Individual Components](res/vs2017-2.png)
-
-Configure the IDE.
+Install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).
 
 ```
-Tools > Options
+Workloads
++ ☑ Desktop development with C++
+
+Individual components
++ Compilers, build tools, and runtimes
+  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.20)
++ Debuggong and testing
+  ☐ Test Adapter for Boost.Test
++ Development Activities
+  ☐ Live Share
++ SDKs, libraries, and frameworks
+  ☐ C++ ATL for v142 build tools (x86 & x64)
+  ☐ Windows 10 SDK (10.0.17763.0)
+  ☑ Windows 10 SDK (10.0.18362.0)
+```
+
+### Windows 10 WDK
+Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+
+### Plugins
+* [Fix File Encoding](https://marketplace.visualstudio.com/items?itemName=SergeyVlasov.FixFileEncoding)
+* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
+
+### Options
+```
 Environment
 + General
   Color theme: Dark
 + Documents
-  ☑ Detect when file is changed outside the environment
-    ☑ Reload modified files unless there are unsaved changes
   ☑ Save documents as Unicode when data cannot be saved in codepage
 + Fonts and Colors
   Text Editor: DejaVu LGC Sans Mono 9
   Printer and Cut/Copy: Iconsolata 10
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
 + Startup
-  On startup, open: Show empty environment
+  On startup, open: Empty environment
+
 Projects and Solutions
 + General
-  ☐ Always show Error list if build finishes with errors
   ☐ Warn user when the project location is not trusted
 + Build and Run
-  On Run, when projects are out of date: Always build
   On Run, when build or deployment error occur: Do not launch
+
 Source Control
 + Plug-in Selection
   Current source control plug-in: Git
+
 Text Editor
 + General
   ☐ Enable mouse click to perform Go to Definition
@@ -155,11 +167,15 @@ Text Editor
     Tab size: 2
     Indent size: 2
     ◉ Indent spaces
+  + CodeLens
+    ☐ Enable CodeLens
 + C/C++
+  + Advanced
+    Disable External Dependencies Folders: True
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: (Latest version from <https://llvm.org/builds/>.)
+      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\clang-format.exe
     + Indentation
       ☐ Indent namespace contents
     + New Lines
@@ -195,42 +211,45 @@ Text Editor
 + JSON
   + Advanced
     Automatic formatting: Off
+
+Fix File Encoding
++ General
+  UTF-8 without signature files regex: \.(c|cc|cpp|cxx|h|hh|hpp|hxx|ipp|ihh|rc|manifest|in|lua|sh|conf|json|js|py|htm|html|css|txt|md)$
 ```
--->
 
-### Windows 10 WDK
-Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+## ScyllaHide
+Install the [ScyllaHide](https://github.com/x64dbg/ScyllaHide) plugin.
 
-### Plugins
-Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
+```cmd
+git clone git@github.com:x64dbg/ScyllaHide
+start ScyllaHide\ScyllaHide.sln
+```
+
+1. Replace `afxres` with `windows` and `IDC_STATIC` with `-1` in `ScyllaHideX64DBGPlugin\ScyllaHideX64DBGPlugin.rc`.
+2. Switch the platform to `Win32` and change the platform toolset for all projects to `Visual Studio 2019 (v142)`.
+3. Switch the platform to `x64` and change the platform toolset for all projects to `Visual Studio 2019 (v142)`.
+4. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `Win32` in `Release` mode.
+5. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `x64` in `Release` mode.
+
+```cmd
+cmake -E make_directory "%ProgramFiles%\x64dbg\release\x32\plugins"
+cmake -E copy ^
+  ScyllaHide\ConfigCollection\scylla_hide.ini ^
+  ScyllaHide\ConfigCollection\NtApiCollection.ini ^
+  ScyllaHide\build\Release\Win32\HookLibraryx86.dll ^
+  ScyllaHide\build\Release\Win32\ScyllaHideX64DBGPlugin.dp32 ^
+  "%ProgramFiles%\x64dbg\release\x32\plugins"
+  
+cmake -E make_directory "%ProgramFiles%\x64dbg\release\x64\plugins"
+cmake -E copy ^
+  ScyllaHide\ConfigCollection\scylla_hide.ini ^
+  ScyllaHide\ConfigCollection\NtApiCollection.ini ^
+  ScyllaHide\build\Release\x64\HookLibraryx64.dll ^
+  ScyllaHide\build\Release\x64\ScyllaHideX64DBGPlugin.dp64 ^
+  "%ProgramFiles%\x64dbg\release\x64\plugins"
+```
 
 <!--
-Install and configure [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
-
-```
-Tools > Options > Line Endings Unifier
-+ General Settings
-  Add Newline On The Last Line: True
-  Default Line Ending: Linux
-  Force Default Line Ending On Document Save: True
-  Save Files After Unifying: True
-  Supported File Formats: .c; .cc; .cpp; .h; .hh; .hpp; .in; .lua; .js; .json; .html; .md; .sh; .conf; .txt
-  Supported File Names: makefile
-```
-
-Install [NPL LuaLanguageService](https://marketplace.visualstudio.com/items?itemName=Xizhi.NPLLuaLanguageService).
-
-```
-Tools > Options > Environment > Fonts and Colors
-+ Display items: NPL.NPLFunction
-  Item foreground: R:0 G:215 B:0
-  ☐ bold
-+ Display items: NPL.NPLSelf
-  Item foreground: R:0 G:204 B:204
-  ☐ bold
-```
--->
-
 ## Visual Studio Code
 **NOTE**: Press `CTRL+P` and type `>` followed by a command.
 
@@ -301,6 +320,7 @@ ext install rreverser.ragel
 ext install dotjoshjohnson.xml
 > Developer: Reload Window
 ```
+-->
 
 <!--
 ## Android Development
@@ -433,4 +453,4 @@ tar xf node-v10.15.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
 ## Vcpkg
-Install Vcpkg using [this](https://github.com/qis/toolchains) guide.
+Install Vcpkg using the [toolchains](https://github.com/qis/toolchains) guide.
