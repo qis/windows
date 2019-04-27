@@ -118,8 +118,8 @@ Individual components
   ☑ Windows 10 SDK (10.0.18362.0)
 ```
 
-### Windows 10 WDK
-Install [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+### Development Kits
+* [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 ### Plugins
 * [Fix File Encoding](https://marketplace.visualstudio.com/items?itemName=SergeyVlasov.FixFileEncoding)

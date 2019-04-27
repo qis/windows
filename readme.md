@@ -558,7 +558,7 @@ Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg app
 -->
 
 ## Development
-Follow the [Development](development.md) guide to set up a developer workstation.
+Follow the [development](development.md) guide to set up a developer workstation.
 
 ## Start Menu
 ![Start Menu](res/start.png)
