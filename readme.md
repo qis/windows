@@ -480,13 +480,23 @@ Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
 * [Chrome](https://www.google.com/chrome/)
-* [ConEmu](https://conemu.github.io)
+* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
 * [Blender](https://www.blender.org/)
-* [gVim](http://www.vim.org)
+* [MPV](https://mpv.srsfckn.biz/)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
+
+<!--
+* [Tor Browser](https://www.torproject.org/download/)
+
+Install [qBittorrent](https://www.qbittorrent.org/) and configure the proxy.
+
+```
+Tor Browser > Menu > Options > General > Network Proxy > Settings…
+```
+-->
 
 Install [Git](https://git-scm.com/downloads) with specific settings.
 
@@ -522,36 +532,11 @@ Configuring file system caching
 
 Add `%ProgramFiles%\Git\cmd` to `Path`.
 
-## gVim
-Configure gVim.
+Install [gVim](http://www.vim.org) and create a config directory.
 
 ```cmd
 git clone https://github.com/qis/vim %UserProfile%\vimfiles
 ```
-
-<!--
-```cmd
-reg add HKCU\SOFTWARE\Classes\.clang-format /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.gitattributes /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.gitignore /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.cfg /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.json /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.md /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.c /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.cc /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.cpp /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.cxx /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.h /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.hh /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.hpp /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.hxx /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.ipp /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.ixx /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.pl /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\.py /v "" /t REG_SZ /d "Source" /f
-reg add HKCU\SOFTWARE\Classes\Source\shell\open\command /v "" /t REG_SZ /d "\"%ProgramFiles(x86)%\Vim\vim81\gvim.exe\" \"%1\"" /f
-```
--->
 
 <!--
 ## Server

@@ -48,15 +48,15 @@ Select Additional Tasks
 ```
 
 * [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `C:\CMake`
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\Nasm`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 
 Install various tools for debugging.
 
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [Resource Hacker](http://www.angusj.com/resourcehacker)
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [x64dbg](https://x64dbg.com)
+* [ScyllaHide](https://github.com/x64dbg/ScyllaHide)
+* [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 
 Install a standalone version of `clang-format`.
 
@@ -87,8 +87,7 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\7-Zip
 %ProgramFiles%\Git\cmd
-%ProgramFiles%\Microsoft VS Code\bin
-%ProgramFiles%\Nasm
+%ProgramFiles%\NASM
 %ProgramFiles%\Ninja
 C:\CMake\bin
 C:\Node
