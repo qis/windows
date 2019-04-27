@@ -6,6 +6,10 @@
 #
 #   Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy Undefined
 #
+# Alternatively, execute this script bypassing the policy as Administrator.
+#
+#   powershell -ExecutionPolicy ByPass -File setup.ps1
+#
 
 # Settings.
 $hostname = ""
