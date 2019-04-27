@@ -1,5 +1,5 @@
 ﻿# Windows
-Installation and configuration instructions for Windows 10 (Version 1809).
+Installation and configuration instructions for Windows 10 (Version 1903).
 
 ## Preparations
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image
@@ -36,119 +36,26 @@ Language to install: English (United States)<br/>
 Time and currency format: {Current Time Zone Country}<br/>
 Keyboard or input method: {Current Hardware Keyboard}<br/>
 
-Choose a single word username starting with a capital letter to keep the `%UserProfile%` path consistent and free from spaces.
+Choose a single word username starting with a capital letter to keep the `%UserProfile%` path consistent
+and free from spaces.
 
-## System
-Rename the user.
+## Setup
+The [setup/system.ps1](setup/system.ps1) script uses the
+[Windows 10 Initial Setup Script](https://github.com/Disassembler0/Win10-Initial-Setup-Script)
+to configure the system. It must be edited, then executed by right-clicking it and selecting `Run with PowerShell`.
 
-```cmd
-lusrmgr.msc > Users
-+ Right click {User} > Rename
-  Enter the same name in lower case letters.
-+ Right click {User} > Properties
-  Full Name: {Name Surname}
-```
 
-Change the hostname.
-
-```
-Settings > System > About > Rename PC
-```
-
-Change the NetBIOS name as **Administrator**.
-
-```ps
-$MemberDefinition = @'
-[DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-public static extern bool SetComputerName(string name);
-'@
-$Kernel32 = Add-Type -MemberDefinition $MemberDefinition -Name 'Kernel32' -Namespace 'Win32' -PassThru
-$Kernel32::SetComputerName("{hostname}");
-```
-
-Disable system restore as **Administrator**.
-
-```cmd
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "DisableSR" /t REG_DWORD /d 1 /f
-```
-
-Disable hibernation as **Administrator** (not recommended for mobile computers).
-
-```cmd
-powercfg -h off
-```
-
-Disable virtual memory.
-
-```
-Control Panel > "System" > Advanced system settings > Advanced > Performance [Settings...] > Advanced > [Change...]
-```
-
-Reboot the system.
-
-Install the latest graphics card drivers from the installation media.
-
-Reboot the system.
-
-## Cortana
-Disable Cortana as **User**.
-
-```cmd
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
-```
-
-Disable Cortana as **Administrator**.
-
-```cmd
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
-```
-
-## Apps
-Disable consumer apps as **Administrator**.
-
-```cmd
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
-```
-
-Uninstall unwanted apps as **Administrator**.
-
-```ps
-Get-AppxPackage -allusers 'Microsoft.GetHelp' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Getstarted' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Messaging' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Microsoft3DViewer' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.MicrosoftOfficeHub' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.MicrosoftSolitaireCollection' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.MicrosoftStickyNotes' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.MixedReality.Portal' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.MSPaint' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Office.OneNote' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.OneConnect' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Print3D' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.SkypeApp' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.WindowsCamera' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.WindowsFeedbackHub' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.WindowsMaps' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.WindowsSoundRecorder' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Windows.Photos' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.Xbox*' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.YourPhone' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.ZuneMusic' | Remove-AppxPackage
-Get-AppxPackage -allusers 'Microsoft.ZuneVideo' | Remove-AppxPackage
-```
-
-Uninstall OneDrive.
-
-```
-Settings > Apps > Microsoft OneDrive
-```
-
+## Universal Apps
 List remaining apps.
 
 ```ps
 Get-AppxPackage | Select Name,PackageFullName | Sort Name
+```
+
+Uninstall unwanted apps.
+
+```ps
+Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
 ```
 
 Uninstall unwanted optional features.
@@ -162,39 +69,10 @@ Settings > Apps > Manage optional features
 Clean up the Start Menu.
 
 ## Group Policies
-Configure group policies (skip unwanted steps).
+Configure group policies.
 
 ```
-gpedit.msc > Computer Configuration > Administrative Templates > Control Panel
-
-Personalization
-+ Do not display the lock screen: Enabled
-
 gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Cloud Content
-+ Turn off Microsoft consumer experiences: Enabled
-
-Data Collection and Preview Builds
-+ Allow Telemetry: Disabled
-+ Do not show feedback notifications: Enabled
-
-OneDrive
-+ Prevent OneDrive from generating network traffic until the user signs in to OneDrive: Enabled
-+ Prevent the usage of OneDrive for file storage: Enabled
-+ Prevent the usage of OneDrive for file storage on Windows 8.1: Enabled
-+ Save documents to OneDrive by default: Disabled
-
-Search
-+ Allow Cloud Search: Disabled
-+ Allow Cortana: Disabled
-+ Allow Cortana above lock screen: Disabled
-+ Allow search and Cortana to use location: Disabled
-+ Do not allow locations on removable drives to be added to libraries: Enabled
-+ Do not allow web search: Enabled
-+ Don't search the web or display web results in Search: Enabled
-+ Prevent automatically adding shared folders to the Windows Search index: Enabled
-+ Prevent clients from querying the index remotely: Enabled
 
 Speech
 + Allow Automatic Update of Speech Data: Disabled
@@ -211,55 +89,13 @@ Windows Defender Antivirus > Network Inspection System
 
 Windows Defender Antivirus > Real-time Protection
 + Turn off real-time protection: Enabled
-
-Windows Defender Antivirus > Signature Updates
-+ Allow definition updates from Microsoft Update: Disabled
-+ Check for the latest virus and spyware definitions on startup: Disabled
-
-Windows Defender SmartScreen > Explorer
-+ Configure Windows Defender SmartScreen: Disabled
-
-Windows Defender SmartScreen > Microsoft Edge
-+ Configure Windows Defender SmartScreen: Disabled
-
-Windows Error Reporting
-+ Disable Windows Error Reporting: Enabled
-
-Windows Update
-+ Configure Automatic Updates: Enabled
-  Configure automatic updating: 2 - Notify for download and auto install
-  ☑ Install updates for other Microsoft products
-```
-
-## Tracking
-Delete diagnostics services.
-
-```cmd
-sc delete diagtrack
-sc delete dmwappushservice
-```
-
-Disable Application Experience tasks.
-
-```
-Task Scheduler > Task Scheduler Library > Microsoft > Windows > Application Experience
-+ Microsoft Compatibility Appraiser: Disabled
-+ ProgramDataUpdater: Disabled
-```
-
-## Startup
-Disable automatically started applications.
-
-```
-Task Manager > Startup
-+ Windows Security notification icon: Disabled
 ```
 
 ## Drivers & Updates
 Disable automatic driver application installation.
 
 ```
-Control Panel > "System" > Advanced system settings > Hardware > Device Installation Settings
+Start > "Change device installation settings"
 ◉ No (your device might not work as expected)
 ```
 
@@ -269,26 +105,107 @@ Connect to the Internet.
 
 Install Windows updates.
 
+## Settings
+Settings that have yet to be incorporated into the [setup/system.ps1](setup/system.ps1) script.
+
+### System
+```
+Notifications & actions
++ Edit your quick actions
+  ☑ All settings
+  ☑ Network
+  ☑ Night light
+  ☑ Screen snip
+```
+
+### Devices
+```
+Typing
++ Spelling
+  ☐ Autocorrect misspelled words
++ Typing
+  ☐ Add a period after I double-tap the Spacebar
+Pen & Windows Ink
++ Windows Ink Workspace
+  ☐ Show recommended app suggestions
+AutoPlay
++ Choose AutoPlay defaults
+  Removable drive: Open folder to view files (File Explorer)
+  Memory card: Open folder to view files (File Explorer)
+```
+
+### Network & Internet
+```
+Proxy
++ Automatic proxy setup
+  ☐ Automatically detect settings
+```
+
+### Personalization
+```
+Colors
++ Choose your color
+  Windows colors: Navy blue
+Start
++ Start
+  ☐ Show app list in Start menu
+```
+
+### Time & Language
+```
+Region > Additional date, time, & regional settings > Change date, time, or number formats
++ Formats > Additional settings...
+  + Numbers
+    Decimal symbol: .
+    Digit grouping symbol: ␣
+    Measurement system: Metric
+  + Currency
+    Decimal symbol: .
+    Digit grouping symbol: ␣
+  + Time
+    Short time: HH:mm
+    Long time: HH:mm:ss
+  + Date
+    Short date: yyyy-MM-dd
+    Long date: ddd, d MMMM yyyy
++ Administrative > Copy settings...
+  ☑ Welcome screen and system accounts
+  ☑ New user accounts
+```
+
+### Ease of Access
+```
+Narrator
++ Use Narrator
+  ☐ Turn on narrator
+  ☐ Allow the shortcut key to start Narrator
+Keyboard
++ Use your device without a physical keyboard
+  ☐ Use the On-Screen Keyboard
++ Use Sticky Keys
+  ☐ Allow the shortcut key to start Sticky Keys
++ Use Toggle Keys
+  ☐ Allow the shortcut key to start Toggle Keys
++ Use Filter Keys
+  ☐ Allow the shortcut key to start Filter Keys
+```
+
+### Privacy
+```
+General
++ Change privacy options
+  ☐ Let apps use advertising ID to make ads more interesting …
+  ☑ Let websites provide locally relevant content by accessing my language list
+  ☐ Let Windows track app launches to improve Start and search results
+  ☐ Show me suggested content in the Settings app
+```
+
+## Indexing Options
+Configure Indexing Options to only index the "Start Menu" and rebuild the index.
+
 <!--
-## Services
-Disable unwanted services.
-
-```
-services.msc
-+ Certificate Propagation: Manual -> Disabled
-+ Microsoft (R) Diagnostics Hub Standard Collector Service: Manual -> Disabled
-```
-
-Disable third party services.
-
-```
-services.msc
-+ Microsoft Office Click-to-Run Service: Automatic -> Disabled
-```
--->
-
-<!--
-Fix Windows Mobile Device Center (WMDC).
+## Windows Mobile Device Center (WMDC)
+Fix WMDC autostart issues and force guest mode for all devices instead showing the user interface.
 
 ```cmd
 taskkill /im wmdc.exe /f
@@ -308,16 +225,6 @@ sc start WcesComm
 ```
 -->
 
-<!--
-## Notifications
-Disable unwanted notifications.
-
-```
-Control Panel > System and Security > Security and Maintenance
-  [Turn off all messages about …]
-```
--->
-
 ## Windows Libraries
 Move unwanted Windows libraries.
 
@@ -326,85 +233,22 @@ Move unwanted Windows libraries.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and set it to `%AppData%\Saved Pictures`.
 
-## Explorer
-<!--
-```cmd
-rem OneDrive
-reg add "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
-```
--->
-
-Hide unwanted "This PC" links as **Administrator**: 3D Objects, Desktop, Documents, Downloads, Music, Pictures, Videos
-
-```cmd
-for %i in (
-  0DB7E03F-FC29-4DC6-9020-FF41B59E513A,
-  B4BFCC3A-DB2C-424C-B029-7FE99A87C641,
-  A8CDFF1C-4878-43be-B5FD-F8091C1C60D0, d3162b92-9365-467a-956b-92703aca08af,
-  374DE290-123F-4565-9164-39C4925E467B, 088e3905-0323-4b02-9826-5d99428e115f,
-  1CF1260C-4DD0-4ebb-811F-33C572699FDE, 3dfdf296-dbec-4fb4-81d1-6a3438bcf4de,
-  3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA, 24ad3ad4-a569-4530-98e1-ab02f9417aa8,
-  A0953C92-50DC-43bf-BE83-3742FED03C9C, f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a
-) do (
-  reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{%i}" /f
-  reg delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{%i}" /f
-)
-for %i in (
-  31C0DD25-9439-4F12-BF41-7FF4EDA38722,
-  B4BFCC3A-DB2C-424C-B029-7FE99A87C641,
-  f42ee2d3-909f-4907-8871-4c22fc0bf756,
-  7d83ee9b-2244-4e70-b1f5-5393042af1e4,
-  a0c69a99-21c8-4671-8703-7934162fcf1d,
-  0ddd015d-b06c-45d5-8c4c-f59713854639,
-  35286a68-3c57-41a1-bbb1-0eae73d76c95
-) do (
-  reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{%i}\PropertyBag" ^
-    /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-)
-```
-
-Remove "Edit with Paint 3D" file context menus as **Administrator**.
-
-```cmd
-reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "3D Edit" /s /k /e
-for %i in (3mf,bmp,fbx,gif,glb,jfif,jpe,jpeg,jpg,obj,ply,png,stl,tif,tiff) do (
-  reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.%i\Shell\3D Edit" /f
-)
-```
-
-Remove "Set as desktop background" file context menus as **Administrator**.
-
-```cmd
-reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "setdesktopwallpaper" /s /k /e
-for %i in (bmp,dib,gif,jfif,jpe,jpeg,jpg,png,tif,tiff,wdp) do (
-  reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.%i\Shell\setdesktopwallpaper" /f
-)
-```
-
-<!--
-Remove "Edit with Photos" file context menus as **Administrator**.
-
-```cmd
-reg add "HKCR\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc\Shell\ShellEdit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-```
--->
-
 ## Firewall
 Disable all rules in Windows Firewall except the following entries.
 
 ```
 wf.msc
 + Inbound Rules
-  + Connect
-  + Core Networking - …
-  + Delivery Optimization (…)
-  + Hyper-V …
-  + Network Discovery (…)
+  Connect
+  Core Networking - …
+  Delivery Optimization (…)
+  Hyper-V …
+  Network Discovery (…)
 + Outbound Rules
-  + Connect
-  + Core Networking - …
-  + Hyper-V …
-  + Network Discovery (…)
+  Connect
+  Core Networking - …
+  Hyper-V …
+  Network Discovery (…)
 ```
 
 Enable inbound rules for "Remomte Desktop - …" if necessary.
@@ -425,7 +269,8 @@ create new keyboard layouts.
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).
 
 ```
-Settings > General
+Settings
++ General
   Open Microsoft Edge with: A specific page or pages
     about:blank
   Open Microsoft Edge with: Previous pages
@@ -435,33 +280,25 @@ Settings > General
   Show sites I frequently visit in "Top sites": Off
   Show definitions inline for: Off
   Ask me what to do with each download: Off
-Settings > Privacy & security
++ Privacy & security
   Show search and site suggestions as I type: Off
   Use page prediction: Off
-Settings > Passwords & autofill
++ Passwords & autofill
   Save form data: Off
 ```
 
 Configure [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer).
 
 ```
-Internet options > General
-Home page: about:blank
-Startup: Start with tabs from the last session
+Internet options
++ General
+  Home page: about:blank
+  Startup: Start with tabs from the last session
++ General > Tabs
+  When a new tab is opened, open: A blank page
 ```
 
 <!--
-Configure the Photos app.
-
-```
-Photos > Settings
-Linked duplicates: Off
-People: Off
-Mouse wheel: Zoom in and out
-Mode: Dark
-Show a notification when new albums are available: Off
-```
-
 Configure [Outlook 2016](https://products.office.com/en/outlook).
 
 ```cmd
@@ -476,7 +313,7 @@ Install useful fonts.
 * [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
 * [IPA](http://ipafont.ipa.go.jp)
 
-## Third Party
+## Applications
 Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
@@ -614,24 +451,6 @@ C:\Workspace\
 ```
 -->
 
-## Windows Features
-Enable or disable Windows features.
-
-```
-Control Panel > Programs > Turn Windows features on or off
-▣ .NET Framework 3.5 (includes .NET 2.0 and 3.0)
-☐ Microsoft XPS Document Writer
-☐ Print and Document Services
-▣ SMB 1.0/CIFS File Sharing Support
-  ☑ SMB 1.0/CIFS Client
-☑ Telnet Client
-☑ TFTP Client
-☑ Windows Subsystem for Linux
-☐ Work Folders Client
-```
-
-Reboot the system.
-
 ## Windows Subsystem for Linux
 Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
 
@@ -668,14 +487,6 @@ enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
 ```
 
-Fix timezone information.
-
-```sh
-sudo rm /etc/localtime
-sudo ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-echo Europe/Berlin | sudo tee /etc/timezone
-```
-
 Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 
 ```sh
@@ -691,15 +502,8 @@ Modify the following lines in `/etc/pam.d/login` and `/etc/pam.d/sshd` (disables
 ```
 
 Execute `chmod -x /etc/update-motd.d/{10-help-text,50-motd-news}` to reduce spam.<br/>
-Modify `/etc/update-motd.d/50-landscape-sysinfo` to your liking.<br/>
-Create the file `/etc/landscape/client.conf`.
 
-```ini
-[sysinfo]
-sysinfo_plugins = Load, Processes, Memory
-```
-
-Restart `bash.exe`.
+**IMPORTANT**: Completely restart `bash.exe` to apply `/etc/wsl.conf` settings.
 
 Create Windows symlinks.
 
@@ -711,11 +515,11 @@ ln -s /mnt/c/Users/Qis/vimfiles ~/.vim
 ln -s /mnt/c/Users/Qis/Documents ~/documents
 ln -s /mnt/c/Users/Qis/Downloads ~/downloads
 ln -s /mnt/c/Workspace ~/workspace
-mkdir -p ~/.ssh
+mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in config id_rsa id_rsa.pub known_hosts; do
   ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
 done
-chmod 0600 ~/.ssh/*
+chmod 0600 /mnt/c/Users/Qis/.ssh/* ~/.ssh/*
 sudo mkdir -p /root/.config
 sudo ln -s /mnt/c/Users/Qis/vimfiles /root/.config/nvim
 sudo ln -s /mnt/c/Users/Qis/vimfiles /root/.vim
@@ -728,17 +532,16 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install apt-file p7zip p7zip-rar zip unzip tree htop python-minimal
+sudo apt install p7zip p7zip-rar zip unzip tree python-minimal
 sudo apt install imagemagick pngcrush webp
 sudo apt install apache2-utils
-sudo apt-file update
 ```
 
 Install youtube-dl.
 
 ```sh
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
+sudo chmod 0755 /usr/local/bin/youtube-dl
 ```
 
 Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
