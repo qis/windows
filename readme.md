@@ -98,11 +98,9 @@ Start > "Change device installation settings"
 ◉ No (your device might not work as expected)
 ```
 
-Reboot the system.
-
-Connect to the Internet.
-
-Install Windows updates.
+1. Reboot the system.
+2. Connect to the Internet.
+3. Install Windows updates.
 
 ## Settings
 Settings that have yet to be incorporated into the [setup/system.ps1](setup/system.ps1) script.
@@ -255,7 +253,9 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 `Remote IP address` in the `Scope` tab.
 
 ## Keymap
-Use this [keymap](res/keymap.zip) to input German characters on a U.S. keyboard.
+1. Install [res/keymap.zip](res/keymap.zip) to input German characters on a U.S. keyboard.
+2. Configure Windows language preferences.
+3. Reboot the system.
 
 <!--
 Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
@@ -270,7 +270,6 @@ Settings
 + General
   Open Microsoft Edge with: A specific page or pages
     about:blank
-  Open Microsoft Edge with: Previous pages
   Open new tabs with: A blank page
   Show the favorites bar: Off
   Show the home button: Off
@@ -546,9 +545,6 @@ Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
 <!--
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 -->
-
-## Settings
-Follow the [Settings](settings.md) guide to finish the configuration.
 
 ## Development
 Follow the [Development](development.md) guide to set up a developer workstation.
