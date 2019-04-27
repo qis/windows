@@ -2,7 +2,8 @@
 Installation and configuration instructions for Windows 10 (Version 1809).
 
 ## Preparations
-Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image and create the installation media.
+Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image
+and create the installation media using [Rufus](https://rufus.ie/).
 
 Create the file `\sources\ei.cfg` on the installation media.
 
