@@ -152,6 +152,7 @@ Source Control
 Text Editor
 + General
   ☐ Enable mouse click to perform Go to Definition
+    Use modifier key: Ctrl+Alt
   ☐ Highlight current line
   ☐ Show structure guide lines
 + All Languages
