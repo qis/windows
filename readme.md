@@ -462,10 +462,10 @@ C:\Workspace\
 Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
 
 ```sh
-rm -f .bashrc .bash_history .bash_logout .profile .tmux.conf
-wget https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc
-wget https://raw.githubusercontent.com/qis/windows/master/wsl/.profile
-wget https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc -o .bashrc
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.profile -o .profile
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf -o .tmux.conf
+rm -f .bash_history .bash_logout
 touch .viminfo
 ```
 
