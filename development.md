@@ -51,6 +51,7 @@ Select Additional Tasks
 
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [SQLite Database Browser](https://sqlitebrowser.org/)
 * [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `%ProgramFiles%\CMake`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) as `%ProgramFiles%\CMake\bin\ninja.exe`
 * [Make](http://www.equation.com/servlet/equation.cmd?fa=make) as `%ProgramFiles%\GNU\make.exe`
@@ -427,7 +428,7 @@ export NODE_PATH="/opt/node/lib/node_modules"
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git subversion swig
+sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git sqlite3 subversion swig
 ```
 
 Install CMake.

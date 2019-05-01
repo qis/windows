@@ -316,11 +316,12 @@ Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
 * [Chrome](https://www.google.com/chrome/)
-* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
+* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Blender](https://www.blender.org/)
+* [Gimp](https://www.gimp.org/)
 * [MPV](https://mpv.srsfckn.biz/)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 

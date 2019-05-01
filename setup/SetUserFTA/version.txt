@@ -1,0 +1,51 @@
+this is version 1.7.1
+
+Release Notes:
+==============
+
+Version 1.7.1	- update to avoid false positive antivirus detection
+Version 1.7	- implemented get and del commands, comments with # in configfile now possible, EULA added
+Version 1.6	- allows to change protocols (mailto, etc.) on Windows builds 1607 and lower
+Version 1.5	- support for Windows 8.x and Server 2012/R2
+Version 1.4	- support for protocols on Windows 1703 and higher
+Version 1.3	- new funtionality: multiple file type associations with a configuration file
+Version 1.2	- completely rewritten in C, because v1.1.1 still was causing "false positive" detections.
+Version 1.1.1 	- includes small changes, due antivirus false positive detections.
+Version 1.1 	- added group checking option. only sets FTA when the user is member of the supplied group.
+Version 1.0 	- first public version
+
+HOW TO:
+=======
+
+run SetUserFTA.exe in the user context with following command line parameters:
+
+SetUserFTA.exe extension progid optional:groupname
+
+or
+
+SetUserFTA.exe configfile
+
+"SetUserFTA.exe del .txt" will remove the UserChoice key from the .txt handler
+"SetUserFTA.exe get" will list all User FTA's (just like GetUserFTA)
+
+EXAMPLE:
+========
+
+SetUserFTA.exe .txt txtfile
+
+or to use group checking:
+
+SetUserFTA.exe .txt txtfile "Notepad Users"
+
+Note: you can supply the group including the domain like "Domain\group" or even in UPN format. 
+if the group contains a space, you must use quotes (not when using a config file).
+
+SetUserFTA.exe path_to_config_file
+
+a config file contains multiple associations - one per line, values separated by comma.
+
+Example: .vsdx, VisioViewer.Viewer, Visio Users
+
+the group is optional and must not contain quotes.
+
+check my blog for more detailed information: http://kolbi.cz/blog/?p=346

@@ -1,0 +1,9 @@
+diff --git i/setup/filetype.cmd w/setup/filetype.cmd
+deleted file mode 100644
+index 8db3328..0000000
+--- i/setup/filetype.cmd
++++ /dev/null
+@@ -1,3 +0,0 @@
+-@echo off
+-
+-pause
