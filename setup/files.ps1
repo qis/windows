@@ -66,11 +66,12 @@ Associate "git" "Git" $editor "git.ico" ("gitattributes", "gitconfig", "gitignor
 Associate "json" "JSON" $editor $text ("json")
 Associate "markdown" "Markdown" $editor $text ("markdown", "md")
 Associate "patch" "Patch" $editor $text ("diff", "patch")
-Associate "text" "Text" $editor $text ("cmake", "txt")
+Associate "text" "Text" $editor $text ("txt")
 
 # Code
 Associate "asm" "Assembler" $editor "asm.ico" ("asm", "s")
 Associate "c" "C Source" $editor "c.ico" ("c")
+Associate "cmake" "CMake" $editor "code.ico" ("cmake", "in")
 Associate "cpp" "C++ Source" $editor "cpp.ico" ("c++", "cc", "cpp", "cxx")
 Associate "cs" "C Sharp" $editor "cs.ico" ("cs")
 Associate "css" "CSS" $editor "code.ico" ("css")
@@ -81,7 +82,7 @@ Associate "javascript" "JavaScript" $editor "code.ico" ("js")
 Associate "manifest" "Manifest" $editor "xml.ico" ("manifest")
 Associate "perl" "Perl" $editor "code.ico" ("pl")
 Associate "python" "Python" $editor "code.ico" ("py")
-Associate "resource" "Resource" $editor "rc.ico" ("in", "rc")
+Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 Associate "xmlfile" "XML" $editor "xml.ico" ("xml")
 
