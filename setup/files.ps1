@@ -83,6 +83,7 @@ Associate "manifest" "Manifest" $editor "xml.ico" ("manifest")
 Associate "perl" "Perl" $editor "code.ico" ("pl")
 Associate "python" "Python" $editor "code.ico" ("py")
 Associate "resource" "Resource" $editor "rc.ico" ("rc")
+Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 Associate "xmlfile" "XML" $editor "xml.ico" ("xml")
 
