@@ -113,6 +113,7 @@ Individual components
 + Debuggong and testing
   ☐ Test Adapter for Boost.Test
 + Development Activities
+  ☑ JavaScript and TypeScript language support
   ☐ Live Share
 + SDKs, libraries, and frameworks
   ☐ C++ ATL for v142 build tools (x86 & x64)
@@ -165,6 +166,7 @@ Text Editor
   ☐ Show structure guide lines
 + All Languages
   + General
+    ☐ Drag and drop text editiong
     ☑ Line numbers
     ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
@@ -208,7 +210,7 @@ Text Editor
   + Advanced
     Color picker format: #000
     Automatic formatting: Off
-+ JavaScript/TrueScript
++ JavaScript/TypeScript
   + Formatting
     + General
       ☐ Format completed line on Enter
