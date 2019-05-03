@@ -120,6 +120,12 @@ Individual components
   ☑ Windows 10 SDK (10.0.18362.0)
 ```
 
+In case `vcruntime140_1.dll` is missing, install the redistributable package.
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\14.20.27508\vc_redist.x64.exe
+````
+
 ### Development Kits
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
