@@ -150,6 +150,7 @@ Environment
 
 Projects and Solutions
 + General
+  ☐ Always show Error List if build finishes with errors
   ☐ Warn user when the project location is not trusted
 + Build and Run
   On Run, when build or deployment error occur: Do not launch
