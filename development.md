@@ -420,6 +420,14 @@ flutter doctor -\-android-licenses
 ```
 -->
 
+## Windows Sandbox
+Install Windows Sandbox.
+
+```
+Start > "Turn Windows features on or off"
+☑ Windows Sandbox
+```
+
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
 
