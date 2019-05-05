@@ -35,6 +35,7 @@ function Associate {
     New-Item -Path "HKCR:\${name}\DefaultIcon" -Force | Out-Null
   }
   Set-ItemProperty -Path "HKCR:\${name}\DefaultIcon" -Name "(Default)" -Type String -Value "${icon}"
+  Remove-Item -Path "HKCR:\${name}_auto_file" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
   $type | ForEach {
     & cmd /c "assoc .${_}=${name}"
     Set-ItemProperty -Path "HKCR:\.${_}" -Name "(Default)" -Type String -Value "${name}"

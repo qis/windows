@@ -113,12 +113,19 @@ Individual components
 + Debuggong and testing
   ☐ Test Adapter for Boost.Test
 + Development Activities
+  ☑ JavaScript and TypeScript language support
   ☐ Live Share
 + SDKs, libraries, and frameworks
   ☐ C++ ATL for v142 build tools (x86 & x64)
   ☐ Windows 10 SDK (10.0.17763.0)
   ☑ Windows 10 SDK (10.0.18362.0)
 ```
+
+In case `vcruntime140_1.dll` is missing, install the redistributable package.
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\14.20.27508\vc_redist.x64.exe
+````
 
 ### Development Kits
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
@@ -143,6 +150,7 @@ Environment
 
 Projects and Solutions
 + General
+  ☐ Always show Error List if build finishes with errors
   ☐ Warn user when the project location is not trusted
 + Build and Run
   On Run, when build or deployment error occur: Do not launch
@@ -159,6 +167,7 @@ Text Editor
   ☐ Show structure guide lines
 + All Languages
   + General
+    ☐ Drag and drop text editiong
     ☑ Line numbers
     ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
@@ -202,7 +211,7 @@ Text Editor
   + Advanced
     Color picker format: #000
     Automatic formatting: Off
-+ JavaScript/TrueScript
++ JavaScript/TypeScript
   + Formatting
     + General
       ☐ Format completed line on Enter
