@@ -326,6 +326,7 @@ Install third party software.
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 
 <!--
+* [Chrome Enterprise(https://cloud.google.com/chrome-enterprise/browser/download/#download)
 * [Tor Browser](https://www.torproject.org/download/)
 
 Install [qBittorrent](https://www.qbittorrent.org/) and configure the proxy.
