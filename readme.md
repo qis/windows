@@ -1,6 +1,19 @@
 ﻿# Windows
 Installation and configuration instructions for Windows 10 (Version 1903).
 
+<!--
+Fix drive previously used for unix partitions with `diskpart`.
+
+```cmd
+DISKPART> list disk
+DISKPART> select disk 1
+DISKPART> clean
+DISKPART> create partition primary
+DISKPART> active
+DISKPART> format fs=Fat32 quick
+```
+-->
+
 ## Preparations
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image
 and create the installation media using [Rufus](https://rufus.ie/).
