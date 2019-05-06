@@ -53,13 +53,13 @@ Select Additional Tasks
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
 * [NSIS](https://nsis.sourceforge.io/Download)
-* [CMake](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) into `%ProgramFiles%\CMake`
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) as `%ProgramFiles%\CMake\bin\ninja.exe`
-* [Make](http://www.equation.com/servlet/equation.cmd?fa=make) as `%ProgramFiles%\GNU\make.exe`
+* [CMake](https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0-win64-x64.msi)
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
+* [Make](http://www.equation.com/servlet/equation.cmd?fa=make) into `%ProgramFiles%\Make`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
 * [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
 
-Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\clang-format.exe`.
+Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\LLVM\bin\clang-format.exe`.
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -83,10 +83,13 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
+%ProgramFiles(x86)%\LLVM\bin
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\7-Zip
-%ProgramFiles%\CMake\bin
 %ProgramFiles%\Git\cmd
+%ProgramFiles%\CMake\bin
+%ProgramFiles%\Ninja
+%ProgramFiles%\Make
 %ProgramFiles%\NASM
 C:\Node
 C:\Python

@@ -126,6 +126,8 @@ Notifications & actions
   ☑ Network
   ☑ Night light
   ☑ Screen snip
++ Get notifications from these senders
+  ☐ Focus assist (via Search)
 ```
 
 ### Devices
@@ -180,6 +182,7 @@ Region > Additional date, time, & regional settings > Change date, time, or numb
   + Date
     Short date: yyyy-MM-dd
     Long date: ddd, d MMMM yyyy
+    First day of week: Monday
 + Administrative > Copy settings...
   ☑ Welcome screen and system accounts
   ☑ New user accounts
