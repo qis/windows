@@ -164,13 +164,13 @@ Source Control
 
 Text Editor
 + General
-  ☐ Enable mouse click to perform Go to Definition
+  ☐ Drag and drop text editing
     Use modifier key: Ctrl+Alt
+  ☐ Enable mouse click to perform Go to Definition
   ☐ Highlight current line
   ☐ Show structure guide lines
 + All Languages
   + General
-    ☐ Drag and drop text editiong
     ☑ Line numbers
     ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
@@ -190,7 +190,7 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\clang-format.exe
+      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\LLVM\bin\clang-format.exe
     + Indentation
       ☐ Indent namespace contents
     + New Lines
