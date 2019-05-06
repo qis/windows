@@ -240,11 +240,9 @@ git clone git@github.com:x64dbg/ScyllaHide
 start ScyllaHide\ScyllaHide.sln
 ```
 
-1. Replace `afxres` with `windows` and `IDC_STATIC` with `-1` in `ScyllaHideX64DBGPlugin\ScyllaHideX64DBGPlugin.rc`.
-2. Switch the platform to `Win32` and change the platform toolset for all projects to `Visual Studio 2019 (v142)`.
-3. Switch the platform to `x64` and change the platform toolset for all projects to `Visual Studio 2019 (v142)`.
-4. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `Win32` in `Release` mode.
-5. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `x64` in `Release` mode.
+1. Replace `afxres` with `windows` and add `#define IDC_STATIC -1` in `ScyllaHideX64DBGPlugin\ScyllaHideX64DBGPlugin.rc`.
+2. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `Win32` in `Release` mode.
+3. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `x64` in `Release` mode.
 
 ```cmd
 cmake -E make_directory "%ProgramFiles%\x64dbg\release\x32\plugins"
