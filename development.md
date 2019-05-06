@@ -36,19 +36,6 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
-<!--
-* [Visual Studio Code](https://code.visualstudio.com/download) (System Installer)
-
-```
-Select Additional Tasks
-  ☐ Create a desktop icon
-  ☑ Add "Open with Code" action to Windows Explorer file context menu
-  ☑ Add "Open with Code" action to Windows Explorer directory context menu
-  ☑ Register Code as an editor for supported file types
-  ☐ Add to PATH (available after restart)
-```
--->
-
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
@@ -91,16 +78,31 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\Ninja
 %ProgramFiles%\Make
 %ProgramFiles%\NASM
+C:\Android\build-tools\28.0.3
+C:\Android\flutter\bin
+C:\Android\platform-tools
+C:\Android\tools
+C:\Android\tools\bin
+C:\Android\studio\jre\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
 C:\Workspace\vcpkg
 ```
 
-Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
+Set the following system environment variables to `C:\Android`.
 
 ```
-x64-windows
+ANDROID_HOME
+ANDROID_ROOT
+ANDROID_SDK_HOME
+ANDROID_SDK_ROOT
+```
+
+Set the following system environment variables to `C:\Android\studio\jre`.
+
+```
+JAVA_HOME
 ```
 
 ## Visual Studio 2019
@@ -262,85 +264,11 @@ cmake -E copy ^
   "%ProgramFiles%\x64dbg\release\x64\plugins"
 ```
 
-<!--
-## Visual Studio Code
-**NOTE**: Press `CTRL+P` and type `>` followed by a command.
-
-Configure editor with the command `Preferences: Open Settings (JSON)`
-
-```json
-{
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.detectIndentation": false,
-  "editor.dragAndDrop": false,
-  "editor.folding": false,
-  "editor.fontFamily": "'Fira Code', 'DejaVu Sans Mono', Consolas, monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 12,
-  "editor.largeFileOptimizations": false,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.renderLineHighlight": "none",
-  "editor.rulers": [ 120 ],
-  "editor.smoothScrolling": true,
-  "editor.tabSize": 2,
-  "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 120,
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  "extensions.ignoreRecommendations": false,
-  "files.eol": "\n",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-  "git.autoRepositoryDetection": false,
-  "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  "git.postCommitCommand": "push",
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
-  "window.newWindowDimensions": "maximized",
-  "window.openFoldersInNewWindow": "on",
-  "window.openFilesInNewWindow": "on",
-  "window.restoreWindows": "none",
-  "window.zoomLevel": 0,
-  "workbench.startupEditor": "newUntitledFile",
-  "debug.internalConsoleOptions": "openOnSessionStart",
-  "debug.openExplorerOnEnd": true,
-  "debug.openDebug": "openOnDebugBreak",
-  "clang-format.executable": "C:\\Program Files (x86)\\clang-format.exe",
-  "cmake.generator": "Ninja",
-  "cmake.configureOnOpen": true,
-  "cmake.installPrefix": "${workspaceRoot}",
-  "cmake.buildDirectory": "${workspaceRoot}/build/code/${buildType}",
-  "cmake.configureSettings": {
-    "CMAKE_VERBOSE_MAKEFILE": "OFF",
-    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
-    "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
-    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
-    "VCPKG_TARGET_TRIPLET": "x64-windows"
-  },
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools"
-}
-```
-
-Install extensions with the following commands with `CTRL+P`.
-
-```
-ext install xaver.clang-format
-ext install maddouri.cmake-tools-helper
-ext install donjayamanne.githistory
-ext install rreverser.ragel
-ext install dotjoshjohnson.xml
-> Developer: Reload Window
-```
--->
-
-<!--
 ## Android Development
-Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) into `C:\Android\sdk`.<br/>
-Extract [Flutter](https://flutter.io/docs/get-started/install/windows) into `C:\Android\flutter`.
+Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
+Extract [Flutter](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
 
-Start and configure Android Studio.
+Start and configure Android Studio (`C:\Android\studio\bin\studio64.exe`).
 
 ```
 Install Type
@@ -348,33 +276,30 @@ Install Type
 SDK Components Setup
   ☐ Performance (Intel® HAXM)
   ☐ Android Virtual Device
-  Android SDK Location: C:\Android\sdk
+  Android SDK Location: C:\Android
+  ⚠ Target folder is neither empty nor does it point to an existing SDK installation.
 ```
 
-Install missing plugins and SDKs for flutter development.
+Install missing tools, plugins and SDKs.
 
 ```
-File > Settings...
+⚙ Configure > Settings...
 + Appearance & Behavior
   + System Settings
     + Android SDK
-      SDK Platforms
-        ☑ Android 9.0 (Pie)
-        ☑ Android 8.1 (Oreo)
       SDK Tools
         ☐ Android Emulator
         ☑ Google USB Driver
         ☑ NDK
 + Editor
   + Font
-    Font: Fira Code
-    ☑ Enable font ligatures
+    Font: DejaVu LGC Sans Mono
   + Code Style
     + Java, C/C++, CMake, HTML, JSON, Kotlin, XML, Other File Types
       Tabs and Indents
         Tab size: 2
         Indent: 2
-        Continuation indent: 4
+        Continuation indent: 2
     + C/C++
       Tabs and Indents
         Indent in lambdas: 2
@@ -411,15 +336,89 @@ File > Settings...
     SSH executable: Native
 ```
 
-Search for `redo` in the settings and assign `CTRL+Y` as a shortcut.
+Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
 
-Verify that flutter is working properly and accept android licenses.
+Accept android licenses.
+
+```cmd
+flutter doctor --android-licenses
+```
+
+## Visual Studio Code
+Install [Visual Studio Code](https://code.visualstudio.com/download) using the "System Installer".
+
+```
+Select Additional Tasks
+  ☐ Create a desktop icon
+  ☑ Add "Open with Code" action to Windows Explorer file context menu
+  ☑ Add "Open with Code" action to Windows Explorer directory context menu
+  ☐ Register Code as an editor for supported file types
+  ☐ Add to PATH (available after restart)
+```
+
+**NOTE**: Press `CTRL+P` and type `>` followed by a command.
+
+Configure editor with the command `Preferences: Open Settings (JSON)`
+
+```json
+{
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.detectIndentation": false,
+  "editor.dragAndDrop": false,
+  "editor.folding": false,
+  "editor.fontFamily": "'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 12,
+  "editor.largeFileOptimizations": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderLineHighlight": "none",
+  "editor.rulers": [ 120 ],
+  "editor.smoothScrolling": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 120,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "extensions.ignoreRecommendations": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autoRepositoryDetection": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.postCommitCommand": "push",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "window.newWindowDimensions": "maximized",
+  "window.openFoldersInNewWindow": "on",
+  "window.openFilesInNewWindow": "on",
+  "window.restoreWindows": "none",
+  "window.zoomLevel": 0,
+  "workbench.startupEditor": "newUntitledFile",
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.openExplorerOnEnd": true,
+  "debug.openDebug": "openOnDebugBreak",
+  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe"
+}
+```
+
+Install extensions with the following commands with `CTRL+P`.
+
+```
+ext install xaver.clang-format
+ext install donjayamanne.githistory
+ext install rreverser.ragel
+ext install dotjoshjohnson.xml
+ext install dart-code.flutter
+> Developer: Reload Window
+```
+
+Verify flutter installation.
 
 ```cmd
 flutter doctor -v
-flutter doctor -\-android-licenses
 ```
--->
 
 ## Windows Sandbox
 Install Windows Sandbox.
