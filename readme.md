@@ -229,14 +229,15 @@ sc stop WcesComm
 sc stop RapiMgr
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\RapiMgr" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WcesComm" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Windows Mobile Device Center" /t REG_EXPAND_SZ /d "%windir%\WindowsMobile\wmdcBase.exe" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
 sc config WcesComm obj= "LocalSystem" password= ""
 sc config RapiMgr obj= "LocalSystem" password= ""
 sc start RapiMgr
 sc start WcesComm
-"%windir%\WindowsMobile\wmdcBase.exe"
 "%windir%\WindowsMobile\wmdc.exe"
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Windows Mobile Device Center" /t REG_EXPAND_SZ /d "%windir%\WindowsMobile\wmdcBase.exe" /f
+"%windir%\WindowsMobile\wmdcBase.exe"
 ```
 -->
 

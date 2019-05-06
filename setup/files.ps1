@@ -54,7 +54,7 @@ $sqlite = '"%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" "%1"
 
 # Archives
 Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
-  "7z", "arj", "bz2", "cab", "deb", "gz", "iso", "lz",
+  "7z", "arj", "bz2", "cab", "deb", "gz", "lz",
   "lzh", "rar", "rpm", "tar", "wim", "xz", "z", "zip"
 )
 
