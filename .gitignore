@@ -1,4 +1,3 @@
 /res/keymap
-/*.ps1
-!/setup.ps1
+/setup/system-*.ps1
 0
