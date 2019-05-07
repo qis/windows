@@ -333,7 +333,7 @@ Install missing tools, plugins and SDKs.
     ☑ Prefer XML editor
 + Plugins
   [Browse repositories...]
-    Install: Flutter, Flutteri18n, Kotlin
+    Install: Flutter, Kotlin
 + Version Control
   + Git
     SSH executable: Native
