@@ -90,19 +90,16 @@ C:\Python\Scripts
 C:\Workspace\vcpkg
 ```
 
-Set the following system environment variables to `C:\Android`.
+Configure the System `ANDROID_HOME` environment variable.
 
 ```
-ANDROID_HOME
-ANDROID_ROOT
-ANDROID_SDK_HOME
-ANDROID_SDK_ROOT
+C:\Android
 ```
 
-Set the following system environment variables to `C:\Android\studio\jre`.
+Configure the System `JAVA_HOME` environment variable.
 
 ```
-JAVA_HOME
+C:\Android\studio\jre
 ```
 
 ## Visual Studio 2019
