@@ -289,6 +289,12 @@ Install missing tools, plugins and SDKs.
         ☑ Google USB Driver
         ☑ NDK
 + Editor
+  + General
+    + Appearance
+      ☐ Show parameter name hints
+      ☐ Show chain call type hints
+    + Code Completion
+      ☐ Show parameter name hints on completion
   + Font
     Font: DejaVu LGC Sans Mono
   + Code Style
@@ -327,7 +333,7 @@ Install missing tools, plugins and SDKs.
     ☑ Prefer XML editor
 + Plugins
   [Browse repositories...]
-    Install: Flutter, Flutteri18n
+    Install: Flutter, Flutteri18n, Kotlin
 + Version Control
   + Git
     SSH executable: Native
