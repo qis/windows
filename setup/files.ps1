@@ -62,6 +62,7 @@ Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
 Associate "database" "Database" $sqlite "database.ico" ("db")
 
 # Editor
+Associate "android" "Android" $editor $conf ("gradle", "iml", "metadata", "properties")
 Associate "configuration" "Configuration" $editor $conf ("cfg", "clang-format", "clang-tidy", "conf", "ini")
 Associate "git" "Git" $editor "git.ico" ("gitattributes", "gitconfig", "gitignore", "gitmodules")
 Associate "json" "JSON" $editor $text ("json")
@@ -69,6 +70,8 @@ Associate "log" "Log" $editor $text ("log", "tlog")
 Associate "markdown" "Markdown" $editor $text ("markdown", "md")
 Associate "patch" "Patch" $editor $text ("diff", "patch")
 Associate "text" "Text" $editor $text ("txt")
+Associate "yaml" "YAML" $editor $text ("yaml")
+Associate "xmlfile" "XML" $editor "xml.ico" ("xml")
 
 # Code
 Associate "asm" "Assembler" $editor "asm.ico" ("asm", "s")
@@ -77,17 +80,18 @@ Associate "cmake" "CMake" $editor "code.ico" ("cmake", "in")
 Associate "cpp" "C++ Source" $editor "cpp.ico" ("c++", "cc", "cpp", "cxx")
 Associate "cs" "C Sharp" $editor "cs.ico" ("cs")
 Associate "css" "CSS" $editor "code.ico" ("css")
+Associate "dart" "Dart" $editor "code.ico" ("dart")
 Associate "h" "C Header" $editor "h.ico" ("h")
 Associate "hpp" "C++ Header" $editor "hpp.ico" ("h++", "hh", "hpp", "hxx", "i++", "ipp", "ixx")
 Associate "java" "Java" $editor "code.ico" ("java")
 Associate "javascript" "JavaScript" $editor "code.ico" ("js")
+Associate "kotlin" "Kotlin" $editor "code.ico" ("kt")
 Associate "manifest" "Manifest" $editor "xml.ico" ("manifest")
 Associate "perl" "Perl" $editor "code.ico" ("pl")
 Associate "python" "Python" $editor "code.ico" ("py")
 Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
-Associate "xmlfile" "XML" $editor "xml.ico" ("xml")
 
 & ie4uinit.exe -ClearIconCache
 
