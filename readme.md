@@ -558,7 +558,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install p7zip p7zip-rar zip unzip tree python-minimal
+sudo apt install p7zip p7zip-rar zip unzip tree pwgen python-minimal
 sudo apt install imagemagick pngcrush webp
 sudo apt install apache2-utils
 ```
