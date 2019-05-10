@@ -62,7 +62,7 @@ Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
 Associate "database" "Database" $sqlite "database.ico" ("db")
 
 # Editor
-Associate "android" "Android" $editor $conf ("gradle", "iml", "metadata", "properties")
+Associate "android" "Android" $editor $conf ("gradle", "iml", "lock", "metadata", "properties")
 Associate "configuration" "Configuration" $editor $conf ("cfg", "clang-format", "clang-tidy", "conf", "ini")
 Associate "git" "Git" $editor "git.ico" ("gitattributes", "gitconfig", "gitignore", "gitmodules")
 Associate "json" "JSON" $editor $text ("json")
