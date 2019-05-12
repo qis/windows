@@ -46,11 +46,13 @@ function Associate {
 # Icons
 $conf = "%SystemRoot%\System32\imageres.dll,62"
 $text = "%SystemRoot%\System32\imageres.dll,97"
+$video = "%ProgramFiles%\MPV\mpv.exe,0"
 
 # Applications
 $7zipfm = '"%ProgramFiles%\7-Zip\7zFM.exe" "%1"'
 $editor = '"%ProgramFiles(x86)%\Vim\vim81\gvim.exe" "%1"'
 $sqlite = '"%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" "%1"'
+$player = '"%ProgramFiles%\MPV\mpv.exe" "%1"'
 
 # Archives
 Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
@@ -92,6 +94,9 @@ Associate "python" "Python" $editor "code.ico" ("py")
 Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
+
+# Video
+Associate "video" "Visual Basic" $player $video ("mkv")
 
 & ie4uinit.exe -ClearIconCache
 
