@@ -185,7 +185,10 @@ Text Editor
     ☐ Enable CodeLens
 + C/C++
   + Advanced
-    Disable External Dependencies Folders: True
+    + Browsing/Navigation
+      Disable External Dependencies Folders: True
+    + IntelliSense
+      Enable Template IntelliSense: False
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
