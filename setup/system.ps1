@@ -193,10 +193,10 @@ SetUnknownNetworksPrivate
 DisableNetDevicesAutoInst
 EnableFirewall
 HideDefenderTrayIcon
-#DisableDefender
-#DisableDefenderCloud
-#DisableCIMemoryIntegrity
-#DisableDefenderAppGuard
+DisableDefender
+DisableDefenderCloud
+DisableCIMemoryIntegrity
+DisableDefenderAppGuard
 HideAccountProtectionWarn
 DisableDownloadBlocking
 EnableScriptHost
@@ -388,8 +388,6 @@ Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen"
 Write-Output ""
 
-Done
-
 # ===========================================================================================================
 
 # Modify group policies.
@@ -400,56 +398,8 @@ Done
 #
 Write-Output "Modifying group policies..."
 
-# Control Panel > Personalization > Do not display the lock screen: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /t REG_DWORD /d 1 /f
-
-# Windows Components > Cloud Content > Turn off Microsoft consumer experiences: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
-
-# Windows Components > Data Collection and Preview Builds > Allow Telemetry: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
-
 # Windows Components > Data Collection and Preview Builds > Do not show feedback notifications: Enabled
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Prevent OneDrive from generating network traffic until the user signs in to OneDrive: Enabled
-reg add "HKLM\SOFTWARE\Microsoft\OneDrive" /v "PreventNetworkTrafficPreUserSignIn" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Prevent the usage of OneDrive for file storage: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSync" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Save documents to OneDrive by default: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableLibrariesDefaultSaveToOneDrive" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cloud Search: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cortana: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cortana above lock screen: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow search and Cortana to use location: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Do not allow locations on removable drives to be added to libraries: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableRemovableDriveIndexing" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Do not allow web search: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Don't search the web or display web results in Search: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Prevent automatically adding shared folders to the Windows Search index: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AutoIndexSharedFolders" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Prevent clients from querying the index remotely: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventRemoteQueries" /t REG_DWORD /d 1 /f
-
-# Windows Components > Speech > Allow Automatic Update of Speech Data: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Speech" /v "AllowSpeechModelUpdate" /t REG_DWORD /d 0 /f
 
 # Windows Components > Windows Defender Antivirus > Turn off Windows Defender Antivirus: Enabled
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
@@ -482,18 +432,5 @@ reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "Enab
 # Windows Components > Windows Error Reporting > Disable Windows Error Reporting: Enabled
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
-
-# Windows Components > Windows Update > Configure Automatic Updates: Enabled
-#   Configure automatic updating: 2 - Notify for download and auto install
-#   [v] Install updates for other Microsoft products
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d 2 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AutomaticMaintenanceEnabled" /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d 3 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallEveryWeek" /t REG_DWORD /d 1 /f
-
-# System > Device Installation > Prevent device metadata retrieval from the Internet: Enabled
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d 1 /f
 
 Done

@@ -286,6 +286,7 @@ Install missing tools, plugins and SDKs.
 ⚙ Configure > Settings...
 + Appearance & Behavior
   + System Settings
+    ☐ Reopen last project on startup
     + Android SDK
       SDK Tools
         ☐ Android Emulator
