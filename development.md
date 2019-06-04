@@ -194,6 +194,7 @@ Text Editor
       ◉ Run ClangFormat only for manually invoked formatting commands
       ☑ Use custom clang-format.exe file: C:\Program Files (x86)\LLVM\bin\clang-format.exe
     + Indentation
+      ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
     + New Lines
       Position of open braces for namespaces: Keep on the same line, but add a space before
