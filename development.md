@@ -73,11 +73,12 @@ Configure the System `Path` environment variable.
 %ProgramFiles(x86)%\LLVM\bin
 %ProgramFiles(x86)%\Sysinternals Suite
 %ProgramFiles%\7-Zip
-%ProgramFiles%\Git\cmd
 %ProgramFiles%\CMake\bin
-%ProgramFiles%\Ninja
 %ProgramFiles%\Make
+%ProgramFiles%\Microsoft VS Code\bin
+%ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
+%ProgramFiles%\Ninja
 C:\Android\build-tools\28.0.3
 C:\Android\flutter\bin
 C:\Android\platform-tools
@@ -111,8 +112,9 @@ Workloads
 
 Individual components
 + Compilers, build tools, and runtimes
-  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.20)
+  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.21)
 + Debuggong and testing
+  ☑ JavaScript diagnostics
   ☐ Test Adapter for Boost.Test
 + Development Activities
   ☑ JavaScript and TypeScript language support
@@ -220,10 +222,13 @@ Text Editor
 + JavaScript/TypeScript
   + Formatting
     + General
+      Automatic Formatting
       ☐ Format completed line on Enter
       ☐ Format completed statement on ;
       ☐ Format opened block on {
       ☐ Format completed block on }
+      Module Quote Preference
+      ◉ Double (")
     + Spacing
       ☐ Insert space after function keyword for anonymous functions
 + JSON

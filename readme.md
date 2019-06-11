@@ -215,6 +215,14 @@ General
   ☐ Show me suggested content in the Settings app
 ```
 
+## Windows Libraries
+Move unwanted Windows libraries.
+
+1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.<br/>
+   Select the `Location` tab and change the path to `%AppData%\Pictures\Camera Roll`.
+2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
+   Select the `Location` tab and change the path to `%AppData%\Pictures\Saved Pictures`.
+
 ## Indexing Options
 Configure Indexing Options to only track the "Start Menu" and rebuild the index.
 
@@ -240,14 +248,6 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Windows Mobile 
 "%windir%\WindowsMobile\wmdcBase.exe"
 ```
 -->
-
-## Windows Libraries
-Move unwanted Windows libraries.
-
-1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.<br/>
-   Select the `Location` tab and change the path to `%AppData%\Camera Roll`.
-2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
-   Select the `Location` tab and change the path to `%AppData%\Saved Pictures`.
 
 ## Firewall
 Disable all rules in Windows Firewall except the following entries.
@@ -297,6 +297,7 @@ Settings
   Ask me what to do with each download: Off
 + Privacy & security
   Show search and site suggestions as I type: Off
+  Show search history: Off
   Use page prediction: Off
 + Passwords & autofill
   Save form data: Off
