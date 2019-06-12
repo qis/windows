@@ -109,20 +109,23 @@ Install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).
 ```
 Workloads
 + ☑ Desktop development with C++
++ ☑ Universal Windows Platform development
+  + Optional
+    ☑ C++ (v142) Universal Windows Platform tools
 
 Individual components
 + Compilers, build tools, and runtimes
-  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.21)
   ☑ C++ Universal Windows Platform runtime for v142 build tools
+  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.21)
 + Debuggong and testing
   ☑ JavaScript diagnostics
   ☐ Test Adapter for Boost.Test
 + Development Activities
+  ☐ IntelliCode
   ☑ JavaScript and TypeScript language support
   ☐ Live Share
 + SDKs, libraries, and frameworks
   ☐ C++ ATL for v142 build tools (x86 & x64)
-  ☐ Windows 10 SDK (10.0.17763.0)
   ☑ Windows 10 SDK (10.0.18362.0)
 ```
 
