@@ -113,6 +113,7 @@ Workloads
 Individual components
 + Compilers, build tools, and runtimes
   ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.21)
+  ☑ C++ Universal Windows Platform runtime for v142 build tools
 + Debuggong and testing
   ☑ JavaScript diagnostics
   ☐ Test Adapter for Boost.Test
