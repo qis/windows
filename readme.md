@@ -415,6 +415,7 @@ Configure the WinRM client.
 ```cmd
 Get-NetConnectionProfile
 Set-NetConnectionProfile -InterfaceIndex {InterfaceIndex} -NetworkCategory Private
+Enable-PSRemoting -SkipNetworkProfileCheck -Force
 Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
 

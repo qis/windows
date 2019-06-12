@@ -73,7 +73,7 @@ Associate "markdown" "Markdown" $editor $text ("markdown", "md")
 Associate "patch" "Patch" $editor $text ("diff", "patch")
 Associate "text" "Text" $editor $text ("txt")
 Associate "yaml" "YAML" $editor $text ("yaml")
-Associate "xmlfile" "XML" $editor "xml.ico" ("xml")
+Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
 
 # Code
 Associate "asm" "Assembler" $editor "asm.ico" ("asm", "s")
