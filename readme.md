@@ -228,24 +228,34 @@ Configure Indexing Options to only track the "Start Menu" and rebuild the index.
 
 <!--
 ## Windows Mobile Device Center (WMDC)
-Fix WMDC autostart issues and force guest mode for all devices instead showing the user interface.
+Use the following script to fix Windows CE device connections.
 
 ```cmd
 taskkill /im wmdc.exe /f
 taskkill /im wmdcBase.exe /f
+@timeout 1
 sc stop WcesComm
 sc stop RapiMgr
+@timeout 1
+reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\RapiMgr" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WcesComm" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
 sc config WcesComm obj= "LocalSystem" password= ""
 sc config RapiMgr obj= "LocalSystem" password= ""
+@timeout 1
 sc start RapiMgr
+@timeout 1
 sc start WcesComm
-"%windir%\WindowsMobile\wmdc.exe"
+@timeout 1
+@rem start "WMDC" "%windir%\WindowsMobile\wmdc.exe"
+start "WMDC" "%windir%\WindowsMobile\wmdcBase.exe"
+```
 
+If the system does not need that script, switch to headless device center.
+
+```cmd
+reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Windows Mobile Device Center" /t REG_EXPAND_SZ /d "%windir%\WindowsMobile\wmdcBase.exe" /f
-"%windir%\WindowsMobile\wmdcBase.exe"
 ```
 -->
 
