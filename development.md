@@ -140,8 +140,8 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\
 
 ### Plugins
 * [Fix File Encoding](https://marketplace.visualstudio.com/items?itemName=SergeyVlasov.FixFileEncoding)
-* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 * [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
+* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 
 ### Options
 ```
@@ -240,18 +240,28 @@ Text Editor
   + Advanced
     Automatic formatting: Off
   Supported File Names: makefile
++ XAML
+  + Formatting
+    + Spacing
+      Element Spacing
+      ◉ Collapse multiple empty lines in content to a single line
 
 Fix File Encoding
 + General
-  UTF-8 without signature files regex: \.(c|cc|cpp|cxx|h|hh|hpp|hxx|ipp|ihh|rc|manifest|in|lua|sh|conf|json|js|py|htm|html|css|txt|md)$
+  UTF-8 without signature files regex: \.(c|cc|cpp|cxx|h|hh|hpp|hxx|ipp|ihh|rc|manifest|in|lua|sh|conf|json|js|py|htm|html|css|txt|md|xaml|xml)$
 
-Tools > Options > Line Endings Unifier
+Line Endings Unifier
 + General Settings
   Add Newline On The Last Line: True
   Default Line Ending: Linux
   Force Default Line Ending On Document Save: True
   Save Files After Unifying: True
-  Supported File Formats: .c; .cc; .cpp; .cxx; .h; .hh; .hpp; .hxx; .ipp; .ihh; .rc; .manifest; .in; .lua; .sh; .conf; .json; .js; .py; .htm; .html; .css; .txt; .md
+  Supported File Formats: .c; .cc; .cpp; .cxx; .h; .hh; .hpp; .hxx; .ipp; .ihh; .rc; .manifest; .in; .lua; .sh; .conf; .json; .js; .py; .htm; .html; .css; .txt; .md; .xaml; .xml
+  Supported File Names: makefile
+
+XAML Designer
++ General
+  Zoom by using: Mouse wheel
 ```
 
 ## ScyllaHide
