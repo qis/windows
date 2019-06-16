@@ -38,6 +38,7 @@ Customize Python
 
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
 * [NSIS](https://nsis.sourceforge.io/Download)
 * [CMake](https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0-win64-x64.msi)

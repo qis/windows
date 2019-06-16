@@ -1,4 +1,4 @@
-﻿# Windows
+# Windows
 Installation and configuration instructions for Windows 10 (Version 1903).
 
 <!--
