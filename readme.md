@@ -539,7 +539,7 @@ Modify the following lines in `/etc/pam.d/login` and `/etc/pam.d/sshd` (disables
 #session    optional    pam_motd.so noupdate
 ```
 
-Execute `chmod -x /etc/update-motd.d/{10-help-text,50-motd-news}` to reduce spam.<br/>
+Execute `chmod -x /etc/update-motd.d/*{-help-text,-motd-news}` to reduce spam.<br/>
 
 **IMPORTANT**: Completely restart `bash.exe` to apply `/etc/wsl.conf` settings.
 
