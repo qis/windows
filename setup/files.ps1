@@ -96,7 +96,7 @@ Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 
 # Video
-Associate "video" "Visual Basic" $player $video ("mkv")
+Associate "video" "Visual Basic" $player $video ("avi", "flv", "mkv", "mp4")
 
 & ie4uinit.exe -ClearIconCache
 
