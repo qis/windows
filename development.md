@@ -74,6 +74,7 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\LLVM\bin
 %ProgramFiles(x86)%\Sysinternals Suite
+%ProgramFiles(x86)%\Tools
 %ProgramFiles%\7-Zip
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Make
