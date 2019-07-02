@@ -37,6 +37,7 @@ Customize Python
 ```
 
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [dd for Windows](http://www.chrysocome.net/dd) into `%ProgramFiles(x86)%\Tools`
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
