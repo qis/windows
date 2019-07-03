@@ -36,11 +36,11 @@ Customize Python
     ☑ Compile .py files to byte code after installation
 ```
 
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [dd for Windows](http://www.chrysocome.net/dd) into `%ProgramFiles(x86)%\Tools`
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
 * [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
+* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [NSIS](https://nsis.sourceforge.io/Download)
 * [CMake](https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0-win64-x64.msi)
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
@@ -74,7 +74,6 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\OpenSSH
 %ProgramFiles(x86)%\LLVM\bin
 %ProgramFiles(x86)%\Sysinternals Suite
-%ProgramFiles(x86)%\Tools
 %ProgramFiles%\7-Zip
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Make
