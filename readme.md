@@ -588,6 +588,16 @@ Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 -->
 
+Install an international locale.
+
+```sh
+sudo curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/en_XX -o /usr/share/i18n/locales/en_XX
+sudo tee -a /etc/locale.gen <<EOF
+en_XX.UTF-8 UTF-8
+EOF
+sudo locale-gen
+```
+
 ## Development
 Follow the [development](development.md) guide to set up a developer workstation.
 

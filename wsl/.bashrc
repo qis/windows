@@ -18,11 +18,20 @@ export NCURSES_NO_UTF8_ACS="1"
 export MM_CHARSET="UTF-8"
 
 # Localization
-export LANG="en_US.${UTF8}"
-export LC_MESSAGES="en_US.${UTF8}"
-export LC_CTYPE="en_US.${UTF8}"
-export LC_COLLATE="C"
-export LC_ALL=
+if [ -f "/usr/share/i18n/locales/en_XX" ]; then
+  export LANG="en_XX.${UTF8}"
+  export LC_TIME="en_XX.${UTF8}"
+  export LC_MESSAGES="en_XX.${UTF8}"
+  export LC_CTYPE="en_XX.${UTF8}"
+  export LC_COLLATE="C"
+  export LC_ALL=
+else
+  export LANG="en_US.${UTF8}"
+  export LC_MESSAGES="en_US.${UTF8}"
+  export LC_CTYPE="en_US.${UTF8}"
+  export LC_COLLATE="C"
+  export LC_ALL=
+fi
 
 # Applications
 export NODE_PATH="/opt/node/lib/node_modules"
