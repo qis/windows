@@ -16,24 +16,25 @@ Custom Setup
   ☒ Add to PATH
 ```
 
-* [Python 2](https://www.python.org/ftp/python/2.7.16/python-2.7.16.amd64.msi)
+* [Python 3](https://www.python.org/ftp/python/3.7.3/python-3.7.3-amd64.exe)
 
 ```
-Select where to install Python
-  ◉ Install for all users
-Select Destination Directory
-  C:\Python
-Customize Python
-  ▣ Python
-    ☑ Register Extensions
-    ☑ Tcl/Tk
-    ☒ Documentation
-    ☑ Utility Scripts
-    ☑ pip
-    ☑ Test suite
-    ☒ Add python.exe to Path
-  [Advanced]
-    ☑ Compile .py files to byte code after installation
+Install Python
+  [Customize installation]
+Optional Features
+  ☐ Documentation
+  ☑ pip
+  ☐ tcl/tk and IDLE
+  ☐ Python test suite
+  ☐ py launcher ☐ for all users (requires elevation)
+Advanced Options
+  ☑ Install for all users
+  ☐ Create shortcuts for installed applications
+  ☐ Add Python to environment variables
+  ☑ Precompile standard library
+  ☐ Download debugging symbols
+  ☐ Download debug binaries (requires VS 2015 or later)
+  Customize install location: C:\Python
 ```
 
 * [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
