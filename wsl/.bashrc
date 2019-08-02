@@ -1,3 +1,6 @@
+# Bash
+[[ $- == *i* ]] || return
+
 # System
 OS="$(uname -s)"
 
