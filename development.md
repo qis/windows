@@ -16,7 +16,7 @@ Custom Setup
   ☒ Add to PATH
 ```
 
-* [Python 3](https://www.python.org/ftp/python/3.7.3/python-3.7.3-amd64.exe)
+* [Python 3](https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe)
 
 ```
 Install Python
