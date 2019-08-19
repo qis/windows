@@ -4,7 +4,7 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development.
 
-* [Node LTS](https://nodejs.org/dist/v10.15.0/node-v10.15.0-x64.msi)
+* [Node LTS](https://nodejs.org/dist/v10.16.3/node-v10.16.3-x64.msi)
 
 ```
 Destination Folder
@@ -43,7 +43,7 @@ Advanced Options
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [NSIS](https://nsis.sourceforge.io/Download)
-* [CMake](https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0-win64-x64.msi)
+* [CMake](https://github.com/Kitware/CMake/releases/download/v3.15.2/cmake-3.15.2-win64-x64.msi)
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [Make](http://www.equation.com/servlet/equation.cmd?fa=make) into `%ProgramFiles%\Make`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
@@ -493,8 +493,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
-tar xf cmake-3.14.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.15/cmake-3.15.2-Linux-x86_64.tar.gz
+tar xf cmake-3.15.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Install Ninja.
@@ -508,8 +508,8 @@ Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.xz
-tar xf node-v10.15.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+tar xf node-v10.16.3-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
 ## Vcpkg
