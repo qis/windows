@@ -116,6 +116,7 @@ Workloads
 + ☑ Universal Windows Platform development
   + Optional
     ☑ C++ (v142) Universal Windows Platform tools
++ ☑ Linux development with C++
 
 Individual components
 + Compilers, build tools, and runtimes
@@ -250,6 +251,15 @@ Text Editor
       Element Spacing
       ◉ Collapse multiple empty lines in content to a single line
 
+CMake
++ General
+  ☑ Show CMake cache notifications
+  When cache is out of date:
+    ◉ Run configure step automatically only if CMakeSettings.json exists
+  ☐ Enable verbose CMake output
+  CMakeSettings.json Template Directory
+    %UserProfile%\.vs
+
 Fix File Encoding
 + General
   UTF-8 without signature files regex: \.(c|cc|cpp|cxx|h|hh|hpp|hxx|ipp|ihh|rc|manifest|in|lua|sh|conf|json|js|py|htm|html|css|txt|md|xaml|xml)$
@@ -278,21 +288,49 @@ Create the file `%UserProfile%\.vs\CMakeSettings.json`.
       "name": "Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [
-        "msvc_x64_x64"
-      ],
+      "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${projectDir}\\build\\msvc\\${name}",
-      "installRoot": "${projectDir}"
+      "installRoot": "${projectDir}\\debug",
+      "variables": []
     },
     {
       "name": "Release",
       "generator": "Ninja",
       "configurationType": "Release",
-      "inheritEnvironments": [
-        "msvc_x64_x64"
-      ],
+      "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${projectDir}\\build\\msvc\\${name}",
-      "installRoot": "${projectDir}"
+      "installRoot": "${projectDir}",
+      "variables": []
+    },
+    {
+      "name": "WSL-Debug",
+      "generator": "Unix Makefiles",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "linux_x64" ],
+      "cmakeExecutable": "/opt/cmake/bin/cmake",
+      "cmakeToolchain": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "buildRoot": "${projectDir}/build/llvm/${name}",
+      "installRoot": "${projectDir}",
+      "wslPath": "${defaultWSLPath}",
+      "variables": [
+        { "name": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE", "type": "PATH", "value": "/opt/vcpkg/scripts/toolchains/linux.cmake" },
+        { "name": "VCPKG_TARGET_TRIPLET", "type": "STRING", "value": "x64-linux" }
+      ]
+    },
+    {
+      "name": "WSL-Release",
+      "generator": "Unix Makefiles",
+      "configurationType": "Release",
+      "inheritEnvironments": [ "linux_x64" ],
+      "cmakeExecutable": "/opt/cmake/bin/cmake",
+      "cmakeToolchain": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "buildRoot": "${projectDir}/build/llvm/${name}",
+      "installRoot": "${projectDir}",
+      "wslPath": "${defaultWSLPath}",
+      "variables": [
+        { "name": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE", "type": "PATH", "value": "/opt/vcpkg/scripts/toolchains/linux.cmake" },
+        { "name": "VCPKG_TARGET_TRIPLET", "type": "STRING", "value": "x64-linux" }
+      ]
     }
   ]
 }
