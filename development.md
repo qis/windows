@@ -55,6 +55,8 @@ Install the latest standalone version of [Clang-Format](https://llvm.org/builds/
 Configure the User `Path` environment variable.
 
 ```
+%UserProfile%\AppData\Local\Programs\Microsoft VS Code Insiders\bin
+%UserProfile%\AppData\Local\Programs\Microsoft VS Code\bin
 %UserProfile%\AppData\Local\Microsoft\WindowsApps
 %UserProfile%\AppData\Roaming\npm
 ```
@@ -78,7 +80,6 @@ Configure the System `Path` environment variable.
 %ProgramFiles%\7-Zip
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Make
-%ProgramFiles%\Microsoft VS Code\bin
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\NASM
 %ProgramFiles%\Ninja
@@ -267,6 +268,36 @@ XAML Designer
   Zoom by using: Mouse wheel
 ```
 
+### CMake Template
+Create the file `%UserProfile%\.vs\CMakeSettings.json`.
+
+```json
+{
+  "configurations": [
+    {
+      "name": "Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "${projectDir}\\build\\msvc\\${name}",
+      "installRoot": "${projectDir}"
+    },
+    {
+      "name": "Release",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "${projectDir}\\build\\msvc\\${name}",
+      "installRoot": "${projectDir}"
+    }
+  ]
+}
+```
+
 ## ScyllaHide
 Install the [ScyllaHide](https://github.com/x64dbg/ScyllaHide) plugin.
 
@@ -385,7 +416,7 @@ flutter doctor --android-licenses
 ```
 
 ## Visual Studio Code
-Install [Visual Studio Code](https://code.visualstudio.com/download) using the "System Installer".
+Install [Visual Studio Code](https://code.visualstudio.com/download).
 
 ```
 Select Additional Tasks
@@ -396,9 +427,23 @@ Select Additional Tasks
   ☐ Add to PATH (available after restart)
 ```
 
-**NOTE**: Press `CTRL+P` and type `>` followed by a command.
+Install extensions with the following commands with `CTRL+P`.
 
-Configure editor with the command `Preferences: Open Settings (JSON)`
+```
+ext install twxs.cmake
+ext install ms-vscode.cpptools
+ext install vector-of-bool.cmake-tools
+ext install xaver.clang-format
+ext install rreverser.ragel
+ext install redhat.vscode-xml
+ext install redhat.vscode-yaml
+ext install donjayamanne.githistory
+ext install ms-vscode-remote.vscode-remote-extensionpack
+> Developer: Reload Window
+```
+
+<details>
+<summary>Configure editor with the command <code>Preferences: Open Settings (JSON)</code>.</summary>
 
 ```json
 {
@@ -406,9 +451,9 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.folding": false,
-  "editor.fontFamily": "'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, monospace",
+  "editor.fontFamily": "'Fira Code', 'DejaVu Sans Mono', Consolas, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 12,
+  "editor.fontSize": 13,
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "none",
@@ -429,7 +474,6 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "git.postCommitCommand": "push",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "on",
@@ -439,26 +483,56 @@ Configure editor with the command `Preferences: Open Settings (JSON)`
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
   "debug.openDebug": "openOnDebugBreak",
-  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe"
+  "C_Cpp.updateChannel": "Insiders",
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "cmake.generator": "Ninja",
+  "cmake.configureOnOpen": false,
+  "cmake.installPrefix": "${workspaceRoot}",
+  "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
+  "cmake.configureSettings": {
+    "CMAKE_BUILD_WITH_INSTALL_RPATH": "ON",
+    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
+    "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
+    "VCPKG_TARGET_TRIPLET": "x64-windows"
+  },
+  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
 }
 ```
+</details>
 
-Install extensions with the following commands with `CTRL+P`.
+<details>
+<summary>Configure editor with the command <code>Preferences: Open Remote Settings</code>.</summary>
 
+```json
+{
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.compilerPath": "/opt/llvm/bin/clang",
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "cmake.generator": "Ninja",
+  "cmake.configureOnOpen": false,
+  "cmake.installPrefix": "${workspaceRoot}",
+  "cmake.buildDirectory": "${workspaceRoot}/build/llvm/${buildType}",
+  "cmake.configureSettings": {
+    "CMAKE_BUILD_WITH_INSTALL_RPATH": "ON",
+    "CMAKE_TOOLCHAIN_FILE": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "/opt/vcpkg/scripts/toolchains/linux.cmake",
+    "VCPKG_TARGET_TRIPLET": "x64-linux"
+  },
+  "clang-format.executable": "/opt/llvm/bin/clang-format"
+}
 ```
-ext install xaver.clang-format
-ext install donjayamanne.githistory
-ext install rreverser.ragel
-ext install dotjoshjohnson.xml
-ext install dart-code.flutter
-> Developer: Reload Window
-```
-
-Verify flutter installation.
-
-```cmd
-flutter doctor -v
-```
+</details>
 
 ## Windows Sandbox
 Install Windows Sandbox.
