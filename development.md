@@ -144,8 +144,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 ### Plugins
-* [Fix File Encoding](https://marketplace.visualstudio.com/items?itemName=SergeyVlasov.FixFileEncoding)
-* [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
 * [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 
 ### Options
@@ -259,19 +257,6 @@ CMake
   ☐ Enable verbose CMake output
   CMakeSettings.json Template Directory
     %UserProfile%\.vs
-
-Fix File Encoding
-+ General
-  UTF-8 without signature files regex: \.(c|cc|cpp|cxx|h|hh|hpp|hxx|ipp|ihh|rc|manifest|in|lua|sh|conf|json|js|py|htm|html|css|txt|md|xaml|xml)$
-
-Line Endings Unifier
-+ General Settings
-  Add Newline On The Last Line: True
-  Default Line Ending: Linux
-  Force Default Line Ending On Document Save: True
-  Save Files After Unifying: True
-  Supported File Formats: .c; .cc; .cpp; .cxx; .h; .hh; .hpp; .hxx; .ipp; .ihh; .rc; .manifest; .in; .lua; .sh; .conf; .json; .js; .py; .htm; .html; .css; .txt; .md; .xaml; .xml
-  Supported File Names: makefile
 
 XAML Designer
 + General
