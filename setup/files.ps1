@@ -65,7 +65,7 @@ Associate "database" "Database" $sqlite "database.ico" ("db")
 
 # Editor
 Associate "android" "Android" $editor $conf ("gradle", "iml", "lock", "metadata", "properties")
-Associate "configuration" "Configuration" $editor $conf ("cfg", "clang-format", "clang-tidy", "conf", "ini")
+Associate "configuration" "Configuration" $editor $conf ("cfg", "clang-format", "clang-tidy", "conf", "editorconfig", "ini")
 Associate "git" "Git" $editor "git.ico" ("gitattributes", "gitconfig", "gitignore", "gitmodules")
 Associate "json" "JSON" $editor $text ("json")
 Associate "log" "Log" $editor $text ("log", "tlog")
