@@ -157,6 +157,8 @@ Environment
   Text Editor: DejaVu LGC Sans Mono 9
   Printer and Cut/Copy: Iconsolata 10
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
++ Keyboard
+  Build.BuildSolution: F7 (Global)
 + Startup
   On startup, open: Empty environment
 
