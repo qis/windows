@@ -267,6 +267,7 @@ Line Endings Unifier
   Add Newline On The Last Line: True
   Default Line Ending: Linux
   Force Default Line Ending On Document Save: True
+  Remove Trailing Whitespace: False
   Save Files After Unifying: True
   Supported File Formats: .c; .cc; .cpp; .cxx; .h; .hh; .hpp; .hxx; .ipp; .ihh; .rc; .manifest; .in; .lua; .sh; .conf; .json; .js; .py; .htm; .html; .css; .txt; .md; .xaml; .xml
   Supported File Names: makefile
