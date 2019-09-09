@@ -42,6 +42,7 @@ Advanced Options
 * [SQLite Database Browser](https://sqlitebrowser.org/)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [fping](https://github.com/dexit/fping-windows)
 * [NSIS](https://nsis.sourceforge.io/Download)
 * [CMake](https://github.com/Kitware/CMake/releases/download/v3.15.2/cmake-3.15.2-win64-x64.msi)
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
@@ -144,6 +145,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 ### Plugins
+* [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier).
 * [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 
 ### Options
