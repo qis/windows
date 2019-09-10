@@ -603,3 +603,17 @@ Follow the [development](development.md) guide to set up a developer workstation
 
 ## Start Menu
 ![Start Menu](res/start.png)
+
+<!--
+Re-register Start Menu and Conrtana in PowerShell as Administrator.
+
+```ps
+Get-AppXPackage -AllUsers | Foreach { `
+  Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" `
+}
+```
+
+Fix broken Start Menu search.
+
+<https://www.windowscentral.com/how-reset-start-menu-layout-windows-10>
+-->

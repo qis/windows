@@ -44,7 +44,7 @@ Advanced Options
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [fping](https://github.com/dexit/fping-windows)
 * [NSIS](https://nsis.sourceforge.io/Download)
-* [CMake](https://github.com/Kitware/CMake/releases/download/v3.15.2/cmake-3.15.2-win64-x64.msi)
+* [CMake](https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3-win64-x64.msi)
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [Make](http://www.equation.com/servlet/equation.cmd?fa=make) into `%ProgramFiles%\Make`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
@@ -604,8 +604,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.15/cmake-3.15.2-Linux-x86_64.tar.gz
-tar xf cmake-3.15.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://cmake.org/files/v3.15/cmake-3.15.3-Linux-x86_64.tar.gz
+tar xf cmake-3.15.3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Install Ninja.
