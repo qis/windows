@@ -163,7 +163,7 @@ Import-Module -Name "$PSScriptRoot\..\script\Win10"
 DisableTelemetry
 DisableWiFiSense
 DisableSmartScreen
-DisableWebSearch
+EnableWebSearch  # NOTE: This breaks the Windows Start Menu search in 1903 Build 18362.329
 DisableAppSuggestions
 DisableActivityHistory
 DisableLocationTracking
