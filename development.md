@@ -44,7 +44,8 @@ Advanced Options
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [fping](https://github.com/dexit/fping-windows)
 * [NSIS](https://nsis.sourceforge.io/Download)
-* [CMake](https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3-win64-x64.msi)
+* [WiX](https://wixtoolset.org/releases/)
+* [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [Make](http://www.equation.com/servlet/equation.cmd?fa=make) into `%ProgramFiles%\Make`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
