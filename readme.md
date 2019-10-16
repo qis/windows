@@ -350,6 +350,7 @@ Install third party software.
 * [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Blender](https://www.blender.org/)
 * [Gimp](https://www.gimp.org/)
+* [LMMS](https://lmms.io/)
 * [MPV](https://mpv.srsfckn.biz/)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 
