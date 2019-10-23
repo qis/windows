@@ -605,8 +605,8 @@ Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://cmake.org/files/v3.15/cmake-3.15.3-Linux-x86_64.tar.gz
-tar xf cmake-3.15.3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc2/cmake-3.16.0-rc2-Linux-x86_64.tar.gz
+tar xf cmake-3.16.0-rc2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Install Ninja.
