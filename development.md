@@ -36,19 +36,17 @@ Advanced Options
   ☐ Download debug binaries (requires VS 2015 or later)
   Customize install location: C:\Python
 ```
-
+* [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
 * [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
 * [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
 * [SQLite Database Browser](https://sqlitebrowser.org/)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [fping](https://github.com/dexit/fping-windows)
-* [NSIS](https://nsis.sourceforge.io/Download)
-* [WiX](https://wixtoolset.org/releases/)
 * [CMake](https://cmake.org/download/)
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
-* [Make](http://www.equation.com/servlet/equation.cmd?fa=make) into `%ProgramFiles%\Make`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
+* [WiX](https://wixtoolset.org/releases/)
 * [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
 
 Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\LLVM\bin\clang-format.exe`.
@@ -57,8 +55,6 @@ Install the latest standalone version of [Clang-Format](https://llvm.org/builds/
 Configure the User `Path` environment variable.
 
 ```
-%UserProfile%\AppData\Local\Programs\Microsoft VS Code Insiders\bin
-%UserProfile%\AppData\Local\Programs\Microsoft VS Code\bin
 %UserProfile%\AppData\Local\Microsoft\WindowsApps
 %UserProfile%\AppData\Roaming\npm
 ```
@@ -77,36 +73,20 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-%ProgramFiles(x86)%\LLVM\bin
-%ProgramFiles(x86)%\Sysinternals Suite
-%ProgramFiles%\7-Zip
-%ProgramFiles%\CMake\bin
-%ProgramFiles%\Make
-%ProgramFiles%\Git\cmd
-%ProgramFiles%\NASM
-%ProgramFiles%\Ninja
-C:\Android\build-tools\28.0.3
-C:\Android\flutter\bin
-C:\Android\platform-tools
-C:\Android\tools
-C:\Android\tools\bin
-C:\Android\studio\jre\bin
+C:\Program Files (x86)\LLVM\bin
+C:\Program Files (x86)\Sysinternals Suite
+C:\Program Files\dotnet
+C:\Program Files\7-Zip
+C:\Program Files\CMake\bin
+C:\Program Files\Git\cmd
+C:\Program Files\NASM
+C:\Program Files\Ninja
+C:\Perl\perl\bin
 C:\Node
 C:\Python
 C:\Python\Scripts
 C:\Workspace\vcpkg
-```
-
-Configure the System `ANDROID_HOME` environment variable.
-
-```
-C:\Android
-```
-
-Configure the System `JAVA_HOME` environment variable.
-
-```
-C:\Android\studio\jre
+C:\Vulkan\1.1.121.2\Bin
 ```
 
 ## Visual Studio 2019
@@ -369,6 +349,29 @@ cmake -E copy ^
 ## Android Development
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
 Extract [Flutter](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
+
+Configure the System `ANDROID_HOME` environment variable.
+
+```
+C:\Android
+```
+
+Configure the System `JAVA_HOME` environment variable.
+
+```
+C:\Android\studio\jre
+```
+
+Configure the System `Path` environment variable.
+
+```
+C:\Android\build-tools\28.0.3
+C:\Android\flutter\bin
+C:\Android\platform-tools
+C:\Android\tools
+C:\Android\tools\bin
+C:\Android\studio\jre\bin
+```
 
 Start and configure Android Studio (`C:\Android\studio\bin\studio64.exe`).
 
