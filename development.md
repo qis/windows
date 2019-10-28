@@ -473,15 +473,14 @@ Select Additional Tasks
 Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install twxs.cmake
 ext install ms-vscode.cpptools
+ext install twxs.cmake
 ext install vector-of-bool.cmake-tools
+ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
 ext install rreverser.ragel
 ext install redhat.vscode-xml
 ext install redhat.vscode-yaml
-ext install donjayamanne.githistory
-ext install ms-vscode-remote.vscode-remote-extensionpack
 > Developer: Reload Window
 ```
 
@@ -540,7 +539,7 @@ ext install ms-vscode-remote.vscode-remote-extensionpack
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
-  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
