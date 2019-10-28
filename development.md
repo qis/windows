@@ -48,8 +48,9 @@ Advanced Options
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [WiX](https://wixtoolset.org/releases/)
 * [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
+* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
-Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\LLVM\bin\clang-format.exe`.
+Build and install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles%\LLVM\bin\clang-format.exe`.
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -73,11 +74,11 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-C:\Program Files (x86)\LLVM\bin
 C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\dotnet
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
+C:\Program Files\LLVM\bin
 C:\Program Files\Git\cmd
 C:\Program Files\NASM
 C:\Program Files\Ninja
