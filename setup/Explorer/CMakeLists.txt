@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+project(open VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_FLAGS "")
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+add_executable(open WIN32 open.cpp)
+target_include_directories(open PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_compile_definitions(open PRIVATE /DWIN32 /D_WINDOWS _UNICODE UNICODE WIN32_LEAN_AND_MEAN NOMINMAX)
+
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+  install(TARGETS open DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
