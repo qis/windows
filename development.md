@@ -49,7 +49,7 @@ Advanced Options
 * [WiX](https://wixtoolset.org/releases/)
 * [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
 
-Install the latest standalone version of [Clang-Format](https://llvm.org/builds/) as `%ProgramFiles(x86)%\LLVM\bin\clang-format.exe`.
+Build LLVM and install `clang-format.exe` into `C:\Program Files\LLVM\bin`.
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -73,11 +73,11 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-C:\Program Files (x86)\LLVM\bin
 C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\dotnet
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
+C:\Program Files\LLVM\bin
 C:\Program Files\Git\cmd
 C:\Program Files\NASM
 C:\Program Files\Ninja
@@ -187,7 +187,7 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\LLVM\bin\clang-format.exe
+      ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
     + Indentation
       ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
@@ -538,7 +538,7 @@ ext install ms-vscode-remote.vscode-remote-extensionpack
     "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
-  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
