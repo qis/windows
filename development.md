@@ -48,6 +48,7 @@ Advanced Options
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [WiX](https://wixtoolset.org/releases/)
 * [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
+* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
 Build LLVM and install `clang-format.exe` into `C:\Program Files\LLVM\bin`.
 
@@ -81,12 +82,13 @@ C:\Program Files\LLVM\bin
 C:\Program Files\Git\cmd
 C:\Program Files\NASM
 C:\Program Files\Ninja
-C:\Perl\perl\bin
 C:\Node
+C:\Perl\perl\bin
 C:\Python
 C:\Python\Scripts
-C:\Workspace\vcpkg
 C:\Vulkan\1.1.121.2\Bin
+C:\Workspace\vcpkg
+C:\Workspace\vcpkg\scripts\toolchains\windows
 ```
 
 ## Visual Studio 2019
@@ -471,15 +473,14 @@ Select Additional Tasks
 Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install twxs.cmake
 ext install ms-vscode.cpptools
+ext install twxs.cmake
 ext install vector-of-bool.cmake-tools
+ext install maddouri.cmake-tools-helper
 ext install xaver.clang-format
 ext install rreverser.ragel
 ext install redhat.vscode-xml
 ext install redhat.vscode-yaml
-ext install donjayamanne.githistory
-ext install ms-vscode-remote.vscode-remote-extensionpack
 > Developer: Reload Window
 ```
 

@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "name": "Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "cmakeExecutable": "C:\\Program Files\\CMake\\bin\\cmake.exe",
+      "installRoot": "${projectDir}\\build\\install",
+      "buildRoot": "${projectDir}\\build\\debug",
+      "variables": []
+    },
+    {
+      "name": "Release",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "cmakeExecutable": "C:\\Program Files\\CMake\\bin\\cmake.exe",
+      "installRoot": "${projectDir}\\build\\install",
+      "buildRoot": "${projectDir}\\build\\release",
+      "variables": []
+    }
+  ]
+}
