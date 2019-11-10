@@ -128,7 +128,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 ### Plugins
-* [Line Endings Unifier](https://marketplace.visualstudio.com/items?itemName=JakubBielawa.LineEndingsUnifier)
 * [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 
 ### Options
