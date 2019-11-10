@@ -624,8 +624,8 @@ Install NodeJS.
 
 ```sh
 rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
-tar xf node-v10.16.3-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz
+tar xf node-v12.13.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
 ## Vcpkg
