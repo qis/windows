@@ -408,10 +408,26 @@ Configuring file system caching
 
 Add `%ProgramFiles%\Git\cmd` to `Path`.
 
-Install [gVim](http://www.vim.org) and create a config directory.
+### Vim
+Install [gVim](http://www.vim.org).
+
+```
+Select the type of install: Minimal
+```
+
+Create configuration directory.
 
 ```cmd
-git clone https://github.com/qis/vim %UserProfile%\vimfiles
+git clone git@github.com:qis/vim %UserProfile%\vimfiles
+```
+
+Register context menu entry.
+
+```cmd
+set vimcmd=\"C:\Program Files (x86)\Vim\vim81\gvim.exe\" \"%1\"
+reg add "HKCR\*\shell\gvim" /ve /d "Edit with Vim" /f
+reg add "HKCR\*\shell\gvim" /v Icon /d "C:\Program Files (x86)\Vim\vim81\gvim.exe,0" /f
+reg add "HKCR\*\shell\gvim\command" /ve /d "%vimcmd%" /f
 ```
 
 <!--
