@@ -4,7 +4,7 @@ Installation and configuration of a Windows 10 development workstation.
 ## Tools
 Install various tools for development.
 
-* [Node LTS](https://nodejs.org/dist/v10.16.3/node-v10.16.3-x64.msi)
+* [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi)
 
 ```
 Destination Folder
@@ -16,7 +16,7 @@ Custom Setup
   ☒ Add to PATH
 ```
 
-* [Python 3](https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe)
+* [Python 3](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
 
 ```
 Install Python
