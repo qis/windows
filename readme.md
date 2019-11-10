@@ -488,7 +488,6 @@ Excluded Directories
 %UserProfile%\AppData\Local\lxss\
 C:\Workspace\
 ```
--->
 
 ## VLANs
 <https://downloadcenter.intel.com/download/25016/Intel-Network-Adapter-Driver-for-Windows-10>
@@ -496,6 +495,7 @@ C:\Workspace\
 ```cmd
 
 ```
+-->
 
 ## Windows Subsystem for Linux
 Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
