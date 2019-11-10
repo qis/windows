@@ -336,7 +336,6 @@ reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365
 Install useful fonts.
 
 * [DejaVu](https://sourceforge.net/projects/dejavu/files/dejavu)
-* [Iconsolata](http://www.levien.com/type/myfonts/inconsolata.html)
 * [IPA](http://ipafont.ipa.go.jp)
 
 ## Applications
@@ -346,12 +345,12 @@ Install third party software.
 * [Chrome](https://www.google.com/chrome/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
-* [Sketchbook Pro](http://www.autodesk.com/products/sketchbook-pro/overview)
 * [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Blender](https://www.blender.org/)
 * [Gimp](https://www.gimp.org/)
 * [LMMS](https://lmms.io/)
 * [MPV](https://mpv.srsfckn.biz/)
+* [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 
 <!--
@@ -606,7 +605,8 @@ sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/you
 sudo chmod 0755 /usr/local/bin/youtube-dl
 ```
 
-Install [WSLtty](https://github.com/mintty/wsltty) for better terminal support.
+Install [mintty/wsltty](https://github.com/mintty/wsltty) or [qis/console](https://github.com/qis/console)
+to have a better command prompt and terminal emulator experience.
 
 <!--
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.

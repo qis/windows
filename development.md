@@ -36,21 +36,25 @@ Advanced Options
   ☐ Download debug binaries (requires VS 2015 or later)
   Customize install location: C:\Python
 ```
+
 * [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
-* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
-* [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
-* [SQLite Database Browser](https://sqlitebrowser.org/)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [fping](https://github.com/dexit/fping-windows)
 * [CMake](https://cmake.org/download/)
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
 * [WiX](https://wixtoolset.org/releases/)
-* [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
-* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
 Build LLVM and install `clang-format.exe` into `C:\Program Files\LLVM\bin`.
+
+## Debugging
+Install various tools for debugging.
+
+* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
+* [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
+* [SQLite Database Browser](https://sqlitebrowser.org/)
+* [fping](https://github.com/dexit/fping-windows)
+* [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -77,6 +81,7 @@ Configure the System `Path` environment variable.
 C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\dotnet
 C:\Program Files\7-Zip
+C:\Program Files\Make
 C:\Program Files\CMake\bin
 C:\Program Files\LLVM\bin
 C:\Program Files\Git\cmd
@@ -88,7 +93,6 @@ C:\Python
 C:\Python\Scripts
 C:\Vulkan\1.1.121.2\Bin
 C:\Workspace\vcpkg
-C:\Workspace\vcpkg\scripts\toolchains\windows
 ```
 
 ## Visual Studio 2019
@@ -126,6 +130,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\
 
 ### Development Kits
 * [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
 ### Plugins
 * [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
