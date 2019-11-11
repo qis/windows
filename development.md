@@ -229,6 +229,8 @@ Help > Send Feedback > Settings...
   ◉ No, I would not like to participate
 ```
 
+Change [toolbars](res/vs-toolbars) to fit the desired workflow.
+
 </details>
 
 <details>
