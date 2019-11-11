@@ -55,9 +55,17 @@ Choose a single word username starting with a capital letter to keep the `%UserP
 consistent and free from spaces.
 
 ## Setup
-Modify the [setup/system.ps1](setup/system.ps1) script and execute it using the "Run with PowerShell" context menu.
+Modify the [setup/system.ps1](setup/system.ps1) script and execute it using the "Run with PowerShell" context menu
+repeatedly until it stops rebooting the system.
 
-## Universal Apps
+Unpin everything from the start menu and taskbar.
+
+```ps1
+cd windows\script
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinStartMenuTiles
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinTaskbarIcons
+```
+
 List remaining apps.
 
 ```ps
@@ -70,38 +78,7 @@ Uninstall unwanted apps.
 Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
 ```
 
-Uninstall unwanted optional features.
-
-```
-Settings > Apps > Manage optional features
-- Microsoft Quick Assist
-- Windows Hello Face
-```
-
-Clean up the Start Menu.
-
-## Group Policies
-Configure group policies.
-
-```
-gpedit.msc > Computer Configuration > Administrative Templates > Windows Components
-
-Speech
-+ Allow Automatic Update of Speech Data: Disabled
-
-Windows Defender Antivirus
-+ Turn off Windows Defender Antivirus: Enabled
-
-Windows Defender Antivirus > MAPS
-+ Join Microsoft MAPS: Disabled
-
-Windows Defender Antivirus > Network Inspection System
-+ Turn on definition retirement: Disabled
-+ Turn on protocol recognition: Disabled
-
-Windows Defender Antivirus > Real-time Protection
-+ Turn off real-time protection: Enabled
-```
+Reboot the system.
 
 ## Drivers & Updates
 Disable automatic driver application installation.
@@ -114,21 +91,31 @@ Start > "Change device installation settings"
 1. Reboot the system.
 2. Connect to the Internet.
 3. Install Windows updates.
+4. Repeat the "Setup" step.
+
+Disable Web Search in Start Menu and install Windows Subsystem for Linux.
+
+```ps
+cd windows\script
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableWebSearch
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableCortana
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem
+```
+
+Reboot the system.
 
 ## Settings
 Settings that have yet to be incorporated into the [setup/system.ps1](setup/system.ps1) script.
 
-### System
-```
-Notifications & actions
-+ Edit your quick actions
-  ☑ All settings
-  ☑ Network
-  ☑ Night light
-  ☑ Screen snip
-+ Get notifications from these senders
-  ☐ Focus assist (via Search)
-```
+### Keymap (Optional)
+1. Install [res/keymap.zip](res/keymap.zip) to input German characters on a U.S. keyboard.
+2. Configure Windows language preferences in Settings.
+3. Reboot the system.
+
+<!--
+Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
+create new keyboard layouts.
+-->
 
 ### Devices
 ```
@@ -137,10 +124,6 @@ Typing
   ☐ Autocorrect misspelled words
 + Typing
   ☐ Add a period after I double-tap the Spacebar
-
-Pen & Windows Ink
-+ Windows Ink Workspace
-  ☐ Show recommended app suggestions
 
 AutoPlay
 + Choose AutoPlay defaults
@@ -157,9 +140,18 @@ Proxy
 
 ### Personalization
 ```
+Background
++ Background
+  Browse: (select picture)
+
 Colors
 + Choose your color
   Windows colors: Navy blue
+
+Lock screen
++ Preview
+  Browse: (select picture)
+
 Start
 + Start
   ☐ Show app list in Start menu
@@ -167,14 +159,19 @@ Start
 
 ### Time & Language
 ```
-Region > Additional date, time, & regional settings > Change date, time, or number formats
-+ Formats > Additional settings...
+Region
++ Region
+  Country or region: United States
+  Regional format: English (United States)
++ Additional date, time, & regional settings > Change date, time, or number formats
+  Formats > Additional settings...
   + Numbers
-    Decimal symbol: .
     Digit grouping symbol: ␣
     Measurement system: Metric
   + Currency
-    Decimal symbol: .
+    Currency symbol: €
+    Positive currency format: 1.1 €
+    Negative currency format: -1.1 €
     Digit grouping symbol: ␣
   + Time
     Short time: HH:mm
@@ -183,36 +180,19 @@ Region > Additional date, time, & regional settings > Change date, time, or numb
     Short date: yyyy-MM-dd
     Long date: ddd, d MMMM yyyy
     First day of week: Monday
-+ Administrative > Copy settings...
-  ☑ Welcome screen and system accounts
-  ☑ New user accounts
+  Administrative
+  + Copy settings...
+    ☑ Welcome screen and system accounts
+    ☑ New user accounts
 ```
 
-### Ease of Access
-```
-Narrator
-+ Use Narrator
-  ☐ Turn on narrator
-  ☐ Allow the shortcut key to start Narrator
-Keyboard
-+ Use your device without a physical keyboard
-  ☐ Use the On-Screen Keyboard
-+ Use Sticky Keys
-  ☐ Allow the shortcut key to start Sticky Keys
-+ Use Toggle Keys
-  ☐ Allow the shortcut key to start Toggle Keys
-+ Use Filter Keys
-  ☐ Allow the shortcut key to start Filter Keys
-```
+Reboot the system.
 
 ### Privacy
 ```
 General
 + Change privacy options
-  ☐ Let apps use advertising ID to make ads more interesting …
-  ☑ Let websites provide locally relevant content by accessing my language list
   ☐ Let Windows track app launches to improve Start and search results
-  ☐ Show me suggested content in the Settings app
 ```
 
 ## Windows Libraries
@@ -222,6 +202,7 @@ Move unwanted Windows libraries.
    Select the `Location` tab and change the path to `%AppData%\Pictures\Camera Roll`.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and change the path to `%AppData%\Pictures\Saved Pictures`.
+3. Delete the `Libraries\Videos\Captures` directory.
 
 ## Indexing Options
 Configure Indexing Options to only track the "Start Menu" and rebuild the index.
@@ -281,26 +262,16 @@ Enable inbound rules for `File and Printer Sharing (Echo Request …)`. Modify `
 rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
 `Remote IP address` in the `Scope` tab.
 
-## Keymap
-1. Install [res/keymap.zip](res/keymap.zip) to input German characters on a U.S. keyboard.
-2. Configure Windows language preferences.
-3. Reboot the system.
-
-<!--
-Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
-create new keyboard layouts.
--->
-
 ## Microsoft Software
 Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).
 
 ```
 Settings
 + General
+  Choose a theme: Dark
   Open Microsoft Edge with: A specific page or pages
     about:blank
   Open new tabs with: A blank page
-  Show the favorites bar: Off
   Show the home button: Off
   Show sites I frequently visit in "Top sites": Off
   Show definitions inline for: Off
@@ -313,6 +284,7 @@ Settings
   Save form data: Off
 ```
 
+<!--
 Configure [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer).
 
 ```
@@ -324,19 +296,12 @@ Internet options
   When a new tab is opened, open: A blank page
 ```
 
-<!--
 Configure [Outlook 2016](https://products.office.com/en/outlook).
 
 ```cmd
 reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365SimplifiedAccountCreation" /t REG_DWORD /d 1 /f
 ```
 -->
-
-## Fonts
-Install useful fonts.
-
-* [DejaVu](https://sourceforge.net/projects/dejavu/files/dejavu)
-* [IPA](http://ipafont.ipa.go.jp)
 
 ## Applications
 Install third party software.
@@ -345,15 +310,23 @@ Install third party software.
 * [Chrome](https://www.google.com/chrome/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
-* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Blender](https://www.blender.org/)
-* [Gimp](https://www.gimp.org/)
 * [LMMS](https://lmms.io/)
 * [MPV](https://mpv.srsfckn.biz/)
 * [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
+* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 
 <!--
+```
+LMMS Working Directory: C:\Users\Qis\Music\Workspace
+GIG Directory: C:\Users\Qis\Music\Workspace\Samples\GIG
+SF2 Directory: C:\Users\Qis\Music\Workspace\Samples\Fonts
+LADSPA Plugin Directories: C:\Users\Qis\Music\Workspace\Plugins\LADSPA
+```
+
+* [Gimp](https://www.gimp.org/)
+* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 * [Chrome Enterprise(https://cloud.google.com/chrome-enterprise/browser/download/#download)
 * [Tor Browser](https://www.torproject.org/download/)
 
@@ -387,9 +360,6 @@ Choosing the default editor used by Git
 Adjusting your PATH environment
   ◉ Use Git from Git Bash only
 
-Choosing the SSH executable
-  ◉ Use OpenSSH
-
 Choosing HTTPS transport backend
   ◉ Use the OpenSSL library
 
@@ -405,7 +375,7 @@ Configuring file system caching
   ☑ Enable symbolic links
 ```
 
-Add `%ProgramFiles%\Git\cmd` to `Path`.
+Add `C:\Program Files\Git\cmd` to `Path`.
 
 ### Vim
 Install [gVim](http://www.vim.org).
@@ -598,6 +568,7 @@ sudo apt install imagemagick pngcrush webp
 sudo apt install apache2-utils
 ```
 
+<!--
 Install youtube-dl.
 
 ```sh
@@ -607,11 +578,13 @@ sudo chmod 0755 /usr/local/bin/youtube-dl
 
 Install [mintty/wsltty](https://github.com/mintty/wsltty) or [qis/console](https://github.com/qis/console)
 to have a better command prompt and terminal emulator experience.
+-->
 
 <!--
 Install [VcXsrv](https://github.com/ArcticaProject/vcxsrv/releases) for Xorg application support.
 -->
 
+<!--
 Install an international locale.
 
 ```sh
@@ -621,6 +594,7 @@ en_XX.UTF-8 UTF-8
 EOF
 sudo locale-gen
 ```
+-->
 
 ## Development
 Follow the [development](development.md) guide to set up a developer workstation.

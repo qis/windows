@@ -1,12 +1,3 @@
-# Settings.
-$hostname = ""
-$username = "name"
-$userfull = "Name Surname"
-
-If ($hostname -eq "") {
-  Error 'Read this script and assign meaningful strings to the variables $hostname, $username, and $userfull.'
-}
-
 # Import utility functions.
 Import-Module -Name "$PSScriptRoot\utility"
 
@@ -20,6 +11,11 @@ If ((IsAdmin) -eq $False) {
   Exit
 }
 
+# Settings.
+$hostname = Read-Host -Prompt "Host Name"
+$username = Read-Host -Prompt "User Name"
+$fullname = Read-Host -Prompt "Full Name"
+
 # Initialize helper objects.
 $Kernel32 = Add-Type -MemberDefinition @'
 [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
@@ -30,7 +26,7 @@ public static extern bool GetComputerName(System.Text.StringBuilder buffer, ref 
 '@ -Name 'Kernel32' -Namespace 'Win32' -PassThru
 
 # Set computer name.
-If ($env:ComputerName -ne $hostname) {
+If ($hostname -ne "" -and $env:ComputerName -ne $hostname) {
   Write-Output "Setting computer name..."
   Rename-Computer -NewName "$hostname" -Force
   Reboot
@@ -46,17 +42,17 @@ function Get-NetbiosName {
   return $data.ToString();
 }
 
-If ((Get-NetbiosName) -cne "$hostname") {
+If ($hostname -ne "" -and (Get-NetbiosName) -cne "$hostname") {
   Write-Output "Setting NetBios name..."
   $Kernel32::SetComputerName("$hostname");
   Reboot
 }
 
 # Change user name.
-If ($env:UserName -cne $username) {
+If ($username -ne "" -and $env:UserName -cne $username) {
   Write-Output "Setting User name..."
   Rename-LocalUser -Name "$env:UserName" -NewName "$username"
-  Set-LocalUser -Name "$username" -FullName "$userfull"
+  Set-LocalUser -Name "$username" -FullName "$fullname"
   Reboot
 }
 
@@ -163,16 +159,15 @@ Import-Module -Name "$PSScriptRoot\..\script\Win10"
 DisableTelemetry
 DisableWiFiSense
 DisableSmartScreen
-EnableWebSearch  # NOTE: This breaks the Windows Start Menu search in 1903 Build 18362.329
 DisableAppSuggestions
 DisableActivityHistory
-DisableLocationTracking
+DisableSensors
+DisableLocation
 DisableMapUpdates
 DisableFeedback
 DisableTailoredExperiences
 DisableAdvertisingID
-EnableWebLangList
-DisableCortana
+DisableBiometrics
 DisableErrorReporting
 SetP2PUpdateDisable
 DisableDiagTrack
@@ -187,21 +182,62 @@ DisableRecentFiles
 DisableSharingMappedDrives
 DisableAdminShares
 DisableLLMNR
-EnableNCSIProbe
-SetCurrentNetworkPrivate
-SetUnknownNetworksPrivate
-DisableNetDevicesAutoInst
-EnableFirewall
-HideDefenderTrayIcon
-DisableDefender
-DisableDefenderCloud
-DisableCIMemoryIntegrity
-DisableDefenderAppGuard
 HideAccountProtectionWarn
+HideDefenderTrayIcon
+DisableDefenderAppGuard
+DisableDefenderCloud
+DisableDefender
 DisableDownloadBlocking
-EnableScriptHost
 EnableDotNetStrongCrypto
 SetDEPOptOut
+
+# ===========================================================================================================
+# Network Tweaks
+# ===========================================================================================================
+
+SetUnknownNetworksPrivate
+DisableSMBServer
+DisableLLMNR
+DisableLLDP
+DisableLLTD
+DisableMSNetClient
+DisableQoS
+DisableConnectionSharing
+DisableRemoteAssistance
+DisableRemoteDesktop
+
+# ===========================================================================================================
+# Service Tweaks
+# ===========================================================================================================
+
+DisableUpdateMSRT
+EnableUpdateMSProducts
+DisableUpdateAutoDownload
+DisableMaintenanceWakeUp
+DisableSharedExperiences
+DisableClipboardHistory
+DisableAutoplay
+DisableAutorun
+DisableRestorePoints
+
+vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
+
+DisableStorageSense
+DisableDefragmentation
+DisableSuperfetch
+DisableSwapFile
+EnableNTFSLongPaths
+DisableNTFSLastAccess
+DisableHibernation
+DisableSleepButton
+
+Write-Output "Setting display and sleep mode timeouts..."
+powercfg /X monitor-timeout-ac 30
+powercfg /X monitor-timeout-dc 10
+powercfg /X standby-timeout-ac 0
+powercfg /X standby-timeout-dc 360
+
+DisableAutoRebootOnCrash
 
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
 #   Windows Components > Windows Update > Configure Automatic Updates: Enabled
@@ -219,47 +255,33 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallEveryWeek" -Type DWord -Value 1
 
 # ===========================================================================================================
-# Service Tweaks
-# ===========================================================================================================
-
-DisableUpdateMSRT
-DisableUpdateRestart
-DisableSharedExperiences
-DisableRemoteAssistance
-DisableAutoplay
-DisableAutorun
-DisableDefragmentation
-DisableSuperfetch
-DisableSwapFile
-DisableNTFSLastAccess
-DisableFastStartup
-DisableAutoRebootOnCrash
-
-Write-Output "Setting display and sleep mode timeouts..."
-powercfg /X monitor-timeout-ac 30
-powercfg /X monitor-timeout-dc 10
-powercfg /X standby-timeout-ac 0
-powercfg /X standby-timeout-dc 300
-
-# ===========================================================================================================
 # UI Tweaks
 # ===========================================================================================================
 
+DisableActionCenter
+HideNetworkFromLockScreen
+DisableLockScreenBlur
 DisableAeroShake
-DisableStickyKeys
+DisableAccessibilityKeys
 ShowTaskManagerDetails
 ShowFileOperationsDetails
-ShowTaskbarSearchIcon
+HideTaskbarSearch
 ShowSmallTaskbarIcons
+SetTaskbarCombineAlways
 HideTaskbarPeopleIcon
 ShowTrayIcons
 DisableSearchAppInStore
+DisableNewAppPrompt
 HideRecentlyAddedApps
 HideMostUsedApps
 DisableShortcutInName
+EnableDarkTheme
 EnableEnhPointerPrecision
-SetSoundSchemeNone
 DisableStartupSound
+SetSoundSchemeNone
+DisableF1HelpKey
+
+SetVisualFXAppearance
 
 Write-Output "Setting custom visual effects..."
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
@@ -276,15 +298,18 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroP
 # Disable transparency in Windows.
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 0
 
-# Disable transparency during Login.
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\System" -Name "DisableAcrylicBackgroundOnLogon" -Type DWord -Value 1
-
 # ===========================================================================================================
 # Explorer UI Tweaks
 # ===========================================================================================================
 
 ShowKnownExtensions
 ShowHiddenFiles
+HideSuperHiddenFiles
+ShowEmptyDrives
+HideFolderMergeConflicts
+DisableRestoreFldrWindows
+DisableSharingWizard
+HideSelectCheckboxes
 HideRecentShortcuts
 SetExplorerQuickAccess
 HideDesktopFromThisPC
@@ -304,49 +329,117 @@ Hide3DObjectsFromExplorer
 HideIncludeInLibraryMenu
 HideGiveAccessToMenu
 HideShareMenu
-DisableThumbnailCache
 DisableThumbsDBOnNetwork
-
-# Make the "HKCR:" drive available.
-If (!(Test-Path "HKCR:")) {
-  New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
-}
-
-# Remove "Edit with Paint 3D" from Explorer context menus.
-# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "3D Edit" /s /k /e
-("3mf", "bmp", "fbx", "gif", "glb", "jfif", "jpe", "jpeg", "jpg", "obj", "ply", "png", "stl", "tif", "tiff") | ForEach-Object {
-  Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\3D Edit" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
-}
-
-# Remove "Set as desktop background" from Explorer context menus.
-# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "setdesktopwallpaper" /s /k /e
-("bmp", "dib", "gif", "jfif", "jpe", "jpeg", "jpg", "png", "tif", "tiff", "wdp") | ForEach-Object {
-  Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\setdesktopwallpaper" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
-}
-
-# Remove "AMD Radeon Software" from Explorer context menus.
-Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
 
 # ===========================================================================================================
 # Application Tweaks
 # ===========================================================================================================
-
 DisableOneDrive
 UninstallOneDrive
-UninstallMsftBloat
+
+Write-Output "Uninstalling default Microsoft applications..."
+Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingFoodAndDrink" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingHealthAndFitness" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingMaps" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingTravel" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.FreshPaint" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.HelpAndTips" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Media.PlayReadyClient.2" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Microsoft3DViewer" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MicrosoftPowerBIForWindows" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MinecraftUWP" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MoCamera" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MSPaint" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.NetworkSpeedTest" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.OfficeLens" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.OneConnect" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Print3D" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Reader" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.RemoteDesktop" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WebMediaExtensions" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Whiteboard" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
+Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsReadingList" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsScan" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WinJS.1.0" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.WinJS.2.0" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage
+
 UninstallThirdPartyBloat
 DisableXboxFeatures
-#DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation
+
+DisableMediaSharing
+UninstallMediaPlayer
+
 DisableIEFirstRun
-#UninstallWorkFolders
-InstallLinuxSubsystem
-InstallNET23
-#SetPhotoViewerAssociation
+UninstallInternetExplorer
+
+UninstallWorkFolders
+UninstallPowerShellV2
+
+SetPhotoViewerAssociation
+AddPhotoViewerOpenWith
+
 UninstallXPSPrinter
 RemoveFaxPrinter
 UninstallFaxAndScan
+
+# ===========================================================================================================
+# Custom Tweaks
+# ===========================================================================================================
+
+# Make the "HKCR:" registry drive available.
+If (!(Test-Path "HKCR:")) {
+  New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+}
+
+Write-Output 'Removing "Edit with Paint 3D" from Explorer context menu.'
+# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "3D Edit" /s /k /e
+("3mf", "bmp", "fbx", "gif", "glb", "jfif", "jpe", "jpeg", "jpg", "obj", "ply", "png", "stl", "tif", "tiff") | ForEach {
+  Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\3D Edit" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
+}
+
+Write-Output 'Removeing "Set as desktop background" from Explorer context menu.'
+# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "setdesktopwallpaper" /s /k /e
+("bmp", "dib", "gif", "jfif", "jpe", "jpeg", "jpg", "png", "tif", "tiff", "wdp") | ForEach {
+  Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\setdesktopwallpaper" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
+}
+
+Write-Output 'Removing "AMD Radeon Software" from Explorer context menu...'
+Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
 
 Write-Output "Uninstalling Microsoft Internet Printing..."
 Disable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-InternetPrinting-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
@@ -355,6 +448,9 @@ Write-Output "Uninstalling Windows Capabilities..."
 Get-WindowsCapability -Online | % {
   $remove = $False
   If ($_.Name | Select-String "App.Support.QuickAssist") {
+    $remove = $True
+  }
+  If ($_.Name | Select-String "Browser.InternetExplorer") {
     $remove = $True
   }
   If ($_.Name | Select-String "Media.WindowsMediaPlayer") {
@@ -372,21 +468,47 @@ Get-WindowsCapability -Online | % {
 }
 
 # ===========================================================================================================
-# Unpinning
+# Manual Tweaks
 # ===========================================================================================================
 
+Write-Output ""
+Write-Output ""
+Write-Output ""
+Write-Output ""
+Write-Output ""
+Write-Output ""
 Write-Output "Open a new PowerShell window as Administrator and enter the script directory."
 Write-Output ""
 Write-Output "  cd $PSScriptRoot\script"
+Write-Output ""
 Write-Output ""
 Write-Output "Run the following command to unpin all start menu icons."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinStartMenuTiles"
 Write-Output ""
+Write-Output ""
+Write-Output "Run the following command to unpin all tarkbar icons."
+Write-Output ""
+Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinTaskbarIcons"
+Write-Output ""
+Write-Output ""
 Write-Output "Run the following command after configuring a lock screen wallpaper."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen"
 Write-Output ""
+Write-Output ""
+Write-Output "Run the following commands after installing Windows 10 1903 Update KB4515384."
+Write-Output ""
+Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableWebSearch"
+Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableCortana"
+Write-Output ""
+Write-Output ""
+Write-Output "Run the following commands after connecting to the internet and installing all updates."
+Write-Output ""
+Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem"
+Write-Output ""
+
+Done
 
 # ===========================================================================================================
 
@@ -398,8 +520,56 @@ Write-Output ""
 #
 Write-Output "Modifying group policies..."
 
+# Control Panel > Personalization > Do not display the lock screen: Enabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /t REG_DWORD /d 1 /f
+
+# Windows Components > Cloud Content > Turn off Microsoft consumer experiences: Enabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+
+# Windows Components > Data Collection and Preview Builds > Allow Telemetry: Disabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+
 # Windows Components > Data Collection and Preview Builds > Do not show feedback notifications: Enabled
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d 1 /f
+
+# Windows Components > OneDrive > Prevent OneDrive from generating network traffic until the user signs in to OneDrive: Enabled
+reg add "HKLM\SOFTWARE\Microsoft\OneDrive" /v "PreventNetworkTrafficPreUserSignIn" /t REG_DWORD /d 1 /f
+
+# Windows Components > OneDrive > Prevent the usage of OneDrive for file storage: Enabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSync" /t REG_DWORD /d 1 /f
+
+# Windows Components > OneDrive > Save documents to OneDrive by default: Disabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableLibrariesDefaultSaveToOneDrive" /t REG_DWORD /d 0 /f
+
+# Windows Components > Search > Allow Cloud Search: Disabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d 0 /f
+
+# Windows Components > Search > Allow Cortana: Disabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
+
+# Windows Components > Search > Allow Cortana above lock screen: Disabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d 0 /f
+
+# Windows Components > Search > Allow search and Cortana to use location: Disabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f
+
+# Windows Components > Search > Do not allow locations on removable drives to be added to libraries: Enabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableRemovableDriveIndexing" /t REG_DWORD /d 1 /f
+
+# Windows Components > Search > Do not allow web search: Enabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d 1 /f
+
+# Windows Components > Search > Don't search the web or display web results in Search: Enabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 1 /f
+
+# Windows Components > Search > Prevent automatically adding shared folders to the Windows Search index: Enabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AutoIndexSharedFolders" /t REG_DWORD /d 1 /f
+
+# Windows Components > Search > Prevent clients from querying the index remotely: Enabled
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventRemoteQueries" /t REG_DWORD /d 1 /f
+
+# Windows Components > Speech > Allow Automatic Update of Speech Data: Disabled
+reg add "HKLM\Software\Policies\Microsoft\Speech" /v "AllowSpeechModelUpdate" /t REG_DWORD /d 0 /f
 
 # Windows Components > Windows Defender Antivirus > Turn off Windows Defender Antivirus: Enabled
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
@@ -432,5 +602,18 @@ reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "Enab
 # Windows Components > Windows Error Reporting > Disable Windows Error Reporting: Enabled
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
+
+# Windows Components > Windows Update > Configure Automatic Updates: Enabled
+#   Configure automatic updating: 2 - Notify for download and auto install
+#   [v] Install updates for other Microsoft products
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d 2 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AutomaticMaintenanceEnabled" /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d 3 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallEveryWeek" /t REG_DWORD /d 1 /f
+
+# System > Device Installation > Prevent device metadata retrieval from the Internet: Enabled
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d 1 /f
 
 Done

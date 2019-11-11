@@ -5,8 +5,8 @@
 OS="$(uname -s)"
 
 # Path
-PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/snap/bin"
-PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/snap/bin:${PATH}"
 export PATH
 
 # Files
@@ -21,20 +21,11 @@ export NCURSES_NO_UTF8_ACS="1"
 export MM_CHARSET="UTF-8"
 
 # Localization
-if [ -f "/usr/share/i18n/locales/en_XX" ]; then
-  export LANG="en_XX.${UTF8}"
-  export LC_TIME="en_XX.${UTF8}"
-  export LC_MESSAGES="en_XX.${UTF8}"
-  export LC_CTYPE="en_XX.${UTF8}"
-  export LC_COLLATE="C"
-  export LC_ALL=
-else
-  export LANG="en_US.${UTF8}"
-  export LC_MESSAGES="en_US.${UTF8}"
-  export LC_CTYPE="en_US.${UTF8}"
-  export LC_COLLATE="C"
-  export LC_ALL=
-fi
+export LANG="en_US.${UTF8}"
+export LC_MESSAGES="en_US.${UTF8}"
+export LC_CTYPE="en_US.${UTF8}"
+export LC_COLLATE="C"
+export LC_ALL=
 
 # Applications
 export NODE_PATH="/opt/node/lib/node_modules"
@@ -43,6 +34,7 @@ export P7ZIP="$(which 7z 7zr 7za 2>/dev/null | head -1)"
 export PAGER="less"
 
 # Ports
+export VCPKG_ROOT="/opt/vcpkg"
 export VCPKG_DEFAULT_TRIPLET="x64-linux"
 
 # Colors
@@ -53,14 +45,8 @@ export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:
 # Aliases
 alias ..="cd .."
 
-if [ "${OS}" = "Darwin" ]; then
-  alias ls="ls -FG"
-  alias ll="ls -lh"
-else
-  alias ls="ls -F --color=auto --group-directories-first"
-  alias ll="ls -lh --time-style long-iso"
-fi
-
+alias ls="ls -F --color=auto --group-directories-first"
+alias ll="ls -lh --time-style long-iso"
 alias lsa="ls -a"
 alias lla="ll -a"
 
@@ -112,13 +98,4 @@ if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
   elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Downloads" ]; then
     cd "${HOME}/downloads/$(pwd | cut -d/ -f7-)"
   fi
-fi
-
-# OSX
-if [ "${OS}" = "Darwin" ]; then
-  export CC="/usr/local/opt/llvm/bin/clang"
-  export CXX="/usr/local/opt/llvm/bin/clang++"
-  export PATH="/usr/local/opt/llvm/bin:${PATH}"
-  export CPPFLAGS="-I/usr/local/opt/llvm/include"
-  export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 fi

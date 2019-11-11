@@ -38,7 +38,6 @@ Advanced Options
 ```
 
 * [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [CMake](https://cmake.org/download/)
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
