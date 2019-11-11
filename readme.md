@@ -294,8 +294,12 @@ Install third party software.
 ### Sysinternals Suite
 Install [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx).
 
-Create Start Menu shortcut "Process Explorer" to `procexp64.exe`.<br/>
-Create Start Menu shortcut "Process Monitor" to `procmon.exe`.
+Create Start Menu shortcuts for the following executables.
+
+- `AutoRuns64.exe` (AutoRuns)
+- `AccessEnum.exe` (AccessEnum)
+- `ProcExp64.exe` (Process Explorer)
+- `ProcMon.exe` (Process Monitor)
 
 ### LMMS
 Install [LMMS](https://lmms.io/) and configure paths on first startup.
