@@ -372,6 +372,16 @@ reg add "HKCR\*\shell\gvim\command" /ve /d "%gvimfile%" /f
 ```
 
 <!--
+```cmd
+set gvim=C:\Program Files (x86)\Vim\vim81\gvim.exe
+set gvimtabfile=\"%gvim%\" -\-remote-tab-silent \"%1\"
+reg add "HKCR\*\shell\gvimtab" /ve /d "Edit with Vim (Tab)" /f
+reg add "HKCR\*\shell\gvimtab" /v Icon /d "%gvim%,0" /f
+reg add "HKCR\*\shell\gvimtab\command" /ve /d "%gvimtabfile%" /f
+```
+-->
+
+<!--
 ## Server
 Install software for Windows Server administration.
 

@@ -30,20 +30,6 @@ Individual components
 ☐ Add to PATH (requires shell restart)
 ```
 
-Register VS Code in Explorer context menus.
-
-```cmd
-set code=C:\Program Files\Microsoft VS Code\Code.exe
-set codefile=\"%code%\" \"%1\"
-reg add "HKCR\*\shell\code" /ve /d "Edit with Code" /f
-reg add "HKCR\*\shell\code" /v Icon /d "%code%,0" /f
-reg add "HKCR\*\shell\code\command" /ve /d "%codefile%" /f
-set codepath=\"%code%\" .
-reg add "HKCU\Software\Classes\Directory\Background\shell\code" /ve /d "Open in Code" /f
-reg add "HKCU\Software\Classes\Directory\Background\shell\code" /v Icon /d "%code%,0" /f
-reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "%codepath%" /f
-```
-
 * [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi)
 
 ```
@@ -309,6 +295,20 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
     "editor.defaultFormatter": "xaver.clang-format"
   }
 }
+```
+
+Register VS Code in Explorer context menus.
+
+```cmd
+set code=C:\Program Files\Microsoft VS Code\Code.exe
+set codefile=\"%code%\" \"%1\"
+reg add "HKCR\*\shell\code" /ve /d "Edit with Code" /f
+reg add "HKCR\*\shell\code" /v Icon /d "%code%,0" /f
+reg add "HKCR\*\shell\code\command" /ve /d "%codefile%" /f
+set codepath=\"%code%\" .
+reg add "HKCU\Software\Classes\Directory\Background\shell\code" /ve /d "Open in Code" /f
+reg add "HKCU\Software\Classes\Directory\Background\shell\code" /v Icon /d "%code%,0" /f
+reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "%codepath%" /f
 ```
 
 </details>
