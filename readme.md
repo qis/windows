@@ -54,8 +54,10 @@ Keyboard or input method: {Current Hardware Keyboard}
 Choose a single word username starting with a capital letter to keep the `%UserProfile%` path
 consistent and free from spaces.
 
+Verify Windows flavor and version with `Start > "winver"`.
+
 ## Setup
-Modify the [setup/system.ps1](setup/system.ps1) script and execute it using the "Run with PowerShell" context menu
+Modify and execute [setup/system.ps1](setup/system.ps1) using the "Run with PowerShell" context menu
 repeatedly until it stops rebooting the system.
 
 Unpin everything from the start menu and taskbar.
