@@ -280,6 +280,7 @@ Install third party software.
 * [Chrome](https://www.google.com/chrome/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
+* [MagicaVoxel](https://ephtracy.github.io/)
 * [Blender](https://www.blender.org/)
 * [SFXR](http://www.drpetter.se/project_sfxr.html)
 * [MPV](https://mpv.srsfckn.biz/)
@@ -297,7 +298,6 @@ Install [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb
 
 Create Start Menu shortcuts for the following executables.
 
-- `AutoRuns64.exe` (AutoRuns)
 - `AccessEnum.exe` (AccessEnum)
 - `ProcExp64.exe` (Process Explorer)
 - `ProcMon.exe` (Process Monitor)
