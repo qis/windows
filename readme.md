@@ -202,7 +202,12 @@ Move unwanted Windows libraries.
    Select the `Location` tab and change the path to `%AppData%\Pictures\Camera Roll`.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and change the path to `%AppData%\Pictures\Saved Pictures`.
-3. Delete the `Libraries\Videos\Captures` directory.
+
+Hide `Captures` directory.
+
+```cmd
+attrib +s +h "%UserProfile%\Videos\Captures"
+```
 
 ## Indexing Options
 Configure Indexing Options to only track the "Start Menu" and rebuild the index.
