@@ -51,7 +51,6 @@ $video = "%ProgramFiles%\MPV\mpv.exe,0"
 # Applications
 $7zipfm = '"%ProgramFiles%\7-Zip\7zFM.exe" "%1"'
 $editor = '"%ProgramFiles(x86)%\Vim\vim81\gvim.exe" "%1"'
-$sqlite = '"%ProgramFiles%\SQLite\DB Browser for SQLite.exe" "%1"'
 $player = '"%ProgramFiles%\MPV\mpv.exe" "%1"'
 
 # Archives
@@ -59,9 +58,6 @@ Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
   "7z", "arj", "bz2", "cab", "deb", "gz", "lz",
   "lzh", "rar", "rpm", "tar", "wim", "xz", "z", "zip"
 )
-
-# General
-Associate "database" "Database" $sqlite "database.ico" ("db")
 
 # Editor
 Associate "android" "Android" $editor $conf ("gradle", "iml", "lock", "metadata", "properties")
@@ -96,7 +92,7 @@ Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 
 # Video
-Associate "video" "Visual Basic" $player $video ("avi", "flv", "mkv", "mp4")
+Associate "video" "Video" $player $video ("avi", "flv", "mkv", "mp4")
 
 & ie4uinit.exe -ClearIconCache
 
