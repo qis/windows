@@ -287,20 +287,12 @@ Install third party software.
 * [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 
 <!--
 * [Gimp](https://www.gimp.org/)
 * [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
 -->
-
-### Sysinternals Suite
-Install [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx).
-
-Create Start Menu shortcuts for the following executables.
-
-- `AccessEnum.exe` (AccessEnum)
-- `ProcExp64.exe` (Process Explorer)
-- `ProcMon.exe` (Process Monitor)
 
 ### LMMS
 Install [LMMS](https://lmms.io/) and configure paths on first startup.
