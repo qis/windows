@@ -1,8 +1,48 @@
 # Development
 Installation and configuration of a Windows 10 development workstation.
 
-## Tools
-Install various tools for development.
+## Native
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+
+```
+Workloads
++ ☑ Desktop development with C++
+
+Individual components
++ Debuggong and testing
+  ☑ JavaScript diagnostics
++ Development Activities
+  ☐ IntelliCode
+  ☑ JavaScript and TypeScript language support
+  ☐ Live Share
+```
+
+* [Make](https://github.com/qis/make) into `C:\Program Files\Make`
+* [CMake](https://cmake.org/download/) into `C:\Program Files\CMake`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\Program Files\Ninja`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\Nasm`
+* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
+
+## Scripting
+* [Visual Studio Code](https://code.visualstudio.com/download)
+
+```
+☐ Add to PATH (requires shell restart)
+```
+
+Register VS Code in Explorer context menus.
+
+```cmd
+set code=C:\Program Files\Microsoft VS Code\Code.exe
+set codefile=\"%code%\" \"%1\"
+reg add "HKCR\*\shell\code" /ve /d "Edit with Code" /f
+reg add "HKCR\*\shell\code" /v Icon /d "%code%,0" /f
+reg add "HKCR\*\shell\code\command" /ve /d "%codefile%" /f
+set codepath=\"%code%\" .
+reg add "HKCU\Software\Classes\Directory\Background\shell\code" /ve /d "Open in Code" /f
+reg add "HKCU\Software\Classes\Directory\Background\shell\code" /v Icon /d "%code%,0" /f
+reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "%codepath%" /f
+```
 
 * [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi)
 
@@ -38,22 +78,10 @@ Advanced Options
 ```
 
 * [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
-* [CMake](https://cmake.org/download/)
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `%ProgramFiles%\NASM`
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `%ProgramFiles%\Ninja`
-* [WiX](https://wixtoolset.org/releases/)
 
-Build LLVM and install `clang-format.exe` into `C:\Program Files\LLVM\bin`.
-
-## Debugging
-Install various tools for debugging.
-
-* [ImageUSB](https://www.osforensics.com/tools/write-usb-images.html) into `%ProgramFiles(x86)%\ImageUSB`
-* [Universal Extractor 2](https://github.com/Bioruebe/UniExtract2)
-* [SQLite Database Browser](https://sqlitebrowser.org/)
-* [fping](https://github.com/dexit/fping-windows)
-* [x64dbg](https://x64dbg.com) into `%ProgramFiles%\x64dbg`
+## Format
+* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
+* [Clang-Format](https://llvm.org/builds/) into `C:\Program Files (x86)\LLVM\bin`
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -63,7 +91,7 @@ Configure the User `Path` environment variable.
 %UserProfile%\AppData\Roaming\npm
 ```
 
-Configure the user `NODE_PATH` environment variable.
+Configure the User `NODE_PATH` environment variable.
 
 ```
 %AppData%\npm\node_modules
@@ -78,63 +106,27 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
 C:\Program Files (x86)\Sysinternals Suite
-C:\Program Files\dotnet
+C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
 C:\Program Files\Make
 C:\Program Files\CMake\bin
-C:\Program Files\LLVM\bin
 C:\Program Files\Git\cmd
-C:\Program Files\NASM
+C:\Program Files\Nasm
 C:\Program Files\Ninja
+C:\Workspace\vcpkg
+C:\Vulkan\Bin
 C:\Node
-C:\Perl\perl\bin
 C:\Python
 C:\Python\Scripts
-C:\Vulkan\1.1.121.2\Bin
-C:\Workspace\vcpkg
+C:\Perl\perl\bin
 ```
 
-## Visual Studio 2019
-Install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).
+## Settings
+Configure development environments.
 
-```
-Workloads
-+ ☑ Desktop development with C++
-+ ☑ Universal Windows Platform development
-  + Optional
-    ☑ C++ (v142) Universal Windows Platform tools
-+ ☑ Linux development with C++
+<details>
+<summary><b>Visual Studio 2019</b></summary>
 
-Individual components
-+ Compilers, build tools, and runtimes
-  ☑ C++ Universal Windows Platform runtime for v142 build tools
-  ☑ MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.21)
-+ Debuggong and testing
-  ☑ JavaScript diagnostics
-  ☐ Test Adapter for Boost.Test
-+ Development Activities
-  ☐ IntelliCode
-  ☑ JavaScript and TypeScript language support
-  ☐ Live Share
-+ SDKs, libraries, and frameworks
-  ☐ C++ ATL for v142 build tools (x86 & x64)
-  ☑ Windows 10 SDK (10.0.18362.0)
-```
-
-In case `vcruntime140_1.dll` is missing, install the redistributable package.
-
-```
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Redist\MSVC\14.20.27508\vc_redist.x64.exe
-````
-
-### Development Kits
-* [WDK for Windows 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
-* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
-
-### Plugins
-* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
-
-### Options
 ```
 Environment
 + General
@@ -143,7 +135,7 @@ Environment
   ☑ Save documents as Unicode when data cannot be saved in codepage
 + Fonts and Colors
   Text Editor: DejaVu LGC Sans Mono 9
-  Printer and Cut/Copy: Iconsolata 10
+  Printer and Cut/Copy: DejaVu LGC Sans Mono 9
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
 + Keyboard
   Build.BuildSolution: F7 (Global)
@@ -192,21 +184,21 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
+      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\LLVM\bin\clang-format.exe
     + Indentation
       ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
     + New Lines
       Position of open braces for namespaces: Keep on the same line, but add a space before
       Position of open braces for types: Keep on the same line, but add a space before
-      Position of open braces for functions: Move to a new line
+      Position of open braces for functions: Keep on the same line, but add a space before
       Position of open braces for control blocks: Keep on the same line, but add a space before
       Position of open braces for lambdas: Keep on the same line, but add a space before
       ☑ Place braces on separate lines
       ☑ For empty types, move closing braces to the same line as opening braces
       ☑ For empty function bodies, move closing braces to the same line as opening braces
-      ☐ Place 'else' on a new line
       ☑ Place 'catch' and similar keywords on a new line
+      ☐ Place 'else' on a new line
       ☐ Place 'while' in a do-while loop on a new line
     + Wrapping
       ◉ Always apply New Lines settings for blocks
@@ -232,12 +224,6 @@ Text Editor
 + JSON
   + Advanced
     Automatic formatting: Off
-  Supported File Names: makefile
-+ XAML
-  + Formatting
-    + Spacing
-      Element Spacing
-      ◉ Collapse multiple empty lines in content to a single line
 
 CMake
 + General
@@ -247,110 +233,87 @@ CMake
   ☐ Enable verbose CMake output
   CMakeSettings.json Template Directory
     %UserProfile%\.vs
-
-Line Endings Unifier
-+ General Settings
-  Add Newline On The Last Line: True
-  Default Line Ending: Linux
-  Force Default Line Ending On Document Save: True
-  Remove Trailing Whitespace: False
-  Save Files After Unifying: True
-  Supported File Formats: .c; .cc; .cpp; .cxx; .h; .hh; .hpp; .hxx; .ipp; .ihh; .rc; .manifest; .in; .lua; .sh; .conf; .json; .js; .py; .htm; .html; .css; .txt; .md; .xaml; .xml
-  Supported File Names: makefile
-
-XAML Designer
-+ General
-  Zoom by using: Mouse wheel
 ```
 
-### CMake Template
-Create the file `%UserProfile%\.vs\CMakeSettings.json`.
+Disable telemetry.
+
+```
+Help > Send Feedback > Settings...
++ Would you like to participate in the Visual Studio Experience Improvement Program?
+  ◉ No, I would not like to participate
+```
+
+</details>
+
+<details>
+<summary><b>Visual Studio Code</b></summary>
+
+Install extensions with the following commands with `CTRL+P`.
+
+```
+ext install ms-vscode.cpptools
+ext install xaver.clang-format
+ext install redhat.vscode-xml
+ext install redhat.vscode-yaml
+> Developer: Reload Window
+```
+
+Configure editor with `> Preferences: Open Settings (JSON)`.
 
 ```json
 {
-  "configurations": [
-    {
-      "name": "Debug",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "buildRoot": "${projectDir}\\build\\msvc\\${name}",
-      "installRoot": "${projectDir}\\debug",
-      "variables": []
-    },
-    {
-      "name": "Release",
-      "generator": "Ninja",
-      "configurationType": "Release",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "buildRoot": "${projectDir}\\build\\msvc\\${name}",
-      "installRoot": "${projectDir}",
-      "variables": []
-    },
-    {
-      "name": "WSL-Debug",
-      "generator": "Unix Makefiles",
-      "configurationType": "Debug",
-      "inheritEnvironments": [ "linux_x64" ],
-      "cmakeExecutable": "/opt/cmake/bin/cmake",
-      "cmakeToolchain": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
-      "buildRoot": "${projectDir}/build/llvm/${name}",
-      "installRoot": "${projectDir}",
-      "wslPath": "${defaultWSLPath}",
-      "variables": [
-        { "name": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE", "type": "PATH", "value": "/opt/vcpkg/scripts/toolchains/linux.cmake" },
-        { "name": "VCPKG_TARGET_TRIPLET", "type": "STRING", "value": "x64-linux" }
-      ]
-    },
-    {
-      "name": "WSL-Release",
-      "generator": "Unix Makefiles",
-      "configurationType": "Release",
-      "inheritEnvironments": [ "linux_x64" ],
-      "cmakeExecutable": "/opt/cmake/bin/cmake",
-      "cmakeToolchain": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
-      "buildRoot": "${projectDir}/build/llvm/${name}",
-      "installRoot": "${projectDir}",
-      "wslPath": "${defaultWSLPath}",
-      "variables": [
-        { "name": "VCPKG_CHAINLOAD_TOOLCHAIN_FILE", "type": "PATH", "value": "/opt/vcpkg/scripts/toolchains/linux.cmake" },
-        { "name": "VCPKG_TARGET_TRIPLET", "type": "STRING", "value": "x64-linux" }
-      ]
-    }
-  ]
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.detectIndentation": false,
+  "editor.dragAndDrop": false,
+  "editor.folding": false,
+  "editor.fontFamily": "'DejaVu LGC Sans Mono', Consolas, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 13,
+  "editor.largeFileOptimizations": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderLineHighlight": "none",
+  "editor.rulers": [ 120 ],
+  "editor.smoothScrolling": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 120,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "extensions.ignoreRecommendations": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autoRepositoryDetection": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.postCommitCommand": "push",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "window.newWindowDimensions": "maximized",
+  "window.openFoldersInNewWindow": "on",
+  "window.openFilesInNewWindow": "on",
+  "window.restoreWindows": "none",
+  "window.zoomLevel": 0,
+  "workbench.startupEditor": "newUntitledFile",
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.openExplorerOnEnd": true,
+  "debug.openDebug": "openOnDebugBreak",
+  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  }
 }
 ```
 
-## ScyllaHide
-Install the [ScyllaHide](https://github.com/x64dbg/ScyllaHide) plugin.
+</details>
 
-```cmd
-git clone git@github.com:x64dbg/ScyllaHide
-start ScyllaHide\ScyllaHide.sln
-```
-
-1. Replace `afxres` with `windows` and add `#define IDC_STATIC -1` in `ScyllaHideX64DBGPlugin\ScyllaHideX64DBGPlugin.rc`.
-2. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `Win32` in `Release` mode.
-3. Build the `HookLibrary` and `ScyllaHideX64DBGPlugin` projects for `x64` in `Release` mode.
-
-```cmd
-cmake -E make_directory "%ProgramFiles%\x64dbg\release\x32\plugins"
-cmake -E copy ^
-  ScyllaHide\ConfigCollection\scylla_hide.ini ^
-  ScyllaHide\ConfigCollection\NtApiCollection.ini ^
-  ScyllaHide\build\Release\Win32\HookLibraryx86.dll ^
-  ScyllaHide\build\Release\Win32\ScyllaHideX64DBGPlugin.dp32 ^
-  "%ProgramFiles%\x64dbg\release\x32\plugins"
-  
-cmake -E make_directory "%ProgramFiles%\x64dbg\release\x64\plugins"
-cmake -E copy ^
-  ScyllaHide\ConfigCollection\scylla_hide.ini ^
-  ScyllaHide\ConfigCollection\NtApiCollection.ini ^
-  ScyllaHide\build\Release\x64\HookLibraryx64.dll ^
-  ScyllaHide\build\Release\x64\ScyllaHideX64DBGPlugin.dp64 ^
-  "%ProgramFiles%\x64dbg\release\x64\plugins"
-```
-
+<!--
 ## Android Development
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
 Extract [Flutter](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
@@ -458,127 +421,11 @@ Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
 Accept android licenses.
 
 ```cmd
-flutter doctor --android-licenses
+flutter doctor -\-android-licenses
 ```
+-->
 
-## Visual Studio Code
-Install [Visual Studio Code](https://code.visualstudio.com/download).
-
-```
-Select Additional Tasks
-  ☐ Create a desktop icon
-  ☑ Add "Open with Code" action to Windows Explorer file context menu
-  ☑ Add "Open with Code" action to Windows Explorer directory context menu
-  ☐ Register Code as an editor for supported file types
-  ☐ Add to PATH (available after restart)
-```
-
-Install extensions with the following commands with `CTRL+P`.
-
-```
-ext install ms-vscode.cpptools
-ext install twxs.cmake
-ext install vector-of-bool.cmake-tools
-ext install maddouri.cmake-tools-helper
-ext install xaver.clang-format
-ext install rreverser.ragel
-ext install redhat.vscode-xml
-ext install redhat.vscode-yaml
-> Developer: Reload Window
-```
-
-<details>
-<summary>Configure editor with the command <code>Preferences: Open Settings (JSON)</code>.</summary>
-
-```json
-{
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.detectIndentation": false,
-  "editor.dragAndDrop": false,
-  "editor.folding": false,
-  "editor.fontFamily": "'Fira Code', 'DejaVu Sans Mono', Consolas, monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 13,
-  "editor.largeFileOptimizations": false,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.renderLineHighlight": "none",
-  "editor.rulers": [ 120 ],
-  "editor.smoothScrolling": true,
-  "editor.tabSize": 2,
-  "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 120,
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  "extensions.ignoreRecommendations": false,
-  "files.eol": "\n",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-  "git.autoRepositoryDetection": false,
-  "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  "git.postCommitCommand": "push",
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
-  "window.newWindowDimensions": "maximized",
-  "window.openFoldersInNewWindow": "on",
-  "window.openFilesInNewWindow": "on",
-  "window.restoreWindows": "none",
-  "window.zoomLevel": 0,
-  "workbench.startupEditor": "newUntitledFile",
-  "debug.internalConsoleOptions": "openOnSessionStart",
-  "debug.openExplorerOnEnd": true,
-  "debug.openDebug": "openOnDebugBreak",
-  "C_Cpp.updateChannel": "Insiders",
-  "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "cmake.generator": "Ninja",
-  "cmake.configureOnOpen": false,
-  "cmake.installPrefix": "${workspaceRoot}",
-  "cmake.buildDirectory": "${workspaceRoot}/build/msvc/${buildType}",
-  "cmake.configureSettings": {
-    "CMAKE_BUILD_WITH_INSTALL_RPATH": "ON",
-    "CMAKE_INSTALL_PREFIX": "${workspaceRoot}",
-    "CMAKE_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/buildsystems/vcpkg.cmake",
-    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "C:/Workspace/vcpkg/scripts/toolchains/windows.cmake",
-    "VCPKG_TARGET_TRIPLET": "x64-windows"
-  },
-  "clang-format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
-  "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "[java]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-}
-```
-</details>
-
-<details>
-<summary>Configure editor with the command <code>Preferences: Open Remote Settings</code>.</summary>
-
-```json
-{
-  "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.default.compilerPath": "/opt/llvm/bin/clang",
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "cmake.generator": "Ninja",
-  "cmake.configureOnOpen": false,
-  "cmake.installPrefix": "${workspaceRoot}",
-  "cmake.buildDirectory": "${workspaceRoot}/build/llvm/${buildType}",
-  "cmake.configureSettings": {
-    "CMAKE_BUILD_WITH_INSTALL_RPATH": "ON",
-    "CMAKE_TOOLCHAIN_FILE": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake",
-    "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "/opt/vcpkg/scripts/toolchains/linux.cmake",
-    "VCPKG_TARGET_TRIPLET": "x64-linux"
-  },
-  "clang-format.executable": "/opt/llvm/bin/clang-format"
-}
-```
-</details>
-
+<!--
 ## Windows Sandbox
 Install Windows Sandbox.
 
@@ -586,6 +433,7 @@ Install Windows Sandbox.
 Start > "Turn Windows features on or off"
 ☑ Windows Sandbox
 ```
+-->
 
 ## Windows Subsystem for Linux
 Take ownership of `/opt`.
@@ -594,33 +442,18 @@ Take ownership of `/opt`.
 USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 ```
 
-Configure environment variables in `~/.bashrc`.
-
-```sh
-export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
-export PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
-export NODE_PATH="/opt/node/lib/node_modules"
-```
-
 Install development packages.
 
 ```sh
-sudo apt install build-essential binutils-dev gdb libedit-dev nasm python python-pip git sqlite3 subversion swig
+sudo apt install -y build-essential binutils-dev gdb libedit-dev nasm ninja-build python python-pip subversion swig
 ```
 
 Install CMake.
 
 ```sh
 rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc2/cmake-3.16.0-rc2-Linux-x86_64.tar.gz
-tar xf cmake-3.16.0-rc2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
-```
-
-Install Ninja.
-
-```sh
-git clone -b release https://github.com/ninja-build/ninja
-sh -c "cd ninja && CC=gcc CXX=g++ ./configure.py --bootstrap && cp ninja /opt/cmake/bin/"
+wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc3/cmake-3.16.0-rc3-Linux-x86_64.tar.gz
+tar xf cmake-3.16.0-rc3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Install NodeJS.

@@ -207,39 +207,6 @@ Move unwanted Windows libraries.
 ## Indexing Options
 Configure Indexing Options to only track the "Start Menu" and rebuild the index.
 
-<!--
-## Windows Mobile Device Center (WMDC)
-Use the following script to fix Windows CE device connections.
-
-```cmd
-taskkill /im wmdc.exe /f
-taskkill /im wmdcBase.exe /f
-@timeout 1
-sc stop WcesComm
-sc stop RapiMgr
-@timeout 1
-reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\RapiMgr" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WcesComm" /v "SvcHostSplitDisable" /t REG_DWORD /d 1 /f
-sc config WcesComm obj= "LocalSystem" password= ""
-sc config RapiMgr obj= "LocalSystem" password= ""
-@timeout 1
-sc start RapiMgr
-@timeout 1
-sc start WcesComm
-@timeout 1
-@rem start "WMDC" "%windir%\WindowsMobile\wmdc.exe"
-start "WMDC" "%windir%\WindowsMobile\wmdcBase.exe"
-```
-
-If the system does not need that script, switch to headless device center.
-
-```cmd
-reg add "HKLM\SOFTWARE\Microsoft\Windows CE Services" /v "GuestOnly" /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Windows Mobile Device Center" /t REG_EXPAND_SZ /d "%windir%\WindowsMobile\wmdcBase.exe" /f
-```
--->
-
 ## Firewall
 Disable all rules in Windows Firewall except the following entries.
 
@@ -263,7 +230,7 @@ rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP ad
 `Remote IP address` in the `Scope` tab.
 
 ## Microsoft Software
-Configure [Microsoft Edge](https://en.wikipedia.org/wiki/Microsoft_Edge).
+Configure Microsoft Edge.
 
 ```
 Settings
@@ -285,23 +252,21 @@ Settings
 ```
 
 <!--
-Configure [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer).
-
-```
-Internet options
-+ General
-  Home page: about:blank
-  Startup: Start with tabs from the last session
-+ General > Tabs
-  When a new tab is opened, open: A blank page
-```
-
-Configure [Outlook 2016](https://products.office.com/en/outlook).
+Configure Microsoft Outlook 2016.
 
 ```cmd
 reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365SimplifiedAccountCreation" /t REG_DWORD /d 1 /f
 ```
 -->
+
+Configure Microsoft Photos.
+
+```
+Settings
++ Viewing and editing
+  Linked duplicates: Off
+  Mouse wheel: ◉ Zoom in and out
+```
 
 ## Applications
 Install third party software.
@@ -311,32 +276,33 @@ Install third party software.
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Blender](https://www.blender.org/)
-* [LMMS](https://lmms.io/)
 * [MPV](https://mpv.srsfckn.biz/)
 * [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
-* [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [CFF Explorer](http://www.ntcore.com/exsuite.php)
 
 <!--
-```
-LMMS Working Directory: C:\Users\Qis\Music\Workspace
-GIG Directory: C:\Users\Qis\Music\Workspace\Samples\GIG
-SF2 Directory: C:\Users\Qis\Music\Workspace\Samples\Fonts
-LADSPA Plugin Directories: C:\Users\Qis\Music\Workspace\Plugins\LADSPA
-```
-
 * [Gimp](https://www.gimp.org/)
 * [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
-* [Chrome Enterprise(https://cloud.google.com/chrome-enterprise/browser/download/#download)
-* [Tor Browser](https://www.torproject.org/download/)
-
-Install [qBittorrent](https://www.qbittorrent.org/) and configure the proxy.
-
-```
-Tor Browser > Menu > Options > General > Network Proxy > Settings…
-```
 -->
 
+### Sysinternals Suite
+Install [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx).
+
+Create Start Menu shortcut "Process Explorer" to `procexp64.exe`.<br/>
+Create Start Menu shortcut "Process Monitor" to `procmon.exe`.
+
+### LMMS
+Install [LMMS](https://lmms.io/) and configure paths on first startup.
+
+```
+LMMS Working Directory: %UserProfile%\Music\Workspace
+GIG Directory: %UserProfile%\Music\Workspace\Samples\GIG
+SF2 Directory: %UserProfile%\Music\Workspace\Samples\Fonts
+LADSPA Plugin Directories: %UserProfile%\Music\Workspace\Plugins\LADSPA
+```
+
+### Git
 Install [Git](https://git-scm.com/downloads) with specific settings.
 
 ```
@@ -390,13 +356,14 @@ Create configuration directory.
 git clone git@github.com:qis/vim %UserProfile%\vimfiles
 ```
 
-Register context menu entry.
+Register gVim in Explorer context menus.
 
 ```cmd
-set vimcmd=\"C:\Program Files (x86)\Vim\vim81\gvim.exe\" \"%1\"
+set gvim=C:\Program Files (x86)\Vim\vim81\gvim.exe
+set gvimfile=\"%gvim%\" \"%1\"
 reg add "HKCR\*\shell\gvim" /ve /d "Edit with Vim" /f
-reg add "HKCR\*\shell\gvim" /v Icon /d "C:\Program Files (x86)\Vim\vim81\gvim.exe,0" /f
-reg add "HKCR\*\shell\gvim\command" /ve /d "%vimcmd%" /f
+reg add "HKCR\*\shell\gvim" /v Icon /d "%gvim%,0" /f
+reg add "HKCR\*\shell\gvim\command" /ve /d "%gvimfile%" /f
 ```
 
 <!--
@@ -476,10 +443,6 @@ C:\Workspace\
 
 ## VLANs
 <https://downloadcenter.intel.com/download/25016/Intel-Network-Adapter-Driver-for-Windows-10>
-
-```cmd
-
-```
 -->
 
 ## Windows Subsystem for Linux
@@ -560,12 +523,12 @@ Install packages.
 
 ```sh
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 sudo apt dist-upgrade
 sudo apt autoremove
-sudo apt install p7zip p7zip-rar zip unzip tree pwgen python-minimal pv
-sudo apt install imagemagick pngcrush webp
-sudo apt install apache2-utils
+sudo apt autoclean
+sudo apt install -y git p7zip p7zip-rar zip unzip tree pv pwgen python-minimal sqlite3
+sudo apt install -y imagemagick pngcrush webp
 ```
 
 <!--
