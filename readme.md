@@ -281,6 +281,7 @@ Install third party software.
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Blender](https://www.blender.org/)
+* [SFXR](http://www.drpetter.se/project_sfxr.html)
 * [MPV](https://mpv.srsfckn.biz/)
 * [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
