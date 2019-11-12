@@ -257,6 +257,7 @@ Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 Install extensions with the following commands with `CTRL+P`.
 
 ```
+ext install ms-vscode-remote.remote-wsl
 ext install ms-vscode.cpptools
 ext install xaver.clang-format
 > Developer: Reload Window
