@@ -1,8 +1,7 @@
 # Development
 Installation and configuration of a Windows 10 development workstation.
 
-## Native
-* [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+Install [Visual Studio](https://visualstudio.microsoft.com/downloads/).
 
 ```
 Workloads
@@ -17,32 +16,27 @@ Individual components
   ☐ Live Share
 ```
 
+Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
+
+Install [Visual Studio Code](https://code.visualstudio.com/download).
+
+```
+☐ Add "Open with Code" action to Windows Explorer file context menu
+☐ Add "Open with Code" action to Windows Explorer directory context menu
+☐ Register Code as an editor for supported file types
+☐ Add to PATH (requires shell restart)
+```
+
+Install development tools.
+
 * [Make](https://github.com/qis/make) into `C:\Program Files\Make`
 * [CMake](https://cmake.org/download/) into `C:\Program Files\CMake`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\Program Files\Ninja`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\Nasm`
+* [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
 * [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
-## Scripting
-* [Visual Studio Code](https://code.visualstudio.com/download)
-
-```
-☐ Add to PATH (requires shell restart)
-```
-
-* [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi)
-
-```
-Destination Folder
-  C:\Node
-Custom Setup
-  ☑ Node.js runtime
-  ☑ npm package manager
-  ☒ Online documentation shortcuts
-  ☒ Add to PATH
-```
-
-* [Python 3](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
+Install [Python 3](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe).
 
 ```
 Install Python
@@ -63,11 +57,22 @@ Advanced Options
   Customize install location: C:\Python
 ```
 
-* [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
+Install [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi).
+
+```
+Destination Folder
+  C:\Node
+Custom Setup
+  ☑ Node.js runtime
+  ☑ npm package manager
+  ☒ Online documentation shortcuts
+  ☒ Add to PATH
+Tools for Native Modules
+  ☐ Automatically install necessary tools.
+```
 
 ## Format
-* [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
-* [Clang-Format](https://llvm.org/builds/) into `C:\Program Files (x86)\LLVM\bin`
+Install [Clang-Format](https://llvm.org/builds/) into `C:\Program Files (x86)\LLVM\bin`.
 
 ## Environment Variables
 Configure the User `Path` environment variable.
@@ -107,6 +112,18 @@ C:\Python\Scripts
 C:\Perl\perl\bin
 ```
 
+Configure the User `VCPKG_ROOT` environment variable.
+
+```
+C:\Workspace\vcpkg
+```
+
+Configure the User `VCPKG_DEFAULT_TRIPLET` environment variable.
+
+```
+x64-windows
+```
+
 ## Settings
 Configure development environments.
 
@@ -142,6 +159,7 @@ Source Control
 Text Editor
 + General
   ☐ Drag and drop text editing
+  ☑ Enable mouse click to perform Go to Definition
     Use modifier key: Ctrl+Alt
   ☐ Enable mouse click to perform Go to Definition
   ☐ Highlight current line
@@ -241,8 +259,6 @@ Install extensions with the following commands with `CTRL+P`.
 ```
 ext install ms-vscode.cpptools
 ext install xaver.clang-format
-ext install redhat.vscode-xml
-ext install redhat.vscode-yaml
 > Developer: Reload Window
 ```
 

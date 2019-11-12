@@ -197,6 +197,14 @@ General
   ☐ Let Windows track app launches to improve Start and search results
 ```
 
+## Lock Screen
+After the final changes to Lock Screen were made, you can disable it.
+
+```cmd
+cd windows\script
+powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen
+```
+
 ## Windows Libraries
 Move unwanted Windows libraries.
 
@@ -208,6 +216,7 @@ Move unwanted Windows libraries.
 Hide `Captures` directory.
 
 ```cmd
+md "%UserProfile%\Videos\Captures"
 attrib +s +h "%UserProfile%\Videos\Captures"
 ```
 
@@ -467,7 +476,6 @@ curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc -o .bas
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.profile -o .profile
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf -o .tmux.conf
 rm -f .bash_history .bash_logout
-touch .viminfo
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
@@ -513,7 +521,7 @@ Execute `chmod -x /etc/update-motd.d/*{-help-text,-motd-news}` to reduce spam.<b
 
 **IMPORTANT**: Completely restart `bash.exe` to apply `/etc/wsl.conf` settings.
 
-Create Windows symlinks.
+Create user symlinks.
 
 ```sh
 mkdir -p ~/.config
@@ -528,9 +536,18 @@ for i in config id_rsa id_rsa.pub known_hosts; do
   ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
 done
 chmod 0600 /mnt/c/Users/Qis/.ssh/* ~/.ssh/*
+rm -f .viminfo
+touch .viminfo
+```
+
+Create root symlinks.
+
+```sh
 sudo mkdir -p /root/.config
-sudo ln -s /mnt/c/Users/Qis/vimfiles /root/.config/nvim
-sudo ln -s /mnt/c/Users/Qis/vimfiles /root/.vim
+sudo ln -s $HOME/.config/nvim /root/.config/nvim
+sudo ln -s $HOME/.vim /root/.vim
+sudo rm -f /root/.viminfo
+sudo touch /root/.viminfo
 ```
 
 Install packages.

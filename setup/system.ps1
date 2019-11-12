@@ -11,11 +11,6 @@ If ((IsAdmin) -eq $False) {
   Exit
 }
 
-# Settings.
-$hostname = Read-Host -Prompt "Host Name"
-$username = Read-Host -Prompt "User Name"
-$fullname = Read-Host -Prompt "Full Name"
-
 # Initialize helper objects.
 $Kernel32 = Add-Type -MemberDefinition @'
 [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
@@ -25,14 +20,6 @@ public static extern bool SetComputerName(String name);
 public static extern bool GetComputerName(System.Text.StringBuilder buffer, ref uint size);
 '@ -Name 'Kernel32' -Namespace 'Win32' -PassThru
 
-# Set computer name.
-If ($hostname -ne "" -and $env:ComputerName -ne $hostname) {
-  Write-Output "Setting computer name..."
-  Rename-Computer -NewName "$hostname" -Force
-  Reboot
-}
-
-# Set netbios name.
 function Get-NetbiosName {
   $data = New-Object System.Text.StringBuilder 64
   $size = $data.Capacity
@@ -42,14 +29,25 @@ function Get-NetbiosName {
   return $data.ToString();
 }
 
-If ($hostname -ne "" -and (Get-NetbiosName) -cne "$hostname") {
-  Write-Output "Setting NetBios name..."
-  $Kernel32::SetComputerName("$hostname");
+# Set computer name.
+$hostname = Read-Host -Prompt "Set hostname [$env:ComputerName]"
+If ($hostname -ne "" -and $env:ComputerName -ne $hostname) {
+  Write-Output "Setting computer name..."
+  Rename-Computer -NewName "$hostname" -Force
   Reboot
 }
 
-# Change user name.
+# Set netbios name.
+If ($env:ComputerName -ne (Get-NetbiosName)) {
+  Write-Output "Setting NetBios name..."
+  $Kernel32::SetComputerName("$env:ComputerName");
+  Reboot
+}
+
+# Set user name.
+$username = Read-Host -Prompt "Set username [$env:UserName]"
 If ($username -ne "" -and $env:UserName -cne $username) {
+  $fullname = Read-Host -Prompt "Full Name"
   Write-Output "Setting User name..."
   Rename-LocalUser -Name "$env:UserName" -NewName "$username"
   Set-LocalUser -Name "$username" -FullName "$fullname"
@@ -296,7 +294,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
 
 # Disable transparency in Windows.
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 0
+#Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 0
 
 # ===========================================================================================================
 # Explorer UI Tweaks
