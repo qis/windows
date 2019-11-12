@@ -468,6 +468,27 @@ C:\Workspace\
 <https://downloadcenter.intel.com/download/25016/Intel-Network-Adapter-Driver-for-Windows-10>
 -->
 
+## Symbolic Link Privilege
+Allow user to create symbolic links.
+
+```
+secpol.msc
++ Security Settings > Local Policies > User Rights Assignment
+  Create symbolic links
+  + Add User or Group...
+    1. Enter own user name.
+    2. Click on "Check Names".
+    3. Click on "OK".
+```
+
+Update group policy.
+
+```cmd
+gpupdate /force
+```
+
+Reboot the system.
+
 ## Windows Subsystem for Linux
 Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
 
