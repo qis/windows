@@ -337,8 +337,8 @@ reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "
 <summary><b>Chrome</b></summary>
 
 1. Open `Local State` in the `%LocalAppData%\Google\Chrome\User Data` directory with VS Code.
-2. Format document.
-3. Make sure there is a `browser > enabled_labs_experiments` entry with Omnibox UI Hide options.
+2. Set file type to JSON and format document.
+3. Add the following entries.
 
 ```json
 {
