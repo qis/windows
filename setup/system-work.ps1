@@ -170,21 +170,21 @@ DisableRecentFiles
 
 DisableSharingMappedDrives
 DisableAdminShares
-HideAccountProtectionWarn
+#HideAccountProtectionWarn
 HideDefenderTrayIcon
-DisableDefenderAppGuard
-DisableDefenderCloud
-DisableDefender
-DisableDownloadBlocking
+#DisableDefenderAppGuard
+#DisableDefenderCloud
+#DisableDefender
+#DisableDownloadBlocking
 EnableDotNetStrongCrypto
-SetDEPOptOut
+#SetDEPOptOut
 
 # ===========================================================================================================
 # Network Tweaks
 # ===========================================================================================================
 
 SetUnknownNetworksPrivate
-DisableSMBServer
+#DisableSMBServer
 DisableLLMNR
 DisableLLDP
 DisableLLTD
@@ -216,8 +216,8 @@ DisableSuperfetch
 DisableSwapFile
 EnableNTFSLongPaths
 DisableNTFSLastAccess
-DisableHibernation
-DisableSleepButton
+#DisableHibernation
+#DisableSleepButton
 
 Write-Output "Setting display and sleep mode timeouts..."
 powercfg /X monitor-timeout-ac 30
@@ -393,7 +393,7 @@ DisableMediaSharing
 UninstallMediaPlayer
 
 DisableIEFirstRun
-UninstallInternetExplorer
+#UninstallInternetExplorer
 
 UninstallWorkFolders
 UninstallPowerShellV2
@@ -426,8 +426,8 @@ Write-Output 'Removeing "Set as desktop background" from Explorer context menu.'
   Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\setdesktopwallpaper" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
 }
 
-Write-Output 'Removing "AMD Radeon Software" from Explorer context menu...'
-Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
+#Write-Output 'Removing "AMD Radeon Software" from Explorer context menu...'
+#Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
 
 Write-Output "Uninstalling Microsoft Internet Printing..."
 Disable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-InternetPrinting-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
@@ -438,9 +438,9 @@ Get-WindowsCapability -Online | % {
   If ($_.Name | Select-String "App.Support.QuickAssist") {
     $remove = $True
   }
-  If ($_.Name | Select-String "Browser.InternetExplorer") {
-    $remove = $True
-  }
+  #If ($_.Name | Select-String "Browser.InternetExplorer") {
+  #  $remove = $True
+  #}
   If ($_.Name | Select-String "Media.WindowsMediaPlayer") {
     $remove = $True
   }

@@ -51,6 +51,7 @@ $video = "%ProgramFiles%\MPV\mpv.exe,0"
 # Applications
 $7zipfm = '"%ProgramFiles%\7-Zip\7zFM.exe" "%1"'
 $editor = '"%ProgramFiles(x86)%\Vim\vim81\gvim.exe" "%1"'
+$sqlite = '"%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" "%1"'
 $player = '"%ProgramFiles%\MPV\mpv.exe" "%1"'
 
 # Archives
@@ -70,6 +71,9 @@ Associate "patch" "Patch" $editor $text ("diff", "patch")
 Associate "text" "Text" $editor $text ("txt")
 Associate "yaml" "YAML" $editor $text ("yaml")
 Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
+
+# Database
+Associate "database" "Database" $sqlite "database.ico" ("db")
 
 # Code
 Associate "editorconfig" "Editor" $editor "code.ico" ("editorconfig")

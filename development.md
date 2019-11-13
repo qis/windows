@@ -34,7 +34,6 @@ Install development tools.
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\Program Files\Ninja`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\Nasm`
 * [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
-* [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`
 
 Install [Python 3](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe).
 
@@ -50,7 +49,7 @@ Optional Features
 Advanced Options
   ☑ Install for all users
   ☐ Create shortcuts for installed applications
-  ☐ Add Python to environment variables
+  ☑ Add Python to environment variables
   ☑ Precompile standard library
   ☐ Download debugging symbols
   ☐ Download debug binaries (requires VS 2015 or later)
@@ -66,10 +65,13 @@ Custom Setup
   ☑ Node.js runtime
   ☑ npm package manager
   ☒ Online documentation shortcuts
-  ☒ Add to PATH
+  ☑ Add to PATH
 Tools for Native Modules
   ☐ Automatically install necessary tools.
 ```
+
+## Development Kits
+Install [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`.
 
 ## Format
 Install [Clang-Format](https://llvm.org/builds/) into `C:\Program Files (x86)\LLVM\bin`.
@@ -96,7 +98,6 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
 C:\Program Files\Make
@@ -121,7 +122,7 @@ C:\Workspace\vcpkg
 Configure the User `VCPKG_DEFAULT_TRIPLET` environment variable.
 
 ```
-x64-windows
+x64-windows-static
 ```
 
 ## Settings
@@ -138,7 +139,6 @@ Environment
   ☑ Save documents as Unicode when data cannot be saved in codepage
 + Fonts and Colors
   Text Editor: DejaVu LGC Sans Mono 9
-  Printer and Cut/Copy: DejaVu LGC Sans Mono 9
   [All Text Tool Windows]: DejaVu LGC Sans Mono 9
 + Keyboard
   Build.BuildSolution: F7 (Global)
@@ -234,7 +234,7 @@ CMake
   ☑ Show CMake cache notifications
   When cache is out of date:
     ◉ Run configure step automatically only if CMakeSettings.json exists
-  ☐ Enable verbose CMake output
+  ☑ Enable verbose CMake output
   CMakeSettings.json Template Directory
     %UserProfile%\.vs
 ```

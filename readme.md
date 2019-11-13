@@ -95,12 +95,10 @@ Start > "Change device installation settings"
 3. Install Windows updates.
 4. Repeat the "Setup" step.
 
-Disable Web Search in Start Menu and install Windows Subsystem for Linux.
+Install Windows Subsystem for Linux.
 
 ```ps
 cd windows\script
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableWebSearch
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableCortana
 powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem
 ```
 
@@ -198,7 +196,7 @@ General
 ```
 
 ## Lock Screen
-After the final changes to Lock Screen were made, you can disable it.
+Disable Lock Screen after personalization.
 
 ```cmd
 cd windows\script
