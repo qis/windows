@@ -333,6 +333,28 @@ reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "
 
 </details>
 
+<details>
+<summary><b>Chrome</b></summary>
+
+1. Open `Local State` in the `%LocalAppData%\Google\Chrome\User Data` directory with VS Code.
+2. Format document.
+3. Make sure there is a `browser > enabled_labs_experiments` entry with Omnibox UI Hide options.
+
+```json
+{
+  "browser": {
+    "enabled_labs_experiments": [
+      "omnibox-ui-hide-steady-state-url-scheme@2",
+      "omnibox-ui-hide-steady-state-url-trivial-subdomains@2",
+      "omnibox-ui-hide-steady-state-url-path-query-and-ref@2"
+    ]
+  },
+  ...
+}
+```
+
+</details>
+
 <!--
 ## Android Development
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
