@@ -71,6 +71,7 @@ Associate "patch" "Patch" $editor $text ("diff", "patch")
 Associate "text" "Text" $editor $text ("txt")
 Associate "yaml" "YAML" $editor $text ("yaml")
 Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
+Associate "sourcemap" "Source Map" $editor $text ("map")
 
 # Database
 Associate "database" "Database" $sqlite "database.ico" ("db")
