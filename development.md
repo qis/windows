@@ -507,5 +507,29 @@ wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz
 tar xf node-v12.13.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
 
+Reinstall SSH Server.
+
+```sh
+sudo apt remove openssh-server
+sudo apt install openssh-server
+sudo service ssh start
+```
+
+Automatically start SSH server.
+
+```
+Task Scheduler > Create Task...
++ General
+  Name: WSL SSH Server
+  Description: Start SSH server in WSL
+  Security options: ◉ Run whether user is logged on or not
+  ☑ Hidden | Configure for: Windows 10
++ Triggers > New...
+  Begin the task: At startup
++ Actions > New...
+  Program/script: C:\Windows\System32\wsl.exe
+  Add arguments (optional): sudo service ssh start
+```
+
 ## Vcpkg
 Install Vcpkg using the [toolchains](https://github.com/qis/toolchains) guide.

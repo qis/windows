@@ -551,7 +551,7 @@ ln -s /mnt/c/Users/Qis/Documents ~/documents
 ln -s /mnt/c/Users/Qis/Downloads ~/downloads
 ln -s /mnt/c/Workspace ~/workspace
 mkdir -p ~/.ssh; chmod 0700 ~/.ssh
-for i in config id_rsa id_rsa.pub known_hosts; do
+for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
   ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
 done
 chmod 0600 /mnt/c/Users/Qis/.ssh/* ~/.ssh/*
