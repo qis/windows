@@ -493,9 +493,10 @@ sudo apt install -y build-essential binutils-dev gdb libedit-dev nasm ninja-buil
 Install CMake.
 
 ```sh
-rm -rf /opt/cmake; mkdir /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc3/cmake-3.16.0-rc3-Linux-x86_64.tar.gz
-tar xf cmake-3.16.0-rc3-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+rm -rf /opt/cmake /opt/cmake-3.16.0; mkdir /opt/cmake-3.16.0
+wget https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz
+tar xf cmake-3.16.0-Linux-x86_64.tar.gz -C /opt/cmake-3.16.0 --strip-components 1
+ln -s cmake-3.16.0 /opt/cmake
 ```
 
 Install NodeJS.
