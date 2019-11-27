@@ -488,13 +488,13 @@ gpupdate /force
 Reboot the system.
 
 ## Windows Subsystem for Linux
-Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files.
+Install a WSL distro from <https://aka.ms/wslstore>, launch it and download config files as **user** and **root**.
 
 ```sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc -o .bashrc
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.profile -o .profile
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf -o .tmux.conf
-rm -f .bash_history .bash_logout
+exit  # required to apply settings and release ~/.history
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
@@ -540,7 +540,7 @@ Execute `chmod -x /etc/update-motd.d/*{-help-text,-motd-news}` to reduce spam.<b
 
 **IMPORTANT**: Completely restart `bash.exe` to apply `/etc/wsl.conf` settings.
 
-Create user symlinks.
+Initialize **user** and **root** home directory structure.
 
 ```sh
 mkdir -p ~/.config
@@ -555,18 +555,8 @@ for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
   ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
 done
 chmod 0600 /mnt/c/Users/Qis/.ssh/* ~/.ssh/*
-rm -f .viminfo
-touch .viminfo
-```
-
-Create root symlinks.
-
-```sh
-sudo mkdir -p /root/.config
-sudo ln -s $HOME/.config/nvim /root/.config/nvim
-sudo ln -s $HOME/.vim /root/.vim
-sudo rm -f /root/.viminfo
-sudo touch /root/.viminfo
+rm -f .bash_history .bash_logout .viminfo
+touch ~/.config/nviminfo ~/.config/viminfo
 ```
 
 Install packages.
@@ -577,7 +567,7 @@ sudo apt upgrade -y
 sudo apt dist-upgrade
 sudo apt autoremove
 sudo apt autoclean
-sudo apt install -y git p7zip p7zip-rar zip unzip tree pv pwgen python-minimal sqlite3
+sudo apt install -y p7zip tree pv pwgen
 sudo apt install -y imagemagick pngcrush webp
 ```
 

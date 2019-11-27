@@ -487,7 +487,8 @@ USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
 Install development packages.
 
 ```sh
-sudo apt install -y build-essential binutils-dev gdb libedit-dev nasm ninja-build python python-pip subversion swig
+sudo apt install -y build-essential gdb nasm ninja-build python python-pip sqlite3 swig
+sudo apt install -y binutils-dev libedit-dev libnftnl-dev libmnl-dev
 ```
 
 Install CMake.
