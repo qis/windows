@@ -567,7 +567,7 @@ sudo apt upgrade -y
 sudo apt dist-upgrade
 sudo apt autoremove
 sudo apt autoclean
-sudo apt install -y p7zip tree pv pwgen
+sudo apt install -y p7zip-full tree pv pwgen
 sudo apt install -y imagemagick pngcrush webp
 ```
 
