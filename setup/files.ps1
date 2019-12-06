@@ -70,6 +70,7 @@ Associate "markdown" "Markdown" $editor $text ("markdown", "md")
 Associate "patch" "Patch" $editor $text ("diff", "patch")
 Associate "text" "Text" $editor $text ("txt")
 Associate "yaml" "YAML" $editor $text ("yaml")
+Associate "jam" "JAM" $editor $text ("jam")
 Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
 Associate "sourcemap" "Source Map" $editor $text ("map")
 
