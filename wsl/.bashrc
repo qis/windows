@@ -30,12 +30,11 @@ export LC_ALL=
 # Applications
 export NODE_PATH="/opt/node/lib/node_modules"
 export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
-export P7ZIP="$(which 7z 7zr 7za 2>/dev/null | head -1)"
 export PAGER="less"
 
 # Ports
 export VCPKG_ROOT="/opt/vcpkg"
-export VCPKG_DEFAULT_TRIPLET="x64-linux"
+export VCPKG_DEFAULT_TRIPLET="x64-linux-llvm"
 
 # Colors
 export CLICOLOR=1
@@ -50,7 +49,6 @@ alias ll="ls -lh --time-style long-iso"
 alias lsa="ls -a"
 alias lla="ll -a"
 
-alias 7z="${P7ZIP}"
 alias vim="${EDITOR} -p"
 alias vimdiff="${EDITOR} -d"
 alias crush="pngcrush -brute -reduce -rem allb -ow"
