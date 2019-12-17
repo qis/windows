@@ -184,6 +184,7 @@ Text Editor
     + Browsing/Navigation
       Disable External Dependencies Folders: True
     + IntelliSense
+      Disable Automatic Precompiled Header: True
       Enable Template IntelliSense: False
   + Formatting
     + General
