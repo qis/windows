@@ -29,7 +29,6 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 
 Install development tools.
 
-* [Make](https://github.com/qis/make) into `C:\Program Files\Make`
 * [CMake](https://cmake.org/download/) into `C:\Program Files\CMake`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\Program Files\Ninja`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\Nasm`
@@ -100,7 +99,6 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\OpenSSH
 C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
-C:\Program Files\Make
 C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
 C:\Program Files\Nasm
