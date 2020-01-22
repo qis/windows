@@ -294,6 +294,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "git.autofetch": false,
   "git.autoRepositoryDetection": false,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
@@ -331,8 +332,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "[javascript]": {
     "editor.fontLigatures": "'ss02', 'ss19'",
     "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "git.autofetch": true
+  }
 }
 ```
 
