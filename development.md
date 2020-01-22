@@ -257,8 +257,13 @@ Install extensions with the following commands with `CTRL+P`.
 
 ```
 ext install ms-vscode-remote.remote-wsl
-ext install ms-vscode.cpptools
+ext install donjayamanne.githistory
+ext install alefragnani.rtf
+ext install jamesbirtles.svelte-vscode
 ext install xaver.clang-format
+ext install twxs.cmake
+ext install ms-vscode.cpptools
+ext install jeff-hykin.better-cpp-syntax
 > Developer: Reload Window
 ```
 
@@ -271,20 +276,22 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.dragAndDrop": false,
   "editor.folding": false,
   "editor.fontFamily": "'DejaVu LGC Sans Mono', Consolas, monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 13,
+  "editor.fontLigatures": false,
+  "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "none",
-  "editor.rulers": [ 120 ],
+  "editor.rulers": [ 128 ],
   "editor.smoothScrolling": true,
+  "editor.minimap.scale": 2,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 120,
+  "editor.wordWrapColumn": 128,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": false,
   "files.eol": "\n",
+  "files.hotExit": "off",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "git.autoRepositoryDetection": false,
@@ -303,7 +310,18 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
   "debug.openDebug": "openOnDebugBreak",
-  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "debug.onTaskErrors": "showErrors",
+  "C_Cpp.vcpkg.enabled": false,
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.experimentalFeatures": "Enabled",
+  "C_Cpp.default.compileCommands": "build\\windows\\debug\\compile_commands.json",
+  "C_Cpp.clang_format_path": "C:\\Workspace\\vcpkg\\triplets\\toolchain\\llvm\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Workspace\\vcpkg\\triplets\\toolchain\\llvm\\bin\\clang-format.exe",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "[c]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
@@ -311,9 +329,24 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
     "editor.defaultFormatter": "xaver.clang-format"
   },
   "[javascript]": {
+    "editor.fontLigatures": "'ss02', 'ss19'",
     "editor.defaultFormatter": "xaver.clang-format"
-  }
+  },
+  "git.autofetch": true
 }
+```
+
+Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)`.
+
+```json
+[
+  { "key": "ctrl+f5",       "command": "workbench.action.debug.run" },
+  { "key": "f5",            "command": "workbench.action.debug.start", "when": "!inDebugMode" },
+  { "key": "f5",            "command": "workbench.action.debug.restart", "when": "inDebugMode" },
+  { "key": "f6",            "command": "workbench.action.debug.pause", "when": "debugState == 'running'" },
+  { "key": "f6",            "command": "workbench.action.debug.continue", "when": "debugState != 'running'" },
+  { "key": "f7",            "command": "workbench.action.tasks.build" }
+]
 ```
 
 Register VS Code in Explorer context menus.
