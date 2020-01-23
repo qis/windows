@@ -299,6 +299,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "push",
+  "git.showPushSuccessNotification": true,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "workbench.startupEditor": "none",
