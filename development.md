@@ -373,7 +373,7 @@ reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "
 <summary><b>Android</b></summary>
 
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
-Extract [Flutter](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
+Extract [Flutter SDK](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
 
 Configure the System `ANDROID_HOME` environment variable.
 
@@ -426,18 +426,46 @@ Install missing tools, plugins and SDKs.
 + Editor
   + General
     + Appearance
+      ☐ Show indent guides
+      ☐ Show intention bulb
       ☐ Show parameter name hints
       ☐ Show chain call type hints
     + Code Completion
       ☐ Show the parameter info popup in [1000] ms
   + Font
     Font: DejaVu LGC Sans Mono
+  + Color Scheme
+    + Language Defaults
+      > Comments
+        > Doc Comment
+          - Tag
+            ☐ Effects
+      > Identifiers
+        - Reassigned local variable
+          ☐ Effects
+        - Reassigned parameter
+          ☐ Effects
+    + Java
+      > Parameters
+        - Implicit anonymous class parameter
+          ☐ Effects
+    + Kotlin
+      > Properties and Variables
+        - Var (mutable variable, parameter or property)
+          ☐ Effects
   + Code Style
+    Wrapping and Braces
+      Hard wrap at: 128
     + Java, C/C++, CMake, HTML, JSON, Kotlin, XML, Other File Types
       Tabs and Indents
         Tab size: 2
         Indent: 2
         Continuation indent: 2
+      Wrapping and Braces
+        Hard wrap at: 128
+        > 'try' statement
+          ☑ 'catch' on new line
+          ☑ 'finally' on new line
     + C/C++
       Tabs and Indents
         Indent in lambdas: 2
@@ -454,11 +482,28 @@ Install missing tools, plugins and SDKs.
           ☑ Before '<'
         In Template Instantiation
           ☑ Before '<'
+      Wrapping and Braces
+        > 'try' statement
+          ☑ 'catch' on new line
       New File Extensions
         C++
           Source Extension: cpp
           Header Extension: hpp
           File Naming Convention: snake_case
+    + Dart
+      Wrapping and Braces
+        Hard wrap at: 128
+        > 'try' statement
+          ☑ 'catch' on new line
+    + JSON
+      Wrapping and Braces
+        Hard wrap at: 128
+    + Kotlin
+      Wrapping and Braces
+        Hard wrap at: 128
+        > 'try' statement
+          ☑ 'catch' on new line
+          ☑ 'finally' on new line
   + File Encodings
     Global Encoding: UTF-8
     Project Encoding: UTF-8
@@ -473,7 +518,7 @@ Install missing tools, plugins and SDKs.
 
 Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
 
-Accept android licenses.
+Accept android license and check compatibility.
 
 ```cmd
 flutter doctor --android-licenses
