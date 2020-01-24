@@ -264,6 +264,7 @@ ext install xaver.clang-format
 ext install twxs.cmake
 ext install ms-vscode.cpptools
 ext install jeff-hykin.better-cpp-syntax
+ext install dart-code.flutter
 > Developer: Reload Window
 ```
 
@@ -368,29 +369,8 @@ reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "
 </details>
 
 <details>
-<summary><b>Chrome</b></summary>
+<summary><b>Android</b></summary>
 
-1. Open `Local State` in the `%LocalAppData%\Google\Chrome\User Data` directory with VS Code.
-2. Set file type to JSON and format document.
-3. Add the following entries.
-
-```json
-{
-  "browser": {
-    "enabled_labs_experiments": [
-      "omnibox-ui-hide-steady-state-url-scheme@2",
-      "omnibox-ui-hide-steady-state-url-trivial-subdomains@2",
-      "omnibox-ui-hide-steady-state-url-path-query-and-ref@2"
-    ]
-  },
-  ...
-}
-```
-
-</details>
-
-<!--
-## Android Development
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
 Extract [Flutter](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
 
@@ -409,12 +389,12 @@ C:\Android\studio\jre
 Configure the System `Path` environment variable.
 
 ```
-C:\Android\build-tools\28.0.3
-C:\Android\flutter\bin
-C:\Android\platform-tools
 C:\Android\tools
 C:\Android\tools\bin
 C:\Android\studio\jre\bin
+C:\Android\build-tools\29.0.2
+C:\Android\platform-tools
+C:\Android\flutter\bin
 ```
 
 Start and configure Android Studio (`C:\Android\studio\bin\studio64.exe`).
@@ -436,18 +416,19 @@ Install missing tools, plugins and SDKs.
 + Appearance & Behavior
   + System Settings
     ☐ Reopen last project on startup
+    ☐ Confirm application exit
     + Android SDK
       SDK Tools
+        ☑ NDK (Side by side)
         ☐ Android Emulator
         ☑ Google USB Driver
-        ☑ NDK
 + Editor
   + General
     + Appearance
       ☐ Show parameter name hints
       ☐ Show chain call type hints
     + Code Completion
-      ☐ Show parameter name hints on completion
+      ☐ Show the parameter info popup in [1000] ms
   + Font
     Font: DejaVu LGC Sans Mono
   + Code Style
@@ -486,10 +467,7 @@ Install missing tools, plugins and SDKs.
     ☑ Prefer XML editor
 + Plugins
   [Browse repositories...]
-    Install: Flutter, Kotlin
-+ Version Control
-  + Git
-    SSH executable: Native
+    Install: Flutter
 ```
 
 Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
@@ -497,9 +475,33 @@ Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
 Accept android licenses.
 
 ```cmd
-flutter doctor -\-android-licenses
+flutter doctor --android-licenses
+flutter doctor --verbose
 ```
--->
+
+</details>
+
+<details>
+<summary><b>Chrome</b></summary>
+
+1. Open `Local State` in the `%LocalAppData%\Google\Chrome\User Data` directory with VS Code.
+2. Set file type to JSON and format document.
+3. Add the following entries.
+
+```json
+{
+  "browser": {
+    "enabled_labs_experiments": [
+      "omnibox-ui-hide-steady-state-url-scheme@2",
+      "omnibox-ui-hide-steady-state-url-trivial-subdomains@2",
+      "omnibox-ui-hide-steady-state-url-path-query-and-ref@2"
+    ]
+  },
+  ...
+}
+```
+
+</details>
 
 <!--
 ## Windows Sandbox
