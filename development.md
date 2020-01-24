@@ -485,21 +485,10 @@ flutter doctor --verbose
 <details>
 <summary><b>Chrome</b></summary>
 
-1. Open `Local State` in the `%LocalAppData%\Google\Chrome\User Data` directory with VS Code.
-2. Set file type to JSON and format document.
-3. Add the following entries.
+Start Chrome and Brave browsers with the following command-line flags:
 
-```json
-{
-  "browser": {
-    "enabled_labs_experiments": [
-      "omnibox-ui-hide-steady-state-url-scheme@2",
-      "omnibox-ui-hide-steady-state-url-trivial-subdomains@2",
-      "omnibox-ui-hide-steady-state-url-path-query-and-ref@2"
-    ]
-  },
-  ...
-}
+```
+--disable-features=OmniboxUIExperimentHideSteadyStateUrlScheme,OmniboxUIExperimentHideSteadyStateUrlTrivialSubdomains
 ```
 
 </details>
