@@ -278,6 +278,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.folding": false,
   "editor.fontFamily": "'DejaVu LGC Sans Mono', Consolas, monospace",
   "editor.fontLigatures": false,
+  "editor.formatOnSave": true,
   "editor.links": false,
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
