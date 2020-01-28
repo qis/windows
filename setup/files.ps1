@@ -46,6 +46,7 @@ function Associate {
 # Icons
 $conf = "%SystemRoot%\System32\imageres.dll,62"
 $text = "%SystemRoot%\System32\imageres.dll,97"
+$audio = "%ProgramFiles%\MPV\mpv.exe,0"
 $video = "%ProgramFiles%\MPV\mpv.exe,0"
 
 # Applications
@@ -98,8 +99,11 @@ Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "shell" "Shell" $editor "code.ico" ("sh")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 
+# Audio
+Associate "audio" "Audio" $player $audio ("mp3")
+
 # Video
-Associate "video" "Video" $player $video ("avi", "flv", "mkv", "mp4")
+Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov")
 
 & ie4uinit.exe -ClearIconCache
 
