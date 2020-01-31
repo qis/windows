@@ -565,18 +565,19 @@ sudo apt install -y binutils-dev libedit-dev libnftnl-dev libmnl-dev
 Install CMake.
 
 ```sh
-rm -rf /opt/cmake /opt/cmake-3.16.2; mkdir /opt/cmake-3.16.2
-wget https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2-Linux-x86_64.tar.gz
-tar xf cmake-3.16.2-Linux-x86_64.tar.gz -C /opt/cmake-3.16.2 --strip-components 1
-ln -s cmake-3.16.2 /opt/cmake
+rm -rf /opt/cmake /opt/cmake-3.16.3; mkdir /opt/cmake-3.16.3
+wget https://github.com/Kitware/CMake/releases/download/v3.16.3/cmake-3.16.3-Linux-x86_64.tar.gz
+tar xf cmake-3.16.3-Linux-x86_64.tar.gz -C /opt/cmake-3.16.3 --strip-components 1
+ln -s cmake-3.16.3 /opt/cmake
 ```
 
 Install NodeJS.
 
 ```sh
-rm -rf /opt/node; mkdir /opt/node
-wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz
-tar xf node-v12.13.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+rm -rf /opt/node /opt/node-12.14.1; mkdir /opt/node-12.14.1
+wget https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz
+tar xf node-v12.14.1-linux-x64.tar.xz -C /opt/node-12.14.1 --strip-components 1
+ln -s node-12.14.1 /opt/node
 ```
 
 Reinstall SSH Server.
