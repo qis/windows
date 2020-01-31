@@ -30,11 +30,11 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 Install development tools.
 
 * [CMake](https://cmake.org/download/) into `C:\Program Files\CMake`
-* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip) into `C:\Program Files\Ninja`
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14/win64/nasm-2.14-win64.zip) into `C:\Program Files\Nasm`
-* [Perl](http://strawberryperl.com/download/5.30.0.1/strawberry-perl-5.30.0.1-64bit-portable.zip) into `C:\Perl`
+* [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.10.0/ninja-win.zip) into `C:\Program Files\Ninja`
+* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip) into `C:\Program Files\Nasm`
+* [Perl](http://strawberryperl.com/download/5.30.1.1/strawberry-perl-5.30.1.1-64bit-portable.zip) into `C:\Perl`
 
-Install [Python 3](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe).
+Install [Python 3](https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe).
 
 ```
 Install Python
@@ -48,14 +48,14 @@ Optional Features
 Advanced Options
   ☑ Install for all users
   ☐ Create shortcuts for installed applications
-  ☑ Add Python to environment variables
+  ☐ Add Python to environment variables
   ☑ Precompile standard library
   ☐ Download debugging symbols
   ☐ Download debug binaries (requires VS 2015 or later)
   Customize install location: C:\Python
 ```
 
-Install [Node LTS](https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi).
+Install [Node LTS](https://nodejs.org/dist/v12.14.1/node-v12.14.1-x64.msi).
 
 ```
 Destination Folder
@@ -64,7 +64,7 @@ Custom Setup
   ☑ Node.js runtime
   ☑ npm package manager
   ☒ Online documentation shortcuts
-  ☑ Add to PATH
+  ☒ Add to PATH
 Tools for Native Modules
   ☐ Automatically install necessary tools.
 ```
@@ -264,7 +264,6 @@ ext install xaver.clang-format
 ext install twxs.cmake
 ext install ms-vscode.cpptools
 ext install jeff-hykin.better-cpp-syntax
-ext install dart-code.flutter
 > Developer: Reload Window
 ```
 
@@ -321,8 +320,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.experimentalFeatures": "Enabled",
   "C_Cpp.default.compileCommands": "build\\windows\\debug\\compile_commands.json",
-  "C_Cpp.clang_format_path": "C:\\Workspace\\vcpkg\\triplets\\toolchain\\llvm\\bin\\clang-format.exe",
-  "clang-format.executable": "C:\\Workspace\\vcpkg\\triplets\\toolchain\\llvm\\bin\\clang-format.exe",
+  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "[c]": {
     "editor.defaultFormatter": "xaver.clang-format"
@@ -373,7 +372,6 @@ reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "
 <summary><b>Android</b></summary>
 
 Extract [Android Studio](https://developer.android.com/studio) (No .exe installer) as `C:\Android\studio`.<br/>
-Extract [Flutter SDK](https://flutter.io/docs/get-started/install/windows) as `C:\Android\flutter`.
 
 Configure the System `ANDROID_HOME` environment variable.
 
@@ -395,7 +393,6 @@ C:\Android\tools\bin
 C:\Android\studio\jre\bin
 C:\Android\build-tools\29.0.2
 C:\Android\platform-tools
-C:\Android\flutter\bin
 ```
 
 Start and configure Android Studio (`C:\Android\studio\bin\studio64.exe`).
@@ -511,19 +508,9 @@ Install missing tools, plugins and SDKs.
     Create UTF-8 files: with NO BOM
   + Layout Editor
     ☑ Prefer XML editor
-+ Plugins
-  [Browse repositories...]
-    Install: Flutter
 ```
 
 Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
-
-Accept android license and check compatibility.
-
-```cmd
-flutter doctor --android-licenses
-flutter doctor --verbose
-```
 
 </details>
 
