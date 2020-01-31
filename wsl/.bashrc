@@ -35,7 +35,7 @@ export PAGER="less"
 # Ports
 export VCPKG_ROOT="/opt/vcpkg"
 export VCPKG_DOWNLOADS="/opt/downloads"
-export VCPKG_DEFAULT_TRIPLET="x64-linux-llvm"
+export VCPKG_DEFAULT_TRIPLET="x64-linux"
 
 # Colors
 export CLICOLOR=1
