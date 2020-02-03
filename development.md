@@ -329,7 +329,6 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.configureOnOpen": true,
-  "cmake.useCMakeServer": false,
   "cmake.generator": "Ninja",
   "cmake.buildTask": true,
   "[c]": {
@@ -344,7 +343,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "[javascript]": {
     "editor.fontLigatures": "'ss02', 'ss19'",
     "editor.defaultFormatter": "xaver.clang-format"
-  }
+  },
+  "terminal.integrated.rendererType": "dom"
 }
 ```
 
@@ -352,12 +352,34 @@ Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)
 
 ```json
 [
-  { "key": "ctrl+f5",       "command": "workbench.action.debug.run" },
-  { "key": "f5",            "command": "workbench.action.debug.start", "when": "!inDebugMode" },
-  { "key": "f5",            "command": "workbench.action.debug.restart", "when": "inDebugMode" },
-  { "key": "f6",            "command": "workbench.action.debug.pause", "when": "debugState == 'running'" },
-  { "key": "f6",            "command": "workbench.action.debug.continue", "when": "debugState != 'running'" },
-  { "key": "f7",            "command": "workbench.action.tasks.build" }
+  {
+    "key": "ctrl+f5",
+    "command": "workbench.action.debug.run"
+  },
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.start",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.restart",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f6",
+    "command": "workbench.action.debug.pause",
+    "when": "debugState == 'running'"
+  },
+  {
+    "key": "f6",
+    "command": "workbench.action.debug.continue",
+    "when": "debugState != 'running'"
+  },
+  {
+    "key": "f7",
+    "command": "workbench.action.tasks.build"
+  }
 ]
 ```
 
