@@ -256,14 +256,14 @@ Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install ms-vscode-remote.remote-wsl
-ext install donjayamanne.githistory
 ext install alefragnani.rtf
+ext install donjayamanne.githistory
 ext install jamesbirtles.svelte-vscode
+ext install ms-vscode.cpptools
+ext install ms-vscode.cmake-tools
+ext install jeff-hykin.better-cpp-syntax
 ext install xaver.clang-format
 ext install twxs.cmake
-ext install ms-vscode.cpptools
-ext install jeff-hykin.better-cpp-syntax
 > Developer: Reload Window
 ```
 
@@ -283,7 +283,9 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "none",
-  "editor.rulers": [ 128 ],
+  "editor.rulers": [
+    128
+  ],
   "editor.smoothScrolling": true,
   "editor.minimap.scale": 2,
   "editor.tabSize": 2,
@@ -319,10 +321,17 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.experimentalFeatures": "Enabled",
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "C_Cpp.default.compileCommands": "build\\windows\\debug\\compile_commands.json",
   "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
   "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
+  "cmake.installPrefix": "${workspaceFolder}/build/install",
+  "cmake.configureOnOpen": true,
+  "cmake.useCMakeServer": false,
+  "cmake.generator": "Ninja",
+  "cmake.buildTask": true,
   "[c]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
@@ -349,6 +358,33 @@ Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)
   { "key": "f6",            "command": "workbench.action.debug.pause", "when": "debugState == 'running'" },
   { "key": "f6",            "command": "workbench.action.debug.continue", "when": "debugState != 'running'" },
   { "key": "f7",            "command": "workbench.action.tasks.build" }
+]
+```
+
+Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
+
+```json
+[
+  {
+    "name": "x64-windows",
+    "visualStudio": "4ef6ec03",
+    "visualStudioArchitecture": "amd64",
+    "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
+    "cmakeSettings": {
+      "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
+      "VCPKG_TARGET_TRIPLET": "x64-windows"
+    }
+  },
+  {
+    "name": "x64-windows-static",
+    "visualStudio": "4ef6ec03",
+    "visualStudioArchitecture": "amd64",
+    "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
+    "cmakeSettings": {
+      "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
+      "VCPKG_TARGET_TRIPLET": "x64-windows-static"
+    }
+  }
 ]
 ```
 
