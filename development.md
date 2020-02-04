@@ -72,9 +72,6 @@ Tools for Native Modules
 ## Development Kits
 Install [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`.
 
-## Format
-Install [Clang-Format](https://llvm.org/builds/) into `C:\Program Files (x86)\LLVM\bin`.
-
 ## Environment Variables
 Configure the User `Path` environment variable.
 
@@ -97,6 +94,7 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
+C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
@@ -120,7 +118,7 @@ C:\Workspace\vcpkg
 Configure the User `VCPKG_DEFAULT_TRIPLET` environment variable.
 
 ```
-x64-windows-static
+x64-windows
 ```
 
 ## Settings
@@ -187,7 +185,7 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Program Files (x86)\LLVM\bin\clang-format.exe
+      ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
     + Indentation
       ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
@@ -250,6 +248,8 @@ Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 
 Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
 
+Build and install the latest [clang-format](https://github.com/qis/llvm) into `C:\Program Files\LLVM`.
+
 </details>
 
 <details>
@@ -285,7 +285,6 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.folding": false,
   "editor.fontFamily": "'DejaVu LGC Sans Mono', Consolas, monospace",
   "editor.fontLigatures": false,
-  "editor.formatOnSave": true,
   "editor.links": false,
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
@@ -336,25 +335,33 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
-  "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
   "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
   "cmake.ignoreKitEnv": true,
   "cmake.generator": "Ninja",
+  "html.format.indentInnerHtml": false,
+  "html.format.extraLiners": "",
   "[c]": {
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true
   },
   "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "[java]": {
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true
   },
   "[javascript]": {
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true
+  },
+  "[svelte]": {
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.formatOnSave": true
   }
 }
 ```
