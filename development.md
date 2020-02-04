@@ -259,12 +259,18 @@ Install extensions with the following commands with `CTRL+P`.
 ext install alefragnani.rtf
 ext install donjayamanne.githistory
 ext install jamesbirtles.svelte-vscode
+ext install eg2.vscode-npm-script
 ext install ms-vscode.cpptools
-ext install ms-vscode.cmake-tools
-ext install jeff-hykin.better-cpp-syntax
 ext install xaver.clang-format
 ext install twxs.cmake
 > Developer: Reload Window
+```
+
+Download the latest version of [CMake Tools](https://github.com/microsoft/vscode-cmake-tools/releases)
+and install it on the command line.
+
+```cmd
+code --install-extension cmake-tools.vsix
 ```
 
 Configure editor with `> Preferences: Open Settings (JSON)`.
@@ -282,7 +288,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
-  "editor.renderLineHighlight": "none",
+  "editor.renderLineHighlight": "all",
   "editor.rulers": [
     128
   ],
@@ -293,7 +299,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.wordWrapColumn": 128,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  "extensions.ignoreRecommendations": false,
+  "extensions.ignoreRecommendations": true,
   "files.eol": "\n",
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
@@ -307,12 +313,14 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "workbench.startupEditor": "none",
-  "window.newWindowDimensions": "maximized",
+  "window.newWindowDimensions": "inherit",
   "window.openFoldersInNewWindow": "on",
   "window.openFilesInNewWindow": "off",
   "window.restoreWindows": "none",
-  "window.closeWhenEmpty": true,
+  "window.closeWhenEmpty": false,
   "window.zoomLevel": 0,
+  "terminal.integrated.rendererType": "experimentalWebgl",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openExplorerOnEnd": true,
   "debug.openDebug": "openOnDebugBreak",
@@ -320,17 +328,20 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.vcpkg.enabled": false,
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.enhancedColorization": "Enabled",
   "C_Cpp.experimentalFeatures": "Enabled",
+  "C_Cpp.configurationWarnings": "Disabled",
+  "C_Cpp.workspaceParsingPriority": "highest",
+  "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.default.compileCommands": "build\\windows\\debug\\compile_commands.json",
   "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
   "clang-format.executable": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
   "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
   "cmake.installPrefix": "${workspaceFolder}/build/install",
+  "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
+  "cmake.ignoreKitEnv": true,
   "cmake.generator": "Ninja",
-  "cmake.buildTask": true,
   "[c]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
@@ -341,10 +352,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
     "editor.defaultFormatter": "xaver.clang-format"
   },
   "[javascript]": {
-    "editor.fontLigatures": "'ss02', 'ss19'",
     "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "terminal.integrated.rendererType": "dom"
+  }
 }
 ```
 
@@ -388,9 +397,8 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 ```json
 [
   {
+    "keep": true,
     "name": "x64-windows",
-    "visualStudio": "4ef6ec03",
-    "visualStudioArchitecture": "amd64",
     "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
     "cmakeSettings": {
       "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
@@ -398,9 +406,8 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
     }
   },
   {
+    "keep": true,
     "name": "x64-windows-static",
-    "visualStudio": "4ef6ec03",
-    "visualStudioArchitecture": "amd64",
     "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
     "cmakeSettings": {
       "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
