@@ -260,6 +260,7 @@ Install extensions with the following commands with `CTRL+P`.
 ```
 ext install alefragnani.rtf
 ext install donjayamanne.githistory
+ext install marvhen.reflow-markdown
 ext install jamesbirtles.svelte-vscode
 ext install eg2.vscode-npm-script
 ext install ms-vscode.cpptools
