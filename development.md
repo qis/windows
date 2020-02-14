@@ -363,6 +363,9 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   },
   "[html]": {
     "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.formatOnSave": true
   }
 }
 ```
