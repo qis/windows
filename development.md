@@ -258,14 +258,14 @@ Build and install the latest [clang-format](https://github.com/qis/llvm) into `C
 Install extensions with the following commands with `CTRL+P`.
 
 ```
+ext install aeschli.vscode-css-formatter
 ext install alefragnani.rtf
 ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
-ext install jamesbirtles.svelte-vscode
-ext install eg2.vscode-npm-script
+ext install ms-vscode.cmake-tools
 ext install ms-vscode.cpptools
-ext install xaver.clang-format
 ext install twxs.cmake
+ext install xaver.clang-format
 > Developer: Reload Window
 ```
 
@@ -291,9 +291,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderLineHighlight": "all",
-  "editor.rulers": [
-    128
-  ],
+  "editor.rulers": [ 128 ],
   "editor.smoothScrolling": true,
   "editor.minimap.scale": 2,
   "editor.tabSize": 2,
@@ -306,6 +304,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "files.defaultLanguage": "markdown",
   "git.autofetch": false,
   "git.autoRepositoryDetection": false,
   "git.confirmSync": false,
@@ -358,13 +357,11 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
-  "[svelte]": {
-    "editor.formatOnSave": true
-  },
   "[html]": {
     "editor.formatOnSave": true
   },
   "[css]": {
+    "editor.defaultFormatter": "aeschli.vscode-css-formatter",
     "editor.formatOnSave": true
   }
 }
@@ -374,34 +371,12 @@ Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)
 
 ```json
 [
-  {
-    "key": "ctrl+f5",
-    "command": "workbench.action.debug.run"
-  },
-  {
-    "key": "f5",
-    "command": "workbench.action.debug.start",
-    "when": "!inDebugMode"
-  },
-  {
-    "key": "f5",
-    "command": "workbench.action.debug.restart",
-    "when": "inDebugMode"
-  },
-  {
-    "key": "f6",
-    "command": "workbench.action.debug.pause",
-    "when": "debugState == 'running'"
-  },
-  {
-    "key": "f6",
-    "command": "workbench.action.debug.continue",
-    "when": "debugState != 'running'"
-  },
-  {
-    "key": "f7",
-    "command": "workbench.action.tasks.build"
-  }
+  { "key": "ctrl+f5", "command": "workbench.action.debug.run" },
+  { "key": "f5", "command": "workbench.action.debug.start", "when": "!inDebugMode" },
+  { "key": "f5", "command": "workbench.action.debug.restart", "when": "inDebugMode" },
+  { "key": "f6", "command": "workbench.action.debug.pause", "when": "debugState == 'running'" },
+  { "key": "f6", "command": "workbench.action.debug.continue", "when": "debugState != 'running'" },
+  { "key": "f7", "command": "workbench.action.tasks.build" }
 ]
 ```
 
