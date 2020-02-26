@@ -38,16 +38,15 @@ alias lla="ll -A"
 alias vim="${EDITOR} -p"
 alias vimdiff="${EDITOR} -d"
 alias crush="pngcrush -brute -reduce -rem allb -ow"
-alias grep="grep --color=auto"
-alias sudo="sudo "
-alias gdb="gdb -q"
 
 alias tm="tmux -2"
 alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
-# Prompt
+# Settings
+export HISTFILE="${HOME}/.history"
+
 PS1=
 if [ -n "${TMUX}" ]; then
   id="$(echo $TMUX | awk -F, '{print $3 + 1}')"
@@ -63,7 +62,6 @@ PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
 PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
 
-# Settings
 stty werase '^_'
 
 # WSL

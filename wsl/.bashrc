@@ -1,13 +1,8 @@
 # Bash
 [[ $- == *i* ]] || return
 
-# System
-OS="$(uname -s)"
-
 # Path
-PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
-PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/snap/bin:${PATH}"
-export PATH
+export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
 
 # Files
 umask 0022
@@ -85,11 +80,10 @@ PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
 
 set -o emacs
-
-[[ $- == *i* ]] && stty werase '^_'
+stty werase '^_'
 
 # WSL
-if [ "${OS}" = "Linux" ] && [[ "$(uname -r)" =~ "Microsoft" ]]; then
+if [[ "$(uname -r)" =~ "Microsoft" ]]; then
   if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
     cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
   elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then

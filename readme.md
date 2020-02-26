@@ -494,7 +494,7 @@ Install a WSL distro from <https://aka.ms/wslstore>, launch it and download conf
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.bashrc -o .bashrc
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.profile -o .profile
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/.tmux.conf -o .tmux.conf
-exit  # required to apply settings and release ~/.history
+exit # required to apply settings and release the shell history file
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html) with `sudo EDITOR=vim visudo`.
@@ -544,18 +544,18 @@ Initialize **user** and **root** home directory structure.
 
 ```sh
 mkdir -p ~/.config
-ln -s /mnt/c/Users/Qis/.gitconfig ~/.gitconfig
-ln -s /mnt/c/Users/Qis/vimfiles ~/.config/nvim
-ln -s /mnt/c/Users/Qis/vimfiles ~/.vim
+ln -s /mnt/c/Workspace ~/workspace
 ln -s /mnt/c/Users/Qis/Documents ~/documents
 ln -s /mnt/c/Users/Qis/Downloads ~/downloads
-ln -s /mnt/c/Workspace ~/workspace
+ln -s /mnt/c/Users/Qis/.gitconfig ~/.gitconfig
+ln -s /mnt/c/Users/Qis/vimfiles ~/.config/nvim
+ln -s .config/nvim ~/.vim
 mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
   ln -s /mnt/c/Users/Qis/.ssh/$i ~/.ssh/$i
 done
 chmod 0600 /mnt/c/Users/Qis/.ssh/* ~/.ssh/*
-rm -f .bash_history .bash_logout .viminfo
+rm -f ~/.bash_history ~/.bash_logout ~/.viminfo
 touch ~/.config/nviminfo ~/.config/viminfo
 ```
 
