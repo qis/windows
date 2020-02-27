@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+export PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/vcpkg:${PATH}"
 
 # Files
 umask 0022
@@ -18,7 +18,6 @@ export LC_COLLATE="C"
 export LC_ALL=
 
 # Applications
-export NODE_PATH="/opt/node/lib/node_modules"
 export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
 export PAGER="less"
 
@@ -35,14 +34,12 @@ alias ll="ls -lh --full-time"
 alias lsa="ls -A"
 alias lla="ll -A"
 
-alias vim="${EDITOR} -p"
-alias vimdiff="${EDITOR} -d"
-alias crush="pngcrush -brute -reduce -rem allb -ow"
-
 alias tm="tmux -2"
 alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
+
+alias crush="pngcrush -brute -reduce -rem allb -ow"
 
 # Settings
 export HISTFILE="${HOME}/.history"
@@ -62,15 +59,7 @@ PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
 PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
 
-stty werase '^_'
-
-# WSL
-if [ -n "$(uname -r | grep Microsoft)" ]; then
-  if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
-    cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
-  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then
-    cd "${HOME}/documents/$(pwd | cut -d/ -f7-)"
-  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Downloads" ]; then
-    cd "${HOME}/downloads/$(pwd | cut -d/ -f7-)"
-  fi
+if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
+  export CMD="/mnt/c/Windows/System32/cmd.exe"
+  export USER_PROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g'))"
 fi
