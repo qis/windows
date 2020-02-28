@@ -116,17 +116,23 @@ sudo chmod 0600 "${USER_PROFILE}/.ssh"/* ~/.ssh/*
 Install packages.
 
 ```sh
-sudo apt install build-essential nasm ninja-build python python-pip sqlite3 swig
-sudo apt install binutils-dev libedit-dev libnftnl-dev libmnl-dev
+sudo apt install -y binutils linux-headers-generic libc6-dev
+sudo apt install -y make nasm ninja-build nodejs npm patch perl pkgconf python python-pip sqlite3 swig z3
+sudo apt install -y build-essential binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev libz3-dev
 ```
 
 Install [CMake](https://cmake.org/).
 
 ```sh
-sudo rm -rf /opt/cmake
-sudo apt install 
-
+sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
 wget https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.tar.gz
-tar xf cmake-3.16.4-Linux-x86_64.tar.gz -C /opt/cmake-3.16.4 --strip-components 1
-ln -s cmake-3.16.4 /opt/cmake
+sudo tar xf cmake-3.16.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+```
+
+Install [Node](https://nodejs.org/).
+
+```sh
+sudo rm -rf /opt/node; sudo mkdir -p /opt/node
+wget https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-x64.tar.xz
+sudo tar xf node-v10.19.0-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```

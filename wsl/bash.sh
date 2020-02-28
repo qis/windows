@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/cmake/bin:/opt/vcpkg:${PATH}"
+export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
 
 # Files
 umask 0022

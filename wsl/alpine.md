@@ -102,8 +102,8 @@ Install packages.
 
 ```sh
 sudo apk add binutils fortify-headers linux-headers libc-dev
-sudo apk add make nasm ninja nodejs npm patch perl pkgconf python sqlite swig z3
-sudo apk add build-base libxml2-dev z3-dev libedit-dev ncurses-dev xz-dev
+sudo apk add make nasm ninja patch perl pkgconf python sqlite swig z3
+sudo apk add build-base binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev z3-dev ncurses-dev xz-dev
 ```
 
 Install [CMake](https://cmake.org/).
@@ -125,113 +125,8 @@ sudo ninja -C cmake-build install
 sudo apk del cmake curl-dev openssl-dev
 ```
 
-Add `/opt/cmake/bin` to the `PATH` environment variable.
+Install [Node](https://nodejs.org/).
 
 ```sh
-export PATH="/opt/cmake/bin:${PATH}"
-cmake --version
-```
-
-Create required directories on Windows.
-
-```cmd
-md C:\Workspace
-md C:\Workspace\downloads
-```
-
-Download [vcpkg](https://github.com/microsoft/vcpkg) and [qis/toolchains](https://github.com/qis/toolchains) on Windows.
-
-```cmd
-cd C:\Workspace
-git clone git@github.com:microsoft/vcpkg
-cmake -E rename vcpkg/scripts/toolchains vcpkg/scripts/toolchains.orig
-git clone git@github.com:qis/toolchains vcpkg/scripts/toolchains
-```
-
-Set Windows environment variables in `rundll32.exe sysdm.cpl,EditEnvironmentVariables`.
-
-```cmd
-set VCPKG_ROOT=C:\Workspace\vcpkg
-set VCPKG_DOWNLOADS=C:\Workspace\downloads
-set VCPKG_DEFAULT_TRIPLET=x64-windows
-```
-
-Create symbolic links in `wsl.exe`.
-
-```sh
-sudo ln -s /mnt/c/Workspace/vcpkg /opt/vcpkg
-sudo ln -s /mnt/c/Workspace/downloads /opt/downloads
-```
-
-Build vcpkg in `cmd.exe`.
-
-```cmd
-C:\Workspace\vcpkg\bootstrap-vcpkg.bat -disableMetrics -win64
-```
-
-Build vcpkg in `wsl.exe`.
-
-```sh
-/opt/vcpkg/bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries && rm -rf /opt/vcpkg/toolsrc/build.rel
-```
-
-<details>
-<summary>Modify the <code>triplets/x64-windows.cmake</code> triplet file.</summary>
-&nbsp;
-
-```cmake
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_LIBRARY_LINKAGE dynamic)
-set(VCPKG_CRT_LINKAGE dynamic)
-
-set(VCPKG_C_FLAGS "/arch:AVX2 /W3 /wd26812 /wd28251 /wd4275")
-set(VCPKG_CXX_FLAGS "${VCPKG_C_FLAGS}")
-```
-
-</details>
-
-<details>
-<summary>Modify the <code>triplets/x64-windows-static.cmake</code> triplet file.</summary>
-&nbsp;
-
-```cmake
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_LIBRARY_LINKAGE static)
-set(VCPKG_CRT_LINKAGE static)
-
-set(VCPKG_C_FLAGS "/arch:AVX2 /W3 /wd26812 /wd28251 /wd4275")
-set(VCPKG_CXX_FLAGS "${VCPKG_C_FLAGS}")
-```
-
-</details>
-
-<details>
-<summary>Modify the <code>triplets/x64-linux.cmake</code> triplet file.</summary>
-&nbsp;
-
-```cmake
-set(VCPKG_CMAKE_SYSTEM_NAME Linux)
-set(VCPKG_TARGET_ARCHITECTURE x64)
-set(VCPKG_CRT_LINKAGE static)
-set(VCPKG_LIBRARY_LINKAGE static)
-```
-
-</details>
-
-Build LLVM in `wsl.exe`.
-
-```sh
-make -C /opt/vcpkg/scripts/toolchains MUSL=ON TRIPLE=x86_64-linux-musl
-```
-
-Install the same TBB version in `cmd.exe`.
-
-```cmd
-vcpkg install --overlay-ports="%VCPKG_ROOT%\scripts\toolchains\tbb" tbb:x64-windows tbb:x64-windows-static
-```
-
-Remove dependencies (optional).
-
-```sh
-sudo apk del build-base libxml2-dev z3-dev libedit-dev ncurses-dev xz-dev
+sudo apk add nodejs npm
 ```
