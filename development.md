@@ -55,7 +55,7 @@ Advanced Options
   Customize install location: C:\Python
 ```
 
-Install [Node LTS](https://nodejs.org/dist/v10.19.0/node-v10.19.0-x64.msi).
+Install [Node LTS](https://nodejs.org/dist/v12.16.1/node-v12.16.1-x64.msi).
 
 ```
 Destination Folder

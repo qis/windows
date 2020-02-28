@@ -133,6 +133,6 @@ Install [Node](https://nodejs.org/).
 
 ```sh
 sudo rm -rf /opt/node; sudo mkdir -p /opt/node
-wget https://nodejs.org/dist/v10.19.0/node-v10.19.0-linux-x64.tar.xz
-sudo tar xf node-v10.19.0-linux-x64.tar.xz -C /opt/node --strip-components 1
+wget https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.xz
+sudo tar xf node-v12.16.1-linux-x64.tar.xz -C /opt/node --strip-components 1
 ```
