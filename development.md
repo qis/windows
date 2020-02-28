@@ -27,9 +27,10 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
+Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-win64-x64.msi).
+
 Install development tools.
 
-* [CMake](https://cmake.org/download/) into `C:\Program Files\CMake`
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.10.0/ninja-win.zip) into `C:\Program Files\Ninja`
 * [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip) into `C:\Program Files\Nasm`
 * [Perl](http://strawberryperl.com/download/5.30.1.1/strawberry-perl-5.30.1.1-64bit-portable.zip) into `C:\Perl`
