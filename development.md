@@ -55,7 +55,7 @@ Advanced Options
   Customize install location: C:\Python
 ```
 
-Install [Node LTS](https://nodejs.org/dist/v12.14.1/node-v12.14.1-x64.msi).
+Install [Node LTS](https://nodejs.org/dist/v10.19.0/node-v10.19.0-x64.msi).
 
 ```
 Destination Folder
@@ -592,32 +592,7 @@ Start > "Turn Windows features on or off"
 Take ownership of `/opt`.
 
 ```sh
-USER=`id -un` GROUP=`id -gn` sudo chown $USER:$GROUP /opt
-```
-
-Install development packages.
-
-```sh
-sudo apt install -y build-essential gdb nasm ninja-build python python-pip sqlite3 swig
-sudo apt install -y binutils-dev libedit-dev libnftnl-dev libmnl-dev
-```
-
-Install CMake.
-
-```sh
-rm -rf /opt/cmake /opt/cmake-3.16.4; mkdir /opt/cmake-3.16.4
-wget https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.tar.gz
-tar xf cmake-3.16.4-Linux-x86_64.tar.gz -C /opt/cmake-3.16.4 --strip-components 1
-ln -s cmake-3.16.4 /opt/cmake
-```
-
-Install NodeJS.
-
-```sh
-rm -rf /opt/node /opt/node-12.14.1; mkdir /opt/node-12.14.1
-wget https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz
-tar xf node-v12.14.1-linux-x64.tar.xz -C /opt/node-12.14.1 --strip-components 1
-ln -s node-12.14.1 /opt/node
+sudo chown `id -un`:`id -gn` /opt
 ```
 
 Reinstall SSH Server.
