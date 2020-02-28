@@ -129,7 +129,6 @@ sudo apk del cmake
 Install [Node](https://nodejs.org/).
 
 ```sh
-#sudo apk add nodejs npm
 sudo rm -rf /opt/node
 wget https://nodejs.org/dist/v12.16.1/node-v12.16.1.tar.gz
 tar xf node-v12.16.1.tar.gz
