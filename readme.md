@@ -491,7 +491,7 @@ Reboot the system.
 See [wsl/alpine.md](wsl/alpine.md) or [wsl/ubuntu.md](wsl/ubuntu.md) for WSL setup instructions.
 
 ## Development
-See [development](development.md) for developer workstation setup instructions.
+See [development.md](development.md) for developer workstation setup instructions.
 
 ## Start Menu
 ![Start Menu](res/start.png)
