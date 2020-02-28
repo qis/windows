@@ -1,8 +1,5 @@
-# Bash
-[[ $- == *i* ]] || return
-
 # Path
-export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+export PATH="/opt/cmake/bin:/opt/vcpkg:${PATH}"
 
 # Files
 umask 0022
@@ -11,20 +8,18 @@ umask 0022
 ulimit -S -c 0
 
 # Unicode
-export UTF8=$(locale -m | grep -i utf | head -1)
 export NCURSES_NO_UTF8_ACS="1"
 export MM_CHARSET="UTF-8"
 
 # Localization
-export LANG="en_US.${UTF8}"
-export LC_MESSAGES="en_US.${UTF8}"
-export LC_CTYPE="en_US.${UTF8}"
-export LC_COLLATE="C"
+export LANG="C.UTF-8"
+export LC_MESSAGES="C.UTF-8"
+export LC_COLLATE="C.UTF-8"
+export LC_CTYPE="C.UTF-8"
 export LC_ALL=
 
 # Applications
-export NODE_PATH="/opt/node/lib/node_modules"
-export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
+export EDITOR="vim"
 export PAGER="less"
 
 # Ports
@@ -40,28 +35,22 @@ export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:
 # Aliases
 alias ..="cd .."
 
-alias ls="ls -F --color=auto --group-directories-first"
+alias ls="ls --color=auto --group-directories-first"
 alias ll="ls -lh --time-style long-iso"
-alias lsa="ls -a"
-alias lla="ll -a"
-
-alias vim="${EDITOR} -p"
-alias vimdiff="${EDITOR} -d"
-alias crush="pngcrush -brute -reduce -rem allb -ow"
-alias grep="grep --color=auto"
-alias sudo="sudo "
-alias gdb="gdb -q"
+alias lsa="ls -A"
+alias lla="ll -A"
 
 alias tm="tmux -2"
 alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
+alias crush="pngcrush -brute -reduce -rem allb -ow"
+alias grep="grep --color=auto"
+alias sudo="sudo "
+
 # Settings
 export HISTFILE="${HOME}/.history"
-export HISTCONTROL=ignoreboth
-export HISTSIZE=1000
-export HISTFILESIZE=2000
 shopt -s histappend
 
 PS1=
@@ -82,13 +71,7 @@ export PS1
 set -o emacs
 stty werase '^_'
 
-# WSL
-if [[ "$(uname -r)" =~ "Microsoft" ]]; then
-  if [ "$(pwd | cut -d/ -f1-4)" = "/mnt/c/Workspace" ]; then
-    cd "${HOME}/workspace/$(pwd | cut -d/ -f5-)"
-  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Documents" ]; then
-    cd "${HOME}/documents/$(pwd | cut -d/ -f7-)"
-  elif [ "$(pwd | cut -d/ -f1-6)" = "/mnt/c/Users/Qis/Downloads" ]; then
-    cd "${HOME}/downloads/$(pwd | cut -d/ -f7-)"
-  fi
+if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
+  export CMD="/mnt/c/Windows/System32/cmd.exe"
+  export USER_PROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g'))"
 fi

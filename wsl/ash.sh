@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/cmake/bin:/opt/llvm/bin:/opt/vcpkg:${PATH}"
+export PATH="/opt/cmake/bin:/opt/vcpkg:${PATH}"
 
 # Files
 umask 0022
@@ -9,16 +9,17 @@ ulimit -S -c 0
 
 # Unicode
 export NCURSES_NO_UTF8_ACS="1"
+export MM_CHARSET="UTF-8"
 
 # Localization
-export LANG="en_US.${CHARSET}"
-export LC_MESSAGES="en_US.${CHARSET}"
-export LC_CTYPE="en_US.${CHARSET}"
-export LC_COLLATE="C"
+export LANG="C.UTF-8"
+export LC_MESSAGES="C.UTF-8"
+export LC_COLLATE="C.UTF-8"
+export LC_CTYPE="C.UTF-8"
 export LC_ALL=
 
 # Applications
-export EDITOR="$(which nvim vim vi 2>/dev/null | head -1)"
+export EDITOR="vim"
 export PAGER="less"
 
 # Ports
@@ -26,11 +27,16 @@ export VCPKG_ROOT="/opt/vcpkg"
 export VCPKG_DOWNLOADS="/opt/downloads"
 export VCPKG_DEFAULT_TRIPLET="x64-linux"
 
+# Colors
+export CLICOLOR=1
+export LSCOLORS="ExGxFxdxCxDxDxBxAbBxFx"
+export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=1;34"
+
 # Aliases
 alias ..="cd .."
 
-alias ls="ls --group-directories-first"
-alias ll="ls -lh --full-time"
+alias ls="ls --color=auto --group-directories-first"
+alias ll="ls -lh --time-style long-iso"
 alias lsa="ls -A"
 alias lla="ll -A"
 
@@ -40,6 +46,7 @@ alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
 alias crush="pngcrush -brute -reduce -rem allb -ow"
+alias grep="grep --color=auto"
 
 # Settings
 export HISTFILE="${HOME}/.history"
