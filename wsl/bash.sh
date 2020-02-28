@@ -30,7 +30,7 @@ export VCPKG_DEFAULT_TRIPLET="x64-linux"
 # Colors
 export CLICOLOR=1
 export LSCOLORS="ExGxFxdxCxDxDxBxAbBxFx"
-export LS_COLORS="di=1;34:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=1;34"
+export LS_COLORS="di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=1;31:sg=1;30;41:tw=1;31:ow=1;35"
 
 # Aliases
 alias ..="cd .."

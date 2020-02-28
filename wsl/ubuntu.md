@@ -40,10 +40,10 @@ chmod 0755 /etc/profile.d/bash.sh
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
 
 ```sh
-EDITOR=vi visudo
+EDITOR=vim visudo
 ```
 
-Press `i` and paste using the window menu followed by `ESC` and `:wq`.
+Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
 
 ```sh
 # Locale settings.
@@ -75,7 +75,7 @@ Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 ARRAY <ignore> devices=/dev/sda
 ```
 
-Modify the following lines in `/etc/pam.d/login` and `/etc/pam.d/sshd` (disables message of the day).
+Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 
 ```sh
 #session    optional    pam_motd.so motd=/run/motd.dynamic
@@ -92,8 +92,7 @@ Create **user** and **root** home directory symlinks.
 
 ```sh
 mkdir -p ~/.config
-rm -f ~/.ash_history ~/.viminfo
-ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
+rm -f ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile ~/.viminfo
 ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
 touch ~/.config/nviminfo
 ```
@@ -101,6 +100,7 @@ touch ~/.config/nviminfo
 Create **user** home directory symlinks.
 
 ```sh
+ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
 ln -s "${USER_PROFILE}/Documents" ~/documents
 ln -s "${USER_PROFILE}/Downloads" ~/downloads
 ln -s /mnt/c/Workspace ~/workspace

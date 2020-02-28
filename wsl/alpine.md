@@ -39,10 +39,10 @@ Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html)
 ```sh
 addgroup sudo
 usermod -aG sudo `ls /home|head -1`
-EDITOR=vi visudo
+EDITOR=vim visudo
 ```
 
-Press `i` and paste using the window menu followed by `ESC` and `:wq`.
+Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
 
 ```sh
 # Locale settings.
@@ -78,7 +78,6 @@ Create **user** and **root** home directory symlinks.
 ```sh
 mkdir -p ~/.config
 rm -f ~/.ash_history ~/.viminfo
-ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
 ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
 touch ~/.config/nviminfo
 ```
@@ -86,6 +85,7 @@ touch ~/.config/nviminfo
 Create **user** home directory symlinks.
 
 ```sh
+ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
 ln -s "${USER_PROFILE}/Documents" ~/documents
 ln -s "${USER_PROFILE}/Downloads" ~/downloads
 ln -s /mnt/c/Workspace ~/workspace
