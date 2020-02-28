@@ -103,14 +103,15 @@ Install packages.
 ```sh
 sudo apk add binutils fortify-headers linux-headers libc-dev
 sudo apk add make nasm ninja patch perl pkgconf python sqlite swig z3
-sudo apk add build-base binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev z3-dev ncurses-dev xz-dev
+sudo apk add build-base binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev
+sudo apk add curl-dev ncurses-dev openssl-dev xz-dev z3-dev
 ```
 
 Install [CMake](https://cmake.org/).
 
 ```sh
 sudo rm -rf /opt/cmake
-sudo apk add cmake curl-dev openssl-dev
+sudo apk add cmake
 wget https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4.tar.gz
 tar xf cmake-3.16.4.tar.gz
 cmake -GNinja -Wno-dev \
@@ -122,7 +123,7 @@ cmake -GNinja -Wno-dev \
   -B cmake-build cmake-3.16.4
 ninja -C cmake-build
 sudo ninja -C cmake-build install
-sudo apk del cmake curl-dev openssl-dev
+sudo apk del cmake
 ```
 
 Install [Node](https://nodejs.org/).
