@@ -287,7 +287,6 @@ Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
 * [Chrome](https://www.google.com/chrome/)
-* [NAPS2](https://www.naps2.com/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [MagicaVoxel](https://ephtracy.github.io/)
@@ -298,6 +297,8 @@ Install third party software.
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
+* [KeePass](https://keepass.info/)
+* [NAPS2](https://www.naps2.com/)
 
 <!--
 * [Gimp](https://www.gimp.org/)
