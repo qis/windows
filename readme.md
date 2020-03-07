@@ -287,6 +287,7 @@ Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
 * [Chrome](https://www.google.com/chrome/)
+* [NAPS2](https://www.naps2.com/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [MagicaVoxel](https://ephtracy.github.io/)
