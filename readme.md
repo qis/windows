@@ -296,6 +296,7 @@ Install third party software.
 * [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
 * [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [Resource Hacker](http://www.angusj.com/resourcehacker/)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
 * [KeePass](https://keepass.info/)
 * [NAPS2](https://www.naps2.com/)
