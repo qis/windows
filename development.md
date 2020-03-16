@@ -263,7 +263,6 @@ ext install aeschli.vscode-css-formatter
 ext install alefragnani.rtf
 ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
-ext install ms-vscode.cmake-tools
 ext install ms-vscode.cpptools
 ext install twxs.cmake
 ext install xaver.clang-format
