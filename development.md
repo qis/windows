@@ -291,6 +291,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
   "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderWhitespace": "selection",
   "editor.renderLineHighlight": "all",
   "editor.rulers": [ 128 ],
   "editor.smoothScrolling": true,
@@ -369,7 +370,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "timeline.showView": true
 }
 ```
 
