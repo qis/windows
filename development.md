@@ -27,7 +27,7 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
-Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-win64-x64.msi).
+Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0-win64-x64.msi).
 
 Install development tools.
 
@@ -265,16 +265,10 @@ ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
 ext install esbenp.prettier-vscode
 ext install ms-vscode.cpptools
+ext install ms-vscode.cmake-tools
 ext install twxs.cmake
 ext install xaver.clang-format
 > Developer: Reload Window
-```
-
-Download the latest version of [CMake Tools](https://github.com/microsoft/vscode-cmake-tools/releases)
-and install it on the command line.
-
-```cmd
-code --install-extension cmake-tools.vsix
 ```
 
 Configure editor with `> Preferences: Open Settings (JSON)`.
@@ -343,8 +337,24 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
-  "cmake.ignoreKitEnv": true,
   "cmake.generator": "Ninja",
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "run",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "internalConsoleOptions": "openOnSessionStart",
+        "program": "${command:cmake.launchTargetPath}",
+        "cwd": "${workspaceRoot}",
+        "externalConsole": false,
+        "stopAtEntry": false,
+        "environment": [],
+        "args": []
+      }
+    ]
+  },
   "html.format.indentInnerHtml": false,
   "html.format.extraLiners": "",
   "[c]": {
@@ -393,21 +403,12 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 ```json
 [
   {
-    "keep": true,
-    "name": "x64-windows",
-    "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
-    "cmakeSettings": {
-      "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
-      "VCPKG_TARGET_TRIPLET": "x64-windows"
-    }
-  },
-  {
-    "keep": true,
-    "name": "x64-windows-static",
-    "toolchainFile": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
-    "cmakeSettings": {
-      "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${env.VCPKG_ROOT}\\scripts\\toolchains\\windows.cmake",
-      "VCPKG_TARGET_TRIPLET": "x64-windows-static"
+    "name": "Visual Studio",
+    "visualStudio": "4ef6ec03",
+    "visualStudioArchitecture": "amd64",
+    "preferredGenerator": {
+      "name": "Visual Studio 16 2019",
+      "platform": "x64"
     }
   }
 ]

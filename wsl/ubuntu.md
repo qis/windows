@@ -125,8 +125,8 @@ Install [CMake](https://cmake.org/).
 
 ```sh
 sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.tar.gz
-sudo tar xf cmake-3.16.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
+wget https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0-Linux-x86_64.tar.gz
+sudo tar xf cmake-3.17.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
 ```
 
 Install [Node](https://nodejs.org/).
