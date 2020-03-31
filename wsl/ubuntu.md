@@ -2,8 +2,9 @@
 Install, launch and configure [Ubuntu Linux](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
-wsl.exe --setdefault Ubuntu
-wsl.exe --distribution Ubuntu --user root
+wsl --list
+wsl --setdefault Ubuntu
+wsl --distribution Ubuntu --user root
 ```
 
 Update system.

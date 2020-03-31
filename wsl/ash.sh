@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:${PATH}"
+export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Files
 umask 0022
@@ -69,5 +69,6 @@ export PS1
 
 if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
   export CMD="/mnt/c/Windows/System32/cmd.exe"
-  export USER_PROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g'))"
+  USER_PROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g') 2>/dev/null)" \
+    && export USER_PROFILE
 fi

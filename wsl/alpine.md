@@ -2,8 +2,9 @@
 Install, launch and configure [Alpine Linux](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
-wsl.exe --setdefault Alpine
-wsl.exe --distribution Alpine --user root
+wsl --list
+wsl --setdefault Alpine
+wsl --distribution Alpine --user root
 ```
 
 Update system.
