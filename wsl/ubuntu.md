@@ -114,12 +114,26 @@ sudo chmod 0600 "${USER_PROFILE}/.ssh"/* ~/.ssh/*
 ```
 
 ## Development
+Add toolchain repository.
+
+```sh
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt install build-essential binutils-dev gcc-9 g++-9
+```
+
 Install packages.
 
 ```sh
 sudo apt install -y binutils linux-headers-generic libc6-dev
 sudo apt install -y make nasm ninja-build nodejs npm patch perl pkgconf python python-pip sqlite3 swig z3
-sudo apt install -y build-essential binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev libz3-dev
+sudo apt install -y build-essential binutils-dev gcc-9 g++-9 libedit-dev libnftnl-dev libmnl-dev libxml2-dev libz3-dev
+```
+
+Switch default system compiler to GCC 9.
+
+```sh
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 90
 ```
 
 Install [CMake](https://cmake.org/).
