@@ -186,7 +186,7 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
+      ☑ Use custom clang-format.exe file: C:\Workspace\vcpkg\triplets\toolchains\llvm\bin\clang-format.exe
     + Indentation
       ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
@@ -248,8 +248,6 @@ Help > Send Feedback > Settings...
 Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 
 Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
-
-Build and install the latest [clang-format](https://github.com/qis/llvm) into `C:\Program Files\LLVM`.
 
 </details>
 
@@ -331,8 +329,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
-  "clang-format.executable": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
+  "C_Cpp.clang_format_path": "C:\\Workspace\\vcpkg\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Workspace\\vcpkg\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
   "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.cmakeCommunicationMode": "fileApi",
