@@ -17,7 +17,7 @@ apk upgrade
 Install packages.
 
 ```sh
-apk add coreutils curl file git grep htop neovim openssh-client p7zip pv pwgen sudo tmux tree tzdata
+apk add coreutils curl file git grep htop neovim openssh-client p7zip pv pwgen sshpass sudo tmux tree tzdata
 apk add imagemagick pngcrush
 ```
 
