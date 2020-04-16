@@ -118,7 +118,7 @@ Add `test` toolchain repository and install GCC 9.
 
 ```sh
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt install build-essential binutils-dev gcc-9 g++-9
+sudo apt install -y build-essential binutils-dev gcc-9 g++-9
 ```
 
 Switch default system compiler to GCC 9.
