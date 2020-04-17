@@ -451,7 +451,7 @@ Configure the System `Path` environment variable.
 C:\Android\tools
 C:\Android\tools\bin
 C:\Android\studio\jre\bin
-C:\Android\build-tools\29.0.2
+C:\Android\build-tools\29.0.3
 C:\Android\platform-tools
 ```
 
