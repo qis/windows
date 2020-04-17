@@ -521,7 +521,6 @@ Install missing tools, plugins and SDKs.
         Indent: 2
         Continuation indent: 2
       Wrapping and Braces
-        Hard wrap at: 128
         > 'try' statement
           ☑ 'catch' on new line
           ☑ 'finally' on new line
@@ -530,10 +529,7 @@ Install missing tools, plugins and SDKs.
         Indent in lambdas: 2
         Indent members of plain structures: 2
         Indent members of classes: 2
-        Indent visibility keywords in class/structure: 0
         Indent members of namespace: 0
-        Preprocessor directive indent: 0
-        ☐ Follow code indent
       Spaces
         Other
           ☐ Prevent > > concatenation in template
@@ -543,9 +539,16 @@ Install missing tools, plugins and SDKs.
           ☑ Before '<'
       New File Extensions
         C++
-          Source Extension: cpp
           Header Extension: hpp
           File Naming Convention: snake_case
+        C
+          File Naming Convention: snake_case
+    + EditorConfig
+      Spaces
+        > Around Operators
+          ☑ After ':'
+    + Properties
+      Insert space around key-value delimiter: ☑
   + File Encodings
     Global Encoding: UTF-8
     Project Encoding: UTF-8
