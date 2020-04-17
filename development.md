@@ -455,6 +455,8 @@ C:\Android\build-tools\29.0.3
 C:\Android\platform-tools
 ```
 
+Extract the [German Dictionary](http://www.winedt.org/dict/de_neu.zip) file as `C:\Android\dict\de_neu.dic`.
+
 Start and configure Android Studio (`C:\Android\studio\bin\studio64.exe`).
 
 ```
@@ -556,6 +558,9 @@ Install missing tools, plugins and SDKs.
     Create UTF-8 files: with NO BOM
   + Layout Editor
     ☑ Prefer XML editor
+  + Spelling
+    Custom Dictionaries: [+]
+    C:\Android\dict\de_neu.dic
 ```
 
 Search in settings for `redo` and assign `CTRL+Y` as a shortcut.
