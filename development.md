@@ -486,11 +486,13 @@ Install missing tools, plugins and SDKs.
       ☐ Show indent guides
       ☐ Show intention bulb
       ☐ Show parameter name hints
-      ☐ Show chain call type hints
+      ☐ Show external annotations inline
     + Code Completion
       ☐ Show the parameter info popup in [1000] ms
   + Font
     Font: DejaVu LGC Sans Mono
+    Size: 12
+    Line spacing: 1.0
   + Color Scheme
     + Language Defaults
       > Comments
@@ -513,7 +515,7 @@ Install missing tools, plugins and SDKs.
   + Code Style
     Wrapping and Braces
       Hard wrap at: 128
-    + Java, C/C++, CMake, HTML, JSON, Kotlin, XML, Other File Types
+    + Java, C/C++, CMake, Groovy, HTML, JSON, Kotlin, XML, Other File Types
       Tabs and Indents
         Tab size: 2
         Indent: 2
@@ -531,7 +533,7 @@ Install missing tools, plugins and SDKs.
         Indent visibility keywords in class/structure: 0
         Indent members of namespace: 0
         Preprocessor directive indent: 0
-        ☑ Follow code indent
+        ☐ Follow code indent
       Spaces
         Other
           ☐ Prevent > > concatenation in template
@@ -539,28 +541,11 @@ Install missing tools, plugins and SDKs.
           ☑ Before '<'
         In Template Instantiation
           ☑ Before '<'
-      Wrapping and Braces
-        > 'try' statement
-          ☑ 'catch' on new line
       New File Extensions
         C++
           Source Extension: cpp
           Header Extension: hpp
           File Naming Convention: snake_case
-    + Dart
-      Wrapping and Braces
-        Hard wrap at: 128
-        > 'try' statement
-          ☑ 'catch' on new line
-    + JSON
-      Wrapping and Braces
-        Hard wrap at: 128
-    + Kotlin
-      Wrapping and Braces
-        Hard wrap at: 128
-        > 'try' statement
-          ☑ 'catch' on new line
-          ☑ 'finally' on new line
   + File Encodings
     Global Encoding: UTF-8
     Project Encoding: UTF-8
