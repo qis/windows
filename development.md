@@ -378,8 +378,7 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  },
-  "timeline.showView": true
+  }
 }
 ```
 
@@ -401,13 +400,11 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 ```json
 [
   {
-    "name": "Visual Studio",
-    "visualStudio": "4ef6ec03",
+    "keep": true,
+    "name": "x64-windows",
+    "visualStudio": "c62a5cb9",
     "visualStudioArchitecture": "amd64",
-    "preferredGenerator": {
-      "name": "Visual Studio 16 2019",
-      "platform": "x64"
-    }
+    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake"
   }
 ]
 ```
