@@ -110,6 +110,18 @@ C:\Python\Scripts
 C:\Perl\perl\bin
 ```
 
+Configure the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
+
+```
+1
+```
+
+Configure the System `VCPKG_KEEP_ENV_VARS` environment variable.
+
+```
+VSCMD_SKIP_SENDTELEMETRY
+```
+
 Configure the User `VCPKG_ROOT` environment variable.
 
 ```
