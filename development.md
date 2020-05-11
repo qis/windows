@@ -102,6 +102,7 @@ C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
+C:\Program Files\LLVM\bin
 C:\Program Files\Nasm
 C:\Program Files\Ninja
 C:\Workspace\vcpkg
