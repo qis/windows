@@ -134,6 +134,8 @@ Install [LLVM](https://llvm.org/).
 sudo rm -rf /opt/llvm; sudo mkdir -p /opt/llvm
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
 sudo tar xf clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
+echo "/opt/llvm/lib" | sudo tee /etc/ld.so.conf.d/llvm.conf
+sudo ldconfig
 ```
 
 Switch the default C and C++ compiler to LLVM 10.
