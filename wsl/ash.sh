@@ -25,7 +25,7 @@ export PAGER="less"
 # Ports
 export VSCMD_SKIP_SENDTELEMETRY=1
 export VCPKG_KEEP_ENV_VARS=VSCMD_SKIP_SENDTELEMETRY
-export VCPKG_DEFAULT_TRIPLET="x64-linux"
+export VCPKG_DEFAULT_TRIPLET="x64-linux-llvm"
 export VCPKG_DOWNLOADS="/opt/downloads"
 export VCPKG_ROOT="/opt/vcpkg"
 
