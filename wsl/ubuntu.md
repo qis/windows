@@ -138,7 +138,7 @@ echo "/opt/llvm/lib" | sudo tee /etc/ld.so.conf.d/llvm.conf
 sudo ldconfig
 ```
 
-Switch the default C and C++ compiler to LLVM 10.
+Switch the default C and C++ compiler to LLVM.
 
 ```sh
 sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
