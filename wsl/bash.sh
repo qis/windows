@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/opt/llvm/bin:/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Files
 umask 0022

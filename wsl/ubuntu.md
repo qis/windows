@@ -121,11 +121,26 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt install -y build-essential binutils-dev gcc-9 g++-9
 ```
 
-Switch default system compiler to GCC 9.
+Switch default GCC compiler to GCC 9.
 
 ```sh
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 90
+```
+
+Install [LLVM](https://llvm.org/).
+
+```sh
+sudo rm -rf /opt/llvm; sudo mkdir -p /opt/llvm
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+sudo tar xf clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
+```
+
+Switch the default C and C++ compiler to LLVM 10.
+
+```sh
+sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
+sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
 ```
 
 Install development packages.
