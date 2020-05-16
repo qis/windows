@@ -344,13 +344,17 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "C:\\Workspace\\vcpkg\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
-  "clang-format.executable": "C:\\Workspace\\vcpkg\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
-  "cmake.buildDirectory": "${workspaceFolder}/build/windows/debug",
+  "C_Cpp.clang_format_path": "${env.VCPKG_ROOT}\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
+  "clang-format.executable": "${env.VCPKG_ROOT}\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
+  "cmake.generator": "Ninja",
+  "cmake.buildDirectory": "${workspaceFolder}/build/windows",
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
-  "cmake.generator": "Ninja",
+  "cmake.configureSettings": {
+    "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG": "debug",
+    "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE": "release"
+  },
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -416,10 +420,23 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 [
   {
     "keep": true,
-    "name": "x64-windows",
+    "name": "x64-windows-msvc",
     "visualStudio": "c62a5cb9",
     "visualStudioArchitecture": "amd64",
-    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake"
+    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake",
+    "cmakeSettings": {
+      "VCPKG_TARGET_TRIPLET": "x64-windows-msvc"
+    }
+  },
+  {
+    "keep": true,
+    "name": "x64-windows-llvm",
+    "visualStudio": "c62a5cb9",
+    "visualStudioArchitecture": "amd64",
+    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake",
+    "cmakeSettings": {
+      "VCPKG_TARGET_TRIPLET": "x64-windows-llvm"
+    }
   }
 ]
 ```
