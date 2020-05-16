@@ -113,15 +113,15 @@ Install [CMake](https://cmake.org/).
 ```sh
 sudo rm -rf /opt/cmake
 sudo apk add cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0.tar.gz
-tar xf cmake-3.17.0.tar.gz
+wget https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz
+tar xf cmake-3.17.2.tar.gz
 cmake -GNinja -Wno-dev \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=/opt/cmake \
   -DCMAKE_C_COMPILER=gcc \
   -DCMAKE_CXX_COMPILER=g++ \
   -DCMAKE_USE_SYSTEM_CURL=ON \
-  -B cmake-build cmake-3.17.0
+  -B cmake-build cmake-3.17.2
 ninja -C cmake-build
 sudo ninja -C cmake-build install
 sudo apk del cmake

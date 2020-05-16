@@ -29,7 +29,7 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 
 Install [LLVM](https://releases.llvm.org/download.html).
 
-Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0-win64-x64.msi).
+Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-win64-x64.msi).
 
 Install development tools.
 
