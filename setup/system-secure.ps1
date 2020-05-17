@@ -353,7 +353,7 @@ Get-AppxPackage "Microsoft.WebMediaExtensions" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Whiteboard" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
-Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
+#Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage  # Mail and Calendar
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
@@ -366,7 +366,7 @@ Get-AppxPackage "Microsoft.WinJS.2.0" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
-#Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage # Dependency for Mail, Calendar, Weather
+#Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage  # Dependency for Mail and Calendar, Weather
 
 UninstallThirdPartyBloat
 DisableXboxFeatures
