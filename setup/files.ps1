@@ -44,7 +44,6 @@ function Associate {
 }
 
 # Icons
-$conf = "%SystemRoot%\System32\imageres.dll,62"
 $text = "%SystemRoot%\System32\imageres.dll,97"
 $audio = "%ProgramFiles%\MPV\mpv.exe,0"
 $video = "%ProgramFiles%\MPV\mpv.exe,0"
@@ -62,8 +61,8 @@ Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
 )
 
 # Editor
-Associate "android" "Android" $editor $conf ("gradle", "iml", "lock", "metadata", "properties")
-Associate "configuration" "Configuration" $editor $conf ("cfg", "clang-format", "clang-tidy", "conf","ini")
+Associate "android" "Android" $editor $text ("gradle", "iml", "lock", "metadata", "properties")
+Associate "config" "Configuration" $editor $text ("cfg", "clang-format", "clang-tidy", "conf", "editorconfig", "ini")
 Associate "git" "Git" $editor "git.ico" ("gitattributes", "gitconfig", "gitignore", "gitmodules")
 Associate "json" "JSON" $editor $text ("json")
 Associate "log" "Log" $editor $text ("log", "tlog")
@@ -76,17 +75,17 @@ Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
 Associate "sourcemap" "Source Map" $editor $text ("map")
 
 # Database
-Associate "database" "Database" $sqlite "database.ico" ("db")
+If (Test-Path "C:\Program Files\DB Browser for SQLite\DB Browser for SQLite.exe" -PathType leaf) {
+  Associate "database" "Database" $sqlite "database.ico" ("db")
+}
 
 # Code
-Associate "editorconfig" "Editor" $editor "code.ico" ("editorconfig")
 Associate "asm" "Assembler" $editor "asm.ico" ("asm", "s")
 Associate "c" "C Source" $editor "c.ico" ("c")
 Associate "cmake" "CMake" $editor "code.ico" ("cmake", "in")
 Associate "cpp" "C++ Source" $editor "cpp.ico" ("c++", "cc", "cpp", "cxx")
 Associate "cs" "C Sharp" $editor "cs.ico" ("cs")
 Associate "css" "CSS" $editor "code.ico" ("css")
-Associate "dart" "Dart" $editor "code.ico" ("dart")
 Associate "h" "C Header" $editor "h.ico" ("h")
 Associate "hpp" "C++ Header" $editor "hpp.ico" ("h++", "hh", "hpp", "hxx", "i++", "ipp", "ixx")
 Associate "java" "Java" $editor "code.ico" ("java")
@@ -97,14 +96,13 @@ Associate "perl" "Perl" $editor "code.ico" ("perl", "pl", "pm")
 Associate "python" "Python" $editor "code.ico" ("py")
 Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "shell" "Shell" $editor "code.ico" ("sh")
+Associate "typescript" "TypeScript" $editor "code.ico" ("ts")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 
 # Audio
-Associate "audio" "Audio" $player $audio ("mp3")
+Associate "audio" "Audio" $player $audio ("mp3", "aac", "flac", "mka")
 
 # Video
-Associate "video" "Video" $player $video ("mp4", "avi", "flac", "flv", "mkv", "mov")
+Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov")
 
 & ie4uinit.exe -ClearIconCache
-
-Done
