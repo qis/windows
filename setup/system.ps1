@@ -57,52 +57,33 @@ If ($username -ne "") {
 # Schedule reboot.
 $rebootRequired = $False
 
-# Disable hibernation.
-function Get-Hibernation {
-  $found = $False
-  $parsing = $False
-  powercfg /a | % {
-    If ($_ -ceq "The following sleep states are available on this system:") {
-      $parsing = $True
-      return
-    }
-    If ($_ -ceq "The following sleep states are not available on this system:") {
-      $parsing = $False
-      return
-    }
-    If ($parsing) {
-      If ($_ | Select-String "Hibernate") {
-        $found = $True
-      }
-    }
-  }
-  return $found
-}
-
 # Disable virtual memory.
 $ComputerSystem = Get-WmiObject Win32_ComputerSystem -EnableAllPrivileges
-If ($ComputerSystem.AutomaticManagedPagefile) {
-  Write-Output "Switching to manual Pagefile management..."
-  $ComputerSystem.AutomaticManagedPagefile = $False
-  $ComputerSystem.Put()
-  $rebootRequired = $True
-}
+$PhysicalMemory = [math]::Ceiling($ComputerSystem.TotalPhysicalMemory / 1024 / 1024 / 1024)
+If ($PhysicalMemory -ge 16) {
+  If ($ComputerSystem.AutomaticManagedPagefile) {
+    Write-Output "Switching to manual Pagefile management..."
+    $ComputerSystem.AutomaticManagedPagefile = $False
+    $ComputerSystem.Put()
+    $rebootRequired = $True
+  }
 
-$PageFileSetting = Get-WmiObject -Query "SELECT * FROM Win32_PageFileSetting WHERE Name LIKE '%pagefile.sys'"
-If ($PageFileSetting) {
-  Write-Output "Setting Pagefile sizes..."
-  $PageFileSetting.InitialSize = 0
-  $PageFileSetting.MaximumSize = 0
-  $PageFileSetting.Put()
-  $rebootRequired = $True
-}
+  $PageFileSetting = Get-WmiObject -Query "SELECT * FROM Win32_PageFileSetting WHERE Name LIKE '%pagefile.sys'"
+  If ($PageFileSetting) {
+    Write-Output "Setting Pagefile sizes..."
+    $PageFileSetting.InitialSize = 0
+    $PageFileSetting.MaximumSize = 0
+    $PageFileSetting.Put()
+    $rebootRequired = $True
+  }
 
-$PageFile = Get-WmiObject -Query "SELECT * FROM Win32_PageFile WHERE Name LIKE '%pagefile.sys'"
-If ($PageFile) {
-  Write-Output "Deleting Pagefile..."
-  $PageFile.Delete()
-  wmic pagefileset delete
-  $rebootRequired = $True
+  $PageFile = Get-WmiObject -Query "SELECT * FROM Win32_PageFile WHERE Name LIKE '%pagefile.sys'"
+  If ($PageFile) {
+    Write-Output "Deleting Pagefile..."
+    $PageFile.Delete()
+    wmic pagefileset delete
+    $rebootRequired = $True
+  }
 }
 
 # Disable system restore.
@@ -157,6 +138,8 @@ DisableTailoredExperiences
 DisableAdvertisingID
 DisableCortana
 DisableBiometrics
+#DisableCamera
+#DisableMicrophone
 DisableErrorReporting
 SetP2PUpdateDisable
 DisableDiagTrack
@@ -170,11 +153,12 @@ DisableRecentFiles
 
 DisableSharingMappedDrives
 DisableAdminShares
-HideAccountProtectionWarn
 HideDefenderTrayIcon
-DisableDefenderAppGuard
-DisableDefenderCloud
 DisableDefender
+DisableDefenderCloud
+DisableDefenderAppGuard
+DisableCIMemoryIntegrity
+HideAccountProtectionWarn
 DisableDownloadBlocking
 EnableDotNetStrongCrypto
 SetDEPOptOut
@@ -183,16 +167,20 @@ SetDEPOptOut
 # Network Tweaks
 # ===========================================================================================================
 
+SetCurrentNetworkPrivate
 SetUnknownNetworksPrivate
+DisableNetDevicesAutoInst
+DisableSMB1
 DisableSMBServer
+DisableNetBIOS
 DisableLLMNR
 DisableLLDP
 DisableLLTD
 DisableMSNetClient
 DisableQoS
 DisableConnectionSharing
-DisableRemoteAssistance
-DisableRemoteDesktop
+#DisableRemoteAssistance
+#DisableRemoteDesktop
 
 # ===========================================================================================================
 # Service Tweaks
@@ -216,6 +204,7 @@ DisableSuperfetch
 DisableSwapFile
 EnableNTFSLongPaths
 DisableNTFSLastAccess
+SetBIOSTimeUTC
 DisableHibernation
 DisableSleepButton
 
@@ -225,6 +214,7 @@ powercfg /X monitor-timeout-dc 10
 powercfg /X standby-timeout-ac 0
 powercfg /X standby-timeout-dc 360
 
+DisableFastStartup
 DisableAutoRebootOnCrash
 
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
@@ -262,14 +252,15 @@ DisableSearchAppInStore
 DisableNewAppPrompt
 HideRecentlyAddedApps
 HideMostUsedApps
+SetWinXMenuCmd
 DisableShortcutInName
-EnableDarkTheme
+DisableTitleBarColor
+SetAppsDarkMode
+SetSystemDarkMode
 EnableEnhPointerPrecision
 DisableStartupSound
 SetSoundSchemeNone
 DisableF1HelpKey
-
-SetVisualFXAppearance
 
 Write-Output "Setting custom visual effects..."
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
@@ -295,11 +286,14 @@ ShowHiddenFiles
 HideSuperHiddenFiles
 ShowEmptyDrives
 HideFolderMergeConflicts
+#HideNavPaneAllFolders
 DisableRestoreFldrWindows
 DisableSharingWizard
 HideSelectCheckboxes
 HideRecentShortcuts
 SetExplorerQuickAccess
+#HideRecycleBinFromDesktop
+#HideDesktopIcons
 HideDesktopFromThisPC
 HideDesktopFromExplorer
 HideDocumentsFromThisPC
@@ -317,6 +311,7 @@ Hide3DObjectsFromExplorer
 HideIncludeInLibraryMenu
 HideGiveAccessToMenu
 HideShareMenu
+#DisableThumbnailCache
 DisableThumbsDBOnNetwork
 
 # ===========================================================================================================
@@ -336,7 +331,7 @@ Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingTravel" | Remove-AppxPackage
-Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
+#Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.FreshPaint" | Remove-AppxPackage
@@ -374,6 +369,7 @@ Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
+#Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsReadingList" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsScan" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
@@ -382,25 +378,26 @@ Get-AppxPackage "Microsoft.WinJS.2.0" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
-Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage
+#Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage # Dependency for Mail, Calendar, Weather
 
 UninstallThirdPartyBloat
 DisableXboxFeatures
+DisableFullscreenOptims
+DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation
-
 DisableMediaSharing
+EnableDeveloperMode
 UninstallMediaPlayer
-
-DisableIEFirstRun
 UninstallInternetExplorer
-
 UninstallWorkFolders
+UninstallHelloFace
+UninstallMathRecognizer
 UninstallPowerShellV2
-
+InstallSSHClient
+InstallTelnetClient
 SetPhotoViewerAssociation
-AddPhotoViewerOpenWith
-
+RemovePhotoViewerOpenWith
 UninstallXPSPrinter
 RemoveFaxPrinter
 UninstallFaxAndScan
@@ -432,170 +429,41 @@ Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\A
 Write-Output "Uninstalling Microsoft Internet Printing..."
 Disable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-InternetPrinting-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
-Write-Output "Uninstalling Windows Capabilities..."
-Get-WindowsCapability -Online | % {
-  $remove = $False
-  If ($_.Name | Select-String "App.Support.QuickAssist") {
-    $remove = $True
-  }
-  If ($_.Name | Select-String "Browser.InternetExplorer") {
-    $remove = $True
-  }
-  If ($_.Name | Select-String "Media.WindowsMediaPlayer") {
-    $remove = $True
-  }
-  If ($_.Name | Select-String "Hello.Face") {
-    $remove = $True
-  }
-  If ($remove -eq $True) {
-    If ($_.State -eq "Installed") {
-      Write-Output "Removing windows capability:" $_.Name "..."
-      Remove-WindowsCapability -Online -Name $_.Name
-    }
-  }
-}
-
 # ===========================================================================================================
 # Manual Tweaks
 # ===========================================================================================================
 
+$script = Resolve-Path -Path $PSScriptRoot\..\script
+
 Write-Output ""
 Write-Output ""
 Write-Output ""
+Write-Output "Open a new CMD or PowerShell window as Administrator and enter the script directory."
+Write-Output ""
+Write-Output "  cd $script"
 Write-Output ""
 Write-Output ""
-Write-Output ""
-Write-Output "Open a new PowerShell window as Administrator and enter the script directory."
-Write-Output ""
-Write-Output "  cd $PSScriptRoot\script"
-Write-Output ""
-Write-Output ""
-Write-Output "Run the following command to unpin all start menu icons."
+Write-Output "Unpin all start menu icons."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinStartMenuTiles"
 Write-Output ""
 Write-Output ""
-Write-Output "Run the following command to unpin all tarkbar icons."
+Write-Output "Unpin all tarkbar icons."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinTaskbarIcons"
 Write-Output ""
 Write-Output ""
-Write-Output "Run the following command after configuring a lock screen wallpaper."
+Write-Output "Disable lock screen after setting a wallpaper."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen"
 Write-Output ""
 Write-Output ""
-Write-Output "Run the following commands after connecting to the internet and installing all updates."
+Write-Output "Install WSL after connecting to the internet and installing all updates."
 Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem"
 Write-Output ""
+Write-Output ""
+Write-Output ""
 
-Done
-
-# ===========================================================================================================
-
-# Modify group policies.
-#
-# See https://www.thewindowsclub.com/group-policy-settings-reference-windows for spreadsheet.
-#
-# All settings can be verified in gpedit.msc > Computer Configuration > Administrative Templates
-#
-Write-Output "Modifying group policies..."
-
-# Control Panel > Personalization > Do not display the lock screen: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /t REG_DWORD /d 1 /f
-
-# Windows Components > Cloud Content > Turn off Microsoft consumer experiences: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
-
-# Windows Components > Data Collection and Preview Builds > Allow Telemetry: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
-
-# Windows Components > Data Collection and Preview Builds > Do not show feedback notifications: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Prevent OneDrive from generating network traffic until the user signs in to OneDrive: Enabled
-reg add "HKLM\SOFTWARE\Microsoft\OneDrive" /v "PreventNetworkTrafficPreUserSignIn" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Prevent the usage of OneDrive for file storage: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSync" /t REG_DWORD /d 1 /f
-
-# Windows Components > OneDrive > Save documents to OneDrive by default: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /v "DisableLibrariesDefaultSaveToOneDrive" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cloud Search: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cortana: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow Cortana above lock screen: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Allow search and Cortana to use location: Disabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f
-
-# Windows Components > Search > Do not allow locations on removable drives to be added to libraries: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableRemovableDriveIndexing" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Do not allow web search: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Don't search the web or display web results in Search: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Prevent automatically adding shared folders to the Windows Search index: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AutoIndexSharedFolders" /t REG_DWORD /d 1 /f
-
-# Windows Components > Search > Prevent clients from querying the index remotely: Enabled
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventRemoteQueries" /t REG_DWORD /d 1 /f
-
-# Windows Components > Speech > Allow Automatic Update of Speech Data: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Speech" /v "AllowSpeechModelUpdate" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender Antivirus > Turn off Windows Defender Antivirus: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
-
-# Windows Components > Windows Defender Antivirus > MAPS > Join Microsoft MAPS: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetReporting" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender Antivirus > Network Inspection System > Turn on definition retirement: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\NIS\Consumers\IPS" /v "DisableSignatureRetirement" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender Antivirus > Network Inspection System > Turn on protocol recognition: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\NIS" /v "DisableProtocolRecognition" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender Antivirus > Real-time Protection > Turn off real-time protection: Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 1 /f
-
-# Windows Components > Windows Defender Antivirus > Signature Updates > Allow definition updates from Microsoft Update: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates" /v "ForceUpdateFromMU" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender Antivirus > Signature Updates > Check for the latest virus and spyware definitions on startup: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates" /v "UpdateOnStartUp" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender SmartScreen > Explorer > Configure Windows Defender SmartScreen: Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Defender SmartScreen > Microsoft Edge > Configure Windows Defender SmartScreen: Disabled
-reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 0 /f
-
-# Windows Components > Windows Error Reporting > Disable Windows Error Reporting: Enabled
-reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
-
-# Windows Components > Windows Update > Configure Automatic Updates: Enabled
-#   Configure automatic updating: 2 - Notify for download and auto install
-#   [v] Install updates for other Microsoft products
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d 2 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AutomaticMaintenanceEnabled" /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d 3 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallEveryWeek" /t REG_DWORD /d 1 /f
-
-# System > Device Installation > Prevent device metadata retrieval from the Internet: Enabled
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d 1 /f
-
-Done
+Wait-Event
+Exit

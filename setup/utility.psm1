@@ -5,11 +5,6 @@ function Confirm {
   }
 }
 
-function Done {
-  Confirm "Press any key to exit..."
-  Exit
-}
-
 function Reboot {
   Confirm "Press any key to reboot the system..."
   Restart-Computer -Force
@@ -18,7 +13,8 @@ function Reboot {
 
 function Error {
   Write-Output "Error: $args"
-  Done
+  Confirm "Press any key to exit..."
+  Exit
 }
 
 function IsAdmin {
