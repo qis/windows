@@ -114,18 +114,18 @@ Import-Module -Name "$PSScriptRoot\..\script\Win10"
 
 DisableTelemetry
 DisableWiFiSense
-DisableSmartScreen
+#DisableSmartScreen
 DisableWebSearch
 DisableAppSuggestions
 DisableActivityHistory
-DisableSensors
-DisableLocation
+#DisableSensors
+#DisableLocation
 DisableMapUpdates
 DisableFeedback
 DisableTailoredExperiences
 DisableAdvertisingID
 DisableCortana
-DisableBiometrics
+#DisableBiometrics
 #DisableCamera
 #DisableMicrophone
 DisableErrorReporting
@@ -141,13 +141,13 @@ DisableRecentFiles
 
 DisableSharingMappedDrives
 DisableAdminShares
-HideDefenderTrayIcon
-DisableDefender
-DisableDefenderCloud
-DisableDefenderAppGuard
-DisableCIMemoryIntegrity
-HideAccountProtectionWarn
-DisableDownloadBlocking
+#HideDefenderTrayIcon
+#DisableDefender
+#DisableDefenderCloud
+#DisableDefenderAppGuard
+#DisableCIMemoryIntegrity
+#HideAccountProtectionWarn
+#DisableDownloadBlocking
 EnableDotNetStrongCrypto
 SetDEPOptOut
 
@@ -174,27 +174,27 @@ DisableConnectionSharing
 # Service Tweaks
 # ===========================================================================================================
 
-DisableUpdateMSRT
+#DisableUpdateMSRT
 EnableUpdateMSProducts
-DisableUpdateAutoDownload
-DisableMaintenanceWakeUp
+#DisableUpdateAutoDownload
+#DisableMaintenanceWakeUp
 DisableSharedExperiences
 DisableClipboardHistory
 DisableAutoplay
 DisableAutorun
-DisableRestorePoints
+#DisableRestorePoints
 
-vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
+#vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
 
 DisableStorageSense
 DisableDefragmentation
 DisableSuperfetch
-DisableSwapFile
+#DisableSwapFile
 EnableNTFSLongPaths
 DisableNTFSLastAccess
 SetBIOSTimeUTC
-DisableHibernation
-DisableSleepButton
+#DisableHibernation
+#DisableSleepButton
 
 Write-Output "Setting display and sleep mode timeouts..."
 powercfg /X monitor-timeout-ac 30
@@ -202,29 +202,29 @@ powercfg /X monitor-timeout-dc 10
 powercfg /X standby-timeout-ac 0
 powercfg /X standby-timeout-dc 360
 
-DisableFastStartup
-DisableAutoRebootOnCrash
+#DisableFastStartup
+#DisableAutoRebootOnCrash
 
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
 #   Windows Components > Windows Update > Configure Automatic Updates: Enabled
 #     Configure automatic updating: 2 - Notify for download and auto install
 #     [v] Install updates for other Microsoft products
-Write-Output "Configuring Windows Update..."
-If (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
-  New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Type DWord -Value 0
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Type DWord -Value 2
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AutomaticMaintenanceEnabled" -Type DWord -Value 1
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Type DWord -Value 0
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Type DWord -Value 3
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallEveryWeek" -Type DWord -Value 1
+#Write-Output "Configuring Windows Update..."
+#If (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+#  New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+#}
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Type DWord -Value 0
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Type DWord -Value 2
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AutomaticMaintenanceEnabled" -Type DWord -Value 1
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Type DWord -Value 0
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Type DWord -Value 3
+#Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallEveryWeek" -Type DWord -Value 1
 
 # ===========================================================================================================
 # UI Tweaks
 # ===========================================================================================================
 
-DisableActionCenter
+#DisableActionCenter
 HideNetworkFromLockScreen
 DisableLockScreenBlur
 DisableAeroShake
@@ -375,7 +375,7 @@ DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation
 DisableMediaSharing
-EnableDeveloperMode
+#EnableDeveloperMode
 UninstallMediaPlayer
 UninstallInternetExplorer
 UninstallWorkFolders

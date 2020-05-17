@@ -1,2 +1,3 @@
 /files-*.ps1
 /system-*.ps1
+!/system-secure.ps1
