@@ -27,14 +27,11 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
-Install [LLVM](https://releases.llvm.org/download.html).
-
 Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-win64-x64.msi).
 
 Install development tools.
 
 * [Ninja](https://github.com/ninja-build/ninja/releases/download/v1.10.0/ninja-win.zip) into `C:\Program Files\Ninja`
-* [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip) into `C:\Program Files\Nasm`
 * [Perl](http://strawberryperl.com/download/5.30.1.1/strawberry-perl-5.30.1.1-64bit-portable.zip) into `C:\Perl`
 
 Install [Python 3](https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe).
@@ -102,8 +99,6 @@ C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
-C:\Program Files\LLVM\bin
-C:\Program Files\Nasm
 C:\Program Files\Ninja
 C:\Workspace\vcpkg
 C:\Vulkan\Bin
