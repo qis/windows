@@ -19,6 +19,13 @@ Individual components
   ☑ Python language support
 ```
 
+Configure node.
+
+```cmd
+set prefix=prefix = "%UserProfile%\AppData\Roaming\npm"
+echo %prefix:\=\\%>%UserProfile%\.npmrc
+```
+
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
 
 Install [Visual Studio Code](https://code.visualstudio.com/download).
@@ -81,12 +88,6 @@ Configure the User `Path` environment variable.
 %UserProfile%\AppData\Roaming\npm
 ```
 
-Configure the User `NODE_PATH` environment variable.
-
-```
-%AppData%\npm\node_modules
-```
-
 Configure the System `Path` environment variable.
 
 ```
@@ -105,33 +106,12 @@ C:\Program Files\7-Zip
 C:\Program Files\Git\cmd
 C:\Workspace\vcpkg
 C:\Vulkan\Bin
-C:\Node
-C:\Python
-C:\Python\Scripts
 ```
 
 Configure the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
 
 ```
 1
-```
-
-Configure the System `VCPKG_KEEP_ENV_VARS` environment variable.
-
-```
-VSCMD_SKIP_SENDTELEMETRY
-```
-
-Configure the System `VCPKG_ROOT` environment variable.
-
-```
-C:\Workspace\vcpkg
-```
-
-Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
-
-```
-x64-windows
 ```
 
 ## Settings
@@ -349,10 +329,6 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "cmake.installPrefix": "${workspaceFolder}/build/install",
   "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
-  "cmake.configureSettings": {
-    "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG": "debug",
-    "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE": "release"
-  },
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -418,22 +394,13 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 [
   {
     "keep": true,
-    "name": "x64-windows-msvc",
-    "visualStudio": "c62a5cb9",
+    "name": "x64-windows-ipo",
+    "visualStudio": "f8f784e6",
     "visualStudioArchitecture": "amd64",
-    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake",
+    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\windows.cmake",
     "cmakeSettings": {
-      "VCPKG_TARGET_TRIPLET": "x64-windows-msvc"
-    }
-  },
-  {
-    "keep": true,
-    "name": "x64-windows-llvm",
-    "visualStudio": "c62a5cb9",
-    "visualStudioArchitecture": "amd64",
-    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\res\\toolchain.cmake",
-    "cmakeSettings": {
-      "VCPKG_TARGET_TRIPLET": "x64-windows-llvm"
+      "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG": "debug",
+      "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE": "release"
     }
   }
 ]
