@@ -227,13 +227,11 @@ Disable all rules in Windows Firewall except the following entries.
 ```
 wf.msc
 + Inbound Rules
-  Connect
   Core Networking - …
   Delivery Optimization (…)
   Hyper-V …
   Network Discovery (…)
 + Outbound Rules
-  Connect
   Core Networking - …
   Hyper-V …
   Network Discovery (…)
@@ -264,6 +262,8 @@ Settings
 + Passwords & autofill
   Save form data: Off
 ```
+
+Download [Microsoft Office](https://account.microsoft.com/services/).
 
 <!--
 Configure Microsoft Outlook 2016.
@@ -373,7 +373,7 @@ git clone git@github.com:qis/vim %UserProfile%\vimfiles
 Register gVim in Explorer context menus.
 
 ```cmd
-set gvim=C:\Program Files (x86)\Vim\vim81\gvim.exe
+set gvim=C:\Program Files (x86)\Vim\vim82\gvim.exe
 set gvimfile=\"%gvim%\" \"%1\"
 reg add "HKCR\*\shell\gvim" /ve /d "Edit with Vim" /f
 reg add "HKCR\*\shell\gvim" /v Icon /d "%gvim%,0" /f
@@ -382,7 +382,7 @@ reg add "HKCR\*\shell\gvim\command" /ve /d "%gvimfile%" /f
 
 <!--
 ```cmd
-set gvim=C:\Program Files (x86)\Vim\vim81\gvim.exe
+set gvim=C:\Program Files (x86)\Vim\vim82\gvim.exe
 set gvimtabfile=\"%gvim%\" -\-remote-tab-silent \"%1\"
 reg add "HKCR\*\shell\gvimtab" /ve /d "Edit with Vim (Tab)" /f
 reg add "HKCR\*\shell\gvimtab" /v Icon /d "%gvim%,0" /f
@@ -497,6 +497,9 @@ See [wsl/alpine.md](wsl/alpine.md) or [wsl/ubuntu.md](wsl/ubuntu.md) for WSL set
 See [development.md](development.md) for developer workstation setup instructions.
 
 ## Start Menu
+<%AppData%\Microsoft\Windows\Start Menu\Programs><br/>
+<C:\ProgramData\Microsoft\Windows\Start Menu\Programs>
+
 ![Start Menu](res/start.png)
 
 <!--

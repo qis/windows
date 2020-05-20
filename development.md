@@ -5,15 +5,18 @@ Install [Visual Studio](https://visualstudio.microsoft.com/downloads/).
 
 ```
 Workloads
++ ☑ Node.js development
 + ☑ Desktop development with C++
++ ☑ Linux development with C++
 
 Individual components
-+ Debuggong and testing
-  ☑ JavaScript diagnostics
++ Compilers, build tools, and runtimes
+  ☑ C++ Clang Compiler for Windows
+  ☑ C++ Modules for v142 build tools
+  ☑ Python 3 64-bit
 + Development Activities
-  ☐ IntelliCode
-  ☑ JavaScript and TypeScript language support
   ☐ Live Share
+  ☑ Python language support
 ```
 
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
@@ -27,6 +30,9 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
+Install [Python](https://www.microsoft.com/en-us/p/python-38/9mssztt1n39l).
+
+<!--
 Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-win64-x64.msi).</br>
 Install [Python 3](https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe).
 
@@ -62,6 +68,7 @@ Custom Setup
 Tools for Native Modules
   ☐ Automatically install necessary tools.
 ```
+-->
 
 ## Development Kits
 Install [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`.
@@ -88,10 +95,13 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\NodeJs
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
 C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
-C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
 C:\Workspace\vcpkg
 C:\Vulkan\Bin
@@ -112,13 +122,13 @@ Configure the System `VCPKG_KEEP_ENV_VARS` environment variable.
 VSCMD_SKIP_SENDTELEMETRY
 ```
 
-Configure the User `VCPKG_ROOT` environment variable.
+Configure the System `VCPKG_ROOT` environment variable.
 
 ```
 C:\Workspace\vcpkg
 ```
 
-Configure the User `VCPKG_DEFAULT_TRIPLET` environment variable.
+Configure the System `VCPKG_DEFAULT_TRIPLET` environment variable.
 
 ```
 x64-windows
@@ -188,7 +198,6 @@ Text Editor
   + Formatting
     + General
       ◉ Run ClangFormat only for manually invoked formatting commands
-      ☑ Use custom clang-format.exe file: C:\Workspace\vcpkg\triplets\toolchains\llvm\bin\clang-format.exe
     + Indentation
       ☐ Indent braces of lambdas used as parameters
       ☐ Indent namespace contents
@@ -223,6 +232,8 @@ Text Editor
       ☐ Format completed block on }
       Module Quote Preference
       ◉ Double (")
+      Semicolon Preference
+      ◉ Insert semicolons at statement ends
     + Spacing
       ☐ Insert space after function keyword for anonymous functions
 + JSON
@@ -331,8 +342,8 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "${env.VCPKG_ROOT}\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
-  "clang-format.executable": "${env.VCPKG_ROOT}\\triplets\\toolchains\\llvm\\bin\\clang-format.exe",
+  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang-format.exe",
+  "clang-format.executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang-format.exe",
   "cmake.generator": "Ninja",
   "cmake.buildDirectory": "${workspaceFolder}/build/windows",
   "cmake.installPrefix": "${workspaceFolder}/build/install",

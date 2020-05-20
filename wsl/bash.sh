@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/llvm/bin:/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Files
 umask 0022
@@ -21,11 +21,6 @@ export LC_ALL=
 # Applications
 export EDITOR="vim"
 export PAGER="less"
-
-# Ports
-export VCPKG_DEFAULT_TRIPLET="x64-linux-llvm"
-export VCPKG_DOWNLOADS="/opt/downloads"
-export VCPKG_ROOT="/opt/vcpkg"
 
 # Colors
 export CLICOLOR=1

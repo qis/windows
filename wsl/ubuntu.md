@@ -20,8 +20,8 @@ apt autoclean
 Install packages.
 
 ```sh
-apt install -y curl file git htop neovim openssh-client p7zip-full pv pwgen sshpass sudo tmux tree
-apt install -y imagemagick pngcrush
+apt install -y curl file git htop openssh-client p7zip-full pv pwgen sshpass sudo tmux tree
+apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
 
 Install `nvim` as default `vim`.
@@ -113,58 +113,27 @@ sudo chown `id -un`:`id -gn` "${USER_PROFILE}/.ssh"/* ~/.ssh/*
 sudo chmod 0600 "${USER_PROFILE}/.ssh"/* ~/.ssh/*
 ```
 
+Restart Windows to apply settings.
+
 ## Development
-Add `test` toolchain repository and install GCC 9.
-
-```sh
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt install -y build-essential binutils-dev gcc-9 g++-9
-```
-
-Switch default GCC compiler to GCC 9.
-
-```sh
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 90
-```
-
 Install [LLVM](https://llvm.org/).
 
 ```sh
-sudo rm -rf /opt/llvm; sudo mkdir -p /opt/llvm
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-sudo tar xf clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C /opt/llvm --strip-components 1
-echo "/opt/llvm/lib" | sudo tee /etc/ld.so.conf.d/llvm.conf
-sudo ldconfig
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
+  clang clang-format clang-tidy llvm-dev lld lldb libc++-dev libc++abi-dev \
+  binutils-dev linux-headers-generic
 ```
 
 Switch the default C and C++ compiler to LLVM.
 
 ```sh
-sudo update-alternatives --install /usr/bin/cc cc /opt/llvm/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
 ```
 
 Install development packages.
 
 ```sh
-sudo apt install -y binutils linux-headers-generic libc6-dev
-sudo apt install -y make nasm ninja-build nodejs npm patch perl pkgconf python python-pip sqlite3 swig z3
-sudo apt install -y build-essential binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev libz3-dev
-```
-
-Install [CMake](https://cmake.org/).
-
-```sh
-sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-Linux-x86_64.tar.gz
-sudo tar xf cmake-3.17.2-Linux-x86_64.tar.gz -C /opt/cmake --strip-components 1
-```
-
-Install [Node](https://nodejs.org/).
-
-```sh
-sudo rm -rf /opt/node; sudo mkdir -p /opt/node
-wget https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.xz
-sudo tar xf node-v12.16.1-linux-x64.tar.xz -C /opt/node --strip-components 1
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
+  cmake make nasm ninja-build nodejs npm patch perl pkgconf python3 python3-pip sqlite3
 ```
