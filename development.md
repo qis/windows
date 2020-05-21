@@ -111,9 +111,16 @@ Configure the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
 Configure npm.
 
 ```cmd
-npm config set prefix "%UserProfile%\AppData\Roaming\npm"
-npm config set init.author.name "Name Surname"
 npm set init.author.email "name@example.com"
+npm config set init.author.name "Name Surname"
+npm config set scripts-prepend-node-path false
+npm config set prefix "%UserProfile%\AppData\Roaming\npm"
+```
+
+Install node packages.
+
+```cmd
+npm install -g typescript
 ```
 
 ## Settings
