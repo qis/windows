@@ -37,8 +37,6 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
-Install [Python](https://www.microsoft.com/en-us/p/python-38/9mssztt1n39l).
-
 <!--
 Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-win64-x64.msi).</br>
 Install [Python 3](https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe).
@@ -100,6 +98,8 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Common
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\NodeJs
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Scripts
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64
 C:\Program Files (x86)\Sysinternals Suite
 C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
