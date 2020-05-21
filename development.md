@@ -19,13 +19,6 @@ Individual components
   ☑ Python language support
 ```
 
-Configure node.
-
-```cmd
-set prefix=prefix = "%UserProfile%\AppData\Roaming\npm"
-echo %prefix:\=\\%>%UserProfile%\.npmrc
-```
-
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
 
 Install [Visual Studio Code](https://code.visualstudio.com/download).
@@ -113,6 +106,14 @@ Configure the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
 
 ```
 1
+```
+
+Configure npm.
+
+```cmd
+npm config set prefix "%UserProfile%\AppData\Roaming\npm"
+npm config set init.author.name "Name Surname"
+npm set init.author.email "name@example.com"
 ```
 
 ## Settings
