@@ -120,7 +120,7 @@ npm config set prefix "%UserProfile%\AppData\Roaming\npm"
 Install node packages.
 
 ```cmd
-npm install -g typescript
+npm install -g gulp-cli typescript
 ```
 
 ## Settings
