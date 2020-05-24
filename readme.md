@@ -497,8 +497,8 @@ See [wsl/alpine.md](wsl/alpine.md) or [wsl/ubuntu.md](wsl/ubuntu.md) for WSL set
 See [development.md](development.md) for developer workstation setup instructions.
 
 ## Start Menu
-<%AppData%\Microsoft\Windows\Start Menu\Programs><br/>
-<C:\ProgramData\Microsoft\Windows\Start Menu\Programs>
+<file:///%AppData%\Microsoft\Windows\Start Menu\Programs><br/>
+<file:///C:\ProgramData\Microsoft\Windows\Start Menu\Programs>
 
 ![Start Menu](res/start.png)
 

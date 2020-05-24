@@ -117,12 +117,6 @@ npm config set scripts-prepend-node-path false
 npm config set prefix "%UserProfile%\AppData\Roaming\npm"
 ```
 
-Install node packages.
-
-```cmd
-npm install -g gulp-cli typescript
-```
-
 ## Settings
 Configure development environments.
 
@@ -263,7 +257,7 @@ ext install aeschli.vscode-css-formatter
 ext install alefragnani.rtf
 ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
-ext install esbenp.prettier-vscode
+ext install dbaeumer.vscode-eslint
 ext install ms-vscode.cpptools
 ext install ms-vscode.cmake-tools
 ext install twxs.cmake
