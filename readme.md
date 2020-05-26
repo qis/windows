@@ -502,7 +502,7 @@ explorer "%AppData%\Microsoft\Windows\Start Menu\Programs"
 explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 ```
 
-![Start Menu](res/start.png)
+![Start Menu](res/start-2020-05-26.png)
 
 <!--
 Re-register Start Menu and Conrtana in PowerShell as Administrator.
