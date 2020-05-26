@@ -1,9 +1,14 @@
 # Ubuntu
-Enable WSL support.
+Enable WSL support as **administrator**.
 
-```ps
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+```cmd
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
+
+```cmd
 wsl --set-default-version 2
 ```
 
