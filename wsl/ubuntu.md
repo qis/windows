@@ -2,8 +2,8 @@
 Enable WSL support as **administrator**.
 
 ```cmd
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
 Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
