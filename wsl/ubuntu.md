@@ -78,12 +78,14 @@ enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
 ```
 
+<!--
 Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
 
 ```sh
 # definitions of existing MD arrays
 ARRAY <ignore> devices=/dev/sda
 ```
+-->
 
 Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 
