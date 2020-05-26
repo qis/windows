@@ -116,7 +116,7 @@ Create **user** and **root** home directory symlinks.
 ```sh
 mkdir -p ~/.config
 rm -f ~/.bash_history ~/.bash_logout
-ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
+ln -s "${USERPROFILE}/vimfiles" ~/.config/nvim
 touch ~/.config/nviminfo
 touch ~/.hushlogin
 ```
@@ -124,16 +124,16 @@ touch ~/.hushlogin
 Create **user** home directory symlinks.
 
 ```sh
-ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
-ln -s "${USER_PROFILE}/Documents" ~/documents
-ln -s "${USER_PROFILE}/Downloads" ~/downloads
+ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
+ln -s "${USERPROFILE}/Documents" ~/documents
+ln -s "${USERPROFILE}/Downloads" ~/downloads
 ln -s /mnt/c/Workspace ~/workspace
 mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
-  ln -s "${USER_PROFILE}/.ssh/$i" ~/.ssh/$i
+  ln -s "${USERPROFILE}/.ssh/$i" ~/.ssh/$i
 done
-sudo chown `id -un`:`id -gn` "${USER_PROFILE}/.ssh"/* ~/.ssh/*
-sudo chmod 0600 "${USER_PROFILE}/.ssh"/* ~/.ssh/*
+sudo chown `id -un`:`id -gn` "${USERPROFILE}/.ssh"/* ~/.ssh/*
+sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ```
 
 Restart Windows to apply settings.
