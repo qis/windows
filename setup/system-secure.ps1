@@ -451,11 +451,6 @@ Write-Output ""
 Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen"
 Write-Output ""
 Write-Output ""
-Write-Output "Install WSL after connecting to the internet and installing all updates."
-Write-Output ""
-Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem"
-Write-Output ""
-Write-Output ""
 Write-Output ""
 
 Wait-Event
