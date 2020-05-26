@@ -99,7 +99,7 @@ Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 #session    optional    pam_motd.so noupdate
 ```
 
-Delete shell user config files.
+Delete shell config files.
 
 ```sh
 rm -f /{root,home/*}/.{bashrc,profile,viminfo}
