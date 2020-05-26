@@ -1,9 +1,18 @@
 # Ubuntu
+Enable WSL support.
+
+```ps
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+wsl --set-default-version 2
+```
+
 Install, launch and configure [Ubuntu Linux](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
 wsl --list
 wsl --setdefault Ubuntu
+wsl --set-version Ubuntu 2
 wsl --distribution Ubuntu --user root
 ```
 
@@ -96,6 +105,7 @@ mkdir -p ~/.config
 rm -f ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile ~/.viminfo
 ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
 touch ~/.config/nviminfo
+touch ~/.hushlogin
 ```
 
 Create **user** home directory symlinks.
