@@ -99,7 +99,13 @@ Modify the following lines in `/etc/pam.d/login` (disables message of the day).
 #session    optional    pam_motd.so noupdate
 ```
 
-Exit shell to release `/root/.bash_history` and apply settings.
+Delete shell user config files.
+
+```sh
+rm -f /{root,home/*}/.{bashrc,profile,viminfo}
+```
+
+Exit shell to release `~/.bash_history` and apply settings.
 
 ```sh
 exit
@@ -109,7 +115,7 @@ Create **user** and **root** home directory symlinks.
 
 ```sh
 mkdir -p ~/.config
-rm -f ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile ~/.viminfo
+rm -f ~/.bash_history ~/.bash_logout
 ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
 touch ~/.config/nviminfo
 touch ~/.hushlogin
