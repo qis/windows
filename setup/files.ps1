@@ -104,6 +104,6 @@ Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 Associate "audio" "Audio" $player $audio ("mp3", "aac", "flac", "mka")
 
 # Video
-Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov")
+Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov", "webm")
 
 & ie4uinit.exe -ClearIconCache
