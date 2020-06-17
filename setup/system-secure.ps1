@@ -167,7 +167,7 @@ DisableLLTD
 DisableMSNetClient
 DisableQoS
 DisableConnectionSharing
-#DisableRemoteAssistance
+DisableRemoteAssistance
 #DisableRemoteDesktop
 
 # ===========================================================================================================
