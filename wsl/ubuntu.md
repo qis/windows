@@ -111,13 +111,22 @@ Exit shell to release `~/.bash_history` and apply settings.
 exit
 ```
 
-Create **user** and **root** home directory symlinks.
+Configure `nvim`.
 
 ```sh
-mkdir -p ~/.config
+sudo rm -rf /etc/vim /etc/xdg/nvim
+sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
+sudo ln -s /etc/vim /etc/xdg/nvim
+sudo touch /root/.viminfo
+touch ~/.viminfo
+```
+
+Clean **user** and **root** home directory files.
+
+```sh
+sudo rm -f /root/.bash_history /root/.bash_logout
+sudo touch /root/.hushlogin
 rm -f ~/.bash_history ~/.bash_logout
-ln -s "${USERPROFILE}/vimfiles" ~/.config/nvim
-touch ~/.config/nviminfo
 touch ~/.hushlogin
 ```
 
