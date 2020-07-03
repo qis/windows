@@ -7,11 +7,17 @@ wsl --setdefault Alpine
 wsl --distribution Alpine --user root
 ```
 
+Upgrade system to the latest version.
+
+```sh
+sed -E 's/v\d+\.\d+/v3.12/g' -i /etc/apk/repositories
+```
+
 Update system.
 
 ```sh
 apk update
-apk upgrade
+apk upgrade --purge
 ```
 
 Install packages.
@@ -127,27 +133,7 @@ Install packages.
 
 ```sh
 sudo apk add binutils fortify-headers linux-headers libc-dev
-sudo apk add make nasm ninja nodejs npm patch perl pkgconf python sqlite swig z3
+sudo apk add cmake make nasm ninja nodejs npm patch perl pkgconf python sqlite swig z3
 sudo apk add build-base binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev
 sudo apk add curl-dev ncurses-dev openssl-dev xz-dev z3-dev
-```
-
-Install [CMake](https://cmake.org/) (version based on the latest Ubuntu LTS package).
-
-```sh
-sudo rm -rf /opt/cmake
-sudo apk add cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.16.3/cmake-3.16.3.tar.gz
-tar xf cmake-3.16.3.tar.gz
-cmake -GNinja -Wno-dev \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/opt/cmake \
-  -DCMAKE_C_COMPILER=gcc \
-  -DCMAKE_CXX_COMPILER=g++ \
-  -DCMAKE_USE_SYSTEM_CURL=ON \
-  -B cmake-3.16.3-build cmake-3.16.3
-ninja -C cmake-3.16.3-build
-sudo ninja -C cmake-3.16.3-build install
-sudo apk del cmake
-exit
 ```
