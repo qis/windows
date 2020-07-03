@@ -1,3 +1,6 @@
+# Path
+export PATH="/opt/cmake/bin:${PATH}"
+
 # Files
 umask 0022
 

@@ -50,7 +50,7 @@ Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
 Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
 
 # Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USER_PROFILE"
+Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USERPROFILE"
 
 # User privilege specification.
 root  ALL=(ALL) ALL
@@ -68,34 +68,58 @@ enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
 ```
 
-Exit shell to release `/root/.ash_history` and apply settings.
+Disable message of the day in `/etc/pam.d/base-session` and `/etc/pam.d/system-login`.
+
+```sh
+#session  required  pam_motd.so
+#session  optional  pam_motd.so  motd=/etc/motd
+```
+
+Exit shell to release `/root/.ash_history`.
 
 ```sh
 exit
 ```
 
-Create **user** and **root** home directory symlinks.
+Terminate distribution to apply `/etc/wsl.conf` settings.
+
+```cmd
+wsl --terminate Alpine
+```
+
+Configure `nvim`.
 
 ```sh
-mkdir -p ~/.config
-rm -f ~/.ash_history ~/.viminfo
-ln -s "${USER_PROFILE}/vimfiles" ~/.config/nvim
-touch ~/.config/nviminfo
+sudo mkdir -p /etc/xdg
+sudo rm -rf /etc/vim /etc/xdg/nvim
+sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
+sudo ln -s /etc/vim /etc/xdg/nvim
+sudo touch /root/.viminfo
+touch ~/.viminfo
+```
+
+Clean home directory files.
+
+```sh
+sudo rm -f /root/.ash_history
+sudo touch /root/.hushlogin
+rm -f ~/.ash_history
+touch ~/.hushlogin
 ```
 
 Create **user** home directory symlinks.
 
 ```sh
-ln -s "${USER_PROFILE}/.gitconfig" ~/.gitconfig
-ln -s "${USER_PROFILE}/Documents" ~/documents
-ln -s "${USER_PROFILE}/Downloads" ~/downloads
+ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
+ln -s "${USERPROFILE}/Documents" ~/documents
+ln -s "${USERPROFILE}/Downloads" ~/downloads
 ln -s /mnt/c/Workspace ~/workspace
 mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
-  ln -s "${USER_PROFILE}/.ssh/$i" ~/.ssh/$i
+  ln -s "${USERPROFILE}/.ssh/$i" ~/.ssh/$i
 done
-sudo chown `id -un`:`id -gn` "${USER_PROFILE}/.ssh"/* ~/.ssh/*
-sudo chmod 0600 "${USER_PROFILE}/.ssh"/* ~/.ssh/*
+sudo chown `id -un`:`id -gn` "${USERPROFILE}/.ssh"/* ~/.ssh/*
+sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ```
 
 ## Development

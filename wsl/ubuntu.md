@@ -65,7 +65,7 @@ Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
 Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
 
 # Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USER_PROFILE"
+Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USERPROFILE"
 
 # User privilege specification.
 root  ALL=(ALL) ALL
@@ -83,16 +83,7 @@ enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
 ```
 
-<!--
-Add the following line to `/etc/mdadm/mdadm.conf` (fixes some `apt` warnings).
-
-```sh
-# definitions of existing MD arrays
-ARRAY <ignore> devices=/dev/sda
-```
--->
-
-Modify the following lines in `/etc/pam.d/login` (disables message of the day).
+Disable message of the day in `/etc/pam.d/login` and `/etc/pam.d/sshd`.
 
 ```sh
 #session    optional    pam_motd.so motd=/run/motd.dynamic
@@ -105,10 +96,16 @@ Delete shell config files.
 rm -f /{root,home/*}/.{bashrc,profile,viminfo}
 ```
 
-Exit shell to release `~/.bash_history` and apply settings.
+Exit shell to release `~/.bash_history`.
 
 ```sh
 exit
+```
+
+Terminate distribution to apply `/etc/wsl.conf` settings.
+
+```cmd
+wsl --terminate Ubuntu
 ```
 
 Configure `nvim`.
@@ -121,7 +118,7 @@ sudo touch /root/.viminfo
 touch ~/.viminfo
 ```
 
-Clean **user** and **root** home directory files.
+Clean home directory files.
 
 ```sh
 sudo rm -f /root/.bash_history /root/.bash_logout
