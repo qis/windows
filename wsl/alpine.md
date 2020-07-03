@@ -10,7 +10,7 @@ wsl --distribution Alpine --user root
 Upgrade system to the latest version.
 
 ```sh
-sed -E 's/v\d+\.\d+/v3.12/g' -i /etc/apk/repositories
+sed -E 's/v\d+\.\d+/edge/g' -i /etc/apk/repositories
 ```
 
 Update system.

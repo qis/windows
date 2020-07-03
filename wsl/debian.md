@@ -1,4 +1,4 @@
-# Ubuntu
+# Debian
 Enable WSL support as **administrator**.
 
 ```cmd
@@ -12,13 +12,21 @@ Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
 wsl --set-default-version 2
 ```
 
-Install, launch and configure [Ubuntu Linux](https://aka.ms/wslstore), then `exit` shell.
+Install, launch and configure [Debian Linux](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
 wsl --list
-wsl --setdefault Ubuntu
-wsl --set-version Ubuntu 2
-wsl --distribution Ubuntu --user root
+wsl --setdefault Debian
+wsl --set-version Debian 2
+wsl --distribution Debian --user root
+```
+
+Upgrade system to the latest version.
+
+```sh
+tee /etc/apt/sources.list >/dev/null <<'EOF'
+deb http://ftp.de.debian.org/debian/ unstable main contrib non-free
+EOF
 ```
 
 Update system.
@@ -34,14 +42,8 @@ apt autoclean
 Install packages.
 
 ```sh
-apt install -y curl file git htop openssh-client p7zip-full pv pwgen sshpass sudo tmux tree
+apt install -y curl file git gnupg htop openssh-{client,server} p7zip-full pv pwgen sshpass sudo tmux tree wget
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
-```
-
-Install `nvim` as default `vim`.
-
-```sh
-update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
 ```
 
 Configure system.
@@ -52,7 +54,7 @@ curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/bash.sh -o /etc
 chmod 0755 /etc/profile.d/bash.sh
 ```
 
-Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
+Configure `sudo(8)`.
 
 ```sh
 EDITOR=vim visudo
@@ -104,7 +106,7 @@ exit
 Terminate distribution to apply `/etc/wsl.conf` settings.
 
 ```cmd
-wsl --terminate Ubuntu
+wsl --terminate Debian
 ```
 
 Configure `nvim`.
@@ -148,15 +150,16 @@ Install [LLVM](https://llvm.org/).
 
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  clang clang-format clang-tidy llvm-dev lld lldb libc++-dev libc++abi-dev \
-  binutils-dev linux-headers-generic
+  llvm-10-runtime llvm-10-tools lld-10 lldb-10 \
+  clang-10 clang-format-10 clang-tidy-10 libc++-10-dev libc++abi-10-dev \
+  binutils-dev linux-headers-amd64
 ```
 
 Switch the default C and C++ compiler.
 
 ```sh
-sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang-10 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-10 100
 ```
 
 Install development packages.
