@@ -491,7 +491,8 @@ gpupdate /force
 Reboot the system.
 
 ## Windows Subsystem for Linux
-See [wsl/alpine.md](wsl/alpine.md) or [wsl/ubuntu.md](wsl/ubuntu.md) for WSL setup instructions.
+See [wsl/debian.md](wsl/debian.md), [wsl/ubuntu.md](wsl/ubuntu.md),
+or [wsl/alpine.md](wsl/alpine.md) for WSL setup instructions.
 
 ## Development
 See [development.md](development.md) for developer workstation setup instructions.
