@@ -1,6 +1,3 @@
-# Path
-export PATH="/opt/cmake/bin:/opt/node/bin:/opt/vcpkg:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 # Files
 umask 0022
 
@@ -21,13 +18,6 @@ export LC_ALL=
 # Applications
 export EDITOR="vim"
 export PAGER="less"
-
-# Ports
-export VSCMD_SKIP_SENDTELEMETRY=1
-export VCPKG_KEEP_ENV_VARS=VSCMD_SKIP_SENDTELEMETRY
-export VCPKG_DEFAULT_TRIPLET="x64-linux-llvm"
-export VCPKG_DOWNLOADS="/opt/downloads"
-export VCPKG_ROOT="/opt/vcpkg"
 
 # Colors
 export CLICOLOR=1
@@ -71,6 +61,6 @@ export PS1
 
 if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
   export CMD="/mnt/c/Windows/System32/cmd.exe"
-  USER_PROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g') 2>/dev/null)" \
-    && export USER_PROFILE
+  USERPROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g') 2>/dev/null)" \
+    && export USERPROFILE
 fi
