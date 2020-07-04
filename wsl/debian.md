@@ -42,7 +42,7 @@ apt autoclean
 Install packages.
 
 ```sh
-apt install -y curl file git gnupg htop openssh-{client,server} p7zip-full pv pwgen sshpass sudo tmux tree wget
+apt install -y curl file git gnupg htop man openssh-{client,server} p7zip-full pv pwgen sshpass sudo tmux tree wget
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
 
