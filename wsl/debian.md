@@ -25,7 +25,7 @@ Upgrade system to the latest version.
 
 ```sh
 tee /etc/apt/sources.list >/dev/null <<'EOF'
-deb http://ftp.de.debian.org/debian/ sid main contrib non-free
+deb http://deb.debian.org/debian/ testing main contrib non-free
 EOF
 ```
 
@@ -39,10 +39,21 @@ apt autoremove -y
 apt autoclean
 ```
 
+Remove old packages.
+
+```sh
+dpkg --list
+apt remove gcc-8-base iptables nano vim-tiny
+apt autoremove -y
+apt autoclean
+```
+
 Install packages.
 
 ```sh
-apt install -y curl file git gnupg htop man openssh-{client,server} p7zip-full pv pwgen sshpass sudo tmux tree wget
+apt install -y bzip2 xz-utils
+apt install -y ca-certificates curl wget git
+apt install -y file gnupg htop man manpages openssh-client p7zip pv pwgen sudo tmux tree
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
 
@@ -146,13 +157,37 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 Restart Windows to apply settings.
 
 ## Development
+Install basic development packages.
+
+```sh
+sudo apt install -y autoconf automake bison flex libtool make
+sudo apt install -y binutils-dev linux-headers-amd64 libc-dev manpages-dev
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
+  cmake nasm ninja-build patch perl pkgconf python3 python3-pip sqlite3
+```
+
+### GCC
+Install [GCC](https://gcc.gnu.org/).
+
+```sh
+sudo apt install -y gcc-10 g++-10 gdb
+```
+
+Switch the default C and C++ compiler.
+
+```sh
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-10 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-10 100
+```
+
+### LLVM
 Install [LLVM](https://llvm.org/).
 
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   llvm-10-runtime llvm-10-tools lld-10 lldb-10 \
-  clang-10 clang-format-10 clang-tidy-10 libc++-10-dev libc++abi-10-dev \
-  binutils-dev linux-headers-amd64
+  clang-10 clang-format-10 clang-tidy-10 \
+  libc++-10-dev libc++abi-10-dev
 ```
 
 Switch the default C and C++ compiler.
@@ -160,11 +195,4 @@ Switch the default C and C++ compiler.
 ```sh
 sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang-10 100
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-10 100
-```
-
-Install development packages.
-
-```sh
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  cmake make nasm ninja-build nodejs npm patch perl pkgconf python3 python3-pip sqlite3
 ```
