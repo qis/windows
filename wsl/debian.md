@@ -25,7 +25,7 @@ Upgrade system to the latest version.
 
 ```sh
 tee /etc/apt/sources.list >/dev/null <<'EOF'
-deb http://ftp.de.debian.org/debian/ unstable main contrib non-free
+deb http://ftp.de.debian.org/debian/ sid main contrib non-free
 EOF
 ```
 
