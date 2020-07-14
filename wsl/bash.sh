@@ -62,6 +62,7 @@ export PS1
 
 set -o emacs
 stty werase '^_'
+bind '"\C-H":backward-kill-word'
 
 if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
   export CMD="/mnt/c/Windows/System32/cmd.exe"
