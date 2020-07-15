@@ -25,14 +25,9 @@ Upgrade system to the latest version.
 
 ```sh
 tee /etc/apt/sources.list >/dev/null <<'EOF'
-deb http://deb.debian.org/debian/ testing main contrib non-free
-deb-src http://deb.debian.org/debian/ testing main contrib non-free
-
-deb http://deb.debian.org/debian/ testing-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
-
+deb http://deb.debian.org/debian testing main contrib non-free
+deb http://deb.debian.org/debian testing-updates main contrib non-free
 deb http://deb.debian.org/debian-security testing-security main
-deb-src http://deb.debian.org/debian-security testing-security main
 EOF
 ```
 
@@ -50,7 +45,7 @@ Remove old packages.
 
 ```sh
 dpkg --list
-apt remove gcc-8-base iptables nano vim-tiny
+apt remove -y gcc-8-base iptables mailutils nano vim-tiny
 apt autoremove -y
 apt autoclean
 ```
@@ -59,7 +54,7 @@ Install packages.
 
 ```sh
 apt install -y bzip2 xz-utils
-apt install -y ca-certificates curl wget git
+apt install -y ca-certificates curl git wget
 apt install -y file gnupg htop man manpages openssh-client p7zip pv pwgen sudo tmux tree
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
@@ -157,11 +152,70 @@ mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
   ln -s "${USERPROFILE}/.ssh/$i" ~/.ssh/$i
 done
-sudo chown `id -un`:`id -gn` "${USERPROFILE}/.ssh"/* ~/.ssh/*
+sudo chown $(id -un):$(id -gn) "${USERPROFILE}/.ssh"/* ~/.ssh/*
 sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ```
 
 Restart Windows to apply settings.
+
+## eMail
+Configure system.
+
+```sh
+sudo usermod -c "root@$(hostname -a)" root
+sudo usermod -c "$(id -un)@$(hostname -a)" $(id -un)
+
+sudo touch /etc/ssmtp/{ssmtp.conf,revaliases}
+sudo chown root:mail /etc/ssmtp/{ssmtp.conf,revaliases}
+sudo chmod 0640 /etc/ssmtp/{ssmtp.conf,revaliases}
+
+sudo touch /var/mail/$(id -un)
+sudo chown $(id -un):$(id -gn) /var/mail/$(id -un)
+
+exit
+```
+
+Replace `exim(8)` with `ssmtp(8)`.
+
+```sh
+sudo apt autoremove -y exim4-daemon-light mailutils
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 mailutils ssmtp
+```
+
+Configure `ssmtp(8)`.
+
+```sh
+email_user=qis
+email_fqdn=example.com
+read -s email_pass
+
+sudo tee /etc/ssmtp/ssmtp.conf >/dev/null <<EOF
+root=$(id -un)
+Hostname=$(hostname -a)
+MailHub=smtp.ionos.de:587
+RewriteDomain=${email_fqdn}
+AuthUser=${email_user}@${email_fqdn}
+AuthPass=${email_pass}
+UseSTARTTLS=YES
+EOF
+
+sudo tee /etc/ssmtp/revaliases >/dev/null <<EOF
+root:${email_user}@${email_fqdn}
+$(id -un):${email_user}@${email_fqdn}
+EOF
+
+printf "Subject: ssmtp test\n\nssmtp text" | ssmtp -v ${email_user}@${email_fqdn}
+echo "mail text" | mail -s "mail test" ${email_user}@${email_fqdn} --debug-level=7
+
+exit
+```
+
+## Updates
+Configure automatic updates.
+
+```sh
+sudo apt install -y unattended-upgrades apt-listchanges
+```
 
 ## Development
 Install basic development packages.
