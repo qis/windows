@@ -26,6 +26,13 @@ Upgrade system to the latest version.
 ```sh
 tee /etc/apt/sources.list >/dev/null <<'EOF'
 deb http://deb.debian.org/debian/ testing main contrib non-free
+deb-src http://deb.debian.org/debian/ testing main contrib non-free
+
+deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
+
+deb http://deb.debian.org/debian-security testing-security main
+deb-src http://deb.debian.org/debian-security testing-security main
 EOF
 ```
 
