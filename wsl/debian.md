@@ -38,7 +38,7 @@ apt update
 apt upgrade -y
 apt dist-upgrade -y
 apt autoremove -y
-apt autoclean
+apt clean
 ```
 
 Remove old packages.
@@ -47,7 +47,7 @@ Remove old packages.
 dpkg --list
 apt remove -y gcc-8-base iptables mailutils nano vim-tiny
 apt autoremove -y
-apt autoclean
+apt clean
 ```
 
 Install packages.
@@ -80,7 +80,7 @@ Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
 Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
 
 # Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USERPROFILE"
+Defaults env_keep += "MM_CHARSET EDITOR PAGER LS_COLORS TMUX SESSION USERPROFILE"
 
 # User privilege specification.
 root  ALL=(ALL) ALL
@@ -215,6 +215,49 @@ Configure automatic updates.
 
 ```sh
 sudo apt install -y unattended-upgrades apt-listchanges
+```
+
+```sh
+sudo tee /etc/apt/apt.conf.d/20auto-upgrades >/dev/null <'EOF'
+APT::Periodic::Update-Package-Lists "7";
+APT::Periodic::Unattended-Upgrade "7";
+EOF
+
+sudo tee /etc/apt/apt.conf.d/50unattended-upgrades >/dev/null <'EOF'
+// Controls which packages are upgraded.
+Unattended-Upgrade::Origins-Pattern {
+  "o=Debian,a=testing";
+  "o=Debian,a=testing-updates";
+  "o=Debian,a=testing-security";
+};
+
+// Python regular expressions, matching packages to exclude from upgrading.
+Unattended-Upgrade::Package-Blacklist {
+  "linux-";
+};
+
+// Split the upgrade into the smallest possible chunks so that they can be interrupted.
+Unattended-Upgrade::MinimalSteps "true";
+
+// Send email to this address for problems or packages upgrades.
+//Unattended-Upgrade::Mail "admin@example.com";
+//Unattended-Upgrade::MailReport "only-on-error";
+
+// Remove unused automatically installed kernel-related packages.
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+
+// Do automatic removal of newly unused dependencies after the upgrade.
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+
+// Do automatic removal of unused packages after the upgrade.
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+// Automatically reboot if the file /var/run/reboot-required is found after the upgrade.
+Unattended-Upgrade::Automatic-Reboot "true";
+
+// If automatic reboot is enabled and needed, reboot at the specific time.
+Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+EOF
 ```
 
 ## Development
