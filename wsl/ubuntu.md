@@ -28,13 +28,13 @@ apt update
 apt upgrade -y
 apt dist-upgrade -y
 apt autoremove -y
-apt autoclean
+apt clean
 ```
 
 Install packages.
 
 ```sh
-apt install -y curl file git htop openssh-client p7zip-full pv pwgen sshpass sudo tmux tree
+apt install -y ca-certificates curl file git gnupg htop man manpages p7zip pv pwgen sudo tmux tree wget
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
 
@@ -55,17 +55,12 @@ chmod 0755 /etc/profile.d/bash.sh
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
 
 ```sh
-EDITOR=vim visudo
-```
-
-Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
-
-```sh
+EDITOR=tee visudo >/dev/null <<'EOF'
 # Locale settings.
 Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
 
 # Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USERPROFILE"
+Defaults env_keep += "MM_CHARSET EDITOR PAGER LS_COLORS TMUX SESSION USERPROFILE"
 
 # User privilege specification.
 root  ALL=(ALL) ALL
@@ -73,14 +68,17 @@ root  ALL=(ALL) ALL
 
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
+EOF
 ```
 
-Create `/etc/wsl.conf`.
+Configure WSL.
 
 ```sh
+tee /etc/wsl.conf >/dev/null <<'EOF'
 [automount]
 enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
+EOF
 ```
 
 Disable message of the day.
@@ -101,16 +99,17 @@ Exit shell to release `~/.bash_history`.
 exit
 ```
 
-Terminate distribution to apply `/etc/wsl.conf` settings.
+Restart distribution to apply `/etc/wsl.conf` settings.
 
 ```cmd
 wsl --terminate Ubuntu
+wsl --distribution Ubuntu
 ```
 
 Configure `nvim`.
 
 ```sh
-sudo rm -rf /etc/vim /etc/xdg/nvim
+sudo rm -rf /etc/vim /etc/xdg/nvim; sudo mkdir -p /etc/xdg
 sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
 sudo ln -s /etc/vim /etc/xdg/nvim
 sudo touch /root/.viminfo
@@ -144,24 +143,56 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 Restart Windows to apply settings.
 
 ## Development
+Install basic development packages.
+
+```sh
+sudo apt install -y binutils-dev linux-headers-generic libc6-dev manpages-dev
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
+  autoconf automake bison flex libtool make cmake nasm ninja-build patch \
+  perl pkgconf python3 python3-pip sqlite3
+```
+
+### GCC
+Install [GCC](https://gcc.gnu.org/).
+
+```sh
+sudo apt install -y gcc-10 g++-10 gdb
+```
+
+Switch the default `gcc` and `g++` executables.
+
+```sh
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+```
+
+### LLVM
 Install [LLVM](https://llvm.org/).
 
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  clang clang-format clang-tidy llvm-dev lld lldb libc++-dev libc++abi-dev \
-  binutils-dev linux-headers-generic
+  llvm-10-runtime llvm-10-tools lld-10 lldb-10 clang-10 clang-format-10 clang-tidy-10 \
+  libc++-10-dev libc++abi-10-dev
 ```
 
-Switch the default C and C++ compiler.
+Switch the default `clang` and `clang++` executables.
 
 ```sh
-sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-10   100
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
 ```
 
-Install development packages.
+## Tools
+Install code formatting tools.
 
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  cmake make nasm ninja-build nodejs npm patch perl pkgconf python3 python3-pip sqlite3
+  clang-format-10 clang-tidy-10
+```
+
+Switch the default `clang-format` and `clang-tidy` executables.
+
+```sh
+sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
+sudo update-alternatives --install /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-10   100
 ```

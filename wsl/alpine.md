@@ -1,13 +1,27 @@
 # Alpine
+Enable WSL support as **administrator**.
+
+```cmd
+dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
+
+```cmd
+wsl --set-default-version 2
+```
+
 Install, launch and configure [Alpine Linux](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
 wsl --list
 wsl --setdefault Alpine
+wsl --set-version Alpine 2
 wsl --distribution Alpine --user root
 ```
 
-Upgrade system to the latest version.
+Switch to rolling release.
 
 ```sh
 sed -E 's/v\d+\.\d+/edge/g' -i /etc/apk/repositories
@@ -23,8 +37,8 @@ apk upgrade --purge
 Install packages.
 
 ```sh
-apk add coreutils curl file git grep htop neovim openssh-client p7zip pv pwgen sshpass sudo tmux tree tzdata
-apk add imagemagick pngcrush
+apk add coreutils curl file git grep htop p7zip pv pwgen sshpass sudo tmux tree tzdata
+apk add neovim openssh-client imagemagick pngcrush
 ```
 
 Install `nvim` as default `vim`.
@@ -44,41 +58,36 @@ chmod 0755 /etc/profile.d/ash.sh
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
 
 ```sh
-addgroup sudo
-usermod -aG sudo `ls /home|head -1`
-EDITOR=vim visudo
-```
-
-Type `:1,$d`, `:set paste`, `i` and paste contents followed by `ESC` and `:wq`.
-
-```sh
+EDITOR=tee visudo >/dev/null <<'EOF'
 # Locale settings.
 Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
 
 # Profile settings.
-Defaults env_keep += "MM_CHARSET EDITOR PAGER CLICOLOR LSCOLORS TMUX SESSION USERPROFILE"
+Defaults env_keep += "MM_CHARSET EDITOR PAGER LS_COLORS TMUX SESSION USERPROFILE"
 
 # User privilege specification.
-root  ALL=(ALL) ALL
-%sudo ALL=(ALL) NOPASSWD: ALL
+root   ALL=(ALL) ALL
+%wheel ALL=(ALL) NOPASSWD: ALL
 
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
+EOF
 ```
 
 Create `/etc/wsl.conf`.
 
 ```sh
+tee /etc/wsl.conf >/dev/null <<'EOF'
 [automount]
 enabled=true
 options=case=off,metadata,uid=1000,gid=1000,umask=022
+EOF
 ```
 
-Disable message of the day in `/etc/pam.d/base-session` and `/etc/pam.d/system-login`.
+Disable message of the day.
 
 ```sh
-#session  required  pam_motd.so
-#session  optional  pam_motd.so  motd=/etc/motd
+sed -E 's/^(session.*pam_motd\.so.*)/#\1/' -i /etc/pam.d/*
 ```
 
 Exit shell to release `/root/.ash_history`.
@@ -87,17 +96,17 @@ Exit shell to release `/root/.ash_history`.
 exit
 ```
 
-Terminate distribution to apply `/etc/wsl.conf` settings.
+Restart distribution to apply `/etc/wsl.conf` settings.
 
 ```cmd
 wsl --terminate Alpine
+wsl --distribution Alpine
 ```
 
 Configure `nvim`.
 
 ```sh
-sudo mkdir -p /etc/xdg
-sudo rm -rf /etc/vim /etc/xdg/nvim
+sudo rm -rf /etc/vim /etc/xdg/nvim; sudo mkdir -p /etc/xdg
 sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
 sudo ln -s /etc/vim /etc/xdg/nvim
 sudo touch /root/.viminfo
@@ -129,11 +138,18 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ```
 
 ## Development
-Install packages.
+Install basic development packages.
 
 ```sh
-sudo apk add binutils fortify-headers linux-headers libc-dev
-sudo apk add cmake make nasm ninja nodejs npm patch perl pkgconf python sqlite swig z3
-sudo apk add build-base binutils-dev libedit-dev libnftnl-dev libmnl-dev libxml2-dev
+sudo apk add binutils binutils-dev fortify-headers linux-headers libc-dev
+sudo apk add cmake make nasm ninja nodejs npm patch perl pkgconf python3 py3-pip sqlite swig z3
+sudo apk add libedit-dev libnftnl-dev libmnl-dev libxml2-dev
 sudo apk add curl-dev ncurses-dev openssl-dev xz-dev z3-dev
+```
+
+### LLVM
+Install [LLVM](https://llvm.org/).
+
+```sh
+sudo apk add clang-dev clang-extra-tools
 ```

@@ -20,8 +20,6 @@ export EDITOR="vim"
 export PAGER="less"
 
 # Colors
-export CLICOLOR=1
-export LSCOLORS="ExGxFxdxCxDxDxBxAbBxFx"
 export LS_COLORS="di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=1;31:sg=1;30;41:tw=1;31:ow=1;35"
 
 # Aliases
