@@ -149,7 +149,7 @@ Install basic development packages.
 sudo apt install -y binutils-dev linux-headers-generic libc6-dev manpages-dev
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   autoconf automake bison flex libtool make cmake nasm ninja-build patch \
-  perl pkgconf python3 python3-pip sqlite3
+  perl pkgconf python3 python3-pip sqlite3 zip
 ```
 
 ### GCC
