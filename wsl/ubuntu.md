@@ -178,8 +178,13 @@ sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
 Switch the default `clang` and `clang++` executables.
 
 ```sh
-sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-10   100
-sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
+sudo update-alternatives --install /usr/bin/clang       clang       /usr/bin/clang-10       100
+sudo update-alternatives --install /usr/bin/clang++     clang++     /usr/bin/clang++-10     100
+sudo update-alternatives --install /usr/bin/llvm-ranlib llvm-ranlib /usr/bin/llvm-ranlib-10 100
+sudo update-alternatives --install /usr/bin/llvm-ar     llvm-ar     /usr/bin/llvm-ar-10     100
+sudo update-alternatives --install /usr/bin/llvm-nm     llvm-nm     /usr/bin/llvm-nm-10     100
+sudo update-alternatives --install /usr/bin/lld         lld         /usr/bin/lld-10         100
+sudo update-alternatives --install /usr/bin/lldb        lldb        /usr/bin/lldb-10        100
 ```
 
 ### Default
