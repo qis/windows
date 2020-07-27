@@ -182,7 +182,15 @@ sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-10   
 sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
 ```
 
-## Tools
+### Default
+Set default compiler.
+
+```sh
+sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang   100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+```
+
+### Tools
 Install code formatting tools.
 
 ```sh
