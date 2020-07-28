@@ -171,20 +171,15 @@ Install [LLVM](https://llvm.org/).
 
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  llvm-10-runtime llvm-10-tools lld-10 lldb-10 clang-10 clang-format-10 clang-tidy-10 \
-  libc++-10-dev libc++abi-10-dev
+  llvm-10-{runtime,tools} {lld,lldb,clang,clang-format,clang-tidy}-10 libc++{,abi}-10-dev
 ```
 
-Switch the default `clang` and `clang++` executables.
+Switch the default LLVM executables.
 
 ```sh
-sudo update-alternatives --install /usr/bin/clang       clang       /usr/bin/clang-10       100
-sudo update-alternatives --install /usr/bin/clang++     clang++     /usr/bin/clang++-10     100
-sudo update-alternatives --install /usr/bin/llvm-ranlib llvm-ranlib /usr/bin/llvm-ranlib-10 100
-sudo update-alternatives --install /usr/bin/llvm-ar     llvm-ar     /usr/bin/llvm-ar-10     100
-sudo update-alternatives --install /usr/bin/llvm-nm     llvm-nm     /usr/bin/llvm-nm-10     100
-sudo update-alternatives --install /usr/bin/lld         lld         /usr/bin/lld-10         100
-sudo update-alternatives --install /usr/bin/lldb        lldb        /usr/bin/lldb-10        100
+for i in clang{,++} llvm-{ranlib,ar,nm} lld{,b}; do
+  sudo update-alternatives --install /usr/bin/$i $i /usr/bin/$i-10 100
+done
 ```
 
 ### Default
@@ -208,4 +203,17 @@ Switch the default `clang-format` and `clang-tidy` executables.
 ```sh
 sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
 sudo update-alternatives --install /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-10   100
+```
+
+### Node.js
+Install [Node.js](https://nodejs.org/).
+
+```sh
+sudo rm -rf /opt/node; sudo mkdir -p /opt/node
+wget https://nodejs.org/dist/v12.13.1/node-v12.13.1-linux-x64.tar.xz
+sudo tar xf node-v12.13.1-linux-x64.tar.xz -C /opt/node --strip-components=1
+sudo tee /etc/profile.d/node.sh >/dev/null <<'EOF'
+export PATH="${PATH}:/opt/node/bin"
+EOF
+sudo chmod 0755 /etc/profile.d/node.sh
 ```
