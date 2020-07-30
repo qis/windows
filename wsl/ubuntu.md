@@ -148,8 +148,21 @@ Install basic development packages.
 ```sh
 sudo apt install -y binutils-dev linux-headers-generic libc6-dev manpages-dev
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  autoconf automake bison flex libtool make cmake nasm ninja-build patch \
+  autoconf automake bison flex libtool make nasm ninja-build patch \
   perl pkgconf python3 python3-pip sqlite3 zip
+```
+
+Install CMake.
+
+```sh
+sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0-Linux-x86_64.tar.gz
+sudo tar xf cmake-3.18.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
+sudo tee /etc/profile.d/cmake.sh >/dev/null <<'EOF'
+export PATH="${PATH}:/opt/cmake/bin"
+EOF
+sudo chmod 0755 /etc/profile.d/cmake.sh
+rm -f cmake-3.18.0-Linux-x86_64.tar.gz
 ```
 
 ### GCC
@@ -210,10 +223,11 @@ Install [Node.js](https://nodejs.org/).
 
 ```sh
 sudo rm -rf /opt/node; sudo mkdir -p /opt/node
-wget https://nodejs.org/dist/v12.13.1/node-v12.13.1-linux-x64.tar.xz
-sudo tar xf node-v12.13.1-linux-x64.tar.xz -C /opt/node --strip-components=1
+wget https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.xz
+sudo tar xf node-v12.18.3-linux-x64.tar.xz -C /opt/node --strip-components=1
 sudo tee /etc/profile.d/node.sh >/dev/null <<'EOF'
 export PATH="${PATH}:/opt/node/bin"
 EOF
 sudo chmod 0755 /etc/profile.d/node.sh
+rm -f node-v12.18.3-linux-x64.tar.xz
 ```

@@ -30,30 +30,21 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
-<!--
-Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-win64-x64.msi).</br>
-Install [Python 3](https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe).
+Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0-win64-x64.msi).
 
 ```
-Install Python
-  [Customize installation]
-Optional Features
-  ☐ Documentation
-  ☑ pip
-  ☐ tcl/tk and IDLE
-  ☐ Python test suite
-  ☐ py launcher ☐ for all users (requires elevation)
-Advanced Options
-  ☑ Install for all users
-  ☐ Create shortcuts for installed applications
-  ☐ Add Python to environment variables
-  ☑ Precompile standard library
-  ☐ Download debugging symbols
-  ☐ Download debug binaries (requires VS 2015 or later)
-  Customize install location: C:\Python
+Install Options
+  ◉ Do not add CMake to the system PATH
 ```
 
-Install [Node LTS](https://nodejs.org/dist/v12.16.1/node-v12.16.1-x64.msi).
+
+Install [Ninja](https://github.com/ninja-build/ninja/releases).
+
+```
+C:\Program Files\Ninja\ninja.exe
+```
+
+Install [Node LTS](https://nodejs.org/dist/v12.18.3/node-v12.18.3-x64.msi).
 
 ```
 Destination Folder
@@ -66,7 +57,6 @@ Custom Setup
 Tools for Native Modules
   ☐ Automatically install necessary tools.
 ```
--->
 
 ## Development Kits
 Install [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows) into `C:\Vulkan`.
@@ -87,22 +77,19 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\NodeJs\win-x64
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\NodeJs
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
-C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Scripts
-C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64
 C:\Program Files (x86)\Sysinternals Suite
-C:\Program Files\Microsoft VS Code\bin
 C:\Program Files\7-Zip
+C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
+C:\Program Files\Microsoft VS Code\bin
+C:\Program Files\Ninja
 C:\Workspace\vcpkg
 C:\Vulkan\Bin
+C:\Node
 ```
 
-Configure the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
+Create the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
 
 ```
 1
