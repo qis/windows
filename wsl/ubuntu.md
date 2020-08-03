@@ -172,13 +172,16 @@ Install [GCC](https://gcc.gnu.org/).
 sudo apt install -y gcc-10 g++-10 gdb
 ```
 
-Switch the default `gcc` and `g++` executables.
+Set default compiler.
 
 ```sh
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/gcc    100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++    100
 ```
 
+<!--
 ### LLVM
 Install [LLVM](https://llvm.org/).
 
@@ -186,22 +189,7 @@ Install [LLVM](https://llvm.org/).
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   llvm-10-{runtime,tools} {lld,lldb,clang,clang-format,clang-tidy}-10 libc++{,abi}-10-dev
 ```
-
-Switch the default LLVM executables.
-
-```sh
-for i in clang{,++} llvm-{ranlib,ar,nm} lld{,b}; do
-  sudo update-alternatives --install /usr/bin/$i $i /usr/bin/$i-10 100
-done
-```
-
-### Default
-Set default compiler.
-
-```sh
-sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang   100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
-```
+-->
 
 ### Tools
 Install code formatting tools.
@@ -209,13 +197,6 @@ Install code formatting tools.
 ```sh
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   clang-format-10 clang-tidy-10
-```
-
-Switch the default `clang-format` and `clang-tidy` executables.
-
-```sh
-sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
-sudo update-alternatives --install /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-10   100
 ```
 
 ### Node.js
