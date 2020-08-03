@@ -176,13 +176,10 @@ sudo apt install -y gcc-10 g++-10 gdb
 Set default compiler.
 
 ```sh
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
 sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/gcc-10 100
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-10 100
 ```
 
-<!--
 ### LLVM
 Install [LLVM](https://llvm.org/).
 
@@ -190,7 +187,13 @@ Install [LLVM](https://llvm.org/).
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   llvm-10-{runtime,tools} {lld,lldb,clang,clang-format,clang-tidy}-10 libc++{,abi}-10-dev
 ```
--->
+
+Set default compiler.
+
+```sh
+sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang-10   100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-10 100
+```
 
 ### Tools
 Install code formatting tools.
