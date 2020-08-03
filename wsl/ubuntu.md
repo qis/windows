@@ -49,7 +49,8 @@ Configure system.
 ```sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/tmux.conf -o /etc/tmux.conf
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/bash.sh -o /etc/profile.d/bash.sh
-chmod 0755 /etc/profile.d/bash.sh
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/wsl.sh -o /etc/profile.d/wsl.sh
+chmod 0755 /etc/profile.d/bash.sh /etc/profile.d/wsl.sh
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
