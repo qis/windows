@@ -6,6 +6,12 @@ dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all
 dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
+Reboot Windows.
+
+```cmd
+shutdown /r /t 0
+```
+
 Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
 
 ```cmd
