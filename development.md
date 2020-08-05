@@ -41,7 +41,7 @@ Install Options
 Install [Ninja](https://github.com/ninja-build/ninja/releases).
 
 ```
-C:\Program Files\Ninja\ninja.exe
+C:\Program Files (x86)\Ninja\ninja.exe
 ```
 
 Install [Node LTS](https://nodejs.org/dist/v12.18.3/node-v12.18.3-x64.msi).
