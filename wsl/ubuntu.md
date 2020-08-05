@@ -197,8 +197,8 @@ sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
 Set default compiler.
 
 ```sh
-sudo update-alternatives --set cc  /usr/bin/clang-10
-sudo update-alternatives --set c++ /usr/bin/clang++-10
+sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang-10   110
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-10 110
 ```
 
 ### Tools
