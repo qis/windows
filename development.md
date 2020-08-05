@@ -77,13 +77,13 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
 C:\Program Files (x86)\Sysinternals Suite
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
+C:\Program Files (x86)\Ninja
 C:\Program Files\7-Zip
 C:\Program Files\CMake\bin
 C:\Program Files\Git\cmd
 C:\Program Files\Microsoft VS Code\bin
-C:\Program Files\Ninja
 C:\Workspace\vcpkg
 C:\Vulkan\Bin
 C:\Node
