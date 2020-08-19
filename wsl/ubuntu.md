@@ -172,21 +172,19 @@ sudo chmod 0755 /etc/profile.d/cmake.sh
 rm -f cmake-3.18.0-Linux-x86_64.tar.gz
 ```
 
-### GCC
 Install [GCC](https://gcc.gnu.org/).
 
 ```sh
 sudo apt install -y gcc-10 g++-10 gdb
 ```
 
-Set default compiler.
+Set default GCC compiler.
 
 ```sh
-sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/gcc-10 100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-10 100
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
 ```
 
-### LLVM
 Install [LLVM](https://llvm.org/).
 
 ```sh
@@ -194,14 +192,22 @@ sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
   llvm-10-{runtime,tools} {lld,lldb,clang,clang-format,clang-tidy}-10 libc++{,abi}-10-dev
 ```
 
-Set default compiler.
+Set default LLVM compiler.
 
 ```sh
-sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang-10   110
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-10 110
+sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-10   100
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
 ```
 
-### Tools
+Set default system compiler.
+
+```sh
+sudo update-alternatives --remove-all cc
+sudo update-alternatives --remove-all c++
+sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang   100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+```
+
 Install code formatting tools.
 
 ```sh
