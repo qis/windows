@@ -291,6 +291,7 @@ Install third party software.
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [MagicaVoxel](https://ephtracy.github.io/)
 * [Blender](https://www.blender.org/)
+* [Audacity](https://www.audacityteam.org/)
 * [SFXR](http://www.drpetter.se/project_sfxr.html)
 * [MPV](https://mpv.srsfckn.biz/)
 * [OBS](https://obsproject.com/download)
