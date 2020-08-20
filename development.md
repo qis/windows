@@ -146,6 +146,8 @@ Text Editor
 + All Languages
   + General
     ☑ Line numbers
+    ☐ Navigation bar
+    ☐ Automatic brace completion
     ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
     ◉ Use map mode for vertical scroll bar
@@ -192,6 +194,7 @@ Text Editor
   + Advanced
     Color picker format: #000
     Automatic formatting: Off
+    Brace positions: Compact
 + JavaScript/TypeScript
   + Formatting
     + General
@@ -206,6 +209,10 @@ Text Editor
       ◉ Insert semicolons at statement ends
     + Spacing
       ☐ Insert space after function keyword for anonymous functions
+  + Linting
+    + General
+      ☑ Enable ESLint
+      [Reset global .eslintrc]
 + JSON
   + Advanced
     Automatic formatting: Off
@@ -216,8 +223,6 @@ CMake
   When cache is out of date:
     ◉ Run configure step automatically only if CMakeSettings.json exists
   ☑ Enable verbose CMake output
-  CMakeSettings.json Template Directory
-    %UserProfile%\.vs
 ```
 
 Disable telemetry.
