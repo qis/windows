@@ -147,7 +147,7 @@ Text Editor
   + General
     ☑ Line numbers
     ☐ Navigation bar
-    ☐ Automatic brace completion
+    ☑ Automatic brace completion
     ☐ Apply Cut or Copy to blank lines when there is no selection
   + Scroll Bars
     ◉ Use map mode for vertical scroll bar
