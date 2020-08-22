@@ -518,4 +518,16 @@ Get-AppXPackage -AllUsers | Foreach { `
 Fix broken Start Menu search.
 
 <https://www.windowscentral.com/how-reset-start-menu-layout-windows-10>
+
+Update script.
+
+```cmd
+cd script
+git checkout master && git pull
+cd ..
+git add script
+git commit -m "updated script"
+```
+
+<https://stackoverflow.com/questions/16212816/setting-up-openssh-for-windows-using-public-key-authentication/50502015#50502015>
 -->
