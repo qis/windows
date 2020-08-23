@@ -1,4 +1,5 @@
 /files-*.ps1
+!/files-relaxed.ps1
 /system-*.ps1
 !/system-relaxed.ps1
 !/system-secure.ps1
