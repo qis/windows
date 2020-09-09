@@ -237,9 +237,9 @@ wf.msc
   Network Discovery (…)
 ```
 
-Enable inbound rules for `File and Printer Sharing (Echo Request …)`. Modify `Private,Public`
-rules for inbound and outbound IPv4 and IPv6 Echo Requests and select "Any IP address" under
-`Remote IP address` in the `Scope` tab.
+Enable inbound rules for `Core Networking Diagnostics - ICMP Echo Request (ICMPv…-In)`.
+Modify `Private,Public` rules for `ICMPv4` and `ICMPv6` inbound rules and select `Any IP address`
+under `Remote IP address` in the `Scope` tab.
 
 ## Microsoft Software
 Configure Microsoft Edge.
