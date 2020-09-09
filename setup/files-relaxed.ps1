@@ -58,6 +58,6 @@ Associate "7zip" "Archive" $7zipfm "%ProgramFiles%\7-Zip\7zFM.exe,0" (
 Associate "audio" "Audio" $player $audio ("mp3", "aac", "flac", "mka", "wav")
 
 # Video
-Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov", "webm")
+Associate "video" "Video" $player $video ("mp4", "avi", "flv", "mkv", "mov", "webm", "wmv")
 
 & ie4uinit.exe -ClearIconCache
