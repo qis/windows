@@ -390,7 +390,7 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
   {
     "keep": true,
     "name": "x64-windows-ipo",
-    "visualStudio": "f8f784e6",
+    "visualStudio": "VisualStudio.16.0",
     "visualStudioArchitecture": "amd64",
     "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\windows.cmake",
     "cmakeSettings": {
