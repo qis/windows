@@ -335,7 +335,7 @@ Select Start Menu Folder
 
 Choosing the default editor used by Git
   [Select other editor as Git's default editor]
-  Location of editor: C:\Program Files (x86)\Vim\vim81\gvim.exe
+  Location of editor: C:\Program Files (x86)\Vim\vim82\gvim.exe
   [Test Custom Editor]
 
 Adjusting your PATH environment
