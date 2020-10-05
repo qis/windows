@@ -40,7 +40,7 @@ apt clean
 Install packages.
 
 ```sh
-apt install -y ca-certificates curl file git gnupg htop man manpages p7zip pv pwgen sudo tmux tree wget wipe
+apt install -y ca-certificates curl debconf-utils file git gnupg htop net-tools p7zip pv pwgen sudo tmux tree wget wipe
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
 ```
 
