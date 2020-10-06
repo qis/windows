@@ -100,6 +100,7 @@ Associate "perl" "Perl" $editor "code.ico" ("perl", "pl", "pm")
 Associate "python" "Python" $editor "code.ico" ("py")
 Associate "resource" "Resource" $editor "rc.ico" ("rc")
 Associate "shell" "Shell" $editor "code.ico" ("sh")
+Associate "sql" "SQL Script" $editor "code.ico" ("sql")
 Associate "typescript" "TypeScript" $editor "code.ico" ("ts")
 Associate "vb" "Visual Basic" $editor "vb.ico" ("vb")
 
