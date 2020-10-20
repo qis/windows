@@ -54,7 +54,11 @@ if [ $(id -u) -ne 0 ]; then
 else
   PS1="${PS1}\[\e[31m\]\u\[\e[0m\]"
 fi
-PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
+if [ -x "/bin/wslpath" ] && grep Ubuntu /etc/lsb-release 2>&1 >/dev/null; then
+  PS1="${PS1}@\[\e[32m\]ubuntu\[\e[0m\]"
+else
+  PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
+fi
 PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
 
