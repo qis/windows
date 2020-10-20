@@ -56,9 +56,3 @@ fi
 PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
 PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
 export PS1
-
-if [ -x "/bin/wslpath" ] && [ -f "/mnt/c/Windows/System32/cmd.exe" ]; then
-  export CMD="/mnt/c/Windows/System32/cmd.exe"
-  USERPROFILE="$(/bin/wslpath -a $(${CMD} /C 'echo %UserProfile%' 2>/dev/null | sed 's/\r//g') 2>/dev/null)" \
-    && export USERPROFILE
-fi

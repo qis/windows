@@ -18,7 +18,7 @@ Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
 wsl --set-default-version 2
 ```
 
-Install, launch and configure [Ubuntu Linux](https://aka.ms/wslstore), then `exit` shell.
+Install, launch and configure [Ubuntu](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
 wsl --list

@@ -6,13 +6,19 @@ dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all
 dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
+Reboot Windows.
+
+```cmd
+shutdown /r /t 0
+```
+
 Install [WSL 2 Linux Kernel](https://aka.ms/wsl2kernel), then configure WSL.
 
 ```cmd
 wsl --set-default-version 2
 ```
 
-Install, launch and configure [Alpine Linux](https://aka.ms/wslstore), then `exit` shell.
+Install, launch and configure [Alpine WSL](https://aka.ms/wslstore), then `exit` shell.
 
 ```cmd
 wsl --list
@@ -37,7 +43,7 @@ apk upgrade --purge
 Install packages.
 
 ```sh
-apk add coreutils curl file git grep htop p7zip pv pwgen sshpass sudo tmux tree tzdata
+apk add coreutils curl file git grep htop p7zip pv pwgen sshpass sudo tmux tree tzdata wipe
 apk add neovim openssh-client imagemagick pngcrush
 ```
 
@@ -52,7 +58,8 @@ Configure system.
 ```sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/tmux.conf -o /etc/tmux.conf
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/ash.sh -o /etc/profile.d/ash.sh
-chmod 0755 /etc/profile.d/ash.sh
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/wsl.sh -o /etc/profile.d/wsl.sh
+chmod 0755 /etc/profile.d/ash.sh /etc/profile.d/wsl.sh
 ```
 
 Configure [sudo(8)](http://manpages.ubuntu.com/manpages/xenial/man8/sudo.8.html).
@@ -117,9 +124,7 @@ Clean home directory files.
 
 ```sh
 sudo rm -f /root/.ash_history
-sudo touch /root/.hushlogin
 rm -f ~/.ash_history
-touch ~/.hushlogin
 ```
 
 Create **user** home directory symlinks.
@@ -141,15 +146,8 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 Install basic development packages.
 
 ```sh
-sudo apk add binutils binutils-dev fortify-headers linux-headers libc-dev
+sudo apk add binutils binutils-dev fortify-headers gcc g++ linux-headers libc-dev
 sudo apk add cmake make nasm ninja nodejs npm patch perl pkgconf python3 py3-pip sqlite swig z3
 sudo apk add libedit-dev libnftnl-dev libmnl-dev libxml2-dev
 sudo apk add curl-dev ncurses-dev openssl-dev xz-dev z3-dev
-```
-
-### LLVM
-Install [LLVM](https://llvm.org/).
-
-```sh
-sudo apk add clang-dev clang-extra-tools
 ```
