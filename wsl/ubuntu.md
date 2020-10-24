@@ -47,7 +47,7 @@ rm -rf /root/snap
 Install packages.
 
 ```sh
-apt install -y ccze net-tools p7zip pv pwgen tree wipe
+apt install -y ccze net-tools p7zip pv pwgen tree wipe zip
 apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 imagemagick pngcrush
 ```
 
@@ -117,9 +117,12 @@ wsl --distribution Ubuntu
 Configure `nvim`.
 
 ```sh
-sudo rm -rf /etc/vim /etc/xdg/nvim; sudo mkdir -p /etc/xdg
-sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
-sudo ln -s /etc/vim /etc/xdg/nvim
+sudo rm -rf /etc/vim
+if [ -d "${USERPROFILE}/vimfiles" ]; then
+  sudo ln -s "${USERPROFILE}/vimfiles" /etc/vim
+else
+  sudo git clone https://github.com/qis/vim /etc/vim
+fi
 sudo touch /root/.viminfo
 touch ~/.viminfo
 ```
@@ -143,56 +146,56 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
 ```
 
-Restart Windows to apply settings.
-
 ## Development
 Install basic development packages.
 
 ```sh
-sudo apt install -y binutils-dev debconf-utils linux-headers-generic libc6-dev manpages-dev
+sudo apt install -y binutils-dev debconf-utils libc6-dev libgcc-9-dev manpages-dev
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  autoconf automake bison flex gcc g++ gdb libtool make nasm ninja-build patch \
-  perl pkgconf python3 python3-pip sqlite3 zip
+  autoconf automake bison flex make nasm ninja-build pkgconf sqlite3
 ```
 
-Install CMake.
+Install [CMake](https://cmake.org/).
 
 ```sh
 sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0-Linux-x86_64.tar.gz
-sudo tar xf cmake-3.18.0-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
+wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz
+sudo tar xf cmake-3.18.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
+rm -f cmake-3.18.4-Linux-x86_64.tar.gz
 sudo tee /etc/profile.d/cmake.sh >/dev/null <<'EOF'
 export PATH="/opt/cmake/bin:${PATH}"
 EOF
 sudo chmod 0755 /etc/profile.d/cmake.sh
-rm -f cmake-3.18.0-Linux-x86_64.tar.gz
 ```
 
-Install [GCC](https://gcc.gnu.org/).
+Install [Node](https://nodejs.org/).
 
 ```sh
-sudo apt install -y gcc-10 g++-10 gdb
-```
-
-Set default GCC compiler.
-
-```sh
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+sudo rm -rf /opt/node; sudo mkdir -p /opt/node
+wget https://nodejs.org/dist/v12.19.0/node-v12.19.0-linux-x64.tar.xz
+sudo tar xf node-v12.19.0-linux-x64.tar.xz -C /opt/node --strip-components=1
+rm -f node-v12.19.0-linux-x64.tar.xz
+sudo tee /etc/profile.d/node.sh >/dev/null <<'EOF'
+export PATH="/opt/node/bin:${PATH}"
+EOF
+sudo chmod 0755 /etc/profile.d/node.sh
 ```
 
 Install [LLVM](https://llvm.org/).
 
 ```sh
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  llvm-10-{runtime,tools} {lld,lldb,clang,clang-format,clang-tidy}-10 libc++{,abi}-10-dev
-```
-
-Set default LLVM compiler.
-
-```sh
-sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-10   100
-sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
+sudo rm -rf /opt/llvm; sudo mkdir -p /opt/llvm
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
+sudo tar xf clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz -C /opt/llvm --strip-components=1
+rm -f clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
+sudo tee /etc/profile.d/llvm.sh >/dev/null <<'EOF'
+export PATH="/opt/llvm/bin:${PATH}"
+EOF
+sudo chmod 0755 /etc/profile.d/llvm.sh
+sudo tee /etc/ld.so.conf.d/llvm.conf >/dev/null <<'EOF'
+/opt/llvm/lib
+EOF
+sudo ldconfig
 ```
 
 Set default system compiler.
@@ -200,34 +203,11 @@ Set default system compiler.
 ```sh
 sudo update-alternatives --remove-all cc
 sudo update-alternatives --remove-all c++
-sudo update-alternatives --install /usr/bin/cc  cc  /usr/bin/clang   100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+sudo update-alternatives --install /usr/bin/cc  cc  /opt/llvm/bin/clang   100
+sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
 ```
 
-Install code formatting tools.
-
-```sh
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  clang-format-10 clang-tidy-10
-```
-
-Set default code formatting tools.
-
-```sh
-sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
-sudo update-alternatives --install /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-10   100
-```
-
-### Node.js
-Install [Node.js](https://nodejs.org/).
-
-```sh
-sudo rm -rf /opt/node; sudo mkdir -p /opt/node
-wget https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.xz
-sudo tar xf node-v12.18.3-linux-x64.tar.xz -C /opt/node --strip-components=1
-sudo tee /etc/profile.d/node.sh >/dev/null <<'EOF'
-export PATH="/opt/node/bin:${PATH}"
-EOF
-sudo chmod 0755 /etc/profile.d/node.sh
-rm -f node-v12.18.3-linux-x64.tar.xz
-```
+<!--
+clang++ -std=c++20 -stdlib=libc++ -Os -flto=full main.cpp -fuse-ld=lld
+clang++ -std=c++20 -stdlib=libc++ -Os -flto=full main.cpp -fuse-ld=lld -static-libstdc++ /opt/llvm/lib/libc++abi.a
+-->
