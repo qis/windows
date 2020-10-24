@@ -35,7 +35,6 @@ alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
-alias crush="pngcrush -brute -reduce -rem allb -ow"
 alias grep="grep --color=auto"
 alias sudo="sudo "
 
@@ -43,24 +42,19 @@ alias sudo="sudo "
 export HISTFILE="${HOME}/.history"
 shopt -s histappend
 
-PS1=
-if [ -n "${TMUX}" ]; then
-  id="$(echo $TMUX | awk -F, '{print $3 + 1}')"
-  session="$(tmux ls | head -${id} | tail -1 | cut -d: -f1)"
-  PS1="${PS1}\[\e[90m\][\[\e[0m\]${session}\[\e[90m\]]\[\e[0m\] "
-fi
+tp() {
+  if [ -n "${TMUX}" ]; then
+    id="$(echo $TMUX | awk -F, '{print $3 + 1}')"
+    session="$(tmux ls | head -${id} | tail -1 | cut -d: -f1)"
+    echo "\[\e[90m\][\[\e[0m\]${session}\[\e[90m\]]\[\e[0m\] "
+  fi
+}
+
 if [ $(id -u) -ne 0 ]; then
-  PS1="${PS1}\[\e[32m\]\u\[\e[0m\]"
+  export PS1='$(tp)\[\e[32m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[34m\]\w\[\e[0m\] '
 else
-  PS1="${PS1}\[\e[31m\]\u\[\e[0m\]"
+  export PS1='$(tp)\[\e[31m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[34m\]\w\[\e[0m\] '
 fi
-if [ -x "/bin/wslpath" ] && grep Ubuntu /etc/lsb-release 2>&1 >/dev/null; then
-  PS1="${PS1}@\[\e[32m\]ubuntu\[\e[0m\]"
-else
-  PS1="${PS1}@\[\e[32m\]\h\[\e[0m\]"
-fi
-PS1="${PS1} \[\e[34m\]\w\[\e[0m\] "
-export PS1
 
 set -o emacs
 stty werase '^_'

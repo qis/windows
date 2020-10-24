@@ -27,33 +27,35 @@ wsl --set-version Ubuntu 2
 wsl --distribution Ubuntu --user root
 ```
 
+Remove snapd.
+
+```sh
+sudo apt purge snapd
+sudo rm -rf /root/snap
+```
+
 Update system.
 
 ```sh
-apt update
-apt upgrade -y
-apt dist-upgrade -y
-apt autoremove -y
-apt clean
+sudo apt update
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+sudo apt clean
 ```
 
 Install packages.
 
 ```sh
-apt install -y ca-certificates ccze curl debconf-utils file git gnupg htop net-tools p7zip pv pwgen sudo tmux tree wget wipe
-apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 neovim imagemagick pngcrush
-```
-
-Install `nvim` as default `vim`.
-
-```sh
-update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo apt install -y ccze net-tools p7zip pv pwgen tree wipe
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 imagemagick pngcrush
 ```
 
 Configure system.
 
 ```sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/tmux.conf -o /etc/tmux.conf
+curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/crush.conf -o /etc/profile.d/crush.sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/bash.sh -o /etc/profile.d/bash.sh
 curl -L https://raw.githubusercontent.com/qis/windows/master/wsl/wsl.sh -o /etc/profile.d/wsl.sh
 chmod 0755 /etc/profile.d/bash.sh /etc/profile.d/wsl.sh
@@ -133,16 +135,13 @@ rm -f ~/.bash_history ~/.bash_logout
 Create **user** home directory symlinks.
 
 ```sh
-ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
-ln -s "${USERPROFILE}/Documents" ~/documents
-ln -s "${USERPROFILE}/Downloads" ~/downloads
-ln -s /mnt/c/Workspace ~/workspace
 mkdir -p ~/.ssh; chmod 0700 ~/.ssh
 for i in authorized_keys config id_rsa id_rsa.pub known_hosts; do
   ln -s "${USERPROFILE}/.ssh/$i" ~/.ssh/$i
 done
 sudo chown `id -un`:`id -gn` "${USERPROFILE}/.ssh"/* ~/.ssh/*
 sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
+ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
 ```
 
 Restart Windows to apply settings.
@@ -151,9 +150,9 @@ Restart Windows to apply settings.
 Install basic development packages.
 
 ```sh
-sudo apt install -y binutils-dev linux-headers-generic libc6-dev manpages-dev
+sudo apt install -y binutils-dev debconf-utils linux-headers-generic libc6-dev manpages-dev
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  autoconf automake bison flex libtool make nasm ninja-build patch \
+  autoconf automake bison flex gcc g++ gdb libtool make nasm ninja-build patch \
   perl pkgconf python3 python3-pip sqlite3 zip
 ```
 
