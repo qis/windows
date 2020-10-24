@@ -46,7 +46,7 @@ tp() {
   if [ -n "${TMUX}" ]; then
     id="$(echo $TMUX | awk -F, '{print $3 + 1}')"
     session="$(tmux ls | head -${id} | tail -1 | cut -d: -f1)"
-    echo "\[\e[90m\][\[\e[0m\]${session}\[\e[90m\]]\[\e[0m\] "
+    echo -e "\e[90m[\e[0m${session}\e[90m]\e[0m "
   fi
 }
 

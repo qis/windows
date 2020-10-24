@@ -27,13 +27,6 @@ wsl --set-version Ubuntu 2
 wsl --distribution Ubuntu --user root
 ```
 
-Remove snapd.
-
-```sh
-sudo apt purge snapd
-sudo rm -rf /root/snap
-```
-
 Update system.
 
 ```sh
@@ -44,11 +37,18 @@ sudo apt autoremove -y
 sudo apt clean
 ```
 
+Remove snapd.
+
+```sh
+apt purge snapd
+rm -rf /root/snap
+```
+
 Install packages.
 
 ```sh
-sudo apt install -y ccze net-tools p7zip pv pwgen tree wipe
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 imagemagick pngcrush
+apt install -y ccze net-tools p7zip pv pwgen tree wipe
+apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 imagemagick pngcrush
 ```
 
 Configure system.
