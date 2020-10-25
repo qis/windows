@@ -5,18 +5,20 @@ Install [Visual Studio](https://visualstudio.microsoft.com/downloads/).
 
 ```
 Workloads
-+ ☑ Node.js development
 + ☑ Desktop development with C++
-+ ☑ Linux development with C++
++ ☑ Node.js development
 
 Individual components
-+ Compilers, build tools, and runtimes
-  ☑ C++ Clang Compiler for Windows
-  ☑ C++ Modules for v142 build tools
-  ☑ Python 3 64-bit
-+ Development Activities
++ Cloud, database, and server
+  ☐ Web Deploy
++ Code tools
+  ☐ NuGet package manager
++ Debugging and testing
+  ☐ C++ AddressSanitizer (Experimental)
+  ☐ Test Adapter for Boost.Test
+  ☐ Test Adapter for Google Test
++ Development activities
   ☐ Live Share
-  ☑ Python language support
 ```
 
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
@@ -30,7 +32,7 @@ Install [Visual Studio Code](https://code.visualstudio.com/download).
 ☐ Add to PATH (requires shell restart)
 ```
 
-Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.18.0/cmake-3.18.0-win64-x64.msi).
+Install [CMake](https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-win64-x64.msi).
 
 ```
 Install Options
@@ -44,7 +46,7 @@ Install [Ninja](https://github.com/ninja-build/ninja/releases).
 C:\Program Files (x86)\Ninja\ninja.exe
 ```
 
-Install [Node LTS](https://nodejs.org/dist/v12.18.3/node-v12.18.3-x64.msi).
+Install [Node LTS](https://nodejs.org/dist/v12.19.0/node-v12.19.0-x64.msi).
 
 ```
 Destination Folder
@@ -237,6 +239,8 @@ Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 
 Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
 
+Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer) extension.
+
 </details>
 
 <details>
@@ -254,6 +258,7 @@ ext install ms-vscode.cpptools
 ext install ms-vscode.cmake-tools
 ext install twxs.cmake
 ext install xaver.clang-format
+ext install esbenp.prettier-vscode
 > Developer: Reload Window
 ```
 
@@ -404,7 +409,7 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 Register VS Code in Explorer context menus.
 
 ```cmd
-set code=C:\Program Files\Microsoft VS Code\Code.exe
+set code=C:\Users\Qis\AppData\Local\Programs\Microsoft VS Code\Code.exe
 set codefile=\"%code%\" \"%1\"
 reg add "HKCR\*\shell\code" /ve /d "Edit with Code" /f
 reg add "HKCR\*\shell\code" /v Icon /d "%code%,0" /f

@@ -48,7 +48,7 @@ Install packages.
 
 ```sh
 apt install -y ccze net-tools p7zip pv pwgen tree wipe zip
-apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 imagemagick pngcrush
+apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 pngcrush
 ```
 
 Configure system.
@@ -152,16 +152,16 @@ Install basic development packages.
 ```sh
 sudo apt install -y binutils-dev debconf-utils libc6-dev libgcc-9-dev manpages-dev
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  autoconf automake bison flex make nasm ninja-build pkgconf sqlite3
+  autoconf automake bison flex gdb make nasm ninja-build pkgconf sqlite3
 ```
 
 Install [CMake](https://cmake.org/).
 
 ```sh
 sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz
-sudo tar xf cmake-3.18.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
-rm -f cmake-3.18.4-Linux-x86_64.tar.gz
+wget https://github.com/Kitware/CMake/releases/download/v3.19.0-rc1/cmake-3.19.0-rc1-Linux-x86_64.tar.gz
+sudo tar xf cmake-3.19.0-rc1-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
+rm -f cmake-3.19.0-rc1-Linux-x86_64.tar.gz
 sudo tee /etc/profile.d/cmake.sh >/dev/null <<'EOF'
 export PATH="/opt/cmake/bin:${PATH}"
 EOF
