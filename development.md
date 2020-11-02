@@ -80,15 +80,7 @@ Configure the System `Path` environment variable.
 %SystemRoot%\System32\WindowsPowerShell\v1.0
 %SystemRoot%\System32\OpenSSH
 C:\Program Files (x86)\Sysinternals Suite
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\x64\bin
-C:\Program Files (x86)\Ninja
 C:\Program Files\7-Zip
-C:\Program Files\CMake\bin
-C:\Program Files\Git\cmd
-C:\Program Files\Microsoft VS Code\bin
-C:\Workspace\vcpkg
-C:\Vulkan\Bin
-C:\Node
 ```
 
 Create the System `VSCMD_SKIP_SENDTELEMETRY` environment variable.
@@ -131,6 +123,7 @@ Projects and Solutions
   ☐ Always show Error List if build finishes with errors
   ☐ Warn user when the project location is not trusted
 + Build and Run
+  On Run, when projects are out of date: Always build
   On Run, when build or deployment error occur: Do not launch
 
 Source Control
@@ -167,28 +160,32 @@ Text Editor
     + Browsing/Navigation
       Disable External Dependencies Folders: True
     + IntelliSense
-      Disable Automatic Precompiled Header: True
       Enable Template IntelliSense: False
-  + Formatting
+  + Code Style
     + General
-      ◉ Run ClangFormat only for manually invoked formatting commands
-    + Indentation
-      ☐ Indent braces of lambdas used as parameters
-      ☐ Indent namespace contents
-    + New Lines
-      Position of open braces for namespaces: Keep on the same line, but add a space before
-      Position of open braces for types: Keep on the same line, but add a space before
-      Position of open braces for functions: Keep on the same line, but add a space before
-      Position of open braces for control blocks: Keep on the same line, but add a space before
-      Position of open braces for lambdas: Keep on the same line, but add a space before
-      ☑ Place braces on separate lines
-      ☑ For empty types, move closing braces to the same line as opening braces
-      ☑ For empty function bodies, move closing braces to the same line as opening braces
-      ☑ Place 'catch' and similar keywords on a new line
-      ☐ Place 'else' on a new line
-      ☐ Place 'while' in a do-while loop on a new line
-    + Wrapping
-      ◉ Always apply New Lines settings for blocks
+      Generated documentation comments style: Doxygen (///)
+    + Formatting
+      + General
+        ◉ Run ClangFormat only for manually invoked formatting commands
+        ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
+
+      + Indentation
+        ☐ Indent braces of lambdas used as parameters
+        ☐ Indent namespace contents
+      + New Lines
+        Position of open braces for namespaces: Keep on the same line, but add a space before
+        Position of open braces for types: Keep on the same line, but add a space before
+        Position of open braces for functions: Move to a new line
+        Position of open braces for control blocks: Keep on the same line, but add a space before
+        Position of open braces for lambdas: Keep on the same line, but add a space before
+        ☑ Place braces on separate lines
+        ☑ For empty types, move closing braces to the same line as opening braces
+        ☑ For empty function bodies, move closing braces to the same line as opening braces
+        ☑ Place 'catch' and similar keywords on a new line
+        ☐ Place 'else' on a new line
+        ☐ Place 'while' in a do-while loop on a new line
+      + Wrapping
+        ◉ Always apply New Lines settings for blocks
   + View
     + Code Squiggles
       Macros in Skipped Browsing Regions: None
@@ -208,16 +205,13 @@ Text Editor
       ☐ Format completed statement on ;
       ☐ Format opened block on {
       ☐ Format completed block on }
+      ☑ Format on paste
       Module Quote Preference
       ◉ Double (")
       Semicolon Preference
       ◉ Insert semicolons at statement ends
     + Spacing
       ☐ Insert space after function keyword for anonymous functions
-  + Linting
-    + General
-      ☑ Enable ESLint
-      [Reset global .eslintrc]
 + JSON
   + Advanced
     Automatic formatting: Off
