@@ -21,7 +21,10 @@ Individual components
   ☐ Live Share
 ```
 
-Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer).
+Install Visual Studio extensions.
+
+- [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins)
+- [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer)
 
 Install [Visual Studio Code](https://code.visualstudio.com/download).
 
@@ -234,12 +237,6 @@ Help > Send Feedback > Settings...
 
 Change [toolbars](res/vs.png) to fit the desired workflow.
 
-Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
-
-Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer) extension.
-
-Install [Struct Layout](https://marketplace.visualstudio.com/items?itemName=RamonViladomat.StructLayout) extension.
-
 </details>
 
 <details>
@@ -248,16 +245,10 @@ Install [Struct Layout](https://marketplace.visualstudio.com/items?itemName=Ramo
 Install extensions with the following commands with `CTRL+P`.
 
 ```
-ext install aeschli.vscode-css-formatter
-ext install alefragnani.rtf
-ext install donjayamanne.githistory
-ext install marvhen.reflow-markdown
-ext install dbaeumer.vscode-eslint
 ext install ms-vscode.cpptools
-ext install ms-vscode.cmake-tools
 ext install twxs.cmake
-ext install xaver.clang-format
-ext install esbenp.prettier-vscode
+ext install marvhen.reflow-markdown
+ext install alefragnani.rtf
 > Developer: Reload Window
 ```
 
@@ -308,10 +299,6 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "window.zoomLevel": 0,
   "terminal.integrated.rendererType": "experimentalWebgl",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
-  "debug.internalConsoleOptions": "openOnSessionStart",
-  "debug.openExplorerOnEnd": true,
-  "debug.openDebug": "openOnDebugBreak",
-  "debug.onTaskErrors": "showErrors",
   "C_Cpp.vcpkg.enabled": false,
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
@@ -321,91 +308,18 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang-format.exe",
-  "clang-format.executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang-format.exe",
-  "cmake.generator": "Ninja",
-  "cmake.buildDirectory": "${workspaceFolder}/build/windows",
-  "cmake.installPrefix": "${workspaceFolder}/build/install",
-  "cmake.cmakeCommunicationMode": "fileApi",
-  "cmake.configureOnOpen": true,
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "run",
-        "type": "cppvsdbg",
-        "request": "launch",
-        "internalConsoleOptions": "openOnSessionStart",
-        "program": "${command:cmake.launchTargetPath}",
-        "cwd": "${workspaceRoot}",
-        "externalConsole": false,
-        "stopAtEntry": false,
-        "environment": [],
-        "args": []
-      }
-    ]
-  },
+  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+  "C_Cpp.default.includePath": [ "C:\\Workspace\\ace\\include", "${default}" ],
   "html.format.indentInnerHtml": false,
   "html.format.extraLiners": "",
-  "[c]": {
-    "editor.defaultFormatter": "xaver.clang-format",
-    "editor.formatOnSave": true
-  },
-  "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format",
-    "editor.formatOnSave": true
-  },
-  "[svelte]": {
-    "editor.defaultFormatter": "JamesBirtles.svelte-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  }
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }
 ```
 
-Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)`.
-
-```json
-[
-  { "key": "ctrl+f5", "command": "workbench.action.debug.run" },
-  { "key": "f5", "command": "workbench.action.debug.start", "when": "!inDebugMode" },
-  { "key": "f5", "command": "workbench.action.debug.restart", "when": "inDebugMode" },
-  { "key": "f6", "command": "workbench.action.debug.pause", "when": "debugState == 'running'" },
-  { "key": "f6", "command": "workbench.action.debug.continue", "when": "debugState != 'running'" },
-  { "key": "f7", "command": "workbench.action.tasks.build" }
-]
-```
-
-Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
-
-```json
-[
-  {
-    "keep": true,
-    "name": "x64-windows-ipo",
-    "visualStudio": "VisualStudio.16.0",
-    "visualStudioArchitecture": "amd64",
-    "toolchainFile": "${env.VCPKG_ROOT}\\triplets\\toolchains\\windows.cmake",
-    "cmakeSettings": {
-      "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG": "debug",
-      "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE": "release"
-    }
-  }
-]
-```
-
-Register VS Code in Explorer context menus.
+Register VS Code in Explorer context menus as **administrator**.
 
 ```cmd
 set code=%LocalAppData%\Programs\Microsoft VS Code\Code.exe
