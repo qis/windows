@@ -238,7 +238,7 @@ Help > Send Feedback > Settings...
   ◉ No, I would not like to participate
 ```
 
-Change [toolbars](res/vs-toolbars) to fit the desired workflow.
+Change [toolbars](res/vs.png) to fit the desired workflow.
 
 Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
 
