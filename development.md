@@ -190,6 +190,9 @@ Text Editor
     + Wrapping
       ◉ Always apply New Lines settings for blocks
   + View
+    + Code Squiggles
+      Macros in Skipped Browsing Regions: None
+      Macros Convertible to constexpr: None
     + Outlining
       Enable Outlining: False
 + CSS
@@ -240,6 +243,8 @@ Change [toolbars](res/vs-toolbars) to fit the desired workflow.
 Install [Hide Suggestion And Outlining Margins](https://marketplace.visualstudio.com/items?itemName=MussiKara.HideSuggestionAndOutliningMargins) extension.
 
 Install [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer) extension.
+
+Install [Struct Layout](https://marketplace.visualstudio.com/items?itemName=RamonViladomat.StructLayout) extension.
 
 </details>
 
