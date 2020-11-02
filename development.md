@@ -408,13 +408,13 @@ Configure CMake Tools kits with `> CMake: Edit User-Local CMake Kits`.
 Register VS Code in Explorer context menus.
 
 ```cmd
-set code=C:\Users\Qis\AppData\Local\Programs\Microsoft VS Code\Code.exe
+set code=%LocalAppData%\Programs\Microsoft VS Code\Code.exe
 set codefile=\"%code%\" \"%1\"
 reg add "HKCR\*\shell\code" /ve /d "Edit with Code" /f
 reg add "HKCR\*\shell\code" /v Icon /d "%code%,0" /f
 reg add "HKCR\*\shell\code\command" /ve /d "%codefile%" /f
 set codepath=\"%code%\" .
-reg add "HKCU\Software\Classes\Directory\Background\shell\code" /ve /d "Open in Code" /f
+reg add "HKCU\Software\Classes\Directory\Background\shell\code" /ve /d "Open with Code" /f
 reg add "HKCU\Software\Classes\Directory\Background\shell\code" /v Icon /d "%code%,0" /f
 reg add "HKCU\Software\Classes\Directory\Background\shell\code\command" /ve /d "%codepath%" /f
 ```
