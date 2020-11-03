@@ -41,7 +41,7 @@ EOF
 exit
 ```
 
-Start WSL.
+Set Ubuntu as the default WSL distribution and start it.
 
 ```sh
 wsl -s Ubuntu
