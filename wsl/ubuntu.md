@@ -37,7 +37,11 @@ root  ALL=(ALL) ALL
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
 EOF
+```
 
+Update system.
+
+```sh
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove --purge -y
@@ -50,6 +54,7 @@ Remove snapd.
 sudo apt purge snapd -y
 sudo apt autoremove --purge -y
 sudo rm -rf /root/snap /snap
+sudo apt clean
 ```
 
 Install packages.
@@ -88,7 +93,6 @@ Replace shell config files.
 
 ```sh
 sudo rm -f /{root,home/*}/.{bashrc,profile,viminfo}
-sudo ln -s /etc/profile.d/bash.sh /root/.bashrc
 ln -s /etc/profile.d/bash.sh ~/.bashrc
 ```
 
