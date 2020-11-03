@@ -324,8 +324,19 @@ ext install alefragnani.rtf
 }
 ```
 
-3. Open a directory in WSL.
-4. Install remote extensions.
+3. Configure keyboard shortcuts with `> Preferences: Open Keyboard Shortcuts (JSON)`.
+
+```json
+[
+  { "key": "ctrl+f5", "command": "cmake.launchTarget" },
+  { "key": "f5", "command": "workbench.action.debug.start", "when": "!inDebugMode" },
+  { "key": "f5", "command": "workbench.action.debug.pause", "when": "inDebugMode && debugState == 'running'" },
+  { "key": "f5", "command": "workbench.action.debug.continue", "when": "inDebugMode && debugState != 'running'" },
+]
+```
+
+4. Open a directory in WSL.
+5. Install remote extensions.
 
 ```
 CMake (from local)
@@ -333,7 +344,7 @@ C/C++ (from local)
 CMake Tools
 ```
 
-5. Configure remote editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)` while editing a directory in WSL.
+6. Configure remote editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)` while editing a directory in WSL.
 
 ```json
 {
@@ -386,7 +397,7 @@ CMake Tools
 }
 ```
 
-6. Configure remote toolkits with `CMake: Edit User-Local CMake Kits` while editing a directory in WSL.
+7. Configure remote toolkits with `CMake: Edit User-Local CMake Kits` while editing a directory in WSL.
 
 ```json
 [
@@ -398,7 +409,7 @@ CMake Tools
 ]
 ```
 
-Register VS Code in Explorer context menus as **administrator**.
+Register VS Code in Explorer context menus as **administrator** (optional).
 
 ```cmd
 set code=%LocalAppData%\Programs\Microsoft VS Code\Code.exe
