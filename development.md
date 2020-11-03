@@ -241,9 +241,13 @@ Change [toolbars](res/vs.png) to fit the desired workflow.
 <details>
 <summary><b>Visual Studio Code</b></summary>
 
-1. Install extensions.
+1. Install extensions with `CTRL+P`.
 
 ```
+ext install twxs.cmake
+ext install ms-vscode.cpptools
+ext install ms-vscode-remote.remote-wsl
+ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
 ext install alefragnani.rtf
 > Developer: Reload Window
@@ -301,7 +305,22 @@ ext install alefragnani.rtf
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "html.format.indentInnerHtml": false,
-  "html.format.extraLiners": ""
+  "html.format.extraLiners": "",
+  "C_Cpp.vcpkg.enabled": false,
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.enhancedColorization": "Enabled",
+  "C_Cpp.experimentalFeatures": "Enabled",
+  "C_Cpp.configurationWarnings": "Disabled",
+  "C_Cpp.workspaceParsingPriority": "highest",
+  "C_Cpp.intelliSenseEngineFallback": "Disabled",
+  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
+  "C_Cpp.default.includePath": [
+    "${default}",
+    "C:\\Ace\\include",
+    "${workspaceFolder}\\src",
+    "${workspaceFolder}\\include"
+  ]
 }
 ```
 
@@ -309,12 +328,12 @@ ext install alefragnani.rtf
 4. Install remote extensions.
 
 ```
-ms-vscode.cpptools
-ms-vscode.cmake-tools
-twxs.cmake
+CMake (from local)
+C/C++ (from local)
+CMake Tools
 ```
 
-5. Configure editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)`.
+5. Configure remote editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)` while editing a directory in WSL.
 
 ```json
 {
@@ -327,7 +346,7 @@ twxs.cmake
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
   "C_Cpp.default.includePath": [
     "${default}",
     "/opt/ace/include",
@@ -337,12 +356,9 @@ twxs.cmake
   "cmake.generator": "Ninja",
   "cmake.cmakePath": "/opt/cmake/bin/cmake",
   "cmake.installPrefix": "${workspaceFolder}",
-  "cmake.buildDirectory": "${workspaceFolder}/build/wsl",
+  "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
   "cmake.cmakeCommunicationMode": "fileApi",
   "cmake.configureOnOpen": true,
-  "cmake.configureSettings": {
-    "CMAKE_BUILD_TYPES": "Ace;Debug;Release"
-  },
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -368,6 +384,18 @@ twxs.cmake
     ]
   }
 }
+```
+
+6. Configure remote toolkits with `CMake: Edit User-Local CMake Kits` while editing a directory in WSL.
+
+```json
+[
+  {
+    "keep": true,
+    "name": "Ace",
+    "toolchainFile": "/opt/ace/toolchain.cmake"
+  }
+]
 ```
 
 Register VS Code in Explorer context menus as **administrator**.
