@@ -37,6 +37,15 @@ root  ALL=(ALL) ALL
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
 EOF
+
+exit
+```
+
+Start WSL.
+
+```sh
+wsl -s Ubuntu
+wsl -d Ubuntu
 ```
 
 Update system.
