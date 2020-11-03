@@ -84,10 +84,12 @@ Disable message of the day.
 sudo sed -E 's/^(session.*pam_motd\.so.*)/#\1/' -i /etc/pam.d/*
 ```
 
-Delete shell config files.
+Replace shell config files.
 
 ```sh
 sudo rm -f /{root,home/*}/.{bashrc,profile,viminfo}
+sudo ln -s /etc/profile.d/bash.sh /root/.bashrc
+ln -s /etc/profile.d/bash.sh ~/.bashrc
 ```
 
 Exit shell to release `~/.bash_history`.

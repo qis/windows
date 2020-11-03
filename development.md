@@ -171,7 +171,6 @@ Text Editor
       + General
         ◉ Run ClangFormat only for manually invoked formatting commands
         ☑ Use custom clang-format.exe file: C:\Program Files\LLVM\bin\clang-format.exe
-
       + Indentation
         ☐ Indent braces of lambdas used as parameters
         ☐ Indent namespace contents
@@ -242,17 +241,15 @@ Change [toolbars](res/vs.png) to fit the desired workflow.
 <details>
 <summary><b>Visual Studio Code</b></summary>
 
-Install extensions with the following commands with `CTRL+P`.
+1. Install extensions.
 
 ```
-ext install ms-vscode.cpptools
-ext install twxs.cmake
 ext install marvhen.reflow-markdown
 ext install alefragnani.rtf
 > Developer: Reload Window
 ```
 
-Configure editor with `> Preferences: Open Settings (JSON)`.
+2. Configure editor with `> Preferences: Open Settings (JSON)`.
 
 ```json
 {
@@ -299,6 +296,28 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "window.zoomLevel": 0,
   "terminal.integrated.rendererType": "experimentalWebgl",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "html.format.indentInnerHtml": false,
+  "html.format.extraLiners": ""
+}
+```
+
+3. Open a directory in WSL.
+4. Install remote extensions.
+
+```
+ms-vscode.cpptools
+ms-vscode.cmake-tools
+twxs.cmake
+```
+
+5. Configure editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)`.
+
+```json
+{
   "C_Cpp.vcpkg.enabled": false,
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
@@ -307,14 +326,47 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.configurationWarnings": "Disabled",
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
-  "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
-  "C_Cpp.default.includePath": [ "C:\\Ace\\include", "${default}" ],
-  "html.format.indentInnerHtml": false,
-  "html.format.extraLiners": "",
-  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  "C_Cpp.default.includePath": [
+    "${default}",
+    "/opt/ace/include",
+    "${workspaceFolder}/src",
+    "${workspaceFolder}/include"
+  ],
+  "cmake.generator": "Ninja",
+  "cmake.cmakePath": "/opt/cmake/bin/cmake",
+  "cmake.installPrefix": "${workspaceFolder}",
+  "cmake.buildDirectory": "${workspaceFolder}/build/wsl",
+  "cmake.cmakeCommunicationMode": "fileApi",
+  "cmake.configureOnOpen": true,
+  "cmake.configureSettings": {
+    "CMAKE_BUILD_TYPES": "Ace;Debug;Release"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug",
+        "type": "cppdbg",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "program": "${command:cmake.launchTargetPath}",
+        "environment": [],
+        "args": [],
+        "MIMode": "gdb",
+        "stopAtEntry": false,
+        "externalConsole": false,
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
