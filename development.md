@@ -257,21 +257,20 @@ ext install alefragnani.rtf
 
 ```json
 {
-  "editor.cursorSmoothCaretAnimation": true,
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.folding": false,
   "editor.fontFamily": "'DejaVu LGC Sans Mono', Consolas, monospace",
-  "editor.fontLigatures": false,
-  "editor.links": false,
   "editor.fontSize": 12,
   "editor.largeFileOptimizations": false,
+  "editor.links": false,
+  "editor.minimap.scale": 2,
   "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderFinalNewline": false,
+  "editor.renderLineHighlight": "gutter",
   "editor.renderWhitespace": "selection",
-  "editor.renderLineHighlight": "all",
   "editor.rulers": [ 128 ],
   "editor.smoothScrolling": true,
-  "editor.minimap.scale": 2,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 128,
@@ -297,24 +296,23 @@ ext install alefragnani.rtf
   "window.openFilesInNewWindow": "off",
   "window.restoreWindows": "none",
   "window.closeWhenEmpty": false,
-  "window.zoomLevel": 0,
   "terminal.integrated.rendererType": "experimentalWebgl",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
-  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "html.format.indentInnerHtml": false,
-  "html.format.extraLiners": "",
   "C_Cpp.vcpkg.enabled": false,
+  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.enhancedColorization": "Enabled",
   "C_Cpp.experimentalFeatures": "Enabled",
   "C_Cpp.configurationWarnings": "Disabled",
-  "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
-  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe"
+  "C_Cpp.intelliSenseEngine": "Disabled",
+  "html.format.extraLiners": "",
+  "html.format.indentInnerHtml": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }
 ```
 
@@ -322,10 +320,11 @@ ext install alefragnani.rtf
 
 ```json
 [
+  { "key": "ctrl+b", "command": "cmake.selectLaunchTarget" },
   { "key": "ctrl+f5", "command": "cmake.launchTarget" },
-  { "key": "f5", "command": "workbench.action.debug.start", "when": "!inDebugMode" },
+  { "key": "f5", "command": "cmake.debugTarget", "when": "!inDebugMode" },
   { "key": "f5", "command": "workbench.action.debug.pause", "when": "inDebugMode && debugState == 'running'" },
-  { "key": "f5", "command": "workbench.action.debug.continue", "when": "inDebugMode && debugState != 'running'" },
+  { "key": "f5", "command": "workbench.action.debug.continue", "when": "inDebugMode && debugState != 'running'" }
 ]
 ```
 
@@ -342,23 +341,18 @@ CMake Tools
 
 ```json
 {
-  "cmake.generator": "Ninja",
-  "cmake.cmakePath": "/opt/cmake/bin/cmake",
-  "cmake.installPrefix": "${workspaceFolder}",
-  "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
-  "cmake.cmakeCommunicationMode": "fileApi",
-  "cmake.configureOnOpen": true,
   "C_Cpp.vcpkg.enabled": false,
+  "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
-  "C_Cpp.enhancedColorization": "Enabled",
-  "C_Cpp.experimentalFeatures": "Enabled",
-  "C_Cpp.configurationWarnings": "Disabled",
-  "C_Cpp.workspaceParsingPriority": "highest",
-  "C_Cpp.intelliSenseEngineFallback": "Disabled",
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
-  "launch": {
+  "C_Cpp.intelliSenseEngine": "Default",
+  "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
+  "cmake.cmakePath": "/opt/cmake/bin/cmake",
+  "cmake.generator": "Ninja Multi-Config",
+  "cmake.installPrefix": "${workspaceFolder}",
+  "cmake.configureOnOpen": true,
+  "cmake.debugConfig": {
     "version": "0.2.0",
     "configurations": [
       {
@@ -367,16 +361,15 @@ CMake Tools
         "request": "launch",
         "cwd": "${workspaceFolder}",
         "program": "${command:cmake.launchTargetPath}",
-        "environment": [],
-        "args": [],
         "MIMode": "gdb",
         "stopAtEntry": false,
         "externalConsole": false,
+        "internalConsoleOptions": "neverOpen",
         "setupCommands": [
           {
-            "description": "Enable pretty-printing for gdb",
+            "description": "Enable pretty printing.",
             "text": "-enable-pretty-printing",
-            "ignoreFailures": true
+            "ignoreFailures": true,
           }
         ]
       }
