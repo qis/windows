@@ -314,13 +314,7 @@ ext install alefragnani.rtf
   "C_Cpp.configurationWarnings": "Disabled",
   "C_Cpp.workspaceParsingPriority": "highest",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
-  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
-  "C_Cpp.default.includePath": [
-    "${default}",
-    "C:\\Ace\\include",
-    "${workspaceFolder}\\src",
-    "${workspaceFolder}\\include"
-  ]
+  "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe"
 }
 ```
 
@@ -348,6 +342,12 @@ CMake Tools
 
 ```json
 {
+  "cmake.generator": "Ninja",
+  "cmake.cmakePath": "/opt/cmake/bin/cmake",
+  "cmake.installPrefix": "${workspaceFolder}",
+  "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
+  "cmake.cmakeCommunicationMode": "fileApi",
+  "cmake.configureOnOpen": true,
   "C_Cpp.vcpkg.enabled": false,
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
@@ -358,18 +358,6 @@ CMake Tools
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
-  "C_Cpp.default.includePath": [
-    "${default}",
-    "/opt/ace/include",
-    "${workspaceFolder}/src",
-    "${workspaceFolder}/include"
-  ],
-  "cmake.generator": "Ninja",
-  "cmake.cmakePath": "/opt/cmake/bin/cmake",
-  "cmake.installPrefix": "${workspaceFolder}",
-  "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
-  "cmake.cmakeCommunicationMode": "fileApi",
-  "cmake.configureOnOpen": true,
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -405,6 +393,11 @@ CMake Tools
     "keep": true,
     "name": "Ace",
     "toolchainFile": "/opt/ace/toolchain.cmake"
+  },
+  {
+    "keep": true,
+    "name": "Vcpkg",
+    "toolchainFile": "/opt/vcpkg/triplets/toolchains/linux.cmake"
   }
 ]
 ```
