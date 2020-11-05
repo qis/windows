@@ -298,7 +298,6 @@ ext install alefragnani.rtf
   "window.closeWhenEmpty": false,
   "terminal.integrated.rendererType": "experimentalWebgl",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
-  "C_Cpp.vcpkg.enabled": false,
   "C_Cpp.clang_format_path": "C:\\Program Files\\LLVM\\bin\\clang-format.exe",
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
@@ -307,6 +306,7 @@ ext install alefragnani.rtf
   "C_Cpp.configurationWarnings": "Disabled",
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.intelliSenseEngine": "Disabled",
+  "C_Cpp.vcpkg.enabled": false,
   "html.format.extraLiners": "",
   "html.format.indentInnerHtml": false,
   "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
@@ -320,11 +320,11 @@ ext install alefragnani.rtf
 
 ```json
 [
-  { "key": "ctrl+b", "command": "cmake.selectLaunchTarget" },
-  { "key": "ctrl+f5", "command": "cmake.launchTarget" },
   { "key": "f5", "command": "cmake.debugTarget", "when": "!inDebugMode" },
   { "key": "f5", "command": "workbench.action.debug.pause", "when": "inDebugMode && debugState == 'running'" },
-  { "key": "f5", "command": "workbench.action.debug.continue", "when": "inDebugMode && debugState != 'running'" }
+  { "key": "f5", "command": "workbench.action.debug.continue", "when": "inDebugMode && debugState != 'running'" },
+  { "key": "ctrl+b", "command": "cmake.selectLaunchTarget" },
+  { "key": "ctrl+f5", "command": "cmake.launchTarget" }
 ]
 ```
 
@@ -334,7 +334,7 @@ ext install alefragnani.rtf
 ```
 CMake (from local)
 C/C++ (from local)
-CMake Tools
+ms-vscode.cmake-tools
 ```
 
 6. Configure remote editor with `> Preferences: Open Remote Settings (WSL: Ubuntu)` while editing a directory in WSL.
@@ -351,6 +351,7 @@ CMake Tools
   "cmake.cmakePath": "/opt/cmake/bin/cmake",
   "cmake.generator": "Ninja Multi-Config",
   "cmake.installPrefix": "${workspaceFolder}",
+  "cmake.configureSettings": { "VSCODE": "ON" },
   "cmake.configureOnOpen": true,
   "cmake.debugConfig": {
     "version": "0.2.0",
