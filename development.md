@@ -342,11 +342,12 @@ ms-vscode.cmake-tools
 ```json
 {
   "C_Cpp.vcpkg.enabled": false,
-  "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
-  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+  "C_Cpp.default.intelliSenseMode": "clang-x64",
   "C_Cpp.intelliSenseEngine": "Default",
+  "C_Cpp.clang_format_path": "/opt/llvm/bin/clang-format",
   "cmake.buildDirectory": "${workspaceFolder}/build/vscode",
   "cmake.cmakePath": "/opt/cmake/bin/cmake",
   "cmake.generator": "Ninja Multi-Config",
@@ -390,8 +391,9 @@ ms-vscode.cmake-tools
   },
   {
     "keep": true,
-    "name": "Vcpkg",
-    "toolchainFile": "/opt/vcpkg/triplets/toolchains/linux.cmake"
+    "name": "Xnet",
+    "toolchainFile": "/opt/vcpkg/triplets/toolchains/linux.cmake",
+    "cmakeSettings": { "VCPKG_TARGET_TRIPLET": "x64-linux-xnet" }
   }
 ]
 ```
