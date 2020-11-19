@@ -246,6 +246,7 @@ Change [toolbars](res/vs.png) to fit the desired workflow.
 ```
 ext install twxs.cmake
 ext install ms-vscode.cpptools
+ext install ms-vscode-remote.remote-ssh
 ext install ms-vscode-remote.remote-wsl
 ext install donjayamanne.githistory
 ext install marvhen.reflow-markdown
