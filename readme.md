@@ -1,5 +1,5 @@
 # Windows
-Installation and configuration instructions for Windows 10 (Version 1909).
+Installation and configuration instructions for Windows 10 20H2.
 
 <!--
 Fix drive previously used for unix partitions with `diskpart`.
@@ -24,12 +24,12 @@ Create the file `\sources\ei.cfg` on the installation media.
 [EditionID]
 Professional
 [Channel]
-Retail
+OEM
 [VL]
 0
 ```
 
-Create the file `\sources\pid.txt` on the installation media.
+Create the file `\sources\pid.txt` on the installation media if `Channel` is `Retail` instead of `OEM`.
 
 ```ini
 [PID]
@@ -290,6 +290,7 @@ Install third party software.
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Affinity Publisher](https://affinity.serif.com/publisher)
+* [ImageGlass](https://imageglass.org/)
 * [MagicaVoxel](https://ephtracy.github.io/)
 * [Blender](https://www.blender.org/)
 * [Audacity](https://www.audacityteam.org/)

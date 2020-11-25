@@ -20,6 +20,20 @@ public static extern bool SetComputerName(String name);
 public static extern bool GetComputerName(System.Text.StringBuilder buffer, ref uint size);
 '@ -Name 'Kernel32' -Namespace 'Win32' -PassThru
 
+# Schedule reboot.
+$rebootRequired = $False
+
+# Set computer name.
+$hostname = $env:ComputerName
+$hostname = Read-Host -Prompt "Set computer name [$hostname]"
+If ($hostname -ne "") {
+  Write-Output "Setting computer name..."
+  Rename-Computer -NewName "tmp-$hostname" -Force
+  Rename-Computer -NewName "$hostname" -Force
+  $rebootRequired = $True
+}
+
+# Set netbios name.
 function Get-NetbiosName {
   $data = New-Object System.Text.StringBuilder 64
   $size = $data.Capacity
@@ -29,28 +43,27 @@ function Get-NetbiosName {
   return $data.ToString();
 }
 
-# Set computer name.
-$hostname = Read-Host -Prompt "Set hostname [$env:ComputerName]"
-If ($hostname -ne "" -and $hostname -ne $env:ComputerName) {
-  Write-Output "Setting computer name..."
-  Rename-Computer -NewName "$hostname" -Force
-  Reboot
-}
-
-# Set netbios name.
-If ($hostname -ne "" -and $hostname -cne (Get-NetbiosName)) {
-  Write-Output "Setting NetBios name..."
-  $Kernel32::SetComputerName("$env:ComputerName");
-  Reboot
+$biosname = Get-NetbiosName
+$biosname = Read-Host -Prompt "Set netbios name [$biosname]"
+If ($biosname -ne "") {
+  Write-Output "Setting netbios name..."
+  $Kernel32::SetComputerName("$biosname");
+  $rebootRequired = $True
 }
 
 # Set user name.
-$username = Read-Host -Prompt "Set username [$env:UserName]"
+$username = $env:UserName
+$username = Read-Host -Prompt "Set username [$username]"
 If ($username -ne "") {
   $fullname = Read-Host -Prompt "Full Name"
   Write-Output "Setting User name..."
   Rename-LocalUser -Name "$env:UserName" -NewName "$username"
   Set-LocalUser -Name "$username" -FullName "$fullname"
+  $rebootRequired = $True
+}
+
+# Perform reboot.
+If ($rebootRequired -eq $True) {
   Reboot
 }
 
@@ -98,6 +111,7 @@ If ((Get-VolumeLabel "C") -ne "System") {
   $rebootRequired = $True
 }
 
+# Perform reboot.
 If ($rebootRequired -eq $True) {
   Reboot
 }
@@ -106,95 +120,87 @@ If ($rebootRequired -eq $True) {
 # https://github.com/Disassembler0/Win10-Initial-Setup-Script
 # ===========================================================================================================
 
-Import-Module -Name "$PSScriptRoot\..\script\Win10"
+Import-Module -Name "$PSScriptRoot\system"
 
 # ===========================================================================================================
 # Privacy Tweaks
 # ===========================================================================================================
 
-DisableTelemetry
-DisableWiFiSense
-DisableSmartScreen
-DisableWebSearch
-DisableAppSuggestions
 DisableActivityHistory
-DisableSensors
-DisableLocation
-DisableMapUpdates
-DisableFeedback
-DisableTailoredExperiences
 DisableAdvertisingID
+DisableAppSuggestions
 DisableCortana
-DisableBiometrics
-#DisableCamera
-#DisableMicrophone
-DisableErrorReporting
-SetP2PUpdateDisable
 DisableDiagTrack
-DisableWAPPush
-EnableClearRecentFiles
+DisableErrorReporting
+DisableFeedback
+DisableMapUpdates
 DisableRecentFiles
+DisableSmartScreen
+DisableTailoredExperiences
+DisableTelemetry
+DisableWAPPush
+DisableWebSearch
+DisableWiFiSense
+EnableClearRecentFiles
+SetP2PUpdateDisable
 
 # ===========================================================================================================
 # Security Tweaks
 # ===========================================================================================================
 
-DisableSharingMappedDrives
 DisableAdminShares
-HideDefenderTrayIcon
-DisableDefender
-DisableDefenderCloud
-DisableDefenderAppGuard
 DisableCIMemoryIntegrity
-HideAccountProtectionWarn
+DisableDefender
+DisableDefenderAppGuard
+DisableDefenderCloud
 DisableDownloadBlocking
-EnableDotNetStrongCrypto
+DisableSharingMappedDrives
+HideAccountProtectionWarn
+HideDefenderTrayIcon
 SetDEPOptOut
 
 # ===========================================================================================================
 # Network Tweaks
 # ===========================================================================================================
 
-SetCurrentNetworkPrivate
-SetUnknownNetworksPrivate
-DisableNetDevicesAutoInst
-DisableSMB1
-DisableSMBServer
-DisableNetBIOS
-DisableLLMNR
+DisableConnectionSharing
 DisableLLDP
+DisableLLMNR
 DisableLLTD
 DisableMSNetClient
+DisableNetBIOS
+DisableNetDevicesAutoInst
 DisableQoS
-DisableConnectionSharing
-#DisableRemoteAssistance
-#DisableRemoteDesktop
+DisableRemoteAssistance
+DisableSMB1
+DisableSMBServer
+SetCurrentNetworkPrivate
+SetUnknownNetworksPrivate
 
 # ===========================================================================================================
 # Service Tweaks
 # ===========================================================================================================
 
-DisableUpdateMSRT
-EnableUpdateMSProducts
-DisableUpdateAutoDownload
-DisableMaintenanceWakeUp
-DisableSharedExperiences
-DisableClipboardHistory
 DisableAutoplay
 DisableAutorun
-DisableRestorePoints
-
-vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
-
-DisableStorageSense
+DisableClipboardHistory
 DisableDefragmentation
+DisableHibernation
+DisableMaintenanceWakeUp
+DisableNTFSLastAccess
+DisableSharedExperiences
+DisableSleepButton
+DisableStorageSense
 DisableSuperfetch
 DisableSwapFile
+DisableUpdateAutoDownload
+DisableUpdateMSRT
 EnableNTFSLongPaths
-DisableNTFSLastAccess
+EnableUpdateMSProducts
 SetBIOSTimeUTC
-DisableHibernation
-DisableSleepButton
+
+DisableRestorePoints
+vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
 
 Write-Output "Setting display and sleep mode timeouts..."
 powercfg /X monitor-timeout-ac 30
@@ -202,8 +208,8 @@ powercfg /X monitor-timeout-dc 10
 powercfg /X standby-timeout-ac 0
 powercfg /X standby-timeout-dc 360
 
-DisableFastStartup
 DisableAutoRebootOnCrash
+DisableFastStartup
 
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
 #   Windows Components > Windows Update > Configure Automatic Updates: Enabled
@@ -224,31 +230,31 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\
 # UI Tweaks
 # ===========================================================================================================
 
-DisableActionCenter
-HideNetworkFromLockScreen
-DisableLockScreenBlur
-DisableAeroShake
 DisableAccessibilityKeys
-ShowTaskManagerDetails
-ShowFileOperationsDetails
-HideTaskbarSearch
-ShowSmallTaskbarIcons
-SetTaskbarCombineAlways
-HideTaskbarPeopleIcon
-ShowTrayIcons
-DisableSearchAppInStore
-DisableNewAppPrompt
-HideRecentlyAddedApps
-HideMostUsedApps
-SetWinXMenuCmd
-DisableShortcutInName
-DisableTitleBarColor
-SetAppsDarkMode
-SetSystemDarkMode
-EnableEnhPointerPrecision
-DisableStartupSound
-SetSoundSchemeNone
+DisableActionCenter
+DisableAeroShake
 DisableF1HelpKey
+DisableLockScreenBlur
+DisableNewAppPrompt
+DisableSearchAppInStore
+DisableShortcutInName
+DisableStartupSound
+DisableTitleBarColor
+EnableEnhPointerPrecision
+HideMostUsedApps
+HideNetworkFromLockScreen
+HideRecentlyAddedApps
+HideTaskbarPeopleIcon
+HideTaskbarSearch
+SetAppsDarkMode
+SetSoundSchemeNone
+SetSystemDarkMode
+SetTaskbarCombineAlways
+SetWinXMenuCmd
+ShowFileOperationsDetails
+ShowSmallTaskbarIcons
+ShowTaskManagerDetails
+ShowTrayIcons
 
 Write-Output "Setting custom visual effects..."
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
@@ -274,38 +280,36 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "AccentColor
 # Explorer UI Tweaks
 # ===========================================================================================================
 
-ShowKnownExtensions
-ShowHiddenFiles
-HideSuperHiddenFiles
-ShowEmptyDrives
-HideFolderMergeConflicts
-#HideNavPaneAllFolders
 DisableRestoreFldrWindows
 DisableSharingWizard
-HideSelectCheckboxes
-HideRecentShortcuts
-SetExplorerQuickAccess
-#HideRecycleBinFromDesktop
-#HideDesktopIcons
-HideDesktopFromThisPC
-HideDesktopFromExplorer
-HideDocumentsFromThisPC
-HideDocumentsFromExplorer
-HideDownloadsFromThisPC
-HideDownloadsFromExplorer
-HideMusicFromThisPC
-HideMusicFromExplorer
-HidePicturesFromThisPC
-HidePicturesFromExplorer
-HideVideosFromThisPC
-HideVideosFromExplorer
-Hide3DObjectsFromThisPC
-Hide3DObjectsFromExplorer
-HideIncludeInLibraryMenu
-HideGiveAccessToMenu
-HideShareMenu
-#DisableThumbnailCache
 DisableThumbsDBOnNetwork
+Hide3DObjectsFromExplorer
+Hide3DObjectsFromThisPC
+HideDesktopFromExplorer
+HideDesktopFromThisPC
+HideDocumentsFromExplorer
+HideDocumentsFromThisPC
+HideDownloadsFromExplorer
+HideDownloadsFromThisPC
+HideFolderMergeConflicts
+HideGiveAccessToMenu
+HideIncludeInLibraryMenu
+HideMusicFromExplorer
+HideMusicFromThisPC
+HideNavPaneAllFolders
+HidePicturesFromExplorer
+HidePicturesFromThisPC
+HideRecentShortcuts
+HideRecycleBinFromDesktop
+HideSelectCheckboxes
+HideShareMenu
+HideSuperHiddenFiles
+HideVideosFromExplorer
+HideVideosFromThisPC
+SetExplorerQuickAccess
+ShowEmptyDrives
+ShowHiddenFiles
+ShowKnownExtensions
 
 # ===========================================================================================================
 # Application Tweaks
@@ -324,7 +328,6 @@ Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.BingTravel" | Remove-AppxPackage
-#Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.FreshPaint" | Remove-AppxPackage
@@ -358,11 +361,9 @@ Get-AppxPackage "Microsoft.WebMediaExtensions" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Whiteboard" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
-#Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage  # Mail and Calendar
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
-#Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsReadingList" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsScan" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
@@ -371,29 +372,31 @@ Get-AppxPackage "Microsoft.WinJS.2.0" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
-#Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage  # Dependency for Mail and Calendar, Weather
 
-UninstallThirdPartyBloat
-DisableXboxFeatures
-DisableFullscreenOptims
+Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage  # Photos
+Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage  # Mail and Calendar
+Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage  # Weather
+Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage  # Dependency for Mail and Calendar, Weather
+
 DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation
+DisableFullscreenOptims
 DisableMediaSharing
-EnableDeveloperMode
-UninstallMediaPlayer
-UninstallInternetExplorer
-UninstallWorkFolders
-UninstallHelloFace
-UninstallMathRecognizer
-UninstallPowerShellV2
+DisableXboxFeatures
 InstallSSHClient
 InstallTelnetClient
-SetPhotoViewerAssociation
-RemovePhotoViewerOpenWith
-UninstallXPSPrinter
 RemoveFaxPrinter
+RemovePhotoViewerOpenWith
 UninstallFaxAndScan
+UninstallHelloFace
+UninstallMathRecognizer
+UninstallMediaPlayer
+UninstallPowerShellV2
+UninstallThirdPartyBloat
+UninstallWorkFolders
+UninstallXPSPrinter
+EnableDeveloperMode
 
 # ===========================================================================================================
 # Custom Tweaks
@@ -423,35 +426,30 @@ Write-Output "Uninstalling Microsoft Internet Printing..."
 Disable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-InternetPrinting-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
 # ===========================================================================================================
-# Manual Tweaks
+# Destructive Tweaks
 # ===========================================================================================================
 
-$script = Resolve-Path -Path $PSScriptRoot\..\script
+$doUnpinStartMenuTiles = Read-Host -Prompt "Unpin all Start Menu tiles [no]"
+If ($doUnpinStartMenuTiles -like "yes") {
+  UnpinStartMenuTiles
+  $rebootRequired = $True
+}
 
-Write-Output ""
-Write-Output ""
-Write-Output ""
-Write-Output "Open a new CMD or PowerShell window as Administrator and enter the script directory."
-Write-Output ""
-Write-Output "  cd $script"
-Write-Output ""
-Write-Output ""
-Write-Output "Unpin all start menu icons."
-Write-Output ""
-Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinStartMenuTiles"
-Write-Output ""
-Write-Output ""
-Write-Output "Unpin all tarkbar icons."
-Write-Output ""
-Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinTaskbarIcons"
-Write-Output ""
-Write-Output ""
-Write-Output "Disable lock screen after setting a wallpaper."
-Write-Output ""
-Write-Output "  powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen"
-Write-Output ""
-Write-Output ""
-Write-Output ""
+$doUnpinTaskbarIcons = Read-Host -Prompt "Unpin all Taskbar icons [no]"
+If ($doUnpinTaskbarIcons -like "yes") {
+  UnpinTaskbarIcons
+  $rebootRequired = $True
+}
+
+$doDisableLockScreen = Read-Host -Prompt "Disable Lock screen [no]"
+If ($doDisableLockScreen -like "yes") {
+  DisableLockScreen
+  $rebootRequired = $True
+}
+
+If ($rebootRequired -eq $True) {
+  Reboot
+}
 
 Wait-Event
 Exit
