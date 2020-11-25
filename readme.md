@@ -289,6 +289,7 @@ Install third party software.
 * [Brave](https://brave.com/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
+* [Affinity Publisher](https://affinity.serif.com/publisher)
 * [MagicaVoxel](https://ephtracy.github.io/)
 * [Blender](https://www.blender.org/)
 * [Audacity](https://www.audacityteam.org/)
