@@ -1,3 +1,0 @@
-INFO  2020-10-20T04:27:52.062 60    patch_terminfo_bugs:1608: Disabling smglr with TERM=xterm for non-xterm.
-INFO  2020-10-20T04:27:52.088 60    main:578: starting main loop
-INFO  2020-10-20T04:27:58.252 60    mch_exit:99: Nvim exit: 0
