@@ -50,8 +50,8 @@ $video = "%ProgramFiles%\MPV\mpv.exe,0"
 
 # Applications
 $7zipfm = '"%ProgramFiles%\7-Zip\7zFM.exe" "%1"'
-$editor = '"%ProgramFiles(x86)%\Vim\vim82\gvim.exe" "%1"'
-$sqlite = '"%ProgramFiles%\DB Browser for SQLite\DB Browser for SQLite.exe" "%1"'
+$editor = '"%ProgramFiles(x86)%\Vim\gvim.exe" "%1"'
+$sqlite = '"%ProgramFiles%\SQLite Browser\SQLite Browser.exe" "%1"'
 $player = '"%ProgramFiles%\MPV\mpv.exe" "%1"'
 
 # Archives

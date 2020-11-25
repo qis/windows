@@ -451,5 +451,6 @@ If ($rebootRequired -eq $True) {
   Reboot
 }
 
+Write-Output 'Configuration complete!'
 Wait-Event
 Exit
