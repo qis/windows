@@ -289,6 +289,14 @@ reg add "HKLM\SOFTWARE\Serif\Affinity\Designer\1" /v "No Update Check" /t REG_DW
 reg add "HKLM\SOFTWARE\Serif\Affinity\Publisher\1" /v "No Update Check" /t REG_DWORD /d 1 /f
 ```
 
+Install [dictionaries](https://github.com/LibreOffice/dictionaries) in Affinity using the following schema.
+
+```
+en/en_US.aff      -> C:\ProgramData\Affinity\Common\1.0\Dictionaries\en-US\en_US.aff
+en/en_US.dic      -> C:\ProgramData\Affinity\Common\1.0\Dictionaries\en-US\en_US.dic
+en/hyph_en_US.dic -> C:\ProgramData\Affinity\Common\1.0\Dictionaries\en-US\hyph_en_US.dic
+```
+
 Configure LMMS paths on first startup.
 
 - Replace `%UserProfile%\Documents` with `%UserProfile%\Music`.
