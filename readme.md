@@ -175,9 +175,10 @@ General
 Create Network Connections shortcut in `powershell.exe`.
 
 ```ps
-$sm = "${env:UserProfile}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Network Connections.lnk"
+$sm = "${env:UserProfile}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+$sp = "${sm}\Network Connections.lnk"
 $ws = New-Object -ComObject WScript.Shell
-$sc = $ws.CreateShortcut($sm)
+$sc = $ws.CreateShortcut($sp)
 $sc.IconLocation = 'C:\Windows\System32\netshell.dll,0'
 $sc.TargetPath = 'C:\Windows\System32\control.exe'
 $sc.Arguments = 'ncpa.cpl'
