@@ -86,7 +86,13 @@ Settings that have yet to be incorporated into the [setup/system.ps1](setup/syst
 ### Keymap (Optional)
 1. Install [res/keymap.zip](res/keymap.zip) to input German characters on a U.S. keyboard.
 2. Configure Windows language preferences in Settings.
-3. Reboot the system.
+3. Disable keyboard layout preload.
+
+```
+reg delete "HKEY_USERS\.DEFAULT\Keyboard Layout\Preload" /f
+```
+
+Reboot the system.
 
 <!--
 Use the [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=22339) to
