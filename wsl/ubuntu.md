@@ -70,7 +70,7 @@ Install packages.
 
 ```sh
 sudo apt install -y ccze net-tools p7zip pv pwgen tree wipe zip
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 pngcrush
+sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 pngcrush imagemagick
 ```
 
 Configure system.
@@ -148,67 +148,27 @@ sudo chmod 0600 "${USERPROFILE}/.ssh"/* ~/.ssh/*
 ln -s "${USERPROFILE}/.gitconfig" ~/.gitconfig
 ```
 
-## Development
-Install basic development packages.
+## SSH Server
+Reinstall SSH server.
 
 ```sh
-sudo apt install -y binutils-dev debconf-utils libc6-dev libgcc-9-dev manpages-dev
-sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 \
-  autoconf automake bison flex gdb make nasm ninja-build pkgconf sqlite3
+sudo apt remove openssh-server
+sudo apt install openssh-server
+sudo service ssh start
 ```
 
-Install [CMake](https://cmake.org/).
+Automatically start SSH server.
 
-```sh
-sudo rm -rf /opt/cmake; sudo mkdir -p /opt/cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz
-sudo tar xf cmake-3.18.4-Linux-x86_64.tar.gz -C /opt/cmake --strip-components=1
-rm -f cmake-3.18.4-Linux-x86_64.tar.gz
-sudo tee /etc/profile.d/cmake.sh >/dev/null <<'EOF'
-export PATH="/opt/cmake/bin:${PATH}"
-EOF
-sudo chmod 0755 /etc/profile.d/cmake.sh
-. /etc/profile.d/cmake.sh
 ```
-
-Install [Node](https://nodejs.org/).
-
-```sh
-sudo rm -rf /opt/node; sudo mkdir -p /opt/node
-wget https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz
-sudo tar xf node-v12.16.3-linux-x64.tar.xz -C /opt/node --strip-components=1
-rm -f node-v12.16.3-linux-x64.tar.xz
-sudo tee /etc/profile.d/node.sh >/dev/null <<'EOF'
-export PATH="/opt/node/bin:${PATH}"
-EOF
-sudo chmod 0755 /etc/profile.d/node.sh
-. /etc/profile.d/node.sh
+Task Scheduler > Create Task...
++ General
+  Name: WSL SSH Server
+  Description: Start SSH server in WSL
+  Security options: ◉ Run whether user is logged on or not
+  ☑ Hidden | Configure for: Windows 10
++ Triggers > New...
+  Begin the task: At startup
++ Actions > New...
+  Program/script: C:\Windows\System32\wsl.exe
+  Add arguments (optional): sudo service ssh start
 ```
-
-Install [LLVM](https://llvm.org/).
-
-```sh
-sudo rm -rf /opt/llvm; sudo mkdir -p /opt/llvm
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
-sudo tar xf clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz -C /opt/llvm --strip-components=1
-rm -f clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
-sudo tee /etc/profile.d/llvm.sh >/dev/null <<'EOF'
-export PATH="/opt/llvm/bin:${PATH}"
-EOF
-sudo chmod 0755 /etc/profile.d/llvm.sh
-. /etc/profile.d/llvm.sh
-```
-
-Set default system compiler.
-
-```sh
-sudo update-alternatives --remove-all cc
-sudo update-alternatives --remove-all c++
-sudo update-alternatives --install /usr/bin/cc  cc  /opt/llvm/bin/clang   100
-sudo update-alternatives --install /usr/bin/c++ c++ /opt/llvm/bin/clang++ 100
-```
-
-<!--
-clang++ -std=c++20 -stdlib=libc++ -Os -flto=full main.cpp -fuse-ld=lld
-clang++ -std=c++20 -stdlib=libc++ -Os -flto=full main.cpp -fuse-ld=lld -static-libstdc++ /opt/llvm/lib/libc++abi.a
--->
