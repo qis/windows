@@ -292,7 +292,6 @@ See [wsl/ubuntu.md](wsl/ubuntu.md) for WSL setup instructions.
 See [development.md](development.md) for development setup instructions.
 
 ## Start Menu
-![Explorer](res/explorer-2020-11-28.png)
 ![Start Menu](res/start-2020-11-28.png)
 
 <!--
