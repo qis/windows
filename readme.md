@@ -308,6 +308,11 @@ Configure LMMS paths on first startup.
 - Replace `%UserProfile%\Documents` with `%UserProfile%\Music`.
 - Use `PortAudio` with `WASAPI` backend.
 
+<!--
+Configure Sumatra to enable Copy&Paste support.
+<https://www.ghacks.net/2019/12/06/how-to-copy-select-and-search-text-in-epub-books-using-sumatrapdf/>
+-->
+
 ## Windows Subsystem for Linux
 See [wsl/ubuntu.md](wsl/ubuntu.md) for WSL setup instructions.
 
