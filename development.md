@@ -428,7 +428,7 @@ C:\Vulkan
 ```
 
 ## Ubuntu
-Install basic development packages.
+Install basic development packages after [installing](wsl/ubuntu.md) WSL.
 
 ```sh
 sudo apt install -y binutils-dev gcc g++ gdb make nasm ninja-build manpages-dev pkg-config
