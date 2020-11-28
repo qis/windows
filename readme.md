@@ -189,12 +189,12 @@ Invoke-Item $sm
 ## Windows Libraries
 Move unwanted Windows libraries.
 
-1. Right click on `%UserProfile%\Pictures\Camera Roll` and select `Properties`.<br/>
-   Select the `Location` tab and change the path to `%AppData%\Pictures\Camera Roll`.
-2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
-   Select the `Location` tab and change the path to `%AppData%\Pictures\Saved Pictures`.
-3. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.<br/>
-   Select the `Location` tab and change the path to `%AppData%\Videos\Captures`.
+1. Right click on `%UserProfile%\Pictures\Camera Roll` and select "Properties".<br/>
+   Select the "Location" tab and change the path to `%AppData%\Pictures\Camera Roll`.
+2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select "Properties".<br/>
+   Select the "Location" tab and change the path to `%AppData%\Pictures\Saved Pictures`.
+3. Right click on `%UserProfile%\Videos\Captures` and select "Properties".<br/>
+   Select the "Location" tab and change the path to `%AppData%\Videos\Captures`.
 
 <!--
 Permanently hide `Captures` directory.
