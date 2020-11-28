@@ -78,7 +78,7 @@ Associate "xmlfile" "XML" $editor "xml.ico" ("xml", "xaml")
 Associate "sourcemap" "Source Map" $editor $text ("map")
 
 # Database
-If (Test-Path "C:\Program Files\DB Browser for SQLite\DB Browser for SQLite.exe" -PathType leaf) {
+If (Test-Path "C:\Program Files\SQLite Browser\SQLite Browser.exe" -PathType leaf) {
   Associate "database" "Database" $sqlite "database.ico" ("db")
 }
 

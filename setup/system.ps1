@@ -378,6 +378,12 @@ Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage  # Ma
 Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage  # Weather
 Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage  # Dependency for Mail and Calendar, Weather
 
+# List remaining apps.
+# Get-AppxPackage | Select Name,PackageFullName | Sort Name
+#
+# Uninstall unwanted apps.
+# Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
+
 DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation

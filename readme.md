@@ -16,7 +16,7 @@ DISKPART> format fs=Fat32 quick
 
 ## Preparations
 Download the latest [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) image
-and create the installation media using [Rufus](https://rufus.ie/).
+and create the installation media using the Media Creation Tool or [Rufus](https://rufus.ie/).
 
 Create the file `\sources\ei.cfg` on the installation media.
 
@@ -29,7 +29,7 @@ OEM
 0
 ```
 
-Create the file `\sources\pid.txt` on the installation media if `Channel` is `Retail` instead of `OEM`.
+Create the file `\sources\pid.txt` on the installation media if `Channel` is `Retail`.
 
 ```ini
 [PID]
@@ -60,28 +60,6 @@ Verify Windows flavor and version with `Start > "winver"`.
 Modify and execute [setup/system.ps1](setup/system.ps1) using the "Run with PowerShell" context menu
 repeatedly until it stops rebooting the system.
 
-Unpin everything from the start menu and taskbar.
-
-```ps1
-cd windows\script
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinStartMenuTiles
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 UnpinTaskbarIcons
-```
-
-List remaining apps.
-
-```ps
-Get-AppxPackage | Select Name,PackageFullName | Sort Name
-```
-
-Uninstall unwanted apps.
-
-```ps
-Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
-```
-
-Reboot the system.
-
 ## Drivers & Updates
 Disable automatic driver application installation.
 
@@ -95,14 +73,12 @@ Start > "Change device installation settings"
 3. Install Windows updates.
 4. Repeat the "Setup" step.
 
-Install Windows Subsystem for Linux.
-
-```ps
-cd windows\script
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 InstallLinuxSubsystem
-```
-
 Reboot the system.
+
+<!--
+## VLAN Support
+<https://downloadcenter.intel.com/download/25016/Intel-Network-Adapter-Driver-for-Windows-10>
+-->
 
 ## Settings
 Settings that have yet to be incorporated into the [setup/system.ps1](setup/system.ps1) script.
@@ -195,12 +171,18 @@ General
   ☐ Let Windows track app launches to improve Start and search results
 ```
 
-## Lock Screen
-Disable Lock Screen after personalization.
+### Shortcuts
+Create Network Connections shortcut in `powershell.exe`.
 
-```cmd
-cd windows\script
-powershell -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 DisableLockScreen
+```ps
+$ws = New-Object -ComObject WScript.Shell
+$sm = "$env:UserProfile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+$sc = $ws.CreateShortcut("$sm\Network Connections.lnk")
+$sc.IconLocation = 'C:\Windows\System32\netshell.dll,0'
+$sc.TargetPath = 'C:\Windows\System32\control.exe'
+$sc.Arguments = 'ncpa.cpl'
+$sc.Save()
+Invoke-Item $sm
 ```
 
 ## Windows Libraries
@@ -210,13 +192,17 @@ Move unwanted Windows libraries.
    Select the `Location` tab and change the path to `%AppData%\Pictures\Camera Roll`.
 2. Right click on `%UserProfile%\Pictures\Saved Pictures` and select `Properties`.<br/>
    Select the `Location` tab and change the path to `%AppData%\Pictures\Saved Pictures`.
+3. Right click on `%UserProfile%\Videos\Captures` and select `Properties`.<br/>
+   Select the `Location` tab and change the path to `%AppData%\Videos\Captures`.
 
-Hide `Captures` directory.
+<!--
+Permanently hide `Captures` directory.
 
 ```cmd
 md "%UserProfile%\Videos\Captures"
 attrib +s +h "%UserProfile%\Videos\Captures"
 ```
+-->
 
 ## Indexing Options
 Configure Indexing Options to only track the "Start Menu" and rebuild the index.
@@ -237,299 +223,79 @@ wf.msc
   Network Discovery (…)
 ```
 
-Enable inbound rules for `Core Networking Diagnostics - ICMP Echo Request (ICMPv…-In)`.
+Enable inbound rules for `Core Networking Diagnostics - ICMP Echo Request (ICMPv…-In)`.<br/>
 Modify `Private,Public` rules for `ICMPv4` and `ICMPv6` inbound rules and select `Any IP address`
 under `Remote IP address` in the `Scope` tab.
 
 ## Microsoft Software
-Configure Microsoft Edge.
-
-```
-Settings
-+ General
-  Choose a theme: Dark
-  Open Microsoft Edge with: A specific page or pages
-    about:blank
-  Open new tabs with: A blank page
-  Show the home button: Off
-  Show sites I frequently visit in "Top sites": Off
-  Show definitions inline for: Off
-  Ask me what to do with each download: Off
-+ Privacy & security
-  Show search and site suggestions as I type: Off
-  Show search history: Off
-  Use page prediction: Off
-+ Passwords & autofill
-  Save form data: Off
-```
-
-Download [Microsoft Office](https://account.microsoft.com/services/).
-
-<!--
-Configure Microsoft Outlook 2016.
-
-```cmd
-reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Setup" /v "DisableOffice365SimplifiedAccountCreation" /t REG_DWORD /d 1 /f
-```
--->
-
-Configure Microsoft Photos.
-
-```
-Settings
-+ Viewing and editing
-  Linked duplicates: Off
-  Mouse wheel: ◉ Zoom in and out
-```
+* Install [Microsoft Edge](https://www.microsoft.com/en-us/edge) and configure
+  [settings](https://gist.github.com/qis/8d5c6fb9d622540d88bfcc6934a20e3e).
+* Install [Microsoft Office](https://account.microsoft.com/services/) and configure
+  [settings](https://gist.github.com/qis/2a0d23ed27b21cd15331b4ff3a1cf430).
+* Install [Windows Terminal](https://aka.ms/terminal) and configure
+  [settings](https://github.com/qis/terminal).
 
 ## Applications
 Install third party software.
 
 * [7-Zip](http://www.7-zip.org)
-* [Brave](https://brave.com/)
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Affinity Publisher](https://affinity.serif.com/publisher)
-* [ImageGlass](https://imageglass.org/)
-* [MagicaVoxel](https://ephtracy.github.io/)
-* [Blender](https://www.blender.org/)
 * [Audacity](https://www.audacityteam.org/)
-* [SFXR](http://www.drpetter.se/project_sfxr.html)
+* [Blender](https://www.blender.org/)
+* [Explorer Suite](http://www.ntcore.com/exsuite.php)
+* [ImageGlass](https://imageglass.org/)
+* [LMMS](https://lmms.io/)
+* [MagicaVoxel](https://ephtracy.github.io/)
+* [OBS Studio](https://obsproject.com/download)
+
+Install or restore portable 64-bit third party software.
+
 * [MPV](https://mpv.srsfckn.biz/)
-* [OBS](https://obsproject.com/download)
 * [HxD](https://mh-nexus.de/en/downloads.php?product=HxD20)
-* [CFF Explorer](http://www.ntcore.com/exsuite.php)
+* [Dependencies](https://github.com/lucasg/Dependencies)
+* [SQLite Browser](https://sqlitebrowser.org/)
+* [Sumatra](https://www.sumatrapdfreader.org/free-pdf-reader.html)
+
+Install or restore portable 32-bit third party software.
+
+* [KeePass](https://keepass.info/)
+* [SFXR](http://www.drpetter.se/project_sfxr.html)
 * [Resource Hacker](http://www.angusj.com/resourcehacker/)
 * [Sysinternals Suite](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx)
-* [KeePass](https://keepass.info/)
-* [NAPS2](https://www.naps2.com/)
+* [Vim](https://www.vim.org/download.php)
 
 <!--
-* [Gimp](https://www.gimp.org/)
 * [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
+* [Gimp](https://www.gimp.org/)
+* [NAPS2](https://www.naps2.com/)
 -->
 
-### LMMS
-Install [LMMS](https://lmms.io/) and configure paths on first startup.
-
-```
-LMMS Working Directory: %UserProfile%\Music\Workspace
-GIG Directory: %UserProfile%\Music\Workspace\Samples\GIG
-SF2 Directory: %UserProfile%\Music\Workspace\Samples\Fonts
-LADSPA Plugin Directories: %UserProfile%\Music\Workspace\Plugins\LADSPA
-```
-
-### Git
-Install [Git](https://git-scm.com/downloads) with specific settings.
-
-```
-Select Destination Location
-  C:\Program Files\Git
-
-Select Components
-  ☐ Windows Explorer integration
-  ☑ Git LFS (Large File Support)
-  ☐ Associate .git* configuration files with the default text editor
-  ☐ Associate .sh files to be run with Bash
-
-Select Start Menu Folder
-  ☑ Don't create a Start Menu folder
-
-Choosing the default editor used by Git
-  [Select other editor as Git's default editor]
-  Location of editor: C:\Program Files (x86)\Vim\vim82\gvim.exe
-  [Test Custom Editor]
-
-Adjusting your PATH environment
-  ◉ Use Git from Git Bash only
-
-Choosing HTTPS transport backend
-  ◉ Use the OpenSSL library
-
-Configuring the line ending conversions
-  ◉ Checkout as-is, commit as-is
-
-Configuring the terminal emulator to use with Git Bash
-  ◉ Use Windows' default console window
-
-Configuring file system caching
-  ☑ Enable file system caching
-  ☑ Enable Git Credential Manager
-  ☑ Enable symbolic links
-```
-
-Add `C:\Program Files\Git\cmd` to `Path`.
-
-### Vim
-Install [gVim](http://www.vim.org).
-
-```
-Select the type of install: Minimal
-```
-
-Create configuration directory.
+Disable Affinity update checks.
 
 ```cmd
-git clone git@github.com:qis/vim %UserProfile%\vimfiles
+reg add "HKLM\SOFTWARE\Serif\Affinity\Photo\1" /v "No Update Check" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Serif\Affinity\Designer\1" /v "No Update Check" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Serif\Affinity\Publisher\1" /v "No Update Check" /t REG_DWORD /d 1 /f
 ```
 
-Register gVim in Explorer context menus.
+Configure LMMS paths on first startup.
 
-```cmd
-set gvim=C:\Program Files (x86)\Vim\vim82\gvim.exe
-set gvimfile=\"%gvim%\" \"%1\"
-reg add "HKCR\*\shell\gvim" /ve /d "Edit with Vim" /f
-reg add "HKCR\*\shell\gvim" /v Icon /d "%gvim%,0" /f
-reg add "HKCR\*\shell\gvim\command" /ve /d "%gvimfile%" /f
-```
-
-<!--
-```cmd
-set gvim=C:\Program Files (x86)\Vim\vim82\gvim.exe
-set gvimtabfile=\"%gvim%\" -\-remote-tab-silent \"%1\"
-reg add "HKCR\*\shell\gvimtab" /ve /d "Edit with Vim (Tab)" /f
-reg add "HKCR\*\shell\gvimtab" /v Icon /d "%gvim%,0" /f
-reg add "HKCR\*\shell\gvimtab\command" /ve /d "%gvimtabfile%" /f
-```
--->
-
-<!--
-## Server
-Install software for Windows Server administration.
-
-* [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)
-* [Remote Server Administration Tools for Windows 10](https://www.microsoft.com/en-us/download/details.aspx?id=45520)
-
-Configure the WinRM client.
-
-```cmd
-Get-NetConnectionProfile
-Set-NetConnectionProfile -InterfaceIndex {InterfaceIndex} -NetworkCategory Private
-Enable-PSRemoting -SkipNetworkProfileCheck -Force
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
-```
-
-Configure the WinRM server.
-
-```ps
-Enable-PSRemoting -SkipNetworkProfileCheck -Force
-Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
-```
-
-Configure the WinRM server to accept HTTPS connections.
-
-```ps
-winrm enumerate winrm/config/listener
-New-SelfSignedCertificate -DnsName "{DomainName}" -CertStoreLocation Cert:\LocalMachine\My
-cmd /C 'winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="{DomainName}"; CertificateThumbprint="{Thumbprint}"}'
-netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=5986
-```
-
-Connect over HTTP.
-
-```ps
-Enter-PSSession -ComputerName host.domain -Port 5985 -Credential administrator@domain
-```
-
-Connect over HTTPS.
-
-```ps
-$soptions = New-PSSessionOption -SkipCACheck
-Enter-PSSession -ComputerName host.domain -Port 5986 -Credential administrator@domain -SessionOption $soptions -UseSSL
-```
--->
-
-<!--
-## Control Panel
-Add Control Panel shortcuts to the Windows start menu (use icons from `C:\Windows\System32\shell32.dll`).
-
-[Control Panel Command Line Commands](https://www.lifewire.com/command-line-commands-for-control-panel-applets-2626060)
--->
-
-<!--
-## Anti-Virus
-Suggested third party anti-virus exclusion lists.
-
-```
-Excluded Processes
-
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\PerfWatson2.exe
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\Common7\IDE\VcxprojReader.exe
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\CL.exe
-%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.12.25827\bin\HostX86\x64\link.exe
-
-Excluded Directories
-
-%ProgramFiles(x86)%\Microsoft Visual Studio\
-%ProgramFiles(x86)%\Windows Kits\
-%UserProfile%\AppData\Local\lxss\
-C:\Workspace\
-```
-
-## VLANs
-<https://downloadcenter.intel.com/download/25016/Intel-Network-Adapter-Driver-for-Windows-10>
--->
-
-## Symbolic Link Privilege
-Allow user to create symbolic links.
-
-```
-secpol.msc
-+ Security Settings > Local Policies > User Rights Assignment
-  Create symbolic links
-  + Add User or Group...
-    1. Enter own user name.
-    2. Click on "Check Names".
-    3. Click on "OK".
-```
-
-Update group policy.
-
-```cmd
-gpupdate /force
-```
-
-Reboot the system.
+- Replace `%UserProfile%\Documents` with `%UserProfile%\Music`.
+- Use `PortAudio` with `WASAPI` backend.
 
 ## Windows Subsystem for Linux
-See [wsl/debian.md](wsl/debian.md), [wsl/ubuntu.md](wsl/ubuntu.md),
-or [wsl/alpine.md](wsl/alpine.md) for WSL setup instructions.
+See [wsl/ubuntu.md](wsl/ubuntu.md) for WSL setup instructions.
 
 ## Development
-See [development.md](development.md) for developer workstation setup instructions.
+See [development.md](development.md) for development setup instructions.
 
 ## Start Menu
-```cmd
-explorer "%AppData%\Microsoft\Windows\Start Menu\Programs"
-explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
-```
-
-![Start Menu](res/start-2020-05-26.png)
+![Explorer](res/explorer-2020-11-28.png)
+![Start Menu](res/start-2020-11-28.png)
 
 <!--
-Re-register Start Menu and Conrtana in PowerShell as Administrator.
-
-```ps
-Get-AppXPackage -AllUsers | Foreach { `
-  Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" `
-}
-```
-
-Fix broken Start Menu search.
-
-<https://www.windowscentral.com/how-reset-start-menu-layout-windows-10>
-
-Update script.
-
-```cmd
-cd script
-git checkout master && git pull
-cd ..
-git add script
-git commit -m "updated script"
-```
-
-<https://stackoverflow.com/questions/16212816/setting-up-openssh-for-windows-using-public-key-authentication/50502015#50502015>
+explorer "%AppData%\Microsoft\Windows\Start Menu\Programs"
+explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 -->
