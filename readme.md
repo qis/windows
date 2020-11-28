@@ -235,6 +235,14 @@ under `Remote IP address` in the `Scope` tab.
 * Install [Windows Terminal](https://aka.ms/terminal) and configure
   [settings](https://github.com/qis/terminal).
 
+Configure autostart options.
+
+```
+Start > "Task Manager" > Startup
+Send to OneNote Tool: Disabled
+Windows Terminal: Enabled
+```
+
 ## Applications
 Install third party software.
 
