@@ -60,11 +60,13 @@ Verify Windows flavor and version with `Start > "winver"`.
 Modify and execute [setup/system.ps1](setup/system.ps1) using the "Run with PowerShell" context menu
 repeatedly until it stops rebooting the system.
 
+<!--
 Configure Windows Explorer to list files the same way `ls(1)` does (optional).
 
 ```cmd
 reg add "HKCU\SOFTWARE\Microsoft\Windows\Currentversion\Policies\Explorer" /v "NoStrCmpLogical" /t REG_DWORD /d 0 /f
 ```
+-->
 
 ## Drivers & Updates
 Disable automatic driver application installation.
