@@ -25,7 +25,7 @@ export LS_COLORS="di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=1;31:
 # Aliases
 alias ..="cd .."
 
-alias ls="ls --color=auto --group-directories-first"
+alias ls="ls -v --color=auto --group-directories-first"
 alias ll="ls -lh --time-style long-iso"
 alias lsa="ls -A"
 alias lla="ll -A"
