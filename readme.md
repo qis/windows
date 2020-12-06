@@ -331,6 +331,14 @@ See [development.md](development.md) for development setup instructions.
 ![Start Menu](res/start-2020-11-28.png)
 
 <!--
+## Notes
+Open Start Menu directories.
+
+```cmd
 explorer "%AppData%\Microsoft\Windows\Start Menu\Programs"
 explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
+```
+
+[Configure Mouse][m].
+[m]: https://delightlylinux.wordpress.com/2019/05/08/the-customizable-mad-catz-rat-8-optical-mouse-and-linux/
 -->
