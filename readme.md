@@ -259,18 +259,31 @@ Windows Terminal: Enabled
 ```
 
 ## Applications
-Install third party software.
+Install tools.
 
 * [7-Zip](http://www.7-zip.org)
+* [Audacity](https://www.audacityteam.org/)
+* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
+* [Gimp](https://www.gimp.org/)
+* [ImageGlass](https://imageglass.org/)
+
+Install "Creation" software.
+
 * [Affinity Photo](https://affinity.serif.com/photo)
 * [Affinity Designer](https://affinity.serif.com/designer)
 * [Affinity Publisher](https://affinity.serif.com/publisher)
-* [Audacity](https://www.audacityteam.org/)
 * [Blender](https://www.blender.org/)
-* [Explorer Suite](http://www.ntcore.com/exsuite.php)
-* [ImageGlass](https://imageglass.org/)
-* [LMMS](https://lmms.io/)
 * [MagicaVoxel](https://ephtracy.github.io/)
+* [LMMS](https://lmms.io/)
+
+Install "Administration" software.
+
+* [Wireshark](https://www.wireshark.org/)
+* [OpenVPN](https://openvpn.net/community-downloads-2/)
+
+Install "Development" software.
+
+* [Explorer Suite](http://www.ntcore.com/exsuite.php)
 * [OBS Studio](https://obsproject.com/download)
 
 Install or restore portable 64-bit third party software.
@@ -290,8 +303,6 @@ Install or restore portable 32-bit third party software.
 * [Vim](https://www.vim.org/download.php)
 
 <!--
-* [FontForge](https://fontforge.github.io/en-US/downloads/windows-dl/)
-* [Gimp](https://www.gimp.org/)
 * [NAPS2](https://www.naps2.com/)
 -->
 
