@@ -304,12 +304,18 @@ Configure editor with `> Preferences: Open Settings (JSON)`.
   "C_Cpp.intelliSenseEngineFallback": "Disabled",
   "C_Cpp.intelliSenseEngine": "Disabled",
   "C_Cpp.vcpkg.enabled": false,
+  "cmake.configureOnOpen": false,
   "html.format.extraLiners": "",
   "html.format.indentInnerHtml": false,
   "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "remote.SSH.defaultExtensions": [
+    "twxs.cmake",
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools"
+  ]
 }
 ```
 
