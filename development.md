@@ -257,6 +257,70 @@ Editor
   ☐ Copy (Ctrl+C) as rich text
   + Code Folding
     ☐ Show code folding outline
++ Code Style
+  ClangFormat
+  ☑ Enable ClangFormat (only for C/C++/Objective-C)
+  + C/C++
+    Scheme: Default
+    + Tabs and Indents
+      Tab size: 2
+      Indent: 2
+      Continuation indent: 2
+      Indent in lambdas: 2
+      Indent members of plain structures: 2
+      Indent members of classes: 2
+      Indent members of namespace: 0
+    + Spaces
+      + Within
+        ☑ Initializer lists braces
+      + Other
+        ☑ Prevent >> concatenation in template
+        ☐ Before '*' in declarations
+        ☑ After '*' in declarations
+        ☐ Before '&' in declarations
+        ☑ After '&' in declarations
+        ☑ Keep spaces between the same-type brackets
+      + In Template Declaration
+        ☑ Before '<'
+    + Wrapping and Braces
+      + Function declaration parameters
+        ☐ Align when multiline
+      + Function call arguments
+        ☐ Align when multiline
+      + 'switch' statement
+        ☐ Indent 'case' branches
+      + 'try' statement
+        ☑ 'catch' on new line
+      + Binary expressions
+        ☐ Align when multiline
+        ☑ New line after '('
+      + Assignment statement
+        ☐ Align when multiline
+      + Ternary operation
+        ☐ Align when multiline
+        ☐ '?' and ':' signs on next line
+      + Initializer lists
+        ☐ Align when multiline
+    + New File Extensions
+      + C++
+        Source Extensions: cpp
+        Header Extensions: hpp
+        File Naming Convention: snake_case
+      + C
+        File Naming Convention: snake_case
+      + CUDA
+        File Naming Convention: snake_case
+  + CMake
+    Scheme: Default
+    + Tabs and Indents
+      Tab size: 2
+      Indent: 2
+      Continuation indent: 2
+    + Spaces
+      ☐ 'if' parentheses
+      ☐ 'for' parentheses
+      ☐ 'while' parentheses
+        
 + Inlay Hints
   ☐ Show hints for:
 
@@ -264,6 +328,9 @@ Plugins
 String Manipulation
 
 Build, Execution, Deployment
++ Toolchains
+  + Visual Studio
+    Architecture: amd64
 + CMake
   + Debug
     CMake options:
