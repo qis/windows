@@ -226,6 +226,73 @@ Change [toolbars](res/vs.png) to fit the desired workflow.
 
 </details>
 
+## CLion
+Install [CLion](https://www.jetbrains.com/clion/download/).
+
+<details>
+<summary><b>Configuration</b></summary>
+
+```
+Appearanace & Behavior
++ System Settings
+  ☐ Confirm before exiting the IDE
+  Project
+  ☐ Reopen projects on startup
+  Default project directory: C:\Workspace
+  + Data Sharing
+    ☐ Send usage statistics
+  + Date Formats
+    ☑ Override system date and time format
+    Date format: yyyy-MM-dd
+
+Keymap
+Keymap: Visual Studio
+Main Menu > Run > Debug: F5 (Remove)
+Main Menu > Run > Debugging Actions > Resume Program: F9 (Remove)
+Main Menu > Run > Toggle Breakpoint > Toggle Line Breakpoint: F8
+
+Editor
++ General
+  Rich-Text Copy
+  ☐ Copy (Ctrl+C) as rich text
+  + Code Folding
+    ☐ Show code folding outline
++ Inlay Hints
+  ☐ Show hints for:
+
+Plugins
+String Manipulation
+
+Build, Execution, Deployment
++ CMake
+  + Debug
+    CMake options:
+      -GNinja
+      -DCMAKE_TOOLCHAIN_FILE="C:/Workspace/vcpkg/triplets/toolchains/windows.cmake"
+      -DVCPKG_TARGET_TRIPLET="x64-windows-xnet"
+    Build directory: build\windows\debug
+  + Add: Release
+    CMake options:
+      -GNinja
+      -DCMAKE_TOOLCHAIN_FILE="C:/Workspace/vcpkg/triplets/toolchains/windows.cmake"
+      -DVCPKG_TARGET_TRIPLET="x64-windows-xnet"
+    Build directory: build\windows\release
++ Debugger
+  ☑ Hide debug window on process termination
+
+Language & Frameworks
++ SQL Dialects
+  Global SQL Dialect: SQLite
+
+Tools
++ Terminal
+  Copy to clipboard on selection
++ SSH Terminal
+  Default encoding: UTF-8
+```
+
+</details>
+
 ## Visual Studio Code
 Install [Visual Studio Code](https://code.visualstudio.com/download).
 
