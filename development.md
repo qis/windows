@@ -344,8 +344,6 @@ Build, Execution, Deployment
       -DCMAKE_TOOLCHAIN_FILE="C:/Workspace/vcpkg/triplets/toolchains/windows.cmake"
       -DVCPKG_TARGET_TRIPLET="x64-windows-xnet"
     Build directory: build\windows\release
-+ Debugger
-  ☑ Hide debug window on process termination
 
 Language & Frameworks
 + SQL Dialects
