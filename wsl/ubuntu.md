@@ -69,7 +69,7 @@ sudo apt clean
 Install packages.
 
 ```sh
-sudo apt install -y ccze net-tools p7zip pv pwgen tree wipe zip
+sudo apt install -y ccze jq net-tools p7zip pv pwgen tree wipe zip
 sudo apt install -y -o APT::Install-Suggests=0 -o APT::Install-Recommends=0 pngcrush imagemagick
 ```
 
