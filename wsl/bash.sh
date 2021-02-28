@@ -9,11 +9,10 @@ export NCURSES_NO_UTF8_ACS="1"
 export MM_CHARSET="UTF-8"
 
 # Localization
-export LANG="C.UTF-8"
-export LC_MESSAGES="C.UTF-8"
-export LC_COLLATE="C.UTF-8"
-export LC_CTYPE="C.UTF-8"
-export LC_ALL=
+export LC_COLLATE=C.UTF-8
+export LC_MESSAGES=C.UTF-8
+export LC_NUMERIC=C.UTF-8
+export LC_TIME=C.UTF-8
 
 # Applications
 export EDITOR="vim"
@@ -35,6 +34,7 @@ alias ta="tm attach -t"
 alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
+alias mime="file --mime-type -b"
 alias grep="grep --color=auto"
 alias sudo="sudo "
 
@@ -56,6 +56,8 @@ else
   export PS1='$(tp)\[\e[31m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[34m\]\w\[\e[0m\] '
 fi
 
-set -o emacs
-stty werase '^_'
-bind '"\C-H":backward-kill-word'
+if [[ $- == *i* ]]; then
+  set -o emacs
+  stty werase '^_'
+  bind '"\C-H":backward-kill-word'
+fi
