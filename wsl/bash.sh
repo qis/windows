@@ -34,6 +34,7 @@ alias ts="tm new-session -s"
 alias tl="tm list-sessions"
 
 alias mime="file --mime-type -b"
+alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias sudo="sudo "
 
