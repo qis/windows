@@ -116,88 +116,130 @@ If ($rebootRequired -eq $True) {
   Reboot
 }
 
-# ===========================================================================================================
-# https://github.com/Disassembler0/Win10-Initial-Setup-Script
-# ===========================================================================================================
-
+# Import system functions.
 Import-Module -Name "$PSScriptRoot\system"
 
 # ===========================================================================================================
 # Privacy Tweaks
 # ===========================================================================================================
 
-DisableActivityHistory
-DisableAdvertisingID
-DisableAppSuggestions
-DisableCortana
-DisableDiagTrack
-DisableErrorReporting
-DisableFeedback
-DisableMapUpdates
-DisableRecentFiles
-DisableSmartScreen
-DisableTailoredExperiences
 DisableTelemetry
-DisableWAPPush
-DisableWebSearch
+DisableCortana
 DisableWiFiSense
+DisableSmartScreen
+DisableWebSearch
+DisableAppSuggestions
+DisableActivityHistory
+#DisableSensors
+#DisableLocation
+DisableMapUpdates
+DisableFeedback
+DisableTailoredExperiences
+DisableAdvertisingID
+#DisableWebLangList
+#DisableBiometrics
+#DisableCamera
+#DisableMicrophone
+DisableErrorReporting
+SetP2PUpdateLocal
+DisableDiagTrack
+DisableWAPPush
 EnableClearRecentFiles
-SetP2PUpdateDisable
+DisableRecentFiles
+
+# ===========================================================================================================
+# UWP Privacy Tweaks
+# ===========================================================================================================
+
+#DisableUWPBackgroundApps
+DisableUWPVoiceActivation
+#DisableUWPNotifications
+#DisableUWPAccountInfo
+#DisableUWPContacts
+#DisableUWPCalendar
+DisableUWPPhoneCalls
+DisableUWPCallHistory
+#DisableUWPEmail
+#DisableUWPTasks
+DisableUWPMessaging
+DisableUWPRadios
+DisableUWPOtherDevices
+DisableUWPDiagInfo
+#DisableUWPFileSystem
+DisableUWPSwapFile
 
 # ===========================================================================================================
 # Security Tweaks
 # ===========================================================================================================
 
-DisableAdminShares
-DisableCIMemoryIntegrity
-DisableDefender
-DisableDefenderAppGuard
-DisableDefenderCloud
-DisableDownloadBlocking
+#SetUACHigh
 DisableSharingMappedDrives
-HideAccountProtectionWarn
+DisableAdminShares
+#EnableFirewall
+
+EnableScriptHost
 HideDefenderTrayIcon
+DisableCIMemoryIntegrity
+DisableCtrldFolderAccess
+DisableDefenderAppGuard
+DisableDownloadBlocking
+DisableMeltdownCompatFlag
+HideAccountProtectionWarn
+DisableDefenderCloud
+DisableDefender
+
+DisableBootRecovery
+#EnableRecoveryAndReset
 SetDEPOptOut
 
 # ===========================================================================================================
 # Network Tweaks
 # ===========================================================================================================
 
-DisableConnectionSharing
-DisableLLDP
-DisableLLMNR
-DisableLLTD
-DisableMSNetClient
-DisableNetBIOS
-DisableNetDevicesAutoInst
-DisableQoS
-DisableRemoteAssistance
-DisableSMB1
-DisableSMBServer
 SetCurrentNetworkPrivate
 SetUnknownNetworksPrivate
+DisableNetDevicesAutoInst
+DisableHomeGroups
+DisableSMB1
+#EnableSMBServer
+DisableNetBIOS
+DisableLLMNR
+DisableLLDP
+DisableLLTD
+DisableMSNetClient
+#EnableQoS
+#DisableIPv4
+#DisableIPv6
+#DisableNCSIProbe
+DisableConnectionSharing
+DisableRemoteAssistance
+#DisableRemoteDesktop
 
 # ===========================================================================================================
 # Service Tweaks
 # ===========================================================================================================
 
+DisableUpdateMSRT
+#DisableUpdateDriver
+EnableUpdateMSProducts
+DisableUpdateRestart
+EnableAutoRestartSignOn
+DisableSharedExperiences
+DisableClipboardHistory
 DisableAutoplay
 DisableAutorun
-DisableClipboardHistory
-DisableDefragmentation
-DisableHibernation
-DisableMaintenanceWakeUp
-DisableNTFSLastAccess
-DisableSharedExperiences
-DisableSleepButton
 DisableStorageSense
+DisableDefragmentation
 DisableSuperfetch
-DisableSwapFile
-DisableUpdateAutoDownload
-DisableUpdateMSRT
+#DisableIndexing
+#DisableRecycleBin
 EnableNTFSLongPaths
-EnableUpdateMSProducts
+DisableNTFSLastAccess
 SetBIOSTimeUTC
+DisableHibernation
+DisableSleepButton
+#DisableFastStartup
+DisableAutoRebootOnCrash
 
 DisableRestorePoints
 vssadmin Delete Shadows /For=$env:SYSTEMDRIVE /Quiet
@@ -208,53 +250,71 @@ powercfg /X monitor-timeout-dc 10
 powercfg /X standby-timeout-ac 0
 powercfg /X standby-timeout-dc 360
 
-DisableAutoRebootOnCrash
-DisableFastStartup
-
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
-#   Windows Components > Windows Update > Configure Automatic Updates: Enabled
-#     Configure automatic updating: 2 - Notify for download and auto install
-#     [v] Install updates for other Microsoft products
+# > Windows Components > Windows Update > Configure Automatic Updates: Enabled
 Write-Output "Configuring Windows Update..."
 If (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
   New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Type DWord -Value 0
+
+# Configure automatic updating: 2 - Notify for download and auto install
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Type DWord -Value 2
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AutomaticMaintenanceEnabled" -Type DWord -Value 1
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Type DWord -Value 0
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Type DWord -Value 3
-Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallEveryWeek" -Type DWord -Value 1
+
+# [ ] Install during automatic maintenance
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AutomaticMaintenanceEnabled" -Type DWord -Value 0
+
+# Scheduled install day: 6 - Every Friday
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallDay" -Type DWord -Value 6
+
+# Scheduled install time: 22:00
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "ScheduledInstallTime" -Type DWord -Value 22
+
+# [x] Install updates for other Microsoft products
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AllowMUUpdateService" -Type DWord -Value 1
+
+# Do not wake up to install updates.
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" -Name "WakeUp" -Type DWord -Value 0
 
 # ===========================================================================================================
 # UI Tweaks
 # ===========================================================================================================
 
-DisableAccessibilityKeys
 DisableActionCenter
-DisableAeroShake
-DisableF1HelpKey
-DisableLockScreenBlur
-DisableNewAppPrompt
-DisableSearchAppInStore
-DisableShortcutInName
-DisableStartupSound
-DisableTitleBarColor
-EnableEnhPointerPrecision
-HideMostUsedApps
 HideNetworkFromLockScreen
-HideRecentlyAddedApps
-HideTaskbarPeopleIcon
-HideTaskbarSearch
-SetAppsDarkMode
-SetSoundSchemeNone
-SetSystemDarkMode
-SetTaskbarCombineAlways
-SetWinXMenuCmd
-ShowFileOperationsDetails
-ShowSmallTaskbarIcons
+#HideShutdownFromLockScreen
+DisableAeroShake
+DisableAccessibilityKeys
 ShowTaskManagerDetails
+ShowFileOperationsDetails
+DisableFileDeleteConfirm
+HideTaskbarSearch
+#HideTaskView
+ShowSmallTaskbarIcons
+SetTaskbarCombineAlways
+HideTaskbarPeopleIcon
 ShowTrayIcons
+#ShowSecondsInTaskbar
+DisableSearchAppInStore
+DisableNewAppPrompt
+HideRecentlyAddedApps
+SetWinXMenuCmd
+DisableShortcutInName
+SetAppsDarkMode
+SetSystemDarkMode
+#EnableNumlock
+SetSoundSchemeNone
+DisableStartupSound
+#DisableChangingSoundScheme
+#EnableVerboseStatus
+DisableF1HelpKey
+
+Write-Output "Setting mouse pointer options..."
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type String -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type String -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type String -Value "4"
 
 Write-Output "Setting custom visual effects..."
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
@@ -280,40 +340,57 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "AccentColor
 # Explorer UI Tweaks
 # ===========================================================================================================
 
-DisableRestoreFldrWindows
-DisableSharingWizard
-DisableThumbsDBOnNetwork
-Hide3DObjectsFromExplorer
-Hide3DObjectsFromThisPC
-HideDesktopFromExplorer
-HideDesktopFromThisPC
-HideDocumentsFromExplorer
-HideDocumentsFromThisPC
-HideDownloadsFromExplorer
-HideDownloadsFromThisPC
-HideFolderMergeConflicts
-HideGiveAccessToMenu
-HideIncludeInLibraryMenu
-HideMusicFromExplorer
-HideMusicFromThisPC
-HideNavPaneAllFolders
-HidePicturesFromExplorer
-HidePicturesFromThisPC
-HideRecentShortcuts
-HideRecycleBinFromDesktop
-HideSelectCheckboxes
-HideShareMenu
-HideSuperHiddenFiles
-HideVideosFromExplorer
-HideVideosFromThisPC
-SetExplorerQuickAccess
-ShowEmptyDrives
-ShowHiddenFiles
+#ShowExplorerTitleFullPath
 ShowKnownExtensions
+ShowHiddenFiles
+#ShowSuperHiddenFiles
+ShowEmptyDrives
+HideFolderMergeConflicts
+#EnableNavPaneExpand
+HideNavPaneAllFolders
+HideNavPaneLibraries
+#EnableFldrSeparateProcess
+#EnableRestoreFldrWindows
+#HideEncCompFilesColor
+DisableSharingWizard
+HideSelectCheckboxes
+#HideSyncNotifications
+HideRecentShortcuts
+SetExplorerThisPC
+#HideQuickAccess
+HideRecycleBinFromDesktop
+#ShowThisPCOnDesktop
+#ShowUserFolderOnDesktop
+#ShowControlPanelOnDesktop
+#ShowNetworkOnDesktop
+#HideDesktopIcons
+#HideBuildNumberFromDesktop
+HideDesktopFromThisPC
+HideDesktopFromExplorer
+HideDocumentsFromThisPC
+HideDocumentsFromExplorer
+HideDownloadsFromThisPC
+HideDownloadsFromExplorer
+HideMusicFromThisPC
+HideMusicFromExplorer
+HidePicturesFromThisPC
+HidePicturesFromExplorer
+HideVideosFromThisPC
+HideVideosFromExplorer
+Hide3DObjectsFromThisPC
+Hide3DObjectsFromExplorer
+HideNetworkFromExplorer
+HideIncludeInLibraryMenu
+HideGiveAccessToMenu
+HideShareMenu
+#DisableThumbnails
+#DisableThumbnailCache
+DisableThumbsDBOnNetwork
 
 # ===========================================================================================================
 # Application Tweaks
 # ===========================================================================================================
+
 DisableOneDrive
 UninstallOneDrive
 
@@ -384,25 +461,34 @@ Get-AppxPackage "Microsoft.Advertising.Xaml" | Remove-AppxPackage  # Dependency 
 # Uninstall unwanted apps.
 # Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
 
+UninstallThirdPartyBloat
+#UninstallWindowsStore
+DisableXboxFeatures
+#DisableFullscreenOptims
 DisableAdobeFlash
 DisableEdgePreload
 DisableEdgeShortcutCreation
-DisableFullscreenOptims
+DisableIEFirstRun
+DisableFirstLogonAnimation
 DisableMediaSharing
-DisableXboxFeatures
-InstallSSHClient
-InstallTelnetClient
-RemoveFaxPrinter
-RemovePhotoViewerOpenWith
-UninstallFaxAndScan
+DisableMediaOnlineAccess
+EnableDeveloperMode
+UninstallMediaPlayer
+InstallInternetExplorer
+UninstallWorkFolders
 UninstallHelloFace
 UninstallMathRecognizer
-UninstallMediaPlayer
 UninstallPowerShellV2
-UninstallThirdPartyBloat
-UninstallWorkFolders
+UninstallPowerShellISE
+InstallHyperV
+InstallSSHClient
+InstallTelnetClient
+InstallNET23
+RemovePhotoViewerOpenWith
+#UninstallPDFPrinter
 UninstallXPSPrinter
-EnableDeveloperMode
+RemoveFaxPrinter
+UninstallFaxAndScan
 
 # ===========================================================================================================
 # Custom Tweaks
@@ -426,6 +512,9 @@ Write-Output 'Removeing "Set as desktop background" from Explorer context menu.'
 }
 
 Write-Output 'Removing "AMD Radeon Software" from Explorer context menu...'
+If (!(Test-Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE")) {
+  New-Item -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Force | Out-Null
+}
 Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
 
 Write-Output "Uninstalling Microsoft Internet Printing..."
@@ -449,6 +538,7 @@ If ($doUnpinTaskbarIcons -like "yes") {
 
 $doDisableLockScreen = Read-Host -Prompt "Disable Lock screen [no]"
 If ($doDisableLockScreen -like "yes") {
+  DisableLockScreenBlur
   DisableLockScreen
   $rebootRequired = $True
 }
