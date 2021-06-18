@@ -1,2 +1,10 @@
-/res/keymap
+/res/keymap/*
+!/res/keymap/RU-U.jpg
+!/res/keymap/RU-UAltGr.jpg
+!/res/keymap/RU-UShft.jpg
+!/res/keymap/RU-UShftAltGr.jpg
+!/res/keymap/US-U.jpg
+!/res/keymap/US-UAltGr.jpg
+!/res/keymap/US-UShft.jpg
+!/res/keymap/US-UShftAltGr.jpg
 0
