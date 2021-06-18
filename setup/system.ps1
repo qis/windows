@@ -207,6 +207,14 @@ DisableConnectionSharing
 DisableRemoteAssistance
 #DisableRemoteDesktop
 
+Write-Output "Disabling scheduled tasks..."
+Get-ScheduledTask -ErrorAction SilentlyContinue "XblGameSaveTaskLogon" | Disable-ScheduledTask
+Get-ScheduledTask -ErrorAction SilentlyContinue "XblGameSaveTask" | Disable-ScheduledTask
+Get-ScheduledTask -ErrorAction SilentlyContinue "Consolidator" | Disable-ScheduledTask
+Get-ScheduledTask -ErrorAction SilentlyContinue "UsbCeip" | Disable-ScheduledTask
+Get-ScheduledTask -ErrorAction SilentlyContinue "DmClient" | Disable-ScheduledTask
+Get-ScheduledTask -ErrorAction SilentlyContinue "DmClientOnScenarioDownload" | Disable-ScheduledTask
+
 # ===========================================================================================================
 # Service Tweaks
 # ===========================================================================================================
@@ -496,13 +504,13 @@ If (!(Test-Path "HKCR:")) {
 }
 
 Write-Output 'Removing "Edit with Paint 3D" from Explorer context menu.'
-# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "3D Edit" /s /k /e
+# reg query "HKLM\Software\Classes\SystemFileAssociations" /f "3D Edit" /s /k /e
 ("3mf", "bmp", "fbx", "gif", "glb", "jfif", "jpe", "jpeg", "jpg", "obj", "ply", "png", "stl", "tif", "tiff") | ForEach {
   Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\3D Edit" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
 }
 
 Write-Output 'Removeing "Set as desktop background" from Explorer context menu.'
-# reg query "HKLM\SOFTWARE\Classes\SystemFileAssociations" /f "setdesktopwallpaper" /s /k /e
+# reg query "HKLM\Software\Classes\SystemFileAssociations" /f "setdesktopwallpaper" /s /k /e
 ("bmp", "dib", "gif", "jfif", "jpe", "jpeg", "jpg", "png", "tif", "tiff", "wdp") | ForEach {
   Remove-Item -Path "HKLM:\Software\Classes\SystemFileAssociations\.$_\Shell\setdesktopwallpaper" -Recurse -ErrorAction SilentlyContinue -Force | Out-Null
 }
