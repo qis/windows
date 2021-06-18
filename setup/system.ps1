@@ -62,14 +62,6 @@ If ($username -ne "") {
   $rebootRequired = $True
 }
 
-# Perform reboot.
-If ($rebootRequired -eq $True) {
-  Reboot
-}
-
-# Schedule reboot.
-$rebootRequired = $False
-
 # Disable virtual memory.
 $ComputerSystem = Get-WmiObject Win32_ComputerSystem -EnableAllPrivileges
 $PhysicalMemory = [math]::Ceiling($ComputerSystem.TotalPhysicalMemory / 1024 / 1024 / 1024)
@@ -299,7 +291,7 @@ ShowTrayIcons
 DisableSearchAppInStore
 DisableNewAppPrompt
 HideRecentlyAddedApps
-SetWinXMenuCmd
+#SetWinXMenuCmd
 DisableShortcutInName
 SetAppsDarkMode
 SetSystemDarkMode
@@ -483,7 +475,11 @@ UninstallPowerShellISE
 InstallHyperV
 InstallSSHClient
 InstallTelnetClient
-InstallNET23
+
+#If ((Get-NetConnectionProfile).IPv4Connectivity -contains "Internet") {
+#  InstallNET23
+#}
+
 RemovePhotoViewerOpenWith
 #UninstallPDFPrinter
 UninstallXPSPrinter
