@@ -2,8 +2,8 @@
 Import-Module -Name "$PSScriptRoot\utility"
 
 # Restart script as administrator.
-If ((IsAdmin) -eq $False) {
-  If ($args[0] -eq "-elevated") {
+if ((IsAdmin) -eq $False) {
+  if ($args[0] -eq "-elevated") {
     Error "Could not execute script as administrator."
   }
   Write-Output "Executing script as Administrator..."
@@ -23,41 +23,47 @@ public static extern bool GetComputerName(System.Text.StringBuilder buffer, ref 
 # Schedule reboot.
 $rebootRequired = $False
 
-# Set computer name.
+# Set computer information.
 $hostname = $env:ComputerName
-$hostname = Read-Host -Prompt "Set computer name [$hostname]"
-If ($hostname -ne "") {
-  Write-Output "Setting computer name..."
+$hostname = Read-Host -Prompt "Set host name [$hostname]"
+if ($hostname -ne "") {
+  Write-Output "Setting host name..."
   Rename-Computer -NewName "tmp-$hostname" -Force
   Rename-Computer -NewName "$hostname" -Force
   $rebootRequired = $True
 }
 
-# Set netbios name.
 function Get-NetbiosName {
   $data = New-Object System.Text.StringBuilder 64
   $size = $data.Capacity
-  If (!$Kernel32::GetComputerName($data, [ref] $size)) {
-    Error "Could not get netbios name."
+  if (!$Kernel32::GetComputerName($data, [ref] $size)) {
+    Error "Could not get bios name."
   }
   return $data.ToString();
 }
 
 $biosname = Get-NetbiosName
-$biosname = Read-Host -Prompt "Set netbios name [$biosname]"
-If ($biosname -ne "") {
-  Write-Output "Setting netbios name..."
+$biosname = Read-Host -Prompt "Set bios name [$biosname]"
+if ($biosname -ne "") {
+  Write-Output "Setting bios name..."
   $Kernel32::SetComputerName("$biosname");
   $rebootRequired = $True
 }
 
-# Set user name.
 $username = $env:UserName
-$username = Read-Host -Prompt "Set username [$username]"
-If ($username -ne "") {
-  $fullname = Read-Host -Prompt "Full Name"
-  Write-Output "Setting User name..."
+$username = Read-Host -Prompt "Set user name [$username]"
+if ($username -ne "") {
+  Write-Output "Setting user name..."
   Rename-LocalUser -Name "$env:UserName" -NewName "$username"
+  $rebootRequired = $True
+} else {
+  $username = $env:UserName
+}
+
+$fullname = ([adsi]"WinNT://$env:UserDomain/$username,user").fullname
+$fullname = Read-Host -Prompt "Set full name [$fullname]"
+if ($fullname -ne "") {
+  Write-Output "Setting full name..."
   Set-LocalUser -Name "$username" -FullName "$fullname"
   $rebootRequired = $True
 }
@@ -65,8 +71,8 @@ If ($username -ne "") {
 # Disable virtual memory.
 $ComputerSystem = Get-WmiObject Win32_ComputerSystem -EnableAllPrivileges
 $PhysicalMemory = [math]::Ceiling($ComputerSystem.TotalPhysicalMemory / 1024 / 1024 / 1024)
-If ($PhysicalMemory -ge 16) {
-  If ($ComputerSystem.AutomaticManagedPagefile) {
+if ($PhysicalMemory -ge 16) {
+  if ($ComputerSystem.AutomaticManagedPagefile) {
     Write-Output "Switching to manual Pagefile management..."
     $ComputerSystem.AutomaticManagedPagefile = $False
     $ComputerSystem.Put()
@@ -74,7 +80,7 @@ If ($PhysicalMemory -ge 16) {
   }
 
   $PageFileSetting = Get-WmiObject -Query "SELECT * FROM Win32_PageFileSetting WHERE Name LIKE '%pagefile.sys'"
-  If ($PageFileSetting) {
+  if ($PageFileSetting) {
     Write-Output "Setting Pagefile sizes..."
     $PageFileSetting.InitialSize = 0
     $PageFileSetting.MaximumSize = 0
@@ -83,7 +89,7 @@ If ($PhysicalMemory -ge 16) {
   }
 
   $PageFile = Get-WmiObject -Query "SELECT * FROM Win32_PageFile WHERE Name LIKE '%pagefile.sys'"
-  If ($PageFile) {
+  if ($PageFile) {
     Write-Output "Deleting Pagefile..."
     $PageFile.Delete()
     wmic pagefileset delete
@@ -97,14 +103,14 @@ function Get-VolumeLabel {
   return $LogicalDisk.VolumeName
 }
 
-If ((Get-VolumeLabel "C") -ne "System") {
+if ((Get-VolumeLabel "C") -ne "System") {
   Write-Output "Setting System volume label..."
   Set-Volume -DriveLetter "C" -NewFileSystemLabel "System"
   $rebootRequired = $True
 }
 
 # Perform reboot.
-If ($rebootRequired -eq $True) {
+if ($rebootRequired -eq $True) {
   Reboot
 }
 
@@ -253,7 +259,7 @@ powercfg /X standby-timeout-dc 360
 # gpedit.msc > Local Computer Policy > Computer Configuration > Administrative Templates
 # > Windows Components > Windows Update > Configure Automatic Updates: Enabled
 Write-Output "Configuring Windows Update..."
-If (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+if (!(Test-Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
   New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Type DWord -Value 0
@@ -484,7 +490,7 @@ InstallHyperV
 InstallSSHClient
 InstallTelnetClient
 
-#If ((Get-NetConnectionProfile).IPv4Connectivity -contains "Internet") {
+#if ((Get-NetConnectionProfile).IPv4Connectivity -contains "Internet") {
 #  InstallNET23
 #}
 
@@ -499,7 +505,7 @@ UninstallFaxAndScan
 # ===========================================================================================================
 
 # Make the "HKCR:" registry drive available.
-If (!(Test-Path "HKCR:")) {
+if (!(Test-Path "HKCR:")) {
   New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
 }
 
@@ -516,7 +522,7 @@ Write-Output 'Removeing "Set as desktop background" from Explorer context menu.'
 }
 
 Write-Output 'Removing "AMD Radeon Software" from Explorer context menu...'
-If (!(Test-Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE")) {
+if (!(Test-Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE")) {
   New-Item -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\ACE" -Name "(Default)" -Type String -Value "--"
@@ -529,25 +535,25 @@ Disable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-Interne
 # ===========================================================================================================
 
 $doUnpinStartMenuTiles = Read-Host -Prompt "Unpin all Start Menu tiles [no]"
-If ($doUnpinStartMenuTiles -like "yes") {
+if ($doUnpinStartMenuTiles -like "yes") {
   UnpinStartMenuTiles
   $rebootRequired = $True
 }
 
 $doUnpinTaskbarIcons = Read-Host -Prompt "Unpin all Taskbar icons [no]"
-If ($doUnpinTaskbarIcons -like "yes") {
+if ($doUnpinTaskbarIcons -like "yes") {
   UnpinTaskbarIcons
   $rebootRequired = $True
 }
 
 $doDisableLockScreen = Read-Host -Prompt "Disable Lock screen [no]"
-If ($doDisableLockScreen -like "yes") {
+if ($doDisableLockScreen -like "yes") {
   DisableLockScreenBlur
   DisableLockScreen
   $rebootRequired = $True
 }
 
-If ($rebootRequired -eq $True) {
+if ($rebootRequired -eq $True) {
   Reboot
 }
 
