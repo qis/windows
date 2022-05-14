@@ -176,6 +176,9 @@ Text Editor
         ☐ Place 'while' in a do-while loop on a new line
       + Wrapping
         ◉ Always apply New Lines settings for blocks
+  + IntelliSense
+    + Inline Hints
+      ☐ Display inline hints
   + View
     + Code Squiggles
       Macros in Skipped Browsing Regions: None
