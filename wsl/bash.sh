@@ -40,6 +40,7 @@ alias sudo="sudo "
 
 # Settings
 export HISTFILE="${HOME}/.history"
+export HISTCONTROL="ignoreboth:erasedups"
 shopt -s histappend
 
 tp() {
