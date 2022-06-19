@@ -50,7 +50,7 @@ $video = "%ProgramFiles%\MPV\mpv.exe,0"
 
 # Applications
 $7zipfm = '"%ProgramFiles%\7-Zip\7zFM.exe" "%1"'
-$editor = '"%ProgramFiles(x86)%\Vim\gvim.exe" "%1"'
+$editor = '"%ProgramFiles%\Vim\bin\nvim-qt.exe" "%1"'
 $sqlite = '"%ProgramFiles%\SQLite Browser\SQLite Browser.exe" "%1"'
 $player = '"%ProgramFiles%\MPV\mpv.exe" "%1"'
 
@@ -95,6 +95,7 @@ Associate "hpp" "C++ Header" $editor "hpp.ico" ("h++", "hh", "hpp", "hxx", "i++"
 Associate "java" "Java" $editor "code.ico" ("java")
 Associate "javascript" "JavaScript" $editor "code.ico" ("js")
 Associate "kotlin" "Kotlin" $editor "code.ico" ("kt")
+Associate "lua" "Lua" $editor "code.ico" ("lua")
 Associate "manifest" "Manifest" $editor "xml.ico" ("manifest")
 Associate "perl" "Perl" $editor "code.ico" ("perl", "pl", "pm")
 Associate "python" "Python" $editor "code.ico" ("py")
