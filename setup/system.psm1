@@ -988,7 +988,7 @@ Function EnableCtrldFolderAccess {
 Function DisableCtrldFolderAccess {
   Write-Output "Disabling Controlled Folder Access..."
   If (Get-Command "Set-MpPreference" -errorAction SilentlyContinue) {
-    Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
+    try { Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue } catch {}
   }
 }
 
